@@ -84,7 +84,7 @@ function listarUsuarios(){
                      JSON.parse(data).registros[i].email,
                      JSON.parse(data).registros[i].phone,
                      JSON.parse(data).registros[i].passwordUser,
-                     JSON.parse(data).registros[i].idRole,
+                     JSON.parse(data).registros[i].id_rol,
                      JSON.parse(data).registros[i].stateUser,
                      ""
                  );
@@ -185,6 +185,16 @@ function updateUsers() {
                     position: 'center',
                     icon: 'success',
                     title: '¡Actualizacion exitosa!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
+                })
+                listarUsuarios()
+            }
+            else if (JSON.parse(data) == 'error') {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: '¡Actualizacion fallida!',
                     ShowConfirmbutton: false,
                     timer: 1500
                 })

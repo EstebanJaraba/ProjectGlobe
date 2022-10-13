@@ -14,7 +14,7 @@
       </div>
       <div class="info">
         <a href="#" class="d-block"><?php echo $_SESSION['nombreCompleto'] ?></a>
-        <a href="#" class="d-block"><?php echo $_SESSION['idRole'] ?></a>
+        <a href="#" class="d-block"><?php echo $_SESSION['id_rol'] ?></a>
       </div>
     </div>
 
