@@ -124,14 +124,6 @@
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Permisos</p>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <li class="nav-item">
