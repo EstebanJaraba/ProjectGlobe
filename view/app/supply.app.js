@@ -26,6 +26,16 @@ function registerSupply() {
                 })
                 listarInsumos()
             }
+            else if (JSON.parse(data) == 'error') {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: '¡Registro fallido!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
+                })
+                listarInsumos()
+            }
         },
         error: function () {
             console.log("No se ha podido obtener la información")

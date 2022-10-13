@@ -84,7 +84,7 @@ function listarUsuarios(){
                      JSON.parse(data).registros[i].email,
                      JSON.parse(data).registros[i].phone,
                      JSON.parse(data).registros[i].passwordUser,
-                     JSON.parse(data).registros[i].rol,
+                     JSON.parse(data).registros[i].idRole,
                      JSON.parse(data).registros[i].stateUser,
                      ""
                  );
@@ -106,14 +106,14 @@ function listarUsuarios(){
     });
 }
 
-function agregarFila_Users(idUser, userName,last_name, document, email, phone,passwordUser, rol, stateUser,acciones){
+function agregarFila_Users(idUser, userName,last_name, document, email, phone,passwordUser, idRole, stateUser,acciones){
     if (stateUser == 1) {
         verEstado = '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>'
     } else if (stateUser == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-12" style="cursor: text">INACTIVO</button>'
     }
 
-    let datosUser = "'" + idUser + "','" + userName + "','" + last_name + "','" + document + "','" + email + "','" + phone + "','" + passwordUser + "','" + rol + "','" + stateUser + "'";
+    let datosUser = "'" + idUser + "','" + userName + "','" + last_name + "','" + document + "','" + email + "','" + phone + "','" + passwordUser + "','" + idRole + "','" + stateUser + "'";
 
     var htmlTags = `
          <tr>
@@ -124,7 +124,7 @@ function agregarFila_Users(idUser, userName,last_name, document, email, phone,pa
            <td> ${email}</td>
            <td> ${phone}</td>
            <td> ${passwordUser}</td>
-           <td> ${rol}</td>
+           <td> ${idRole}</td>
            <td> ${verEstado}</td>
            <td>
              <button data-toggle="modal" data-target="#updateUser" class="btn btn-outline-success btn-sm" onclick="tomarDatosUser(${datosUser})"><i class="bi bi-pencil-square"></i></button>
@@ -145,7 +145,7 @@ function eliminarFilasTableUsers(){
     }
 }
 
-function tomarDatosUser(idUser, name, last_name, documento, email, phone, passwordUser, role, stateUser){    
+function tomarDatosUser(idUser, name, last_name, documento, email, phone, passwordUser, idRole, stateUser){    
     document.getElementById('idUserUpdate').value=idUser
     document.getElementById('nameUserUpdate').value=name
     document.getElementById('last_nameUserUpdate').value=last_name
@@ -153,7 +153,7 @@ function tomarDatosUser(idUser, name, last_name, documento, email, phone, passwo
     document.getElementById('emailUserUpdate').value=email
     document.getElementById('phoneUserUpdate').value=phone
     document.getElementById('passwordUserUpdate').value=passwordUser
-    document.getElementById('roleUserUpdate').value=role
+    document.getElementById('roleUserUpdate').value=idRole
     document.getElementById('stateUserUpdate').value=stateUser
 }
 
