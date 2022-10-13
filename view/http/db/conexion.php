@@ -1,3 +1,3 @@
 <?php
 
-    $conexion = mysqli_connect('localhost', 'root', '','globe_db');
+$conexion = mysqli_connect('localhost', 'root', '', 'globe_db');
