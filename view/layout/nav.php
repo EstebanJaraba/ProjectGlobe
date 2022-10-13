@@ -39,15 +39,14 @@
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="bi bi-people"></i>
-            <span class="badge badge-danger navbar-badge">7</span>
+          <i class="bi bi-person-fill"></i>
           </a>
           
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item"></a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="account.php" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
                 <img src="assets/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
@@ -56,7 +55,7 @@
                     <?php echo $_SESSION['nombreCompleto']?>
                     <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                   </h3>
-                  <p class="text-sm"><?php echo $_SESSION['idRole']?></p>
+                  <p class="text-sm"><?php echo $_SESSION['id_rol']?></p>
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
               </div>
