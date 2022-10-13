@@ -29,6 +29,16 @@ function registerSupplier() {
                 })
                 listarProveedores()
             }
+            if (JSON.parse(data) == 'error') {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: '¡Registro fallido!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
+                })
+                listarProveedores()
+            }
         },
         error: function () {
             console.log("No se ha podido obtener la información")
@@ -62,7 +72,7 @@ function listarProveedores() {
             for (var i in JSON.parse(data).registros) {
                 agregarFila_Suppliers(
                     JSON.parse(data).registros[i].idSupplier,
-                    JSON.parse(data).registros[i].name,
+                    JSON.parse(data).registros[i].nameSupplier,
                     JSON.parse(data).registros[i].last_name,
                     JSON.parse(data).registros[i].document,
                     JSON.parse(data).registros[i].email,
@@ -168,6 +178,16 @@ function updateSupplier() {
                 })
                 listarProveedores()
             }
+            if (JSON.parse(data) == 'error') {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: '¡Actualizacion fallida!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
+                })
+                listarProveedores()
+            }
         },
         error: function () {
             console.log("No se ha podido obtener la información")
@@ -195,7 +215,7 @@ function AnularSupplier(idSupplier) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Anulación exitosa!',
+                    title: 'Acción exitosa!',
                     ShowConfirmbutton: false,
                     timer: 1500
                 })
