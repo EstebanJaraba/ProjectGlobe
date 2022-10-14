@@ -7,7 +7,7 @@ if (!isset($_SESSION['userName'])) {
 }
 ?>
 <?php
-  require('http/db/conexion.php');
+require('http/db/conexion.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,17 +60,31 @@ if (!isset($_SESSION['userName'])) {
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1 class="m-0">Dashboard</h1>
-            </div><!-- /.col -->
-
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="inicio.php">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+            </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
+
+
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <div class="card">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Usuarios</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
               <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
                 <p class="card-text">
                   <canvas id="myChartUsers" width="400" height="400"></canvas>
                   <script>
@@ -78,38 +92,36 @@ if (!isset($_SESSION['userName'])) {
                     const myChartUsers = new Chart(ctxUsers, {
                       type: 'bar',
                       data: {
-                        labels: 
-                        [
-                          <?php 
-                            
-                            $sql = "SELECT * FROM users";
+                        labels: [
+                          <?php
 
-                            $query = mysqli_query($conexion,$sql);
+                          $sql = "SELECT * FROM users";
 
-                            while($row = mysqli_fetch_array($query)){
-                              ?> '<?php echo $row['userName'] ?>',
-                              <?php
-                            }
-                          
+                          $query = mysqli_query($conexion, $sql);
+
+                          while ($row = mysqli_fetch_array($query)) {
+                          ?> '<?php echo $row['userName'] ?>',
+                          <?php
+                          }
+
                           ?>
 
                         ],
                         datasets: [{
                           label: '# of Votes',
-                          data: 
-                          [
-                            <?php 
-                            
+                          data: [
+                            <?php
+
                             $sql = "SELECT * FROM users";
 
-                            $query = mysqli_query($conexion,$sql);
+                            $query = mysqli_query($conexion, $sql);
 
-                            while($row = mysqli_fetch_array($query)){
-                              ?> '<?php echo $row['idUser'] ?>',
-                              <?php
+                            while ($row = mysqli_fetch_array($query)) {
+                            ?> '<?php echo $row['idUser'] ?>',
+                            <?php
                             }
-                          
-                          ?>
+
+                            ?>
                           ],
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -145,9 +157,17 @@ if (!isset($_SESSION['userName'])) {
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="card">
+            <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Proveedores</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
               <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
+                
                 <p class="card-text">
                   <canvas id="myChartProveedores" width="400" height="400"></canvas>
                   <script>
@@ -155,37 +175,35 @@ if (!isset($_SESSION['userName'])) {
                     const myChartProveedores = new Chart(ctxProveedores, {
                       type: 'line',
                       data: {
-                        labels: 
-                        [
-                          <?php 
-                            
-                            $sql = "SELECT * FROM suppliers";
+                        labels: [
+                          <?php
 
-                            $query = mysqli_query($conexion,$sql);
+                          $sql = "SELECT * FROM suppliers";
 
-                            while($row = mysqli_fetch_array($query)){
-                              ?> '<?php echo $row['name'] ?>',
-                              <?php
-                            }
-                          
+                          $query = mysqli_query($conexion, $sql);
+
+                          while ($row = mysqli_fetch_array($query)) {
+                          ?> '<?php echo $row['nameSupplier'] ?>',
+                          <?php
+                          }
+
                           ?>
                         ],
                         datasets: [{
                           label: '# of Votes',
-                          data: 
-                          [
-                            <?php 
-                            
+                          data: [
+                            <?php
+
                             $sql = "SELECT * FROM suppliers";
 
-                            $query = mysqli_query($conexion,$sql);
+                            $query = mysqli_query($conexion, $sql);
 
-                            while($row = mysqli_fetch_array($query)){
-                              ?> '<?php echo $row['idSupplier'] ?>',
-                              <?php
+                            while ($row = mysqli_fetch_array($query)) {
+                            ?> '<?php echo $row['idSupplier'] ?>',
+                            <?php
                             }
-                          
-                          ?>
+
+                            ?>
                           ],
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -222,12 +240,21 @@ if (!isset($_SESSION['userName'])) {
           </div>
         </div>
       </div>
+
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <div class="card">
+            <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Compras</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
               <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
+                
                 <p class="card-text">
                   <canvas id="myChartCompras" width="400" height="400"></canvas>
                   <script>
@@ -235,19 +262,18 @@ if (!isset($_SESSION['userName'])) {
                     const myChartCompras = new Chart(ctxCompras, {
                       type: 'bar',
                       data: {
-                        labels: 
-                        [
-                          <?php 
-                            
-                            $sql = "SELECT * FROM purchases";
+                        labels: [
+                          <?php
 
-                            $query = mysqli_query($conexion,$sql);
+                          $sql = "SELECT * FROM purchases";
 
-                            while($row = mysqli_fetch_array($query)){
-                              ?> '<?php echo $row['name'] ?>',
-                              <?php
-                            }
-                          
+                          $query = mysqli_query($conexion, $sql);
+
+                          while ($row = mysqli_fetch_array($query)) {
+                          ?> '<?php echo $row['name'] ?>',
+                          <?php
+                          }
+
                           ?>
                         ],
                         datasets: [{
@@ -287,9 +313,17 @@ if (!isset($_SESSION['userName'])) {
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="card">
+            <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Ventas</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
               <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
+                
                 <p class="card-text">
                   <canvas id="myChartVentas" width="400" height="400"></canvas>
                   <script>
@@ -297,19 +331,18 @@ if (!isset($_SESSION['userName'])) {
                     const myChartVentas = new Chart(ctxVentas, {
                       type: 'bar',
                       data: {
-                        labels: 
-                        [
-                          <?php 
-                            
-                            $sql = "SELECT * FROM sales";
+                        labels: [
+                          <?php
 
-                            $query = mysqli_query($conexion,$sql);
+                          $sql = "SELECT * FROM sales";
 
-                            while($row = mysqli_fetch_array($query)){
-                              ?> '<?php echo $row['name'] ?>',
-                              <?php
-                            }
-                          
+                          $query = mysqli_query($conexion, $sql);
+
+                          while ($row = mysqli_fetch_array($query)) {
+                          ?> '<?php echo $row['name'] ?>',
+                          <?php
+                          }
+
                           ?>
                         ],
                         datasets: [{
@@ -353,9 +386,16 @@ if (!isset($_SESSION['userName'])) {
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <div class="card">
+            <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Insumos</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
               <div class="card-body">
-                <h5 class="card-title">Insumos</h5>
                 <p class="card-text">
                   <canvas id="myChartInsumos" width="400" height="400"></canvas>
                   <script>
@@ -363,37 +403,35 @@ if (!isset($_SESSION['userName'])) {
                     const myChartInsumos = new Chart(ctxInsumos, {
                       type: 'bar',
                       data: {
-                        labels: 
-                        [
-                          <?php 
-                            
-                            $sql = "SELECT * FROM supplys";
+                        labels: [
+                          <?php
 
-                            $query = mysqli_query($conexion,$sql);
+                          $sql = "SELECT * FROM supplys";
 
-                            while($row = mysqli_fetch_array($query)){
-                              ?> '<?php echo $row['nameSupply'] ?>',
-                              <?php
-                            }
-                          
+                          $query = mysqli_query($conexion, $sql);
+
+                          while ($row = mysqli_fetch_array($query)) {
+                          ?> '<?php echo $row['nameSupply'] ?>',
+                          <?php
+                          }
+
                           ?>
                         ],
                         datasets: [{
                           label: '# of Votes',
-                          data: 
-                          [
-                            <?php 
-                            
+                          data: [
+                            <?php
+
                             $sql = "SELECT * FROM supplys";
 
-                            $queryId = mysqli_query($conexion,$sql);
+                            $queryId = mysqli_query($conexion, $sql);
 
-                            while($row = mysqli_fetch_array($queryId)){
-                              ?> '<?php echo $row['idSupply'] ?>',
-                              <?php
+                            while ($row = mysqli_fetch_array($queryId)) {
+                            ?> '<?php echo $row['idSupply'] ?>',
+                            <?php
                             }
-                          
-                          ?>
+
+                            ?>
                           ],
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',

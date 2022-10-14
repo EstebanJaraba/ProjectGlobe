@@ -7,6 +7,14 @@ if (!isset($_SESSION['userName'])) {
 }
 
 ?>
+<?php
+
+require('http/db/conexion.php');
+
+$query = "SELECT * FROM role_management";
+
+$resultado = mysqli_query($conexion, $query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,7 +69,12 @@ if (!isset($_SESSION['userName'])) {
             <div class="col-sm-6">
               <h1 class="m-0">Usuarios</h1>
             </div><!-- /.col -->
-
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="inicio.php">Home</a></li>
+                <li class="breadcrumb-item active">Usuarios</li>
+              </ol>
+            </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
@@ -175,7 +188,7 @@ if (!isset($_SESSION['userName'])) {
 
 <!-- Modal Register-->
 <div class="modal fade" id="registerUsers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <h5 class="modal-title" id="exampleModalLabel">Registro Usuario</h5>
@@ -183,17 +196,18 @@ if (!isset($_SESSION['userName'])) {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
 
         <div class="form-group">
           <label for="nameUser">Nombre</label>
-          <input type="text" class="form-control" id="nameUser" aria-describedby="">
+          <input type="text" class="form-control" id="nameUser" aria-describedby="error">
         </div>
 
         <div class="form-group">
           <label for="last_nameUser">Apellidos</label>
           <input type="text" class="form-control" id="last_nameUser" aria-describedby="">
         </div>
+
 
         <div class="form-group">
           <label for="documentUser">Documento</label>
@@ -293,8 +307,10 @@ if (!isset($_SESSION['userName'])) {
             <div class="form-group">
               <label for="roleUserUpdate">Rol</label>
               <select class="form-control" id="roleUserUpdate" aria-describedby="">
-                <option value="1">Admin</option>
-                <option value="0">Empleado</option>
+                <option value="">---</option>
+                <?php while ($row = $resultado->fetch_assoc()) { ?>
+                  <option value="<?php echo $row['id_rol']; ?>"><?php echo $row['name_rol']; ?></option>
+                <?php }   ?>
               </select>
             </div>
           </div>

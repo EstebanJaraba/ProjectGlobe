@@ -25,11 +25,10 @@ require_once 'db/conexion.php';
                 while($datos = mysqli_fetch_assoc($file)){
                     $_SESSION['nombreCompleto']= $datos['userName']." ".$datos['last_name'];
                     $_SESSION['userName']= $datos['userName'];
-                    $_SESSION['idRole']= $datos['idRole'];
                     $_SESSION['last_name']= $datos['last_name'];
-                    $_SESSION['document']= $datos['document'];
+                    $_SESSION['id_rol']= $datos['id_rol'];
                     $_SESSION['email']= $datos['email'];
-                    
+                    $_SESSION['phone']= $datos['phone'];
                 }
                 header('location: ../index.php');
             }
