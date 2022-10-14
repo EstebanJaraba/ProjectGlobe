@@ -8,6 +8,7 @@ if (!isset($_SESSION['userName'])) {
 ?>
 <?php
 require('http/db/conexion.php');
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -158,7 +159,7 @@ require('http/db/conexion.php');
           </div>
           <div class="col-sm-6">
             <div class="card card-primary">
-            <div class="card-header">
+              <div class="card-header">
                 <h3 class="card-title">Proveedores</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -167,7 +168,7 @@ require('http/db/conexion.php');
                 </div>
               </div>
               <div class="card-body">
-                
+
                 <p class="card-text">
                   <canvas id="myChartProveedores" width="400" height="400"></canvas>
                   <script>
@@ -245,7 +246,7 @@ require('http/db/conexion.php');
         <div class="row">
           <div class="col-sm-6">
             <div class="card card-primary">
-            <div class="card-header">
+              <div class="card-header">
                 <h3 class="card-title">Compras</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -254,7 +255,7 @@ require('http/db/conexion.php');
                 </div>
               </div>
               <div class="card-body">
-                
+
                 <p class="card-text">
                   <canvas id="myChartCompras" width="400" height="400"></canvas>
                   <script>
@@ -314,7 +315,7 @@ require('http/db/conexion.php');
           </div>
           <div class="col-sm-6">
             <div class="card card-primary">
-            <div class="card-header">
+              <div class="card-header">
                 <h3 class="card-title">Ventas</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -323,7 +324,7 @@ require('http/db/conexion.php');
                 </div>
               </div>
               <div class="card-body">
-                
+
                 <p class="card-text">
                   <canvas id="myChartVentas" width="400" height="400"></canvas>
                   <script>
@@ -387,7 +388,7 @@ require('http/db/conexion.php');
         <div class="row">
           <div class="col-sm-12">
             <div class="card card-primary">
-            <div class="card-header">
+              <div class="card-header">
                 <h3 class="card-title">Insumos</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">

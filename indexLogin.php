@@ -29,7 +29,9 @@
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title"> Inicio de sesión </h3>
-        <a href="view/register.php"><h6 class="text-lg-right">Crear cuenta</h6></a>
+        <a data-toggle="modal" data-target="#registerUsers">
+          <h6 class="text-lg-right">Crear cuenta</h6>
+        </a>
 
       </div>
       <div class="card-body login-card-body">
@@ -54,7 +56,7 @@
             </div>
           </div>
 
-          
+
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
@@ -64,11 +66,11 @@
                 </label>
               </div>
             </div>
-            <!-- /.col -->
+
             <div class="col-4">
               <button type="submit" name="access" class="btn btn-primary btn-block">Acceder</button>
             </div>
-            <!-- /.col -->
+
           </div>
         </form>
         <p class="mb-1">
@@ -112,6 +114,96 @@
   <script src="view/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="view/assets/dist/js/adminlte.min.js"></script>
+  <script src="view/app/user.app.js"></script>
 </body>
 
+
 </html>
+<div class="modal fade" id="registerUsers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="card-outline card-primary">
+        <div class="modal-header ">
+          <div class="col-6 ">
+            <b class="h3">Registro Usuario</b>
+          </div>
+          <div class="col-6">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="login-box-msg">Registrar un nuevo usuario</p>
+          <form action="../../index.html" method="post">
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="nameUser" placeholder="Nombre">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="last_nameUser" placeholder="Apellidos">
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="documentUser" placeholder="Documento">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" id="emailUser" placeholder="Email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="phoneUser" placeholder="Telefono">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-phone"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" id="passwordUser" placeholder="Contraseña">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" class="form-control" id="roleUser" value="1">
+            <input type="hidden" class="form-control" id="stateUser" value="1">
+
+            <div class="row">
+              <div class="col-6">
+                <div class="icheck-primary">
+                  <input type="checkbox" id="axgreeTerms" name="terms" value="agree">
+                  <label for="agreeTerms">
+                    Acepto envio de datos
+                  </label>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-6 text-lg-right">
+                <button type="button" onclick="registerUser()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

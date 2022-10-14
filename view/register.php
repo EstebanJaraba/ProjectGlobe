@@ -27,8 +27,7 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Registrar un nuevo usuario</p>
-
-                <form action="../view/http/users.controller.php" method="post">
+                <form action="../view/http/register.controller.php" method="post">
 
                     <div class="row">
                         <div class="col-6">
@@ -90,7 +89,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                            <button type="submit" name="save" class="btn btn-primary btn-block">Guardar</button>
                         </div>
                         <!-- /.col -->
                     </div>
