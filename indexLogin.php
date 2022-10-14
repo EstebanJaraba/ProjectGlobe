@@ -29,6 +29,8 @@
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title"> Inicio de sesión </h3>
+        <a href="view/register.php"><h6 class="text-lg-right">Crear cuenta</h6></a>
+
       </div>
       <div class="card-body login-card-body">
         <form action="view/http/access.controller.php" method="post">
@@ -70,7 +72,7 @@
           </div>
         </form>
         <p class="mb-1">
-          <a href="forgot-password.html">Olvidé mi contraseña</a>
+          <a href="view/forgotPassword.php">Olvidé mi contraseña</a>
         </p>
       </div>
       <!-- /.login-card-body -->
