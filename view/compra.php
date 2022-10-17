@@ -1,21 +1,21 @@
 <?php
 
-  session_start();
+session_start();
 
-  if (!isset($_SESSION['userName'])) {
-    header('location: ../indexLogin.php');
-  }
+if (!isset($_SESSION['userName'])) {
+  header('location: ../indexLogin.php');
+}
 
 ?>
 
 <?php
 
-  require('http/db/conexion.php');
+require('http/db/conexion.php');
 
-  $queryProveedor = "SELECT * FROM suppliers";
-  $queryCompras = "SELECT * FROM supplys";
-  $resultadoProveedor = mysqli_query($conexion, $queryProveedor);
-  $resultadoCompras = mysqli_query($conexion, $queryCompras);
+$queryProveedor = "SELECT * FROM suppliers";
+$queryCompras = "SELECT * FROM supplys";
+$resultadoProveedor = mysqli_query($conexion, $queryProveedor);
+$resultadoCompras = mysqli_query($conexion, $queryCompras);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,33 +84,160 @@
       <section class="content">
         <div id="container-fluid">
           <div class="card">
-            <div class="card-header d-flex justify-content-end">
-              <button data-toggle="modal" data-target="#registerPurchase" class="btn btn-primary btn-sm">Nueva Compra</button>
-            </div>
-            <!-- /.card-header -->
             <div class="card-body">
-              <table id="tablePurchases" class="table table-sm table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Direccion de Entrega</th>
-                    <th>Direccion de Pedido</th>
-                    <th>Cliente</th>
-                    <th>Insumo</th>
-                    <th>Fecha de Expiración</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <div class="row">
+                <div class="col-6">
+                  <form id="registerPurchase" action="">
+                    <div class="row">
+                      <div class="col-6" style="margin-right: 0;">
+                        <div class="form-group">
+                          <label for="proveedorPurchase">Proveedor</label>
+                          <select class="form-control" id="proveedorPurchase" aria-describedby="">
+                            <option value="">---</option>
+                            <?php while ($row = $resultadoProveedor->fetch_assoc()) { ?>
+                              <option value="<?php echo $row['idSupplier']; ?>"><?php echo $row['nameSupplier']; ?></option>
+                            <?php }   ?>
+                          </select>
+                        </div>
+                      </div>
 
+                      <div class="col-6" style="margin-left: 0;">
+                        <div class="form-group">
+                          <label for="insumoPurchase">Insumo</label>
+                          <select class="form-control" id="insumoPurchase" aria-describedby="">
+                            <option value="">---</option>
+                            <?php while ($row = $resultadoCompras->fetch_assoc()) { ?>
+                              <option value="<?php echo $row['idSupply']; ?>"><?php echo $row['nameSupply']; ?></option>
+                            <?php }   ?>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="descriptionPurchase" class="form-label">Descripción</label>
+                      <textarea class="form-control" id="descriptionPurchase" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3" style="margin-left: 0;">
+                      <div class="form-group">
+                        <label for="statePurchase">Estado</label>
+                        <select class="form-control" id="statePurchase" aria-describedby="">
+                          <option value="">---</option>
+                          <option value="0">PENDIENTE</option>
+                          <option value="1">EN COBRO</option>
+                          <option value="2">PAGADO</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-footer">
+                      <button type="button" onclick="registerPurchase()" class="btn btn-primary">Guardar</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Insumos</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 10px">ID</th>
+                            <th>Nombre</th>
+                            <th>Número de parte</th>
+                            <th style="width: 40px">Cantidad</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1.</td>
+                            <td>Update software</td>
+                            <td>
+                              <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-danger">55%</span></td>
+                            <td><span class="badge bg-danger">30%</span></td>
+                          </tr>
+                          <tr>
+                            <td>2.</td>
+                            <td>Clean database</td>
+                            <td>
+                              <div class="progress progress-xs">
+                                <div class="progress-bar bg-warning" style="width: 70%"></div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-warning">70%</span></td>
+                            <td><span class="badge bg-danger">2%</span></td>
+                          </tr>
+                          <tr>
+                            <td>3.</td>
+                            <td>Cron job running</td>
+                            <td>
+                              <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar bg-primary" style="width: 30%"></div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-primary">30%</span></td>
+                            <td><span class="badge bg-success">100%</span></td>
+                          </tr>
+                          <tr>
+                            <td>4.</td>
+                            <td>Fix and squish bugs</td>
+                            <td>
+                              <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar bg-success" style="width: 90%"></div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-success">90%</span></td>
+                            <td><span class="badge bg-danger">4%</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                </div>
+              </div>
 
-                </tbody>
-
-              </table>
             </div>
-            <!-- /.card-body -->
+
+          </div>
+        </div>
+      </section>
+      <section class="content">
+        <div id="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <section class="content">
+                <div id="container-fluid">
+                  <div class="card">
+                    <div class="card-body">
+                      <table id="tablePurchases" class="table table-sm table-striped">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Proveedor</th>
+                            <th>Insumo</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       </section>
@@ -188,7 +315,7 @@
 
 
 <!-- Modal Register-->
-<div class="modal fade" id="registerPurchase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="registerPurchase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -266,9 +393,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- Modal update -->
-<div class="modal fade" id="updatePurchase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="updatePurchase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -343,4 +470,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

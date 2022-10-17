@@ -45,7 +45,7 @@ if (trim($_POST['accion']) == 'select_ListPurchases') {
     $elementos = [];
     $i = 1;
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idPurchase' => $datos["idPurchase"], 'name' => $datos["name"], 'billingAddress' => $datos["billingAddress"], 'mailingAddress' => $datos["mailingAddress"], 'idSupplier' => $datos["idSupplier"],'idSupply' => $datos["idSupply"], 'espirationDate' => $datos["espirationDate"], 'statePurchase' => $datos["statePurchase"]]);
+        array_push($elementos, ['idPurchase' => $datos["idPurchase"], 'idSupplier' => $datos["idSupplier"],'idSupply' => $datos["idSupply"], 'description' => $datos["description"], 'price' => $datos["price"], 'statePurchase' => $datos["statePurchase"]]);
         $i++;
     }
     $respuesta->registros = $elementos;
