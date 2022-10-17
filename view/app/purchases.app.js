@@ -63,12 +63,10 @@ function listarCompras() {
             for (var i in JSON.parse(data).registros) {
                 agregarFila_Purchases(
                     JSON.parse(data).registros[i].idPurchase,
-                    JSON.parse(data).registros[i].name,
-                    JSON.parse(data).registros[i].billingAddress,
-                    JSON.parse(data).registros[i].mailingAddress,
                     JSON.parse(data).registros[i].idSupplier,
                     JSON.parse(data).registros[i].idSupply,
-                    JSON.parse(data).registros[i].exprirationDate,
+                    JSON.parse(data).registros[i].description,
+                    JSON.parse(data).registros[i].price,
                     JSON.parse(data).registros[i].statePurchase,
                     " "
                 );
@@ -92,32 +90,30 @@ function listarCompras() {
     });
 }
 
-function agregarFila_Purchases(idPurchase, name, billingAddress, mailingAddress, idSupplier, idSupply, exprirationDate, statePurchase, acciones) {
+function agregarFila_Purchases(idPurchase, idSupplier, idSupply, description, price, statePurchase, acciones) {
     if (statePurchase == 0) {
         verEstado = '<button class="btn btn-success btn-sm col-12 " style="cursor: text">PENDIENTE</button>'
-    }else if (statePurchase == 1) {
+    } else if (statePurchase == 1) {
         verEstado = '<button class="btn btn-danger btn-sm col-12 " style="cursor: text">EN COBRO</button>'
-    }else if (statePurchase == 2) {
+    } else if (statePurchase == 2) {
         verEstado = '<button class="btn btn-warning btn-sm col-12 " style="cursor: text">PAGADO</button>'
-    }else if (statePurchase == 3) {
+    } else if (statePurchase == 3) {
         verEstado = '<button class="btn btn-secondary btn-sm col-12 " style="cursor: text">CANCELADO</button>'
     }
 
-    let datosPurchase = "'"+idPurchase+"','"+name+"','"+billingAddress+"','"+mailingAddress+"','"+idSupplier+"','"+idSupply+"','"+exprirationDate+"','"+statePurchase+"'";
+    let datosPurchase = "'" + idPurchase + "','" + idSupplier + "','" + idSupply + "','" + description + "','" + price + "','" + statePurchase + "'";
 
     var htmlTags = `
         <tr>
           <td> ${idPurchase}</td>
-          <td> ${name}</td>
-          <td> ${billingAddress}</td>
-          <td> ${mailingAddress}</td>
           <td> ${idSupplier}</td>
           <td> ${idSupply}</td>
-          <td> ${exprirationDate}</td>
+          <td> ${description}</td>
+          <td> ${price}</td>
           <td> ${verEstado}</td>
           <td >
-            <button data-toggle="modal" data-target="#updatePurchase" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosPurchase})"><i class="bi bi-pencil-square"></i></button>
-            <button class="btn btn-outline-danger btn-sm" onclick="AnularPurchase(${idPurchase})"><i class="bi bi-cart-dash"></i></button>
+          <button data-toggle="modal" data-target="#updatePurchase" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosPurchase})"><i class="bi bi-pencil-square"></i></button>
+          <button class="btn btn-outline-danger btn-sm" onclick="AnularPurchase(${idPurchase})"><i class="bi bi-cart-dash"></i></button>
           </td>
         </tr>`;
     $("#tablePurchases tbody").append(htmlTags);
@@ -134,20 +130,18 @@ function eliminarFilasTablePurchases() {
     }
 }
 
-function tomarDatos(idPurchase,name,billingAddress, mailingAddress, idSupplier, idSupply, exprirationDate, statePurchase){
-    document.getElementById('idPurchaseUpdate').value=idPurchase  
-    document.getElementById('namePurchaseUpdate').value=name 
-    document.getElementById('dateEntregaPurchaseUpdate').value=billingAddress  
-    document.getElementById('datePedidoPurchaseUpdate').value=mailingAddress
-    document.getElementById('proveedorPurchaseUpdate').value=idSupplier 
-    document.getElementById('insumoPurchaseUpdate').value=idSupply  
-    document.getElementById('dateExpiracionPurchaseUpdate').value=exprirationDate  
-    document.getElementById('statePurchaseUpdate').value=statePurchase  
+function tomarDatos(idPurchase, idSupplier, idSupply, description, price, statePurchase) {
+    document.getElementById('idPurchaseUpdate').value = idPurchase
+    document.getElementById('namePurchaseUpdate').value = idSupplier
+    document.getElementById('dateEntregaPurchaseUpdate').value = idSupply
+    document.getElementById('datePedidoPurchaseUpdate').value = description
+    document.getElementById('proveedorPurchaseUpdate').value = price
+    document.getElementById('statePurchaseUpdate').value = statePurchase
 }
 
 
 
-function updatePurchase(){
+function updatePurchase() {
     var parametros = {
         "accion": "updatePurchase",
         "id": document.getElementById('idPurchaseUpdate').value,
@@ -187,7 +181,7 @@ function updatePurchase(){
 }
 
 
-function AnularPurchase(idPurchase){
+function AnularPurchase(idPurchase) {
     var parametros = {
         "accion": "anularPurchase",
         "id": idPurchase

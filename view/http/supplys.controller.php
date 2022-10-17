@@ -5,9 +5,10 @@ require_once 'db/conexion.php';
 if ($_POST['accion'] == 'registerSupplys') {
     $name = $_POST['name'];
     $partNumber = $_POST['partNumber'];
+    $quantity = $_POST['quantity'];
     $state = $_POST['state'];
 
-    $query = "INSERT INTO supplys(nameSupply,partNumber,stateSupply) VALUE ('$name','$partNumber','$state')";
+    $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,stateSupply) VALUE ('$name','$partNumber','$quantity','$state')";
 
     $file =  mysqli_query($conexion, $query);
 
@@ -28,7 +29,7 @@ if (trim($_POST['accion']) == 'select_ListSupplys') {
     $elementos = [];
     $i = 1;
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idSupply' => $datos["idSupply"], 'nameSupply' => $datos["nameSupply"], 'partNumber' => $datos["partNumber"], 'stateSupply' => $datos["stateSupply"]]);
+        array_push($elementos, ['idSupply' => $datos["idSupply"], 'nameSupply' => $datos["nameSupply"], 'partNumber' => $datos["partNumber"], 'quantity' => $datos["quantity"],'stateSupply' => $datos["stateSupply"]]);
         $i++;
     }
     $respuesta->registros = $elementos;

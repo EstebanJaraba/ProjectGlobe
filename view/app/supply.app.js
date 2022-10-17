@@ -4,6 +4,7 @@ function registerSupply() {
         "accion": "registerSupplys",
         "name": document.getElementById('nameSupply').value,
         "partNumber": document.getElementById('partNumberSupply').value,
+        "quantity": document.getElementById('quantitySupply').value,
         "state": document.getElementById('stateSupply').value,
     };
 
@@ -71,6 +72,7 @@ function listarInsumos() {
                     JSON.parse(data).registros[i].idSupply,
                     JSON.parse(data).registros[i].nameSupply,
                     JSON.parse(data).registros[i].partNumber,
+                    JSON.parse(data).registros[i].quantity,
                     JSON.parse(data).registros[i].stateSupply,
                     " "
                 );
@@ -94,20 +96,21 @@ function listarInsumos() {
     });
 }
 
-function agregarFila_Supplys(idSupply, nameSupply, partNumber, stateSupply, acciones) {
+function agregarFila_Supplys(idSupply, nameSupply, partNumber,quantity, stateSupply, acciones) {
     if (stateSupply == 1) {
         verEstado = '<button class="btn btn-success btn-sm col-6 " style="cursor: text">ACTIVO</button>'
     } else if (stateSupply == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-6 " style="cursor: text">INACTIVO</button>'
     }
 
-    let datosSupply = "'"+idSupply+"','"+nameSupply+"','"+partNumber+"','"+stateSupply+"'";
+    let datosSupply = "'"+idSupply+"','"+nameSupply+"','"+partNumber+"','"+quantity+"','"+stateSupply+"'";
 
     var htmlTags = `
         <tr>
           <td class="d-flex justify-content-center"> ${idSupply}</td>
           <td> ${nameSupply}</td>
           <td> ${partNumber}</td>
+          <td> ${quantity}</td>
           <td class="d-flex justify-content-center"> ${verEstado}</td>
           <td >
             <button data-toggle="modal" data-target="#updateSupplys" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosSupply})"><i class="bi bi-pencil-square"></i></button>
