@@ -26,22 +26,22 @@ require "http/db/conexion.php";
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="" class="h1"><b>Globe</b></a>
+        <a href="../../index2.html" class="h1"><b>Globe</b></a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">¿Olvidaste tu contraseña? ingrese su correo para recuperarla.</p>
-        <form id="recoverForm" action="" method="post">
+        <p class="login-box-msg">Se ha enviado un codigo a su correo.</p>
+        <form id="recoverForm" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
           <div class="input-group mb-3">
-            <input type="email" name="email" id="email" class="form-control" placeholder="Correo">
+            <input type="text" name="token" id="token" class="form-control" placeholder="Codigo.">
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+                <span class="fas fa-lock"></span>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
-              <button type="submit" id="recuperar" class="btn btn-primary btn-block">Recuperar contraseña</button>
+              <button type="submit" id="recuperar" class="btn btn-primary btn-block">Confirmar</button>
             </div>
             <!-- /.col -->
           </div>

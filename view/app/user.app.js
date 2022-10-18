@@ -16,7 +16,7 @@ function registerUser() {
 
     $.ajax({
         data: parametros,
-        url: "view/http/users.controller.php",
+        url: "http/users.controller.php",
         type: "post",
         beforeSend: function () {
 

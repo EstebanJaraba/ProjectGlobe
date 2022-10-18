@@ -256,7 +256,7 @@ $resultado = mysqli_query($conexion, $query);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" onclick="registerUser()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        <a onclick="registerUser()" class="btn btn-primary">Guardar</a>
       </div>
     </div>
   </div>

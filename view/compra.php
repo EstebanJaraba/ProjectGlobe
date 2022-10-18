@@ -87,7 +87,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
-                  <form id="registerPurchase" action="">
+                  <form id="registerPurchase" >
                     <div class="row">
                       <div class="col-6" style="margin-right: 0;">
                         <div class="form-group">

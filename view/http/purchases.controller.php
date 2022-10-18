@@ -3,15 +3,12 @@
 require_once 'db/conexion.php';
 
 if ($_POST['accion'] == 'registerPurchase') {
-    $name = $_POST['name'];
-    $dateEntrega = $_POST['dateEntrega'];
-    $datePedido = $_POST['datePedido'];
-    $idProveedor = $_POST['idProveedor'];
-    $idInsumo = $_POST['idInsumo'];
-    $dateExpiracion = $_POST['dateExpiracion'];
+    $proveedor = $_POST['proveedor'];
+    $insumo = $_POST['insumo'];
+    $description = $_POST['description'];
     $state = $_POST['state'];
 
-    $query = "INSERT INTO purchases(name,billingAddress,mailingAddress,idSupplier,idSupply,espirationDate,statePurchase) VALUE ('$name','$dateEntrega','$datePedido','$idProveedor','$idInsumo','$dateExpiracion','$state')";
+    $query = "INSERT INTO purchases(idSupplier,idSupply,description,price,statePurchase) VALUE ('$proveedor','$insumo','$description','1','$state')";
 
     $file =  mysqli_query($conexion, $query);
 

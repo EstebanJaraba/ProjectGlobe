@@ -1,13 +1,11 @@
 function registerPurchase() {
+    
 
     var parametros = {
         "accion": "registerPurchase",
-        "name": document.getElementById('namePurchase').value,
-        "dateEntrega": document.getElementById('dateEntregaPurchase').value,
-        "datePedido": document.getElementById('datePedidoPurchase').value,
-        "idProveedor": document.getElementById('proveedorPurchase').value,
-        "idInsumo": document.getElementById('insumoPurchase').value,
-        "dateExpiracion": document.getElementById('dateExpiracionPurchase').value,
+        "proveedor": document.getElementById('proveedorPurchase').value,
+        "insumo": document.getElementById('insumoPurchase').value,
+        "description": document.getElementById('descriptionPurchase').value,
         "state": document.getElementById('statePurchase').value,
     };
 
@@ -25,6 +23,15 @@ function registerPurchase() {
                     position: 'center',
                     icon: 'success',
                     title: '¡Registro exitoso!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
+                })
+                listarCompras()
+            } else if (JSON.parse(data) == 'error') {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: '¡Registro fallido!',
                     ShowConfirmbutton: false,
                     timer: 1500
                 })

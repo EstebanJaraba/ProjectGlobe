@@ -92,7 +92,13 @@
               icon: 'warning',
               heightAuto: false,
               title: 'Debes ingresar su nombre de usuario'
-          })
+          }).then(function(isConfirm) {
+            if (isConfirm) {
+              location.href = 'indexLogin.php';
+            } else {
+              //if no clicked => do something else
+            }
+          });
       </script>
       ";
   } else if ($_GET['id'] == "1") {
@@ -102,9 +108,32 @@
             icon: 'warning',
             heightAuto: false,
             title: 'Debes ingresar su contraseña'
-        })
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            location.href = 'indexLogin.php';
+          } else {
+            //if no clicked => do something else
+          }
+        });
     </script>
     ";
+  }else if ($_GET['id'] == "3") {
+    echo "
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            heightAuto: false,
+            title: 'error'
+        }).then(function(isConfirm) {
+          if (isConfirm) {
+            location.href = 'indexLogin.php';
+          } else {
+            //if no clicked => do something else
+          }
+        });
+    </script>
+    ";
+    
   }
   ?>
 
@@ -114,7 +143,7 @@
   <script src="view/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="view/assets/dist/js/adminlte.min.js"></script>
-  <script src="view/app/user.app.js"></script>
+  <script src="view/app/create.app.js"></script>
 </body>
 
 
