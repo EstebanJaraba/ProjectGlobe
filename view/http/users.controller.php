@@ -12,14 +12,28 @@ if ($_POST['accion'] == 'registerUsers') {
    $role = $_POST['role'];
    $state = $_POST['state'];
 
-   $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$password','$role','$state')";
-
-   $file =  mysqli_query($conexion, $query);
-
-   if ($file) {
-      echo json_encode('ok');
+   if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "" || $state == "") {
+      echo json_encode('fallo');
    } else {
-      echo json_encode('error');
+      $consulta = "SELECT document FROM users where document='$document'";
+
+      $conect = mysqli_query($conexion, $consulta);
+
+      $result = mysqli_num_rows($conect);
+
+      if ($result > 0) {
+         echo json_encode('doc');
+      } else {
+         $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$password','$role','$state')";
+
+         $file =  mysqli_query($conexion, $query);
+
+         if ($file) {
+            echo json_encode('ok');
+         } else {
+            echo json_encode('error');
+         }
+      }
    }
 }
 

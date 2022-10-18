@@ -225,7 +225,7 @@ if (!isset($_SESSION['userName'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" onclick="registerSupply()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        <a onclick="registerSupply()" class="btn btn-primary">Guardar</a>
       </div>
     </div>
 
@@ -234,7 +234,7 @@ if (!isset($_SESSION['userName'])) {
 
 <!-- Modal update -->
 <div class="modal fade" id="updateSupplys" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <h5 class="modal-title" id="exampleModalLabel">Actualizar Insumo</h5>
@@ -267,7 +267,7 @@ if (!isset($_SESSION['userName'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" onclick="updateSupply()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
+        <button  onclick="updateSupply()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
       </div>
     </div>
   </div>

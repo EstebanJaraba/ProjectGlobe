@@ -10,14 +10,18 @@ if ($_POST['accion'] == 'registerSuppliers') {
     $phone = $_POST['celular'];
     $state = $_POST['estado'];
 
-    $query = "INSERT INTO suppliers(nameSupplier,last_name,document,email,phone,stateSupplier) VALUE ('$name','$last_name','$documento','$email','$phone','$state')";
-
-    $file =  mysqli_query($conexion, $query);
-
-    if ($file) {
-        echo json_encode('ok');
+    if ($name == "" || $last_name == "" || $documento == "" || $email == "" || $phone == "" || $state == "") {
+        echo json_encode('fallo');
     } else {
-        echo json_encode('error');
+        $query = "INSERT INTO suppliers(nameSupplier,last_name,document,email,phone,stateSupplier) VALUE ('$name','$last_name','$documento','$email','$phone','$state')";
+
+        $file =  mysqli_query($conexion, $query);
+
+        if ($file) {
+            echo json_encode('ok');
+        } else {
+            echo json_encode('error');
+        }
     }
 }
 
@@ -31,7 +35,7 @@ if (trim($_POST['accion']) == 'select_ListSuppliers') {
     $elementos = [];
     $i = 1;
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idSupplier' => $datos["idSupplier"], 'nameSupplier' => $datos["nameSupplier"], 'last_name' => $datos["last_name"], 'document' => $datos["document"],'email' => $datos["email"],'phone' => $datos["phone"],'stateSupplier' => $datos["stateSupplier"]]);
+        array_push($elementos, ['idSupplier' => $datos["idSupplier"], 'nameSupplier' => $datos["nameSupplier"], 'last_name' => $datos["last_name"], 'document' => $datos["document"], 'email' => $datos["email"], 'phone' => $datos["phone"], 'stateSupplier' => $datos["stateSupplier"]]);
         $i++;
     }
     $respuesta->registros = $elementos;

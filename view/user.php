@@ -94,8 +94,8 @@ $resultado = mysqli_query($conexion, $query);
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Documento</th>
-                    <th>Email</th>
-                    <th>phone</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
                     <th>Contaseña</th>
                     <th>Rol</th>
                     <th>Estado</th>
@@ -263,7 +263,7 @@ $resultado = mysqli_query($conexion, $query);
 </div>
 <!-- Modal update -->
 <div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <h5 class="modal-title" id="exampleModalLabel">Actualizar Usuario</h5>
