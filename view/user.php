@@ -211,7 +211,7 @@ $resultado = mysqli_query($conexion, $query);
 
         <div class="form-group">
           <label for="documentUser">Documento</label>
-          <input type="number" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" aria-describedby="">
+          <input type="text" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" aria-describedby="">
         </div>
 
         <div class="form-group">

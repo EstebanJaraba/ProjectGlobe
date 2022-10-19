@@ -22,11 +22,43 @@ function registerUser() {
         },
         success: function (data) {
 
-            if (JSON.parse(data) == 'fallo') {
+            if (JSON.parse(data) == 'max') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'El documento es invalido'
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'max2') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Número de telefono no valido'
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'fallo') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
                     text: 'Debes ingresar todos los campos'
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'emailError') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!ups, el correo ya fue registrado!',
+                    footer: ''
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'email') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!ups, el correo es invalido. Ingrese otro!',
+                    footer: ''
                 })
                 listarUsuarios()
             }else if (JSON.parse(data) == 'doc') {
