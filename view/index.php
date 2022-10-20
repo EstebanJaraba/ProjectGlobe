@@ -8,7 +8,7 @@ if (!isset($_SESSION['userName'])) {
 ?>
 <?php
 require('http/db/conexion.php');
-  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +41,9 @@ require('http/db/conexion.php');
   <link rel="stylesheet" href="assets/plugins/summernote/summernote-bs4.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/plugins/uplot/uPlot.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -271,7 +274,7 @@ require('http/db/conexion.php');
                           $query = mysqli_query($conexion, $sql);
 
                           while ($row = mysqli_fetch_array($query)) {
-                          ?> '<?php echo $row['name'] ?>',
+                          ?> '<?php echo $row['idPurchase'] ?>',
                           <?php
                           }
 
@@ -469,16 +472,32 @@ require('http/db/conexion.php');
           </div>
         </div>
       </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Compras vs Ventas</h3>
 
-
-
-
-
-
-
-      <!-- Main content -->
-
-      <!-- /.content -->
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <div id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- /.content-wrapper -->
 
@@ -523,6 +542,67 @@ require('http/db/conexion.php');
   <script src="assets/dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="assets/dist/js/pages/dashboard.js"></script>
+  <!-- jQuery -->
+  <script src="assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- uPlot -->
+  <script src="assets/plugins/uplot/uPlot.iife.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="assets/dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="assets/dist/js/demo.js"></script>
+  <script>
+    $(function() {
+      /* uPlot
+       * -------
+       * Here we will create a few charts using uPlot
+       */
+
+      function getSize(elementId) {
+        return {
+          width: document.getElementById(elementId).offsetWidth,
+          height: document.getElementById(elementId).offsetHeight,
+        }
+      }
+
+      let data = [
+        [0, 1, 2, 3, 4, 5, 6],
+        [28, 48, 40, 19, 86, 27, 90],
+        [65, 59, 80, 81, 56, 55, 40]
+      ];
+
+      //--------------
+      //- AREA CHART -
+      //--------------
+
+      const optsAreaChart = {
+        ...getSize('areaChart'),
+        scales: {
+          x: {
+            time: false,
+          },
+          y: {
+            range: [0, 100],
+          },
+        },
+        series: [{},
+          {
+            fill: 'rgba(60,141,188,0.7)',
+            stroke: 'rgba(60,141,188,1)',
+          },
+          {
+            stroke: '#c1c7d1',
+            fill: 'rgba(210, 214, 222, .7)',
+          },
+        ],
+      };
+
+      let areaChart = new uPlot(optsAreaChart, data, document.getElementById('areaChart'));
+
+
+    })
+  </script>
 </body>
 
 </html>

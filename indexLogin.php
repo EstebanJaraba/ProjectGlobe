@@ -29,9 +29,9 @@
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title"> Inicio de sesión </h3>
-        <a data-toggle="modal" data-target="#registerUsers">
+        <!-- <a data-toggle="modal" data-target="#registerUsers">
           <h6 class="text-lg-right">Crear cuenta</h6>
-        </a>
+        </a> -->
 
       </div>
       <div class="card-body login-card-body">
@@ -58,17 +58,20 @@
 
 
           <div class="row">
-            <div class="col-8">
+            <div class="col-4">
               <div class="icheck-primary">
                 <input type="checkbox" id="remember">
                 <label for="remember">
-                  Recordar contraseña
+                  Recordar
                 </label>
               </div>
             </div>
 
             <div class="col-4">
-              <button type="submit" name="access" class="btn btn-primary btn-block">Acceder</button>
+              <button type="button" name="access" data-toggle="modal" data-target="#registerUsers" class="btn btn-primary btn-block">Crear</button>
+            </div>
+            <div class="col-4">
+              <button type="submit"  name="access" class="btn btn-success btn-block">Acceder</button>
             </div>
 
           </div>
@@ -76,6 +79,7 @@
         <p class="mb-1">
           <a href="view/forgotPassword.php">Olvidé mi contraseña</a>
         </p>
+
       </div>
       <!-- /.login-card-body -->
     </div>
@@ -91,7 +95,7 @@
           Swal.fire({
               icon: 'warning',
               heightAuto: false,
-              title: 'Debes ingresar su nombre de usuario'
+              title: 'Por favor, ingresa tu nombre de usuario.'
           }).then(function(isConfirm) {
             if (isConfirm) {
               location.href = 'indexLogin.php';
@@ -107,7 +111,7 @@
         Swal.fire({
             icon: 'warning',
             heightAuto: false,
-            title: 'Debes ingresar su contraseña'
+            title: 'Por favor, ingresa tu contraseña.'
         }).then(function(isConfirm) {
           if (isConfirm) {
             location.href = 'indexLogin.php';

@@ -26,21 +26,21 @@ function registerUser() {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
-                    text: 'El documento es invalido'
+                    text: 'Número de documento incorrecto.'
                 })
                 listarUsuarios()
             }else if (JSON.parse(data) == 'max2') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
-                    text: 'Número de telefono no valido'
+                    text: 'Número de teléfono incorrecto.'
                 })
                 listarUsuarios()
             }else if (JSON.parse(data) == 'fallo') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
-                    text: 'Debes ingresar todos los campos'
+                    text: 'Por favor, completa todos los campos.'
                 })
                 listarUsuarios()
             }else if (JSON.parse(data) == 'emailError') {
@@ -48,7 +48,7 @@ function registerUser() {
                     icon: 'warning',
                     title: '',
                     position: 'center',
-                    text: '!ups, el correo ya fue registrado!',
+                    text: '!El correo electrónico ya!',
                     footer: ''
                 })
                 listarUsuarios()
@@ -57,7 +57,7 @@ function registerUser() {
                     icon: 'warning',
                     title: '',
                     position: 'center',
-                    text: '!ups, el correo es invalido. Ingrese otro!',
+                    text: '!Correo electrónico inválido!',
                     footer: ''
                 })
                 listarUsuarios()
@@ -66,7 +66,7 @@ function registerUser() {
                     icon: 'warning',
                     title: '',
                     position: 'center',
-                    text: '!ups, el documento ya existe. Ingrese otro!',
+                    text: '!El número de documento ya existe!',
                     footer: ''
                 })
                 listarUsuarios()
@@ -85,7 +85,7 @@ function registerUser() {
                     icon: 'error',
                     title: '',
                     position: 'center',
-                    text: '¡Falló en el registro!',
+                    text: '¡Fallo en el registro!',
                     footer: ''
                 })
             }
