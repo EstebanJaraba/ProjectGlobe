@@ -84,10 +84,13 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
       <section class="content">
         <div id="container-fluid">
           <div class="card">
+            <div class="card-header d-flex justify-content-end">
+              <button data-toggle="modal" data-target="#" class="btn btn-primary btn-sm">Nueva compra</button>
+            </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
-                  <form id="registerPurchase" >
+                  <!-- <form id="registerPurchase">
                     <div class="row">
                       <div class="col-6" style="margin-right: 0;">
                         <div class="form-group">
@@ -131,15 +134,15 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                     <div class="form-footer">
                       <button type="button" onclick="registerPurchase()" class="btn btn-primary">Guardar</button>
                     </div>
-                  </form>
+                  </form> -->
                 </div>
-                <div class="col-6">
-                  <div class="card">
-                    <div class="card-header">
+                <!-- <div class="col-6">
+                  <div class="card"> -->
+                <!-- <div class="card-header">
                       <h3 class="card-title">Insumos</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body p-0">
+                    </div> -->
+                <!-- /.card-header -->
+                <!-- <div class="card-body p-0">
                       <table class="table table-sm">
                         <thead>
                           <tr>
@@ -197,10 +200,10 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                           </tr>
                         </tbody>
                       </table>
-                    </div>
-                    <!-- /.card-body -->
-                  </div>
-                </div>
+                    </div> -->
+                <!-- /.card-body -->
+                <!-- </div>
+                </div> -->
               </div>
 
             </div>
@@ -212,26 +215,51 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
         <div id="container-fluid">
           <div class="card">
             <div class="card-body">
+              <!-- <div class="table-responsive mb-4">
+                <div class=" d-flex justify-content-end p-4 pr-5">
+                  <button class="btn btn-primary" onclick="mostrar()">Nueva
+                    Compra</button>
+                </div>
+                <table id="tablaProducto" class="table table-sm table-striped table-hover table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="color: black"># Factura</th>
+                      <th scope="col" style="color: black">Total</th>
+                      <th scope="col" style="color: black">Proveedor</th>
+                      <th scope="col" style="color: black">Estado</th>
+                      <th scope="col" style="color: black">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div> -->
               <section class="content">
                 <div id="container-fluid">
                   <div class="card">
                     <div class="card-body">
-                      <table id="tablePurchases" class="table table-sm table-striped">
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Proveedor</th>
-                            <th>Insumo</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
+                      <div class="table-responsive mb-4">
+                        <div class="card-header d-flex justify-content-end p-4 pr-5">
+                          <button  class="btn btn-primary btn-sm">Nueva compra</button>
+                        </div>
+                        <table id="tablePurchases" class="table table-sm table-striped">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Proveedor</th>
+                              <th>Insumo</th>
+                              <th>Descripción</th>
+                              <th>Precio</th>
+                              <th>Estado</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
 
-                        </tbody>
-                      </table>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
 
                   </div>
