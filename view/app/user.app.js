@@ -1,5 +1,3 @@
-
- 
 function registerUser() {
 
     var parametros = {
@@ -14,6 +12,7 @@ function registerUser() {
         "state": document.getElementById('stateUser').value,
     };
 
+
     $.ajax({
         data: parametros,
         url: "http/users.controller.php",
@@ -23,7 +22,56 @@ function registerUser() {
         },
         success: function (data) {
 
-            if (JSON.parse(data) == 'ok') {
+            if (JSON.parse(data) == 'max') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Número de documento incorrecto.'
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'max2') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Número de teléfono incorrecto.'
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'fallo') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Por favor, completa todos los campos.'
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'emailError') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El correo electrónico ya!',
+                    footer: ''
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'email') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!Correo electrónico inválido!',
+                    footer: ''
+                })
+                listarUsuarios()
+            }else if (JSON.parse(data) == 'doc') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El número de documento ya existe!',
+                    footer: ''
+                })
+                listarUsuarios()
+            }
+            else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
                     icon: 'success',
                     title: '',
@@ -49,11 +97,11 @@ function registerUser() {
 
 }
 
-function assinmenetPassword(){
+function assinmenetPassword() {
     document.getElementById('passwordUser').value = document.getElementById('documentUser').value
 }
 
-function listarUsuarios(){
+function listarUsuarios() {
     eliminarFilasTableUsers();
 
     var tableUsers = $("#tableUsers").DataTable();
@@ -69,27 +117,27 @@ function listarUsuarios(){
         data: parametros,
         url: "../view/http/users.controller.php",
         type: "post",
-        beforeSend: function(data){
+        beforeSend: function (data) {
             //mostrar_loading();
         },
-        success: function (data){
+        success: function (data) {
 
 
-             for (var i in JSON.parse(data).registros){
-                 agregarFila_Users(
-                     JSON.parse(data).registros[i].idUser,
-                     JSON.parse(data).registros[i].userName,
-                     JSON.parse(data).registros[i].last_name,
-                     JSON.parse(data).registros[i].document,
-                     JSON.parse(data).registros[i].email,
-                     JSON.parse(data).registros[i].phone,
-                     JSON.parse(data).registros[i].passwordUser,
-                     JSON.parse(data).registros[i].id_rol,
-                     JSON.parse(data).registros[i].stateUser,
-                     ""
-                 );
-             }
-             $("#tableUsers").DataTable({
+            for (var i in JSON.parse(data).registros) {
+                agregarFila_Users(
+                    JSON.parse(data).registros[i].idUser,
+                    JSON.parse(data).registros[i].userName,
+                    JSON.parse(data).registros[i].last_name,
+                    JSON.parse(data).registros[i].document,
+                    JSON.parse(data).registros[i].email,
+                    JSON.parse(data).registros[i].phone,
+                    JSON.parse(data).registros[i].passwordUser,
+                    JSON.parse(data).registros[i].id_rol,
+                    JSON.parse(data).registros[i].stateUser,
+                    ""
+                );
+            }
+            $("#tableUsers").DataTable({
                 dom: "Bfrtip",
                 buttons: ["copy", "csv", "excel", "pdf", "print"],
                 language: {
@@ -100,13 +148,13 @@ function listarUsuarios(){
                 ],
             });
         },
-        error:function (){
+        error: function () {
             console.log("no se ha podido obtener la informacion");
         },
     });
 }
 
-function agregarFila_Users(idUser, userName,last_name, document, email, phone,passwordUser, idRole, stateUser,acciones){
+function agregarFila_Users(idUser, userName, last_name, document, email, phone, passwordUser, idRole, stateUser, acciones) {
     if (stateUser == 1) {
         verEstado = '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>'
     } else if (stateUser == 0) {
@@ -135,26 +183,26 @@ function agregarFila_Users(idUser, userName,last_name, document, email, phone,pa
 }
 
 
-function eliminarFilasTableUsers(){
+function eliminarFilasTableUsers() {
     var n = 0;
-    $("#tableUsers tbody tr").each(function(){
+    $("#tableUsers tbody tr").each(function () {
         n++;
     });
-    for (i = n - 1; i > 1; i--){
+    for (i = n - 1; i > 1; i--) {
         $("#tableUsers tbody tr:eq('" + i + "')").remove();
     }
 }
 
-function tomarDatosUser(idUser, name, last_name, documento, email, phone, passwordUser, idRole, stateUser){    
-    document.getElementById('idUserUpdate').value=idUser
-    document.getElementById('nameUserUpdate').value=name
-    document.getElementById('last_nameUserUpdate').value=last_name
-    document.getElementById('documentUserUpdate').value=documento
-    document.getElementById('emailUserUpdate').value=email
-    document.getElementById('phoneUserUpdate').value=phone
-    document.getElementById('passwordUserUpdate').value=passwordUser
-    document.getElementById('roleUserUpdate').value=idRole
-    document.getElementById('stateUserUpdate').value=stateUser
+function tomarDatosUser(idUser, name, last_name, documento, email, phone, passwordUser, idRole, stateUser) {
+    document.getElementById('idUserUpdate').value = idUser
+    document.getElementById('nameUserUpdate').value = name
+    document.getElementById('last_nameUserUpdate').value = last_name
+    document.getElementById('documentUserUpdate').value = documento
+    document.getElementById('emailUserUpdate').value = email
+    document.getElementById('phoneUserUpdate').value = phone
+    document.getElementById('passwordUserUpdate').value = passwordUser
+    document.getElementById('roleUserUpdate').value = idRole
+    document.getElementById('stateUserUpdate').value = stateUser
 }
 
 function updateUsers() {
@@ -189,8 +237,7 @@ function updateUsers() {
                     timer: 1500
                 })
                 listarUsuarios()
-            }
-            else if (JSON.parse(data) == 'error') {
+            } else if (JSON.parse(data) == 'error') {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',

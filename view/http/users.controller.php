@@ -1,5 +1,7 @@
 <?php
 
+use LDAP\Result;
+
 require_once 'db/conexion.php';
 
 if ($_POST['accion'] == 'registerUsers') {
@@ -12,14 +14,41 @@ if ($_POST['accion'] == 'registerUsers') {
    $role = $_POST['role'];
    $state = $_POST['state'];
 
-   $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$password','$role','$state')";
+   
 
-   $file =  mysqli_query($conexion, $query);
+   if (strlen($document) <= 9 || !is_numeric($document)){
+      echo json_encode('max');
+   } else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
+      echo json_encode('max2');
+   } else if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "" || $state == "") {
+      echo json_encode('fallo');
+   } else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $consulta = "SELECT document FROM users WHERE document='$document'";
+      $consultaCorreo = "SELECT email FROM users WHERE email='$email'";
 
-   if ($file) {
-      echo json_encode('ok');
+      $conect = mysqli_query($conexion, $consulta);
+      $conect2 = mysqli_query($conexion, $consultaCorreo);
+
+      $result = mysqli_num_rows($conect);
+      $result2 = mysqli_num_rows($conect2);
+
+      if ($result > 0) {
+         echo json_encode('doc');
+      } else if ($result2 > 0) {
+         echo json_encode('emailError');
+      } else {
+         $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$password','$role','$state')";
+
+         $file =  mysqli_query($conexion, $query);
+
+         if ($file) {
+            echo json_encode('ok');
+         } else {
+            echo json_encode('error');
+         }
+      }
    } else {
-      echo json_encode('error');
+      echo json_encode('email');
    }
 }
 

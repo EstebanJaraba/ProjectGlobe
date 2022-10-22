@@ -18,8 +18,15 @@ function registerSupplier() {
 
         },
         success: function (data) {
-
-            if (JSON.parse(data) == 'ok') {
+            if (JSON.parse(data) == 'fallo') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Debes ingresar todos los campos'
+                })
+                listarProveedores()
+            }
+            else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',

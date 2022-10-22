@@ -47,10 +47,10 @@
   <div class="wrapper">
 
        <!-- Navbar -->
-       <?php include 'layouts/nav.php' ?>
+       <?php include 'layout/nav.php' ?>
 
        <!-- Main Sidebar Container -->
-       <?php include 'layouts/aside.php' ?>
+       <?php include 'layout/aside.php' ?>
     
     <div class="content-wrapper">
 
