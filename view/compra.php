@@ -81,194 +81,240 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
         </div><!-- /.container-fluid -->
       </div>
 
-      <section class="content">
-        <div id="container-fluid">
-          <div class="card">
-            <div class="card-header d-flex justify-content-end">
-              <button data-toggle="modal" data-target="#" class="btn btn-primary btn-sm">Nueva compra</button>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-6">
-<<<<<<< HEAD
-                  <!-- <form id="registerPurchase">
-=======
-                  <form id="registerPurchase">
->>>>>>> a3117f616e136c1292dabe430f1fbd81ed042302
-                    <div class="row">
-                      <div class="col-6" style="margin-right: 0;">
-                        <div class="form-group">
-                          <label for="proveedorPurchase">Proveedor</label>
-                          <select class="form-control" id="proveedorPurchase" aria-describedby="">
-                            <option value="">---</option>
-                            <?php while ($row = $resultadoProveedor->fetch_assoc()) { ?>
-                              <option value="<?php echo $row['idSupplier']; ?>"><?php echo $row['nameSupplier']; ?></option>
-                            <?php }   ?>
-                          </select>
-                        </div>
-                      </div>
 
-                      <div class="col-6" style="margin-left: 0;">
-                        <div class="form-group">
-                          <label for="insumoPurchase">Insumo</label>
-                          <select class="form-control" id="insumoPurchase" aria-describedby="">
-                            <option value="">---</option>
-                            <?php while ($row = $resultadoCompras->fetch_assoc()) { ?>
-                              <option value="<?php echo $row['idSupply']; ?>"><?php echo $row['nameSupply']; ?></option>
-                            <?php }   ?>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="descriptionPurchase" class="form-label">Descripción</label>
-                      <textarea class="form-control" id="descriptionPurchase" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3" style="margin-left: 0;">
-                      <div class="form-group">
-                        <label for="statePurchase">Estado</label>
-                        <select class="form-control" id="statePurchase" aria-describedby="">
-                          <option value="">---</option>
-                          <option value="0">PENDIENTE</option>
-                          <option value="1">EN COBRO</option>
-                          <option value="2">PAGADO</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-footer">
-                      <button type="button" onclick="registerPurchase()" class="btn btn-primary">Guardar</button>
-                    </div>
-                  </form> -->
-                </div>
-                <!-- <div class="col-6">
-                  <div class="card"> -->
-                <!-- <div class="card-header">
-                      <h3 class="card-title">Insumos</h3>
-                    </div> -->
-                <!-- /.card-header -->
-                <!-- <div class="card-body p-0">
-                      <table class="table table-sm">
-                        <thead>
-                          <tr>
-                            <th style="width: 10px">ID</th>
-                            <th>Nombre</th>
-                            <th>Número de parte</th>
-                            <th style="width: 40px">Cantidad</th>
-                            <th>Acciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1.</td>
-                            <td>Update software</td>
-                            <td>
-                              <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                            <td><span class="badge bg-danger">30%</span></td>
-                          </tr>
-                          <tr>
-                            <td>2.</td>
-                            <td>Clean database</td>
-                            <td>
-                              <div class="progress progress-xs">
-                                <div class="progress-bar bg-warning" style="width: 70%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-warning">70%</span></td>
-                            <td><span class="badge bg-danger">2%</span></td>
-                          </tr>
-                          <tr>
-                            <td>3.</td>
-                            <td>Cron job running</td>
-                            <td>
-                              <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-primary">30%</span></td>
-                            <td><span class="badge bg-success">100%</span></td>
-                          </tr>
-                          <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                              <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-success" style="width: 90%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-success">90%</span></td>
-                            <td><span class="badge bg-danger">4%</span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div> -->
-                <!-- /.card-body -->
-                <!-- </div>
-                </div> -->
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </section>
       <section class="content">
         <div id="container-fluid">
           <div class="card">
             <div class="card-body">
-              <!-- <div class="table-responsive mb-4">
-                <div class=" d-flex justify-content-end p-4 pr-5">
-                  <button class="btn btn-primary" onclick="mostrar()">Nueva
-                    Compra</button>
-                </div>
-                <table id="tablaProducto" class="table table-sm table-striped table-hover table-bordered" style="width:100%">
-                  <thead>
-                    <tr>
-                      <th scope="col" style="color: black"># Factura</th>
-                      <th scope="col" style="color: black">Total</th>
-                      <th scope="col" style="color: black">Proveedor</th>
-                      <th scope="col" style="color: black">Estado</th>
-                      <th scope="col" style="color: black">Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
 
-                  </tbody>
-                </table>
-              </div> -->
-              <section class="content">
+              <div class="card">
                 <div id="container-fluid">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="table-responsive mb-4">
-                        <div class="card-header d-flex justify-content-end p-4 pr-5">
-                          <button  class="btn btn-primary btn-sm">Nueva compra</button>
-                        </div>
-                        <table id="tablePurchases" class="table table-sm table-striped">
-                          <thead>
-                            <tr>
-                              <th>ID</th>
-                              <th>Proveedor</th>
-                              <th>Insumo</th>
-                              <th>Descripción</th>
-                              <th>Precio</th>
-                              <th>Estado</th>
-                              <th>Acciones</th>
-                            </tr>
-                          </thead>
-                          <tbody>
+                  <div class="row" id="cancel-row">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                      <div class="statbox widget box box-shadow">
+                        <div class="widget-content widget-content-area">
+                          <div class="card showRegister" id="showRegister">
+                            <div class=" d-flex justify-content-end p-4 pr-5">
+                              <button class="btn btn-danger" onclick="ocultar()"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="row m-2">
+                              <div class="col-6">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h3 class="card-title">Registrar compra</h3>
+                                  </div>
+                                  <div class="card-body">
+                                    <form id="registroProducto">
+                                      <div class="row">
+                                        <div class="col-5">
+                                          <div class="form-group">
+                                            <label for="nombre">Numero de factura</label>
+                                            <input name="descripcion" type="text" placeholder="Ingrese numero de factura" class="form-control" id="facturaCompra">
+                                          </div>
+                                        </div>
+                                        <div class="col-7">
+                                          <div class="form-group">
+                                            <label for="total">Total</label>
+                                            <p class="form-label h1" id="totalCompra">000000</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-6" style="margin-right: 0;">
+                                          <div class="form-group">
+                                            <label for="proveedorPurchase">Proveedor</label>
+                                            <select class="form-control" id="proveedorPurchase" aria-describedby="">
+                                              <option value="">---</option>
+                                              <?php while ($row = $resultadoProveedor->fetch_assoc()) { ?>
+                                                <option value="<?php echo $row['idSupplier']; ?>"><?php echo $row['nameSupplier']; ?></option>
+                                              <?php }   ?>
+                                            </select>
+                                          </div>
+                                        </div>
 
-                          </tbody>
-                        </table>
+                                        <div class="col-6" style="margin-left: 0;">
+                                          <div class="form-group">
+                                            <label for="insumoPurchase">Insumo</label>
+                                            <select class="form-control" id="insumoPurchase" aria-describedby="">
+                                              <option value="">---</option>
+                                              <?php while ($row = $resultadoCompras->fetch_assoc()) { ?>
+                                                <option value="<?php echo $row['idSupply']; ?>"><?php echo $row['nameSupply']; ?></option>
+                                              <?php }   ?>
+                                            </select>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="mb-3">
+                                        <label for="descriptionPurchase" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="descriptionPurchase" rows="3"></textarea>
+                                      </div>
+                                      <!-- <div class="mb-3" style="margin-left: 0;">
+                                        <div class="form-group">
+                                          <label for="statePurchase">Estado</label>
+                                          <select class="form-control" id="statePurchase" aria-describedby="">
+                                            <option value="">---</option>
+                                            <option value="0">PENDIENTE</option>
+                                            <option value="1">EN COBRO</option>
+                                            <option value="2">PAGADO</option>
+                                          </select>
+                                        </div>
+                                      </div> -->
+                                      <div class="row">
+                                        <div class="col-4">
+                                          <label for="cantidad">Cantidad</label>
+                                          <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" class="form-control" id="cantidadAgregar">
+                                        </div>
+                                        <div class="col-4">
+                                          <label for="cantidad">V. Unitario</label>
+                                          <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" class="form-control" id="v_unitario">
+                                        </div>
+                                        <div class="col-4">
+                                          <label for="cantidad">V. Total</label>
+                                          <input name="v_total" type="number" disabled style="background:white" class="form-control" id="v_total">
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <div class="modal-footer">
+                                          <button type="button" onclick="agregarProducto()" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                      </div>
+
+                                    </form>
+                                  </div>
+
+                                </div>
+
+                                <!-- <form id="registroProducto">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Registrar
+                                      Compra
+                                    </h5>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <div class="form-group">
+                                        <label for="nombre">Numero de factura</label>
+                                        <input name="descripcion" type="text" placeholder="Ingrese numero de factura" class="form-control" id="facturaCompra">
+                                      </div>
+                                    </div>
+                                    <div class="col-7">
+                                      <div class="form-group">
+                                        <label for="total">Total</label>
+                                        <p class="form-label h2" id="totalCompra">000000</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Proveedor</label>
+                                      <select name="proveedor" class="form-control" required aria-required="" id="listaProveedor">
+                                        <option value="0">Seleccione un proveedor</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="form-group">
+                                        <label for="exampleInputEmail1">Producto</label>
+                                        <select name="producto" class="form-control" id="listaProducto">
+                                          <option value="0">Seleccione un producto
+                                          </option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-4">
+                                      <label for="cantidad">Cantidad</label>
+                                      <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" class="form-control" id="cantidadAgregar">
+                                    </div>
+                                    <div class="col-4">
+                                      <label for="cantidad">V. Unitario</label>
+                                      <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" class="form-control" id="v_unitario">
+                                    </div>
+                                    <div class="col-4">
+                                      <label for="cantidad">V. Total</label>
+                                      <input name="v_total" type="number" disabled style="background:white" class="form-control" id="v_total">
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div class="modal-footer">
+                                      <button type="button" onclick="agregarProducto()" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                                    </div>
+                                  </div>
+                                </form> -->
+                              </div>
+                              <div class="col-6">
+
+                                <div class=" scroll">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h3 class="card-title">Insumos</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body p-0">
+                                      <table class="table table-sm" id="tablaCompras">
+                                        <thead>
+                                          <tr>
+                                            <th style="width: 10px">ID</th>
+                                            <th>Nombre</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Total</th>
+                                            <th>Acciones</th>
+
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                  </div>
+
+                                </div>
+                                <div>
+                                  <div class="modal-footer">
+                                    <button type="button" onclick="registrarCompra()" data-dismiss="modal" id="guardaCompras" class="btn btn-primary">Guardar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="table-responsive mb-4">
+                            <div class="d-flex justify-content-end p-4 pr-5">
+                              <button class="btn btn-primary btn-sm" onclick="mostrar()">Nueva compra</button>
+                            </div>
+                            <table id="tablePurchases" class="table table-sm table-striped table-hover table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Proveedor</th>
+                                  <th>Insumo</th>
+                                  <th>Descripción</th>
+                                  <th>Precio</th>
+                                  <th>Estado</th>
+                                  <th>Acciones</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
                   </div>
+
                 </div>
-              </section>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -341,6 +387,16 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
   $(document).ready(function() {
     listarCompras();
   })
+</script>
+<script>
+  function mostrar() {
+    document.getElementById('showRegister').style.display = 'flex';
+  }
+
+
+  function ocultar() {
+    document.getElementById('showRegister').style.display = 'none';
+  }
 </script>
 
 </html>

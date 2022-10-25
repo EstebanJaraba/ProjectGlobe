@@ -90,7 +90,7 @@ require('http/db/conexion.php');
               </div>
               <div class="card-body">
                 <p class="card-text">
-                  <canvas id="myChartUsers" width="400" height="400"></canvas>
+                  <canvas id="myChartUsers" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                   <script>
                     const ctxUsers = document.getElementById('myChartUsers');
                     const myChartUsers = new Chart(ctxUsers, {
@@ -173,7 +173,7 @@ require('http/db/conexion.php');
               <div class="card-body">
 
                 <p class="card-text">
-                  <canvas id="myChartProveedores" width="400" height="400"></canvas>
+                  <canvas id="myChartProveedores" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                   <script>
                     const ctxProveedores = document.getElementById('myChartProveedores');
                     const myChartProveedores = new Chart(ctxProveedores, {
@@ -260,7 +260,7 @@ require('http/db/conexion.php');
               <div class="card-body">
 
                 <p class="card-text">
-                  <canvas id="myChartCompras" width="400" height="400"></canvas>
+                  <canvas id="myChartCompras" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                   <script>
                     const ctxCompras = document.getElementById('myChartCompras');
                     const myChartCompras = new Chart(ctxCompras, {
@@ -329,7 +329,7 @@ require('http/db/conexion.php');
               <div class="card-body">
 
                 <p class="card-text">
-                  <canvas id="myChartVentas" width="400" height="400"></canvas>
+                  <canvas id="myChartVentas" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                   <script>
                     const ctxVentas = document.getElementById('myChartVentas');
                     const myChartVentas = new Chart(ctxVentas, {
@@ -401,7 +401,7 @@ require('http/db/conexion.php');
               </div>
               <div class="card-body">
                 <p class="card-text">
-                  <canvas id="myChartInsumos" width="400" height="400"></canvas>
+                  <canvas id="myChartInsumos" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                   <script>
                     const ctxInsumos = document.getElementById('myChartInsumos');
                     const myChartInsumos = new Chart(ctxInsumos, {
