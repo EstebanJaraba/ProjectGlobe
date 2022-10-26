@@ -93,7 +93,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                       <div class="statbox widget box box-shadow">
                         <div class="widget-content widget-content-area">
-                          <div class="card showRegister" id="showRegister">
+                          <div class="card showRegister collapse" id="showRegister">
                             <div class=" d-flex justify-content-end p-4 pr-5">
                               <button class="btn btn-danger" onclick="ocultar()"><i class="bi bi-x-lg"></i></button>
                             </div>
@@ -291,11 +291,10 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                             <table id="tablePurchases" class="table table-sm table-striped table-hover table-bordered">
                               <thead>
                                 <tr>
-                                  <th>ID</th>
+                                  <th>Factura</th>
                                   <th>Proveedor</th>
-                                  <th>Insumo</th>
                                   <th>Descripción</th>
-                                  <th>Precio</th>
+                                  <th>Total</th>
                                   <th>Estado</th>
                                   <th>Acciones</th>
                                 </tr>
@@ -385,7 +384,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
 
 <script>
   $(document).ready(function() {
-    listarCompras();
+    listar();
   })
 </script>
 <script>

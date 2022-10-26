@@ -74,7 +74,16 @@ function registrarCompra() {
                     showConfirmButton: false,
                     timer: 1500,
                 });
-                //listar();
+                listar();
+            }if (JSON.parse(data) == "error") {
+                Swal.fire({
+                    position: "top",
+                    icon: "success",
+                    title: "Registro f",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listar();
             }
         },
         error: function (error) {
@@ -85,8 +94,8 @@ function registrarCompra() {
 
 function calcularValorTotal() {
     document.getElementById("v_total").value =
-        document.getElementById("cantidadAgregar").value *
-        document.getElementById("v_unitario").value;
+    document.getElementById("cantidadAgregar").value *
+    document.getElementById("v_unitario").value;
 }
 
 let ArregloProductosAgregarCompra = Array();
@@ -179,408 +188,410 @@ function eliminaFilastablaProducto() {
 
 
 
-// function ajaxMain(accion, url, nombreSelect) {
-//     var parametros = {
-//         accion: accion,
-//     };
+function ajaxMain(accion, url, nombreSelect) {
+    var parametros = {
+        accion: accion,
+    };
 
-//     $.ajax({
-//         data: parametros,
-//         url: url,
-//         type: "post",
-//         beforeSend: function () {
-//             trar_loading();
-//         },
-//         success: function (data) {
-//             if (accion == "listaProveedor") {
-//                 loadingSelect(data, nombreSelect);
-//             }
-//             if (accion == "listaProducto") {
-//                 loadingSelect(data, nombreSelect);
-//             }
-//         },
-//         error: function (error) {
-//             console.log("No se ha podido obtener la informaciín " + error);
-//         },
-//     });
-// }
+    $.ajax({
+        data: parametros,
+        url: url,
+        type: "post",
+        beforeSend: function () {
+            trar_loading();
+        },
+        success: function (data) {
+            if (accion == "listaProveedor") {
+                loadingSelect(data, nombreSelect);
+            }
+            if (accion == "listaProducto") {
+                loadingSelect(data, nombreSelect);
+            }
+        },
+        error: function (error) {
+            console.log("No se ha podido obtener la informaciín " + error);
+        },
+    });
+}
 
-// function loadingSelect(data, nombreSelect) {
-//     for (var i in JSON.parse(data).registros) {
-//         var select = document.getElementById(nombreSelect);
-//         let option = document.createElement("option");
-//         option.setAttribute("value", JSON.parse(data).registros[i].id);
-//         option.innerHTML = "" + JSON.parse(data).registros[i].nombre;
+function loadingSelect(data, nombreSelect) {
+    for (var i in JSON.parse(data).registros) {
+        var select = document.getElementById(nombreSelect);
+        let option = document.createElement("option");
+        option.setAttribute("value", JSON.parse(data).registros[i].id);
+        option.innerHTML = "" + JSON.parse(data).registros[i].nombre;
 
-//         select.appendChild(option);
-//     }
-// }
+        select.appendChild(option);
+    }
+}
 
-//   function selectListaProveedor() {
-//     ajaxMain(
-//       "listaProveedor",
-//       "http/purchasing.controller.php",
-//       "listaProveedor"
-//     );
-//     cargando();
-//     setTimeout(() => {
-//       selectListaProducto();
-//     }, 200);
-//   }
+function selectListaProveedor() {
+    ajaxMain(
+        "listaProveedor",
+        "../view/http/purchases.controller.php",
+        "listaProveedor"
+    );
+    cargando();
+    setTimeout(() => {
+        selectListaProducto();
+    }, 200);
+}
 
-//   //Lista dinamica producto
+function selectListaProducto() {
+    ajaxMain("listaProducto", "../view/http/purchases.controller.php", "listaProducto");
+    cerrarAlert();
+}
 
-//   function selectListaProducto() {
-//     ajaxMain("listaProducto", "http/purchasing.controller.php", "listaProducto");
-//     cerrarAlert();
-//   }
+//Listar Productos Agregados
 
-//   //Listar Productos Agregados
+function listarProducto() {
+    eliminaFilastablaProducto();
 
-//   function listarProducto() {
-//     eliminaFilastablaProducto();
+    var tablaCompra = $("#tablaCompras").DataTable();
+    tablaCompra.clear();
+    tablaCompra.destroy();
 
-//     var tablaCompra = $("#tablaCompras").DataTable();
-//     tablaCompra.clear();
-//     tablaCompra.destroy();
+    var parametros = {
+        accion: "seleccionarListaProducto",
+    };
 
-//     var parametros = {
-//       accion: "seleccionarListaProducto",
-//     };
+    for (var i in ArregloProductosAgregarCompra) {
+        agregarFilaProducto(
+            ArregloProductosAgregarCompra[i].productoId,
+            ArregloProductosAgregarCompra[i].nombreProducto,
+            ArregloProductosAgregarCompra[i].cantidad,
+            ArregloProductosAgregarCompra[i].valorUnitario,
+            ArregloProductosAgregarCompra[i].valorTotal
+        );
+    }
 
-//     for (var i in ArregloProductosAgregarCompra) {
-//       agregarFilaProducto(
-//         ArregloProductosAgregarCompra[i].productoId,
-//         ArregloProductosAgregarCompra[i].nombreProducto,
-//         ArregloProductosAgregarCompra[i].cantidad,
-//         ArregloProductosAgregarCompra[i].valorUnitario,
-//         ArregloProductosAgregarCompra[i].valorTotal
-//       );
-//     }
+    $("#tablaCompras").DataTable({
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+        },
+    });
+}
 
-//     $("#tablaCompras").DataTable({
-//       language: {
-//         url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-//       },
-//     });
-//   }
-
-//   function eliminaFilastablaProducto() {
-//     var n = 0;
-//     $("#tablaCompras tbody tr").each(function () {
-//       n++;
-//     });
-//     for (i = n - 1; i > 1; i--) {
-//       $("#tablaCompras tbody tr:eq('" + i + "')").remove();
-//     }
-//   }
+function eliminaFilastablaProducto() {
+    var n = 0;
+    $("#tablaCompras tbody tr").each(function () {
+        n++;
+    });
+    for (i = n - 1; i > 1; i--) {
+        $("#tablaCompras tbody tr:eq('" + i + "')").remove();
+    }
+}
 
 //   //Arreglo para enlistar productos agregados
-//   function agregarFilaProducto(
-//     productoId,
-//     nombreProducto,
-//     cantidad,
-//     valorUnitario,
-//     valorTotal,
-//     accion
-//   ) {
-//     var htmlTags = `<tr>
-//       <td>${productoId}</td>
-//       <td>${nombreProducto}</td>
-//       <td>${cantidad}</td>
-//       <td>${valorUnitario}</td>
-//       <td>${valorTotal}</td>
-//       <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarProducto(${productoId})">x</button></td>
-//       </tr>`;
+function agregarFilaProducto(
+    productoId,
+    nombreProducto,
+    cantidad,
+    valorUnitario,
+    valorTotal,
+    accion
+) {
+    var htmlTags = `<tr>
+    <td>${productoId}</td>
+    <td>${nombreProducto}</td>
+    <td>${cantidad}</td>
+    <td>${valorUnitario}</td>
+    <td>${valorTotal}</td>
+    <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarProducto(${productoId})">x</button></td>
+    </tr>`;
 
-//     $("#tablaCompras tbody").append(htmlTags);
-//   }
+    $("#tablaCompras tbody").append(htmlTags);
+}
 
-//   function eliminarProducto(productoId) {
-//     for (let i = 0; i < ArregloProductosAgregarCompra.length; i++) {
-//       if (ArregloProductosAgregarCompra[i].productoId == productoId) {
-//         ArregloProductosAgregarCompra.splice(ArregloProductosAgregarCompra[i],1);
-//       }
-//     }
+function eliminarProducto(productoId) {
+    for (let i = 0; i < ArregloProductosAgregarCompra.length; i++) {
+        if (ArregloProductosAgregarCompra[i].productoId == productoId) {
+            ArregloProductosAgregarCompra.splice(ArregloProductosAgregarCompra[i], 1);
+        }
+    }
 
-//     listarProducto();
-//   }
+    listarProducto();
+}
 
-//   //Listar Compras
+//Listar Compras
 
-//   function listarCompra() {
-//     eliminaFilastablaCompra();
+function listarCompra() {
+    eliminaFilastablaCompra();
+  
+    var tablaCompra = $("#tablaCompras").DataTable();
+    tablaCompra.clear();
+    tablaCompra.destroy();
+  
+    var parametros = {
+      accion: "seleccionarListaCompra",
+    };
+  
+    $.ajax({
+      data: parametros,
+      url: "../view/http/purchases.controller.php",
+      type: "post",
+      beforeSend: function () {
+        cargando();
+      },
+      success: function (data) {
+        //console.log(JSON.parse(data));
+        //if(JSON.parse(data).registros == ""){
+  
+        for (var i in JSON.parse(data).registros) {
+          agregarFilaCompra(
+            JSON.parse(data).registros[i].id,
+            JSON.parse(data).registros[i].descripcion,
+            JSON.parse(data).registros[i].cantidad,
+            JSON.parse(data).registros[i].valor,
+            JSON.parse(data).registros[i].estado
+          );
+        }
+  
+        $("#tablaCompra").DataTable({
+          language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+          },
+        });
+  
+        setTimeout(() => {
+          cerrarAlert();
+        }, 1200);
+      },
+  
+      error: function (error) {
+        console.log("No se ha podido obtener la información " + error);
+      },
+    });
+}
 
-//     var tablaCompra = $("#tablaCompras").DataTable();
-//     tablaCompra.clear();
-//     tablaCompra.destroy();
+function cargando() {
+    let timerInterval;
+    Swal.fire({
+        title: "cargando...",
+        html: "Cargando registros",
+        timer: 20000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            const b = Swal.getHtmlContainer().querySelector("b");
+            timerInterval = setInterval(() => {}, 1000);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        },
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("Error de conexión con la BD");
+        }
+    });
+}
 
-//     var parametros = {
-//       accion: "seleccionarListaCompra",
-//     };
+function cerrarAlert() {
+    Swal.close();
+}
 
-//     $.ajax({
-//       data: parametros,
-//       url: "http/purchasing.controller.php",
-//       type: "post",
-//       beforeSend: function () {
-//         cargando();
-//       },
-//       success: function (data) {
-//         //console.log(JSON.parse(data));
-//         //if(JSON.parse(data).registros == ""){
+function eliminaFilastablaCompra() {
+    var n = 0;
+    $("#tablaCompras tbody tr").each(function () {
+        n++;
+    });
+    for (i = n - 1; i > 1; i--) {
+        $("#tablaCompras tbody tr:eq('" + i + "')").remove();
+    }
+}
 
-//         for (var i in JSON.parse(data).registros) {
-//           agregarFilaCompra(
-//             JSON.parse(data).registros[i].id,
-//             JSON.parse(data).registros[i].descripcion,
-//             JSON.parse(data).registros[i].cantidad,
-//             JSON.parse(data).registros[i].valor,
-//             JSON.parse(data).registros[i].estado
-//           );
-//         }
+function agregarFilaCompra(id, descripcion, cantidad, valor, estado) {
+    if (estado == 1) {
+        varEstado =
+            '<button class="btn btn-success btn-sm col-8" style="cursor: text">Activo</button>';
+    } else if (estado == 0) {
+        varEstado =
+            '<button class="btn btn-danger btn-sm col-8" style="cursor: text">Inactivo</button>';
+    }
 
-//         $("#tablaCompra").DataTable({
-//           language: {
-//             url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-//           },
-//         });
+    let datosProvider =
+        "'" +
+        id +
+        "', '" +
+        descripcion +
+        "', '" +
+        cantidad +
+        "', '" +
+        valor +
+        "', '" +
+        estado +
+        "' ";
 
-//         setTimeout(() => {
-//           cerrarAlert();
-//         }, 1200);
-//       },
+    var htmlTags = `<tr>
+       <td>${id}</td>
+       <td>${descripcion}</td>
+       <td>${cantidad}</td>
+       <td>${valor}</td>
+       <td>Proveedor</td>
+       <td>Producto</td>
+       <td>${varEstado}</td>
+       <td><button data-toggle="modal" data-target="#actualizacionCompra" class="btn btn-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button></td>
+       </tr>`;
 
-//       error: function (error) {
-//         console.log("No se ha podido obtener la información " + error);
-//       },
-//     });
-//   }
+    $("#tablaCompras tbody").append(htmlTags);
+}
 
-//   function cargando() {
-//     let timerInterval;
-//     Swal.fire({
-//       title: "cargando...",
-//       html: "Cargando registros",
-//       timer: 20000,
-//       timerProgressBar: true,
-//       didOpen: () => {
-//         Swal.showLoading();
-//         const b = Swal.getHtmlContainer().querySelector("b");
-//         timerInterval = setInterval(() => {}, 1000);
-//       },
-//       willClose: () => {
-//         clearInterval(timerInterval);
-//       },
-//     }).then((result) => {
-//       /* Read more about handling dismissals below */
-//       if (result.dismiss === Swal.DismissReason.timer) {
-//         console.log("Error de conexión con la BD");
-//       }
-//     });
-//   }
+// LISTAR ES LA TABLA DE COMPRAS REAL
 
-//   function cerrarAlert() {
-//     Swal.close();
-//   }
+function listar() {
+    eliminaFilastabla();
 
-//   function eliminaFilastablaCompra() {
-//     var n = 0;
-//     $("#tablaCompras tbody tr").each(function () {
-//       n++;
-//     });
-//     for (i = n - 1; i > 1; i--) {
-//       $("#tablaCompras tbody tr:eq('" + i + "')").remove();
-//     }
-//   }
+    var tablaLista = $("#tablePurchases").DataTable();
+    tablaLista.clear();
+    tablaLista.destroy();
 
-//   function agregarFilaCompra(id, descripcion, cantidad, valor, estado) {
-//     if (estado == 1) {
-//       varEstado =
-//         '<button class="btn btn-success btn-sm col-8" style="cursor: text">Activo</button>';
-//     } else if (estado == 0) {
-//       varEstado =
-//         '<button class="btn btn-danger btn-sm col-8" style="cursor: text">Inactivo</button>';
-//     }
+    var parametros = {
+        accion: "seleccionarLista",
+    };
 
-//     let datosProvider =
-//       "'" +
-//       id +
-//       "', '" +
-//       descripcion +
-//       "', '" +
-//       cantidad +
-//       "', '" +
-//       valor +
-//       "', '" +
-//       estado +
-//       "' ";
+    $.ajax({
+        data: parametros,
+        url: "../view/http/purchases.controller.php",
+        type: "post",
+        beforeSend: function () {
+            cargando();
+        },
+        success: function (data) {
+            for (var i in JSON.parse(data).registros) {
+                agregarFila(
+                    JSON.parse(data).registros[i].IdFactura,
+                    JSON.parse(data).registros[i].proveedor,
+                    JSON.parse(data).registros[i].description,
+                    JSON.parse(data).registros[i].total,
+                    JSON.parse(data).registros[i].estado,
+                    ""
+                );
+            }
 
-//     var htmlTags = `<tr>
-//       <td>${id}</td>
-//       <td>${descripcion}</td>
-//       <td>${cantidad}</td>
-//       <td>${valor}</td>
-//       <td>Proveedor</td>
-//       <td>Producto</td>
-//       <td>${varEstado}</td>
-//       <td><button data-toggle="modal" data-target="#actualizacionCompra" class="btn btn-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button></td>
-//       </tr>`;
+            $("#tablePurchases").DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+                },
+            });
 
-//     $("#tablaCompras tbody").append(htmlTags);
-//   }
+            setTimeout(() => {
+                cerrarAlert();  
+            }, 1200);
+        },
 
-//   // LISTAR ES LA TABLA DE COMPRAS REAL
+        error: function (error) {
+            console.log("No se ha podido obtener la información " + error);
+        },
+    });
+}
 
-//   function listar() {
-//     eliminaFilastabla();
+function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
+    if (estado == 1) {
+        varEstado =
+            '<button class="btn btn-success btn-sm col-8" style="cursor: text">Activo</button>';
+    } else if (estado == 0) {
+        varEstado =
+            '<button class="btn btn-danger btn-sm col-8" style="cursor: text">Anulado</button>';
+    }
+    if (estado == 1) {
+        anular = `<button class="btn btn-danger" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-x-octagon"></i></button>`;
+    } else if (estado == 0) {
+        anular = "";
+    }
 
-//     var tablaLista = $("#tablaProducto").DataTable();
-//     tablaLista.clear();
-//     tablaLista.destroy();
+    let datosProvider =
+        "'" +
+        IdFactura +
+        "', '" +
+        proveedor +
+        "', '" +
+        description +
+        "', '" +
+        total +
+        "', '" +
+        estado +
+        "'";
 
-//     var parametros = {
-//       accion: "seleccionarLista",
-//     };
+    var htmlTags = `<tr>
+       <td>${IdFactura}</td>
+       <td>${proveedor}</td>
+       <td>${description}</td>
+       <td>${total}</td>
+       <td>${varEstado}</td>
+       <td><button data-toggle="modal" data-target="#detalleCompra" class="btn btn-warning" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button> ${anular}</td>
+       </tr>`;
 
-//     $.ajax({
-//       data: parametros,
-//       url: "http/purchasing.controller.php",
-//       type: "post",
-//       beforeSend: function () {
-//         cargando();
-//       },
-//       success: function (data) {
-//         for (var i in JSON.parse(data).registros) {
-//           agregarFila(
-//             JSON.parse(data).registros[i].IdFactura,
-//             JSON.parse(data).registros[i].total,
-//             JSON.parse(data).registros[i].proveedor,
-//             JSON.parse(data).registros[i].estado,
-//             ""
-//           );
-//         }
+    $("#tablePurchases tbody").append(htmlTags);
+}
 
-//         $("#tablaProducto").DataTable({
-//           language: {
-//             url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-//           },
-//         });
+function eliminaFilastabla() {
+    var n = 0;
+    $("#tablaProducto tbody tr").each(function () {
+        n++;
+    });
+    for (i = n - 1; i > 1; i--) {
+        $("#tablaProducto tbody tr:eq('" + i + "')").remove();
+    }
+}
 
-//         setTimeout(() => {
-//           cerrarAlert();
-//         }, 1200);
-//       },
+//Cambiar de ESTADO
 
-//       error: function (error) {
-//         console.log("No se ha podido obtener la información " + error);
-//       },
-//     });
-//   }
+function actualizarEstado(IdFactura, estado) {
+    let parametros = {
+        accion: "actualizarEstadoActivo",
+        id: IdFactura,
+        estado: estado,
+    };
 
-//   function agregarFila(IdFactura, total, proveedor, estado, accion) {
-//     if (estado == 1) {
-//       varEstado =
-//         '<button class="btn btn-success btn-sm col-8" style="cursor: text">Activo</button>';
-//     } else if (estado == 0) {
-//       varEstado =
-//         '<button class="btn btn-danger btn-sm col-8" style="cursor: text">Anulado</button>';
-//     }
-//     if (estado == 1) {
-//       anular = `<button class="btn btn-danger" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-x-octagon"></i></button>`;
-//     } else if (estado == 0) {
-//       anular = "";
-//     }
+    $.ajax({
+        data: parametros,
+        url: "../view/http/purchases.controller.php",
+        type: "POST",
+        beforeSend: function () {
+            //         //mostrar cargando
+        },
+        success: function (data) {
+            if (JSON.parse(data) == "ok") {
+                Swal.fire({
+                    position: "top",
+                    icon: "success",
+                    title: "Estado editado con exito",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listar();
+            }
+        },
+        error: function (error) {
+            console.log("No se a podido editar la información " + error);
+        },
+    });
+}
 
-//     let datosProvider =
-//       "'" +
-//       IdFactura +
-//       "', '" +
-//       total +
-//       "', '" +
-//       proveedor +
-//       "', '" +
-//       estado +
-//       "'";
+//Listar Detalles de Compra
 
-//     var htmlTags = `<tr>
-//       <td>${IdFactura}</td>
-//       <td>${total}</td>
-//       <td>${proveedor}</td>
-//       <td>${varEstado}</td>
-//       <td><button data-toggle="modal" data-target="#detalleCompra" class="btn btn-warning" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button> ${anular}</td>
-//       </tr>`;
+function tomarDatos(IdFactura, total, proveedor, estado) {
 
-//     $("#tablaProducto tbody").append(htmlTags);
-//   }
+    if (estado == 1) {
+        var status = 'Activo';
+    } else if (estado == 0) {
+        var status = 'Anulado';
+    }
 
-//   function eliminaFilastabla() {
-//     var n = 0;
-//     $("#tablaProducto tbody tr").each(function () {
-//       n++;
-//     });
-//     for (i = n - 1; i > 1; i--) {
-//       $("#tablaProducto tbody tr:eq('" + i + "')").remove();
-//     }
-//   }
-
-//   //Cambiar de ESTADO
-
-//   function actualizarEstado(IdFactura, estado) {
-//     let parametros = {
-//       accion: "actualizarEstadoActivo",
-//       id: IdFactura,
-//       estado: estado,
-//     };
-
-//     $.ajax({
-//       data: parametros,
-//       url: "http/purchasing.controller.php",
-//       type: "POST",
-//       beforeSend: function () {
-//         //mostrar cargando
-//       },
-//       success: function (data) {
-//         if (JSON.parse(data) == "ok") {
-//           Swal.fire({
-//             position: "top",
-//             icon: "success",
-//             title: "Estado editado con exito",
-//             showConfirmButton: false,
-//             timer: 1500,
-//           });
-//           listar();
-//         }
-//       },
-//       error: function (error) {
-//         console.log("No se a podido editar la información " + error);
-//       },
-//     });
-//   }
-
-//   //Listar Detalles de Compra
-
-//   function tomarDatos(IdFactura, total, proveedor, estado) {
-
-//     if(estado == 1){
-//       var status = 'Activo';
-//     }else if(estado == 0){
-//       var status = 'Anulado';
-//     }
-
-//     const formatoPesoDetalle = new Intl.NumberFormat("en-US", {
-//       style: "currency",
-//       currency: "USD",
-//       minimumFractionDigits: 2,
-//     });
-//     var amount = formatoPesoDetalle.format(total);
+    const formatoPesoDetalle = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+    });
+    var amount = formatoPesoDetalle.format(total);
 
 
-//     document.getElementById("idDetail").value = IdFactura;
-//     document.getElementById("totalDetail").value = amount;
-//     document.getElementById("proveedorDetail").value = proveedor;
-//     document.getElementById("estadoDetail").value = status;
-//   }
+    document.getElementById("idDetail").value = IdFactura;
+    document.getElementById("totalDetail").value = amount;
+    document.getElementById("proveedorDetail").value = proveedor;
+    document.getElementById("estadoDetail").value = status;
+}
 
 
 
