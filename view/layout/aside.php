@@ -100,23 +100,6 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a href="" class="nav-link">
-            <i class="bi bi-gear"></i>
-            <p>
-              &nbsp;&nbsp;&nbsp;Configuración
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="rol.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Roles</p>
-              </a>
-            </li>
-          </ul>
-        </li>
 
         <li class="nav-item">
           <a href="calendar.php" class="nav-link">
