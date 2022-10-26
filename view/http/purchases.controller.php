@@ -6,8 +6,8 @@ if ($_POST['accion'] == 'registrarCompra') {
     $factura = $_POST['factura'];
     $total = $_POST['total'];
     $proveedor = $_POST['proveedor'];
-    $description = $_POST['description'];
     $insumo = $_POST['insumo'];
+    $description = $_POST['description'];
     $cantidad = $_POST['cantidad'];
 
 

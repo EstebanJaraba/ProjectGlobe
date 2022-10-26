@@ -148,17 +148,6 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                         <label for="descriptionPurchase" class="form-label">Descripción</label>
                                         <textarea class="form-control" id="descriptionPurchase" rows="3"></textarea>
                                       </div>
-                                      <!-- <div class="mb-3" style="margin-left: 0;">
-                                        <div class="form-group">
-                                          <label for="statePurchase">Estado</label>
-                                          <select class="form-control" id="statePurchase" aria-describedby="">
-                                            <option value="">---</option>
-                                            <option value="0">PENDIENTE</option>
-                                            <option value="1">EN COBRO</option>
-                                            <option value="2">PAGADO</option>
-                                          </select>
-                                        </div>
-                                      </div> -->
                                       <div class="row">
                                         <div class="col-4">
                                           <label for="cantidad">Cantidad</label>
@@ -282,28 +271,29 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                               </div>
                             </div>
                           </div>
+                          <div class="card-body">
+                            <div class="table-responsive mb-4">
+                              <div class="d-flex justify-content-end p-4 pr-5">
+                                <button class="btn btn-primary btn-sm" onclick="mostrar()">Nueva compra</button>
+                              </div>
+                              <table id="tablePurchases" class="table table-sm table-striped table-hover table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Factura</th>
+                                    <th>Proveedor</th>
+                                    <th>Descripción</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
 
-
-                          <div class="table-responsive mb-4">
-                            <div class="d-flex justify-content-end p-4 pr-5">
-                              <button class="btn btn-primary btn-sm" onclick="mostrar()">Nueva compra</button>
+                                </tbody>
+                              </table>
                             </div>
-                            <table id="tablePurchases" class="table table-sm table-striped table-hover table-bordered">
-                              <thead>
-                                <tr>
-                                  <th>Factura</th>
-                                  <th>Proveedor</th>
-                                  <th>Descripción</th>
-                                  <th>Total</th>
-                                  <th>Estado</th>
-                                  <th>Acciones</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-
-                              </tbody>
-                            </table>
                           </div>
+
                         </div>
                       </div>
                     </div>

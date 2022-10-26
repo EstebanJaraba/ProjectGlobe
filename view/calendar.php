@@ -167,7 +167,7 @@
     <script src="assets/plugins/moment/moment.min.js"></script>
     <script src="assets/plugins/fullcalendar/main.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="assets/dist/js/demo.js"></script>
+    <!-- <script src="assets/dist/js/demo.js"></script> -->
     <!-- Page specific script -->
   <script src="app/calendar.app.js"></script>
 

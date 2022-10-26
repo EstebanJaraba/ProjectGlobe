@@ -46,6 +46,7 @@
 // }
 
 function registrarCompra() {
+    
     var parametros = {
         accion: "registrarCompra",
         factura: document.getElementById("facturaCompra").value,
@@ -55,6 +56,7 @@ function registrarCompra() {
         description: document.getElementById("descriptionPurchase").value,
         cantidad: document.getElementById("cantidadAgregar").value,
         valor: document.getElementById("v_unitario").value,
+
     };
 
     $.ajax({
@@ -75,7 +77,8 @@ function registrarCompra() {
                     timer: 1500,
                 });
                 listar();
-            }if (JSON.parse(data) == "error") {
+            }
+            if (JSON.parse(data) == "error") {
                 Swal.fire({
                     position: "top",
                     icon: "success",
@@ -93,9 +96,7 @@ function registrarCompra() {
 }
 
 function calcularValorTotal() {
-    document.getElementById("v_total").value =
-    document.getElementById("cantidadAgregar").value *
-    document.getElementById("v_unitario").value;
+    document.getElementById("v_total").value = document.getElementById("cantidadAgregar").value * document.getElementById("v_unitario").value;
 }
 
 let ArregloProductosAgregarCompra = Array();
@@ -113,6 +114,10 @@ function agregarProducto() {
     };
 
     ArregloProductosAgregarCompra.push(productoAgregado);
+
+    valorTotalProCompra = valorTotalProCompra + parseInt(document.getElementById("v_total").value);
+    document.getElementById("totalCompra").innerHTML = valorTotalProCompra;
+
 
     listarProducto();
 }
@@ -317,75 +322,75 @@ function eliminarProducto(productoId) {
 
 function listarCompra() {
     eliminaFilastablaCompra();
-  
+
     var tablaCompra = $("#tablaCompras").DataTable();
     tablaCompra.clear();
     tablaCompra.destroy();
-  
+
     var parametros = {
-      accion: "seleccionarListaCompra",
+        accion: "seleccionarListaCompra",
     };
-  
+
     $.ajax({
-      data: parametros,
-      url: "../view/http/purchases.controller.php",
-      type: "post",
-      beforeSend: function () {
-        cargando();
-      },
-      success: function (data) {
-        //console.log(JSON.parse(data));
-        //if(JSON.parse(data).registros == ""){
-  
-        for (var i in JSON.parse(data).registros) {
-          agregarFilaCompra(
-            JSON.parse(data).registros[i].id,
-            JSON.parse(data).registros[i].descripcion,
-            JSON.parse(data).registros[i].cantidad,
-            JSON.parse(data).registros[i].valor,
-            JSON.parse(data).registros[i].estado
-          );
-        }
-  
-        $("#tablaCompra").DataTable({
-          language: {
-            url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-          },
-        });
-  
-        setTimeout(() => {
-          cerrarAlert();
-        }, 1200);
-      },
-  
-      error: function (error) {
-        console.log("No se ha podido obtener la información " + error);
-      },
+        data: parametros,
+        url: "../view/http/purchases.controller.php",
+        type: "post",
+        beforeSend: function () {
+            cargando();
+        },
+        success: function (data) {
+            //console.log(JSON.parse(data));
+            //if(JSON.parse(data).registros == ""){
+
+            for (var i in JSON.parse(data).registros) {
+                agregarFilaCompra(
+                    JSON.parse(data).registros[i].id,
+                    JSON.parse(data).registros[i].descripcion,
+                    JSON.parse(data).registros[i].cantidad,
+                    JSON.parse(data).registros[i].valor,
+                    JSON.parse(data).registros[i].estado
+                );
+            }
+
+            $("#tablaCompra").DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+                },
+            });
+
+            setTimeout(() => {
+                cerrarAlert();
+            }, 1200);
+        },
+
+        error: function (error) {
+            console.log("No se ha podido obtener la información " + error);
+        },
     });
 }
 
-function cargando() {
-    let timerInterval;
-    Swal.fire({
-        title: "cargando...",
-        html: "Cargando registros",
-        timer: 20000,
-        timerProgressBar: true,
-        didOpen: () => {
-            Swal.showLoading();
-            const b = Swal.getHtmlContainer().querySelector("b");
-            timerInterval = setInterval(() => {}, 1000);
-        },
-        willClose: () => {
-            clearInterval(timerInterval);
-        },
-    }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-            console.log("Error de conexión con la BD");
-        }
-    });
-}
+// function cargando() {
+//     let timerInterval;
+//     Swal.fire({
+//         title: "cargando...",
+//         html: "Cargando registros",
+//         timer: 20000,
+//         timerProgressBar: true,
+//         didOpen: () => {
+//             Swal.showLoading();
+//             const b = Swal.getHtmlContainer().querySelector("b");
+//             timerInterval = setInterval(() => {}, 1000);
+//         },
+//         willClose: () => {
+//             clearInterval(timerInterval);
+//         },
+//     }).then((result) => {
+//         /* Read more about handling dismissals below */
+//         if (result.dismiss === Swal.DismissReason.timer) {
+//             console.log("Error de conexión con la BD");
+//         }
+//     });
+// }
 
 function cerrarAlert() {
     Swal.close();
@@ -455,7 +460,7 @@ function listar() {
         url: "../view/http/purchases.controller.php",
         type: "post",
         beforeSend: function () {
-            cargando();
+            //cargando();
         },
         success: function (data) {
             for (var i in JSON.parse(data).registros) {
@@ -476,7 +481,7 @@ function listar() {
             });
 
             setTimeout(() => {
-                cerrarAlert();  
+                cerrarAlert();
             }, 1200);
         },
 
@@ -489,13 +494,14 @@ function listar() {
 function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
     if (estado == 1) {
         varEstado =
-            '<button class="btn btn-success btn-sm col-8" style="cursor: text">Activo</button>';
+            '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>';
     } else if (estado == 0) {
         varEstado =
-            '<button class="btn btn-danger btn-sm col-8" style="cursor: text">Anulado</button>';
+            '<button class="btn btn-danger btn-sm col-12" style="cursor: text">INACTIVO</button>';
     }
     if (estado == 1) {
-        anular = `<button class="btn btn-danger" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-x-octagon"></i></button>`;
+        anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-cart-dash"></i></button>`
+
     } else if (estado == 0) {
         anular = "";
     }
@@ -519,7 +525,10 @@ function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
        <td>${description}</td>
        <td>${total}</td>
        <td>${varEstado}</td>
-       <td><button data-toggle="modal" data-target="#detalleCompra" class="btn btn-warning" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button> ${anular}</td>
+       <td>
+       <button data-toggle="modal" data-target="#updateUser" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button>
+            ${anular}
+       </td>
        </tr>`;
 
     $("#tablePurchases tbody").append(htmlTags);
