@@ -24,13 +24,6 @@
                with font-awesome or any other icon font library -->
 
         <li class="nav-item">
-          <a href="inicio.php" class="nav-link">
-            <i class="bi bi-house-door"></i>
-            <p>&nbsp;&nbsp;&nbsp;Inicio</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
           <a href="index.php" class="nav-link ">
             <i class="bi bi-speedometer2"></i>
             <p>
