@@ -536,20 +536,20 @@ require('http/db/conexion.php');
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Summernote -->
-  <script src="assets/plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- <script src="assets/plugins/summernote/summernote-bs4.min.js"></script> -->
   <!-- overlayScrollbars -->
   <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
   <script src="assets/dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="assets/dist/js/pages/dashboard.js"></script>
-
   <!-- uPlot -->
   <script src="assets/plugins/uplot/uPlot.iife.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="assets/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="assets/dist/js/demo.js"></script>
+ <!-- <script src="assets/dist/js/adminlte.min.js"></script> -->
+
+
+
   <script>
     $(function() {
       /* uPlot
