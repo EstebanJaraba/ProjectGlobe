@@ -191,7 +191,7 @@ if (!isset($_SESSION['userName'])) {
 
 
 <!-- Modal Register -->
-<div class="modal fade" id="registerSuppliers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerSuppliers" tabindex="-1" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -241,7 +241,7 @@ if (!isset($_SESSION['userName'])) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <a onclick="registerSupplier()" class="btn btn-primary">Guardar</a>
+          <a onclick="registerSupplier()" class="btn btn-primary" data-dismiss="modal">Guardar</a>
         </div>
       </div>
     </div>
@@ -249,7 +249,7 @@ if (!isset($_SESSION['userName'])) {
 </div>
 
 <!-- Modal update -->
-<div class="modal fade" id="updateSupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateSupplier"  data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -292,8 +292,8 @@ if (!isset($_SESSION['userName'])) {
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" onclick="updateSupplier()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" onclick="updateSupplier()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>

@@ -45,6 +45,7 @@ require('http/db/conexion.php');
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -542,10 +543,7 @@ require('http/db/conexion.php');
   <script src="assets/dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="assets/dist/js/pages/dashboard.js"></script>
-  <!-- jQuery -->
-  <script src="assets/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
   <!-- uPlot -->
   <script src="assets/plugins/uplot/uPlot.iife.min.js"></script>
   <!-- AdminLTE App -->

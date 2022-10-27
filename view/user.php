@@ -187,7 +187,7 @@ $resultado = mysqli_query($conexion, $query);
 
 
 <!-- Modal Register-->
-<div class="modal fade" id="registerUsers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="registerUsers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -262,7 +262,7 @@ $resultado = mysqli_query($conexion, $query);
   </div>
 </div>
 <!-- Modal update -->
-<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateUser"  data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
