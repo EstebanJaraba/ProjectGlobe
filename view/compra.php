@@ -148,17 +148,6 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                         <label for="descriptionPurchase" class="form-label">Descripción</label>
                                         <textarea class="form-control" id="descriptionPurchase" rows="3"></textarea>
                                       </div>
-                                      <!-- <div class="mb-3" style="margin-left: 0;">
-                                        <div class="form-group">
-                                          <label for="statePurchase">Estado</label>
-                                          <select class="form-control" id="statePurchase" aria-describedby="">
-                                            <option value="">---</option>
-                                            <option value="0">PENDIENTE</option>
-                                            <option value="1">EN COBRO</option>
-                                            <option value="2">PAGADO</option>
-                                          </select>
-                                        </div>
-                                      </div> -->
                                       <div class="row">
                                         <div class="col-4">
                                           <label for="cantidad">Cantidad</label>
@@ -183,66 +172,6 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                   </div>
 
                                 </div>
-
-                                <!-- <form id="registroProducto">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Registrar
-                                      Compra
-                                    </h5>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <div class="form-group">
-                                        <label for="nombre">Numero de factura</label>
-                                        <input name="descripcion" type="text" placeholder="Ingrese numero de factura" class="form-control" id="facturaCompra">
-                                      </div>
-                                    </div>
-                                    <div class="col-7">
-                                      <div class="form-group">
-                                        <label for="total">Total</label>
-                                        <p class="form-label h2" id="totalCompra">000000</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Proveedor</label>
-                                      <select name="proveedor" class="form-control" required aria-required="" id="listaProveedor">
-                                        <option value="0">Seleccione un proveedor</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-12">
-                                      <div class="form-group">
-                                        <label for="exampleInputEmail1">Producto</label>
-                                        <select name="producto" class="form-control" id="listaProducto">
-                                          <option value="0">Seleccione un producto
-                                          </option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-4">
-                                      <label for="cantidad">Cantidad</label>
-                                      <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" class="form-control" id="cantidadAgregar">
-                                    </div>
-                                    <div class="col-4">
-                                      <label for="cantidad">V. Unitario</label>
-                                      <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" class="form-control" id="v_unitario">
-                                    </div>
-                                    <div class="col-4">
-                                      <label for="cantidad">V. Total</label>
-                                      <input name="v_total" type="number" disabled style="background:white" class="form-control" id="v_total">
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div class="modal-footer">
-                                      <button type="button" onclick="agregarProducto()" data-dismiss="modal" class="btn btn-primary">Agregar</button>
-                                    </div>
-                                  </div>
-                                </form> -->
                               </div>
                               <div class="col-6">
 
@@ -282,28 +211,29 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                               </div>
                             </div>
                           </div>
+                          <div class="card-body">
+                            <div class="table-responsive mb-4">
+                              <div class="d-flex justify-content-end p-4 pr-5">
+                                <button class="btn btn-primary btn-sm" onclick="mostrar()">Nueva compra</button>
+                              </div>
+                              <table id="tablePurchases" class="table table-sm table-striped table-hover table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Factura</th>
+                                    <th>Proveedor</th>
+                                    <th>Descripción</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
 
-
-                          <div class="table-responsive mb-4">
-                            <div class="d-flex justify-content-end p-4 pr-5">
-                              <button class="btn btn-primary btn-sm" onclick="mostrar()">Nueva compra</button>
+                                </tbody>
+                              </table>
                             </div>
-                            <table id="tablePurchases" class="table table-sm table-striped table-hover table-bordered">
-                              <thead>
-                                <tr>
-                                  <th>Factura</th>
-                                  <th>Proveedor</th>
-                                  <th>Descripción</th>
-                                  <th>Total</th>
-                                  <th>Estado</th>
-                                  <th>Acciones</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-
-                              </tbody>
-                            </table>
                           </div>
+
                         </div>
                       </div>
                     </div>

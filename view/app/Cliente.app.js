@@ -23,9 +23,9 @@ function registroCliente() {
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
+                    position: 'center',
                     icon: 'success',
-                    title: 'Registro exitoso!...',
+                    title: 'Registro exitoso!',
                     showConfirmButton: false,
                     timer: 1500
                   })
