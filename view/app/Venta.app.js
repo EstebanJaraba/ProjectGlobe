@@ -20,21 +20,29 @@ function registrarVenta() {
             
         },
 
-        success: function(data){
-            console.log(data);
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Registro exitoso!...',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listar();
-            }
-
-        },
-
+        success: function (data) {
+          console.log(data);
+          if (JSON.parse(data) == "ok") {
+              Swal.fire({
+                  position: "top",
+                  icon: "success",
+                  title: "Registro exitoso",
+                  showConfirmButton: false,
+                  timer: 1500,
+              });
+              listar();
+          }
+          if (JSON.parse(data) == "error") {
+              Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Registro f",
+                  showConfirmButton: false,
+                  timer: 1500,
+              });
+              listar();
+          }
+      },
         error: function(error){
             console.log("No se ha podido obtener la información " + error);
         },
@@ -174,16 +182,6 @@ function listarInsumos() {
         ArregloInsumosAgregarVenta[i].valorTotal
       );
     }
-  
-    $("#tableVentas").DataTable({
-        dom: "Bfrtip",
-        buttons: ["copy", "csv", "excel", "pdf", "print"],
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-        },
-        order: [[1, "desc"]],
-
-    });
 }
 
 function eliminarFilasTableInsumo(){
@@ -311,7 +309,7 @@ function agregarFila_Ventas(id, cantidad, valor, stateSale, acciones){
         <td>Insumo</td>
         <td> ${mostrarStateSale} </td>
         <td>
-            <button class= "btn btn-danger btn-sm " onclick="anularVenta(${id})"><i class="bi bi-trash3"></i></button/>
+            <button class= "btn btn-danger btn-sm " onclick="anularVenta(${id})"><i class="bi bi-trash"></i></button/>
         </td>
     </tr>`;
     $("#tableVentas tbody").append(htmlTags);
@@ -353,14 +351,10 @@ function listar() {
         }
   
         $("#tableInsumos").DataTable({
-            dom: "Bfrtip",
-            buttons: ["copy", "csv", "excel", "pdf", "print"],
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-            },
-            order: [[1, "desc"]],
-
-        });
+          language: {
+              url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+          },
+      });
       },
   
       error: function (error) {
@@ -379,7 +373,7 @@ function agregarFila(id, cliente, servicio, total, descriptionSale, dateRegistra
         '<button class="btn btn-danger btn-sm col-8">Anulada</button>';
     }
     if (stateSale == 1) {
-      anular = `<button class="btn btn-danger" onclick="actualizarEstado(${id},${stateSale})"><i class="bi bi-x-octagon"></i></button>`;
+      anular = `<button class="btn btn-danger btn-sm" onclick="actualizarEstado(${id},${stateSale})"><i class="bi bi-trash3"></button>`;
     } else if (stateSale == 0) {
       anular = "";
     }
@@ -394,7 +388,7 @@ function agregarFila(id, cliente, servicio, total, descriptionSale, dateRegistra
       <td>${descriptionSale}</td>
       <td>${dateRegistration}</td>
       <td>${mostrarStateSale}</td>
-      <td><button data-toggle="modal" data-target="#detalleVenta" class="btn btn-warning" onclick="tomarDatos(${datosVentas})"><i class="bi bi-pencil-square"></i></button> ${anular}</td>
+      <td><button data-toggle="modal" data-target="#detalleVenta" class="btn btn-success btn-sm" onclick="tomarDatos(${datosVentas})"><i class="bi bi-pencil-square"></i></button> ${anular}</td>
       </tr>`;
   
     $("#tableInsumos tbody").append(htmlTags);
@@ -467,10 +461,8 @@ function tomarDatos(id, cliente, servicio, total, descriptionSale, dateRegistrat
     document.getElementById("idDetail").value = id;
     document.getElementById("idClientDetail").value = cliente;
     document.getElementById("idServiceDetail").value = servicio;
-    document.getElementById("descriptionSaleDetail").value = descriptionSale;
-    document.getElementById("idSupplyDetail").value = insumo;
     document.getElementById("totalDetail").value = amount;
-    document.getElementById("dateRegistration").value = dateRegistration;
+    document.getElementById("descriptionSaleDetail").value = descriptionSale;
     document.getElementById("estadoDetail").value = status;
 }
 

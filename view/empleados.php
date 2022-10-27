@@ -56,29 +56,27 @@ session_start();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Clientes</h1>
+                            <h1 class="m-0">Empleados</h1>
                         </div>
                     </div>
                 </div>
             </div>
 
-
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header d-flex justify-content-end">
-                            <button data-toggle="modal" data-target="#registroCliente" class="btn btn-primary btn-sm">Nuevo cliente</button>
+                            <button data-toggle="modal" data-target="#registroEmpleado" class="btn btn-primary btn-sm">Nuevo empleado</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="tableClientes" class="table table-sm table table-striped table-hover">
+                            <table id="tableEmpleados" class="table table-sm table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
                                         <th>Documento</th>
                                         <th>Nombre</th>
-                                        <th>Apellidos</th>
-                                        <th>Email</th>
+                                        <th>Correo Electrónico</th>
                                         <th>Telefono</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
@@ -97,7 +95,6 @@ session_start();
             </section>
         </div>
     </div>
-
 
     <!-- jQuery -->
     <script src="assets/plugins/jquery/jquery.min.js"></script>
@@ -134,28 +131,21 @@ session_start();
 
     <script>
         $(document).ready(function() {
-            listarClientes();
+            listarEmpleados();
         })
     </script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
 
     <!-- Archivo APP clientes -->
-    <script src="app/Cliente.app.js"></script>
-
-
-
-
-    <!-- Funcionalidad de javascript del modulo Clientes -->
-    <script src="app/Cliente.app.js"></script>
-
+    <script src="app/Empleado.app.js"></script>
 
     <!-- Modal de registro -->
-    <div class="modal fade" id="registroCliente" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="registroEmpleado" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="modal-title" id="staticBackdropLabel">Información del cliente</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Información del empleado</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -163,28 +153,23 @@ session_start();
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="documentClient">Documento</label>
-                        <input type="number" class="form-control" id="documentClient" aria-describedby="emailHelp">
+                        <label for="documentEmployee">Documento</label>
+                        <input type="number" class="form-control" id="documentEmployee" aria-describedby="emailHelp">
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="nameClient">Nombre</label>
-                                <input type="text" class="form-control" id="nameClient" aria-describedby="emailHelp">
+                                <label for="nameEmployee">Nombre</label>
+                                <input type="text" class="form-control" id="nameEmployee" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="last_name">Apellidos</label>
-                                <input type="text" class="form-control" id="last_name" aria-describedby="emailHelp">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                     </div>
 
                     <div class="row">
@@ -196,10 +181,10 @@ session_start();
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="stateClient">Estado</label>
-                                <select class="form-control" id="stateClient" aria-describedby="emailHelp">
+                                <label for="stateEmployee">Estado</label>
+                                <select class="form-control" id="stateEmployee" aria-describedby="emailHelp">
                                     <option value="1">Activo</option>
-                                    <option value="0">Anular</option>
+                                    <option value="0">Anulado</option>
                                 </select>
                             </div>
                         </div>
@@ -208,15 +193,14 @@ session_start();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" onclick="registroCliente()" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                    <button type="button" onclick="registroEmpleado()" data-dismiss="modal" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- Modal de editar-->
-    <div class="modal fade" id="editarCliente" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="editarEmpleado" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -225,45 +209,38 @@ session_start();
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                    <input type="hidden" name="id" class="form-control" id="idClientEditar">
+                <input type="hidden" name="id" class="form-control" id="idEmployeeEditar">
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="documentClientEditar">Documento</label>
-                        <input type="number" class="form-control" id="documentClientEditar" aria-describedby="emailHelp">
+                        <label for="documentEmployeeEditar">Documento</label>
+                        <input type="number" class="form-control" id="documentEmployeeEditar" aria-describedby="emailHelp">
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nameClient">Nombre</label>
-                                <input type="text" class="form-control" id="nameClientEditar" aria-describedby="emailHelp">
+                                <input type="text" class="form-control" id="nameEmployeeEditar" aria-describedby="emailHelp">
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="last_nameClient">Apellidos</label>
-                                <input type="text" class="form-control" id="last_nameClientEditar" aria-describedby="emailHelp">
-                            </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="emailEmployeeEditar" aria-describedby="emailHelp">
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="emailClientEditar" aria-describedby="emailHelp">
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="phone">Telefono</label>
-                                <input type="number" class="form-control" id="phoneClientEditar" aria-describedby="emailHelp">
+                                <input type="number" class="form-control" id="phoneEmployeeEditar" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stateClient">Estado</label>
-                                <select class="form-control" id="stateClientEditar" aria-describedby="emailHelp">
+                                <select class="form-control" id="stateEmployeeEditar" aria-describedby="emailHelp">
                                     <option value="1">Activo</option>
                                     <option value="0">Anular</option>
                                 </select>
@@ -274,7 +251,7 @@ session_start();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" onclick="editarCliente()" data-dismiss="modal" class="btn btn-primary">Guardar cambios</button>
+                    <button type="button" onclick="editarEmpleado()" data-dismiss="modal" class="btn btn-primary">Guardar cambios</button>
                 </div>
             </div>
         </div>

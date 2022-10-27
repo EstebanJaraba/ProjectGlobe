@@ -98,6 +98,13 @@
                 <p>Clientes</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="empleados.php" class="nav-link">
+                <i class="bi bi-chevron-double-right nav-icon"></i>
+                <p>Empleados</p>
+              </a>
+            </li>
           </ul>
         </li>
 

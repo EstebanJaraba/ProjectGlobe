@@ -6,40 +6,33 @@ require_once 'db/conexion.php';
 if ($_POST['accion'] == 'registrarVenta') {
     $cliente = $_POST['cliente'];
     $servicio = $_POST['servicio'];
+    $insumo = $_POST['insumo'];
+    $cantidad = $_POST['cantidad'];
     $total = $_POST['total'];
     $descriptionSale = $_POST['descriptionSale'];
+    $dateRegistration = $_POST['dateRegistration'];
 
 
-    $query = "INSERT INTO sales_management (idClient, idService, amount_total_sale, descriptionSale, stateSale, dateRegistration) 
-    VALUE ('$cliente', '$servicio', '$total', '1', '$descriptionSale', '$dateRegistration')";
+    $query = "INSERT INTO sales_management (idClient, idService, amount_total_sale, descriptionSale, dateRegistration, stateSale) 
+    VALUE ('$cliente', '$servicio', '$total', '$descriptionSale', '$dateRegistration', '1')";
 
     $file = mysqli_query($conexion, $query);
-     if ($file){
-        echo json_encode('ok');
-     }else{
+    if ($file) {
+
+        $newquery = "INSERT INTO sales_detail(idSupply, amount_supply_detail, quantity_sales_detail) 
+        VALUE('$insumo', '$total','$cantidad')";
+
+        $newfile = mysqli_query($conexion,$newquery);
+
+        if($newfile){
+            echo json_encode('ok');
+        }else{
+            echo json_encode('error');
+        }
+        
+    } else {
         echo json_encode('error');
-     }
-}
-
-
-if($_POST['accion'] == 'registrarVenta'){
-   $insumo = $_POST['insumo'];
-   $total = $_POST['total'];
-   $cantidad = $_POST['cantidad'];
-
-   echo $cantidad;
-
-   $query = "INSERT INTO sales_detail(idSupply, amount_supply_detail, quantity_sales_detail) 
-   VALUE('$insumo', '$total','$cantidad')";
-   
-   $file = mysqli_query($conexion,$query);
-
-   if($file){
-       echo json_encode('ok');
-   }else{
-       echo json_encode('error');
-   }
-
+    }
 }
 
 
@@ -204,7 +197,7 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
    $respuesta = new stdclass();
 
    $cadena = "SELECT * FROM sales_management AS p INNER JOIN clients AS pr
-           ON p.idClient = pr.idClient";
+           ON p.idClient = pr.idClient INNER JOIN services AS sr ON p.idService = sr.idService";
 
    $resultado = mysqli_query($conexion, $cadena);
 
@@ -217,8 +210,8 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
            $elementos,
            [
                'id' => $datos["idSale"],
-               'cliente' => $datos["idClient"],
-               'servicio' => $datos["idService"],
+               'cliente' => $datos["nameClient"],
+               'servicio' => $datos["nameService"],
                'total' => $datos["amount_total_sale"],
                'descriptionSale' => $datos["descriptionSale"],
                'dateRegistration' => $datos["dateRegistration"],

@@ -50,12 +50,12 @@ require('http/db/conexion.php');
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Navbar -->
-    <?php include 'layout/nav.php' ?>
-    <!-- /.navbar -->
+   <!-- Navbar -->
+   <?php include 'layout/nav.php' ?>
 
     <!-- Main Sidebar Container -->
     <?php include 'layout/aside.php' ?>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
