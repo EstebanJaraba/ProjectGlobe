@@ -11,13 +11,15 @@ if ($_POST['accion'] == 'registrarCompra') {
     $cantidad = $_POST['cantidad'];
 
 
-    $query = "INSERT INTO purchases(id_invoice,amount_total,id_supplier,description,statePurchase) VALUE ('$factura','$total','$proveedor','$description','1')";
+    $query = "INSERT INTO purchases(id_invoice,amount_total,id_supplier,description,statePurchase) 
+    VALUE ('$factura','$total','$proveedor','$description','1')";
 
     $file =  mysqli_query($conexion, $query);
 
     if ($file) {
 
-        $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) VALUE ('$factura','$insumo','$total','$cantidad')";
+        $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) 
+        VALUE ('$factura','$insumo','$total','$cantidad')";
 
         $newfile = mysqli_query($conexion,$newquery);
 

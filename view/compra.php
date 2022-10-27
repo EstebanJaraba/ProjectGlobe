@@ -172,66 +172,6 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                   </div>
 
                                 </div>
-
-                                <!-- <form id="registroProducto">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Registrar
-                                      Compra
-                                    </h5>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <div class="form-group">
-                                        <label for="nombre">Numero de factura</label>
-                                        <input name="descripcion" type="text" placeholder="Ingrese numero de factura" class="form-control" id="facturaCompra">
-                                      </div>
-                                    </div>
-                                    <div class="col-7">
-                                      <div class="form-group">
-                                        <label for="total">Total</label>
-                                        <p class="form-label h2" id="totalCompra">000000</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Proveedor</label>
-                                      <select name="proveedor" class="form-control" required aria-required="" id="listaProveedor">
-                                        <option value="0">Seleccione un proveedor</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-12">
-                                      <div class="form-group">
-                                        <label for="exampleInputEmail1">Producto</label>
-                                        <select name="producto" class="form-control" id="listaProducto">
-                                          <option value="0">Seleccione un producto
-                                          </option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-4">
-                                      <label for="cantidad">Cantidad</label>
-                                      <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" class="form-control" id="cantidadAgregar">
-                                    </div>
-                                    <div class="col-4">
-                                      <label for="cantidad">V. Unitario</label>
-                                      <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" class="form-control" id="v_unitario">
-                                    </div>
-                                    <div class="col-4">
-                                      <label for="cantidad">V. Total</label>
-                                      <input name="v_total" type="number" disabled style="background:white" class="form-control" id="v_total">
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div class="modal-footer">
-                                      <button type="button" onclick="agregarProducto()" data-dismiss="modal" class="btn btn-primary">Agregar</button>
-                                    </div>
-                                  </div>
-                                </form> -->
                               </div>
                               <div class="col-6">
 

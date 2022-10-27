@@ -25,9 +25,9 @@
 
         <li class="nav-item">
           <a href="index.php" class="nav-link ">
-            <i class="bi bi-speedometer2"></i>
+          <i class="bi bi-house"></i>
             <p>
-              &nbsp;&nbsp;&nbsp;Dashboard
+              &nbsp;&nbsp;&nbsp;Inicio
             </p>
           </a>
         </li>
@@ -96,6 +96,13 @@
               <a href="clientes.php" class="nav-link">
                 <i class="bi bi-chevron-double-right nav-icon"></i>
                 <p>Clientes</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="empleados.php" class="nav-link">
+                <i class="bi bi-chevron-double-right nav-icon"></i>
+                <p>Empleados</p>
               </a>
             </li>
           </ul>

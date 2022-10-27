@@ -6,18 +6,18 @@ session_start();
 <?php
 
 require('http/db/conexion.php');
-$query = "SELECT * FROM sales_management AS p INNER JOIN clients AS pr
-            ON p.idClient = pr.idClient
-            ";
-$resultado = mysqli_query($conexion, $query);
+
 
 
 
 $queryVenta = "SELECT * FROM services";
 $queryInsumo = "SELECT * FROM supplys";
+$queryCliente = "SELECT * FROM clients";
 
 $resultadoServicio = mysqli_query($conexion, $queryVenta);
 $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
+$resultadoCliente = mysqli_query($conexion, $queryCliente);
+
 
 ?>
 
@@ -29,6 +29,7 @@ $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GLOBE</title>
 
+    <link href="assets/dist/img/Globee.jpeg" rel="icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -74,7 +75,7 @@ $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-4">
-                            <h1 class="m-0">Gestion de ventas</h1>
+                            <h1 class="m-0">Gestión de ventas</h1>
                         </div>
                     </div>
                 </div>
@@ -94,7 +95,9 @@ $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
                                                     <label for="idClient">Cliente</label>
                                                     <select name="cliente" class="form-control" aria-required="" id="listaCliente">
                                                         <option value="0">--Seleccione--</option>
-                                                        
+                                                        <?php while ($row = $resultadoCliente->fetch_assoc()) { ?>
+                                                            <option value="<?php echo $row['idClient']; ?>"><?php echo $row['nameClient']; ?></option>
+                                                        <?php }   ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -216,7 +219,7 @@ $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
                                 <div id="container-fluid">
                                     <div class="card">
                                         <div class="card-body">
-                                            <table id="tableInsumos" class="table table-sm table-striped">
+                                            <table id="tableInsumos" class="table table-sm table-striped table-hover table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>Id</th>
@@ -295,11 +298,11 @@ $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
 
 </html>
 
-<div class="modal fade" id="detalleVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="detalleVenta" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-blue"->
                 <h5 class="modal-title" id="exampleModalLabel">Detalle de venta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -323,24 +326,14 @@ $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
                             <input type="text" readonly class="form-control-plaintext" id="idServiceDetail">
                         </div>
 
-                        <label for="descriptionSaleDetail" class="col-sm-2 col-form-label">Descripcion</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="descriptionSaleDetail">
-                        </div>
-
-                        <label for="idSupplyDetail" class="col-sm-2 col-form-label">Insumos</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="idSupplyDetail">
-                        </div>
-
                         <label for="totalDetail" class="col-sm-2 col-form-label">Total</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="totalDetail">
                         </div>
 
-                        <label for="dateRegistration" class="col-sm-2 col-form-label">Fecha de registro</label>
+                        <label for="descriptionSaleDetail" class="col-sm-2 col-form-label">Descripcion</label>
                         <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="dateRegistration">
+                            <input type="text" readonly class="form-control-plaintext" id="descriptionSaleDetail">
                         </div>
 
                         <label for="estadoDetail" class="col-sm-2 col-form-label">Estado</label>
