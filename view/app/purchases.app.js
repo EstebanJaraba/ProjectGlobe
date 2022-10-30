@@ -75,7 +75,7 @@ function registrarCompra() {
                     timer: 1500,
                 });
                 listar();
-            }if (JSON.parse(data) == "error") {
+            }else if (JSON.parse(data) == "error") {
                 Swal.fire({
                     position: "top",
                     icon: "success",
@@ -455,7 +455,7 @@ function listar() {
         url: "../view/http/purchases.controller.php",
         type: "post",
         beforeSend: function () {
-            cargando();
+            //cargando();
         },
         success: function (data) {
             for (var i in JSON.parse(data).registros) {
