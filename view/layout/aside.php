@@ -20,14 +20,12 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
 
         <li class="nav-item">
           <a href="index.php" class="nav-link ">
-            <i class="bi bi-speedometer2"></i>
+          <i class="bi bi-house"></i>
             <p>
-              &nbsp;&nbsp;&nbsp;Dashboard
+              &nbsp;&nbsp;&nbsp;Inicio
             </p>
           </a>
         </li>
@@ -98,21 +96,11 @@
                 <p>Clientes</p>
               </a>
             </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="" class="nav-link">
-            <i class="bi bi-gear"></i>
-            <p>
-              &nbsp;&nbsp;&nbsp;Configuración
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
+
             <li class="nav-item">
-              <a href="rol.php" class="nav-link">
+              <a href="empleados.php" class="nav-link">
                 <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Roles</p>
+                <p>Empleados</p>
               </a>
             </li>
           </ul>

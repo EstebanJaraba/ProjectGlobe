@@ -95,7 +95,7 @@
           Swal.fire({
               icon: 'warning',
               heightAuto: false,
-              title: 'Por favor, ingresa tu nombre de usuario.'
+              title: 'No hay un usuario registrado con ese nombre.'
           }).then(function(isConfirm) {
             if (isConfirm) {
               location.href = 'indexLogin.php';
@@ -111,7 +111,7 @@
         Swal.fire({
             icon: 'warning',
             heightAuto: false,
-            title: 'Por favor, ingresa tu contraseña.'
+            title: 'Contraseña Incorrecta.'
         }).then(function(isConfirm) {
           if (isConfirm) {
             location.href = 'indexLogin.php';

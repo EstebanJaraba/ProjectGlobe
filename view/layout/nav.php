@@ -56,13 +56,14 @@
                     <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                   </h3>
                   <p class="text-sm"><?php echo $_SESSION['id_rol']?></p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  
                 </div>
               </div>
               <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
-            <a href="http/logout.controller.php" class="dropdown-item dropdown-footer">Cerrar sesión</a>
+            <a href="account.php" class="dropdown-item dropdown-footer"><i class="bi bi-pencil-square"></i> Editar perfil</a>
+            <a href="http/logout.controller.php" class="dropdown-item dropdown-footer"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
           </div>
         </li>
 
