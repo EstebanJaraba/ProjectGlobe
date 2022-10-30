@@ -21,7 +21,6 @@ function registrarCompra() {
 
         },
         success: function (data) {
-            console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
                     position: "top",
@@ -32,13 +31,10 @@ function registrarCompra() {
                 });
                 listar();
             }else if (JSON.parse(data) == "error") {
-            }
-            if (JSON.parse(data) == "error") {
-
                 Swal.fire({
-                    position: "top",
-                    icon: "success",
-                    title: "Registro f",
+                    position: "center",
+                    icon: "warning",
+                    title: "Registro fallido",
                     showConfirmButton: false,
                     timer: 1500,
                 });
