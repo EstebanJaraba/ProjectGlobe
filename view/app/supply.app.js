@@ -5,6 +5,7 @@ function registerSupply() {
         "name": document.getElementById('nameSupply').value,
         "partNumber": document.getElementById('partNumberSupply').value,
         "quantity": document.getElementById('quantitySupply').value,
+        "price": document.getElementById('priceSupply').value,
         "state": document.getElementById('stateSupply').value,
     };
 
@@ -80,6 +81,7 @@ function listarInsumos() {
                     JSON.parse(data).registros[i].nameSupply,
                     JSON.parse(data).registros[i].partNumber,
                     JSON.parse(data).registros[i].quantity,
+                    JSON.parse(data).registros[i].price,
                     JSON.parse(data).registros[i].stateSupply,
                     " "
                 );
@@ -103,14 +105,14 @@ function listarInsumos() {
     });
 }
 
-function agregarFila_Supplys(idSupply, nameSupply, partNumber,quantity, stateSupply, acciones) {
+function agregarFila_Supplys(idSupply, nameSupply, partNumber,quantity, price, stateSupply, acciones) {
     if (stateSupply == 1) {
-        verEstado = '<button class="btn btn-success btn-sm col-6 " style="cursor: text">ACTIVO</button>'
+        verEstado = '<button class="btn btn-success btn-sm col-12 " style="cursor: text">ACTIVO</button>'
     } else if (stateSupply == 0) {
-        verEstado = '<button class="btn btn-danger btn-sm col-6 " style="cursor: text">INACTIVO</button>'
+        verEstado = '<button class="btn btn-danger btn-sm col-12 " style="cursor: text">INACTIVO</button>'
     }
 
-    let datosSupply = "'"+idSupply+"','"+nameSupply+"','"+partNumber+"','"+quantity+"','"+stateSupply+"'";
+    let datosSupply = "'"+idSupply+"','"+nameSupply+"','"+partNumber+"','"+quantity+"','"+price+"','"+stateSupply+"'";
 
     var htmlTags = `
         <tr>
@@ -118,8 +120,9 @@ function agregarFila_Supplys(idSupply, nameSupply, partNumber,quantity, stateSup
           <td> ${nameSupply}</td>
           <td> ${partNumber}</td>
           <td> ${quantity}</td>
-          <td class="d-flex justify-content-center"> ${verEstado}</td>
-          <td >
+          <td> ${price} </td>
+          <td > ${verEstado}</td>
+          <td class="d-flex justify-content-center">
             <button data-toggle="modal" data-target="#updateSupplys" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosSupply})"><i class="bi bi-pencil-square"></i></button>
             <button class="btn btn-outline-danger btn-sm" onclick="AnularSupply(${idSupply})"><i class="bi bi-file-earmark-minus"></i></button>
           </td>
@@ -138,10 +141,12 @@ function eliminarFilasTableSupplys() {
     }
 }
 
-function tomarDatos(idSupply,nameSupply,partNumber,stateSupply){
+function tomarDatos(idSupply,nameSupply,partNumber,quantity,price,stateSupply){
     document.getElementById('idSupplyUpdate').value=idSupply  
     document.getElementById('nameSupplyUpdate').value=nameSupply 
-    document.getElementById('partNumberSupplyUpdate').value=partNumber  
+    document.getElementById('partNumberSupplyUpdate').value=partNumber
+    document.getElementById('quantitySupplyUpdate').value=quantity
+    document.getElementById('priceSupplyUpdate').value=price
     document.getElementById('stateSupplyUpdate').value=stateSupply  
 }
 
@@ -153,6 +158,8 @@ function updateSupply(){
         "id": document.getElementById('idSupplyUpdate').value,
         "name": document.getElementById('nameSupplyUpdate').value,
         "partNumber": document.getElementById('partNumberSupplyUpdate').value,
+        "quantity": document.getElementById('quantitySupplyUpdate').value,
+        "price": document.getElementById('priceSupplyUpdate').value,
         "state": document.getElementById('stateSupplyUpdate').value
     };
 

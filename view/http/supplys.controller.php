@@ -6,12 +6,13 @@ if ($_POST['accion'] == 'registerSupplys') {
     $name = $_POST['name'];
     $partNumber = $_POST['partNumber'];
     $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
     $state = $_POST['state'];
 
     if ($name == "" || $partNumber = "" || $quantity == "" || $state == "") {
         echo json_encode('fallo');
     } else {
-        $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,stateSupply) VALUE ('$name','$partNumber','$quantity','$state')";
+        $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','$state')";
 
         $file =  mysqli_query($conexion, $query);
 
@@ -33,7 +34,7 @@ if (trim($_POST['accion']) == 'select_ListSupplys') {
     $elementos = [];
     $i = 1;
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idSupply' => $datos["idSupply"], 'nameSupply' => $datos["nameSupply"], 'partNumber' => $datos["partNumber"], 'quantity' => $datos["quantity"], 'stateSupply' => $datos["stateSupply"]]);
+        array_push($elementos, ['idSupply' => $datos["idSupply"], 'nameSupply' => $datos["nameSupply"], 'partNumber' => $datos["partNumber"], 'quantity' => $datos["quantity"],'price' => $datos["price"], 'stateSupply' => $datos["stateSupply"]]);
         $i++;
     }
     $respuesta->registros = $elementos;
@@ -46,9 +47,11 @@ if ($_POST['accion'] == 'updateSupply') {
     $id = $_POST['id'];
     $name = $_POST['name'];
     $partNumber = $_POST['partNumber'];
+    $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
     $state = $_POST['state'];
 
-    $query = "UPDATE supplys SET nameSupply = '$name', partNumber = '$partNumber', stateSupply = '$state' WHERE idSupply = '$id'";
+    $query = "UPDATE supplys SET nameSupply = '$name', partNumber = '$partNumber',quantity = '$quantity',price = '$price', stateSupply = '$state' WHERE idSupply = '$id'";
 
     $file =  mysqli_query($conexion, $query);
 
