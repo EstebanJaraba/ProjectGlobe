@@ -30,6 +30,11 @@ function registrarCompra() {
                     timer: 1500,
                 });
                 listar();
+            }else if (JSON.parse(data) == "error") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Registro fallido",
             }else if (JSON.parse(data) == "errorPur") {
                 Swal.fire({
                     position: "center",

@@ -68,6 +68,7 @@ session_start();
                     <div class="card">
                         <div class="card-header d-flex justify-content-end">
                             <button data-toggle="modal" data-target="#registroCliente" class="btn btn-primary btn-sm">Nuevo cliente</button>
+                            
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -90,7 +91,10 @@ session_start();
                             </table>
                         </div>
                         <!-- /.card-body -->
+                        
                     </div>
+                    <a href="reportes/reporte.clientes.php" target="_blank" class="btn btn-primary btn-sm">Ver reporte cliente</a>
+                    
 
                 </div>
 

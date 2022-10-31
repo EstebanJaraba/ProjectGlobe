@@ -3,6 +3,7 @@ function registrarVenta() {
       accion: "registrarVenta",
       cliente: document.getElementById("listaCliente").value,
       servicio: document.getElementById("listaServicio").value,
+      empleado: document.getElementById("listaEmpleado").value,
       insumo: document.getElementById("listaInsumo").value,
       cantidad: document.getElementById("cantidadAgregar").value,
       valor: document.getElementById("v_unitario").value,
@@ -23,24 +24,20 @@ function registrarVenta() {
         success: function (data) {
           console.log(data);
           if (JSON.parse(data) == "ok") {
-              Swal.fire({
-                  position: "top",
-                  icon: "success",
-                  title: "Registro exitoso",
-                  showConfirmButton: false,
-                  timer: 1500,
-              });
-              listar();
-          }
-          if (JSON.parse(data) == "error") {
-              Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Registro f",
-                  showConfirmButton: false,
-                  timer: 1500,
-              });
-              listar();
+            Swal.fire({
+              icon: 'success',
+              title: '¡Registro exitoso!',
+              text: '',
+              heightAuto: false,
+              confirmButtonText: "Aceptar",
+            })
+            listar();
+            $('#registrarVenta').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
+                setTimeout(function () {
+                  location.href = "ventas.php";
+              }, 1500);
           }
       },
         error: function(error){
@@ -113,6 +110,9 @@ function ajaxMain(accion, url, nombreSelect) {
         if (accion == "listaServicio") {
           loadingSelect(data, nombreSelect);
         }
+        if (accion == "listaEmpleado") {
+          loadingSelect(data, nombreSelect);
+        }
       },
       error: function (error) {
         console.log("No se ha podido obtener la información " + error);
@@ -151,6 +151,17 @@ function selectListaServicio() {
   );
   setTimeout(() => {
     selectListaServicio();
+  }, 200);
+}
+
+function selectListaEmpleado() {
+  ajaxMain(
+    "listaEmpleado",
+    '../view/http/ventas.controller.php',
+    "listaEmpleado"
+  );
+  setTimeout(() => {
+    selectListaEmpleado();
   }, 200);
 }
 
@@ -342,6 +353,7 @@ function listar() {
             JSON.parse(data).registros[i].id,
             JSON.parse(data).registros[i].cliente,
             JSON.parse(data).registros[i].servicio,
+            JSON.parse(data).registros[i].empleado,
             JSON.parse(data).registros[i].total,
             JSON.parse(data).registros[i].descriptionSale,
             JSON.parse(data).registros[i].dateRegistration,
@@ -364,7 +376,7 @@ function listar() {
 }
 
 
-function agregarFila(id, cliente, servicio, total, descriptionSale, dateRegistration, stateSale, accion) {
+function agregarFila(id, cliente, servicio, empleado, total, descriptionSale, dateRegistration, stateSale, accion) {
     if (stateSale == 1) {
         mostrarStateSale =
         '<button class="btn btn-success btn-sm col-8">Activo</button>';
@@ -378,12 +390,13 @@ function agregarFila(id, cliente, servicio, total, descriptionSale, dateRegistra
       anular = "";
     }
   
-    let datosVentas = "'"+id+"', '"+cliente+"', '"+servicio+"', '"+total+"', '"+descriptionSale+"', '"+dateRegistration+"', '"+stateSale+"'";
+    let datosVentas = "'"+id+"', '"+cliente+"', '"+servicio+"', '"+empleado+"', '"+total+"', '"+descriptionSale+"' '"+dateRegistration+"', '"+stateSale+"'";
   
     var htmlTags = `<tr>
       <td>${id}</td>
       <td>${cliente}</td>
       <td>${servicio}</td>
+      <td>${empleado}</td>
       <td>${total}</td>
       <td>${descriptionSale}</td>
       <td>${dateRegistration}</td>
@@ -442,7 +455,7 @@ function actualizarEstado(id, estado) {
 
 
 //Ver detalles ventas
-function tomarDatos(id, cliente, servicio, total, descriptionSale, dateRegistration, estado) {
+function tomarDatos(id, cliente, servicio, empleado, total, descriptionSale, dateRegistration, estado) {
   
     if(estado == 1){
       var status = 'Activo';
@@ -461,15 +474,17 @@ function tomarDatos(id, cliente, servicio, total, descriptionSale, dateRegistrat
     document.getElementById("idDetail").value = id;
     document.getElementById("idClientDetail").value = cliente;
     document.getElementById("idServiceDetail").value = servicio;
+    document.getElementById("idEmployeeDetail").value = empleado;
     document.getElementById("totalDetail").value = amount;
     document.getElementById("descriptionSaleDetail").value = descriptionSale;
+    document.getElementById("dateRegistrationDetail").value = dateRegistration;
     document.getElementById("estadoDetail").value = status;
 }
 
 function anularVenta(id){
     var parametros = {
         "accion": "anularVenta",
-        "id": id
+        "id": idSale
     };
 
     $.ajax({
@@ -486,7 +501,7 @@ function anularVenta(id){
                 Swal.fire({
                     position: 'top',
                     icon: 'success',
-                    title: 'Venta anulada!...',
+                    title: '¡Venta anulada con éxito!',
                     showConfirmButton: false,
                     timer: 1500
                   })

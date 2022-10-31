@@ -439,7 +439,7 @@ require('http/db/conexion.php');
                           $query = mysqli_query($conexion, $sql);
 
                           while ($row = mysqli_fetch_array($query)) {
-                          ?> '<?php echo $row['name'] ?>',
+                          ?> '<?php echo $row['nameSale'] ?>',
                           <?php
                           }
 

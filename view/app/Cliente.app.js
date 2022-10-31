@@ -23,13 +23,19 @@ function registroCliente() {
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'center',
                     icon: 'success',
-                    title: 'Registro exitoso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listarClientes()
+                    title: '¡Registro exitoso!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
+                listarClientes();
+                $('#registroCliente').modal('hide');
+                  $('body').removeClass('modal-open');
+                  $('.modal-backdrop').remove();
+                setTimeout(function () {
+                    location.href = "clientes.php";
+                }, 1500);
             }
 
         },
@@ -169,13 +175,13 @@ function editarCliente(){
             
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
                     icon: 'success',
-                    title: 'Actualización exitosa!...',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listarClientes()
+                    title: '¡Actualizado con éxito!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
+                listarClientes()
             }
 
         },
@@ -206,12 +212,12 @@ function anularCliente(idClient){
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
                     icon: 'success',
-                    title: 'Cliente inactivo!...',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
+                    title: '¡Anulado!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
                 listarClientes()
             }
 
