@@ -13,10 +13,12 @@ require('http/db/conexion.php');
 $queryVenta = "SELECT * FROM services";
 $queryInsumo = "SELECT * FROM supplys";
 $queryCliente = "SELECT * FROM clients";
+$queryEmpleado = "SELECT * FROM employees";
 
 $resultadoServicio = mysqli_query($conexion, $queryVenta);
 $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
 $resultadoCliente = mysqli_query($conexion, $queryCliente);
+$resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
 
 
 ?>
@@ -86,161 +88,189 @@ $resultadoCliente = mysqli_query($conexion, $queryCliente);
                 <div id="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <form id="registroInsumo">
-                                        <div class="row">
-                                            <div class="col-6" style="margin-right: 0;">
-                                                <div class="form-group">
-                                                    <label for="idClient">Cliente</label>
-                                                    <select name="cliente" class="form-control" aria-required="" id="listaCliente">
-                                                        <option value="0">--Seleccione--</option>
-                                                        <?php while ($row = $resultadoCliente->fetch_assoc()) { ?>
-                                                            <option value="<?php echo $row['idClient']; ?>"><?php echo $row['nameClient']; ?></option>
-                                                        <?php }   ?>
-                                                    </select>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-6" style="margin-left: 0;">
-                                                <div class="form-group">
-                                                    <label for="idService">Servicio</label>
-                                                    <select name="servicio" class="form-control" aria-required="" id="listaServicio">
-                                                        <option value="">--Seleccione--</option>
-                                                        <?php while ($row = $resultadoServicio->fetch_assoc()) { ?>
-                                                            <option value="<?php echo $row['idService']; ?>"><?php echo $row['nameService']; ?></option>
-                                                        <?php }   ?>
-                                                    </select>
-                                                </div>
-                                            </div>
+                            <div class="card">
+                                <div id="container-fluid">
+                                    <div class="row" id="cancel-row">
+                                        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                                            <div class="statbox widget box box-shadow">
+                                                <div class="widget-content widget-content-area">
+                                                    <div class="card showRegister collapse" id="showRegister">
+                                                        <div class=" d-flex justify-content-end p-4 pr-5">
+                                                            <button class="btn btn-danger" onclick="ocultar()"><i class="bi bi-x-lg"></i></button>
+                                                        </div>
+                                                        <div class="row m-2">
+                                                            <div class="col-6">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title">Registrar venta</h3>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <form id="registroInsumo">
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <div class="form-group">
+                                                                                        <label for="dateRegistration">Fecha de registro</label>
+                                                                                        <input type="date" class="form-control" id="dateRegistration" aria-describedby="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <div class="form-group">
+                                                                                        <label for="total">Total</label>
+                                                                                        <p class="form-label h2" id="totalVenta">000000</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-4" style="margin-right: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="idClient">Cliente</label>
+                                                                                        <select name="cliente" class="form-control" aria-required="" id="listaCliente">
+                                                                                            <option value="0">--Seleccione--</option>
+                                                                                            <?php while ($row = $resultadoCliente->fetch_assoc()) { ?>
+                                                                                                <option value="<?php echo $row['idClient']; ?>"><?php echo $row['nameClient']; ?></option>
+                                                                                            <?php }   ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
 
-                                            <div class="col-6" style="margin-left: 0;">
-                                                <div class="form-group">
-                                                    <label for="idSupply">Insumo</label>
-                                                    <select name="insumo" class="form-control" aria-required="" id="listaInsumo">
-                                                        <option value="">--Seleccione--</option>
-                                                        <?php while ($row = $resultadoInsumo->fetch_assoc()) { ?>
-                                                            <option value="<?php echo $row['idSupply']; ?>"><?php echo $row['nameSupply']; ?></option>
-                                                        <?php }   ?>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                                                                <div class="col-4" style="margin-left: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="idService">Servicio</label>
+                                                                                        <select name="servicio" class="form-control" aria-required="" id="listaServicio">
+                                                                                            <option value="">--Seleccione--</option>
+                                                                                            <?php while ($row = $resultadoServicio->fetch_assoc()) { ?>
+                                                                                                <option value="<?php echo $row['idService']; ?>"><?php echo $row['nameService']; ?></option>
+                                                                                            <?php }   ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
 
-                                            <div class="col-6" style="margin-left: 0;">
-                                                <div class="form-group">
-                                                    <label for="cantidad">Cantidad</label>
-                                                    <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" 
-                                                    class="form-control" id="cantidadAgregar">             
-                                                </div>
-                                            </div>
+                                                                                <div class="col-4" style="margin-left: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="idEmpleado">Empleado</label>
+                                                                                        <select name="empleado" class="form-control" aria-required="" id="listaEmpleado">
+                                                                                            <option value="">--Seleccione--</option>
+                                                                                            <?php while ($row = $resultadoEmpleado->fetch_assoc()) { ?>
+                                                                                                <option value="<?php echo $row['idEmployee']; ?>"><?php echo $row['nameEmployee']; ?></option>
+                                                                                            <?php }   ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-                                            <div class="col-6" style="margin-left: 0;">
-                                                <div class="form-group">
-                                                    <label for="cantidad">V. Unitario</label>
-                                                    <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" 
-                                                    class="form-control" id="v_unitario">
-                                                </div>
-                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="descriptionSale" class="form-label">Descripción</label>
+                                                                                <textarea class="form-control" id="descriptionSale" rows="3"></textarea>
+                                                                            </div>
 
-                                            <div class="col-6" style="margin-left: 0;">
-                                                <div class="form-group">
-                                                    <label for="cantidad">Total</label>
-                                                    <input name="v_total" type="number" disabled
-                                                        style="background:white" class="form-control"
-                                                        id="v_total">
-                                                </div>
-                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="idSupply">Insumo</label>
+                                                                                        <select name="insumo" class="form-control" aria-required="" id="listaInsumo">
+                                                                                            <option value="">--Seleccione--</option>
+                                                                                            <?php while ($row = $resultadoInsumo->fetch_assoc()) { ?>
+                                                                                                <option value="<?php echo $row['idSupply']; ?>"><?php echo $row['nameSupply']; ?></option>
+                                                                                            <?php }   ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
 
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="descriptionSale" class="form-label">Descripción</label>
-                                            <textarea class="form-control" id="descriptionSale" rows="3"></textarea>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="dateRegistration">Fecha de registro</label>
-                                                    <input type="date" class="form-control" id="dateRegistration" aria-describedby="">
+                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="cantidad">Cantidad</label>
+                                                                                        <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" class="form-control" id="cantidadAgregar">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="cantidad">V. Unitario</label>
+                                                                                        <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" class="form-control" id="v_unitario">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="cantidad">Total</label>
+                                                                                        <input name="v_total" type="number" disabled style="background:white" class="form-control" id="v_total">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="form-footer">
+                                                                                <button type="button" onclick="agregarInsumo()" class="btn btn-primary">Agregar</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="card">
+                                                                    <!-- /.card-header -->
+                                                                    <div class="card-body p-0">
+                                                                        <table id="tableVentas" class="table table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th style="width: 10px">Id</th>
+                                                                                    <th>Insumos</th>
+                                                                                    <th>Cantidad</th>
+                                                                                    <th>V. Unitario</th>
+                                                                                    <th>Total</th>
+                                                                                    <th>Acción</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="modal-footer">
+                                                                            <!-- <button type="button" class="btn btn-danger"
+                                                                            data-dismiss="modal">Limpiar</button> -->
+                                                                            <button type="button" onclick="registrarVenta()" data-dismiss="modal" id="guardaVentas" class="btn btn-primary">Guardar
+                                                                                venta</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="table-responsive mb-4">
+                                                            <div class="d-flex justify-content-end p-4 pr-5">
+                                                                <button class="btn btn-primary btn-sm" onclick="mostrar()">Nueva venta</button>
+                                                            </div>
+                                                            <table id="tableInsumos" class="table table-sm table-striped table-hover table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Id</th>
+                                                                        <th>Cliente</th>
+                                                                        <th>Servicio</th>
+                                                                        <th>Empleado</th>
+                                                                        <th>Total</th>
+                                                                        <th>Descripción</th>
+                                                                        <th>Fecha de registro</th>
+                                                                        <th>Estado</th>
+                                                                        <th>Acciones</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="total">Total</label>
-                                                        <p class="form-label h2" id="totalVenta">000000</p>
-                                                </div>
-                                            </div>
                                         </div>
-                                        <div class="form-footer">
-                                            <button type="button" onclick="agregarInsumo()" class="btn btn-primary">Agregar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-6">
-                                    <div class="card">
-                                        <!-- /.card-header -->
-                                        <div class="card-body p-0">
-                                            <table id="tableVentas" class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 10px">Id</th>
-                                                        <th>Insumos</th>
-                                                        <th>Cantidad</th>
-                                                        <th>V. Unitario</th>
-                                                        <th>Total</th>
-                                                        <th>Acción</th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                        <div>
-                                            <div class="modal-footer">
-                                                <!-- <button type="button" class="btn btn-danger"
-                                                data-dismiss="modal">Limpiar</button> -->
-                                                <button type="button" onclick="registrarVenta()"
-                                                    data-dismiss="modal" id="guardaVentas"
-                                                    class="btn btn-primary">Guardar
-                                                    venta</button>
-                                            </div>
-                                        </div>
+
                                     </div>
+
                                 </div>
                             </div>
 
-                        </div>
 
-                    </div>
-                </div>
-            </section>
-            <section class="content">
-                <div id="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <section class="content">
-                                <div id="container-fluid">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <table id="tableInsumos" class="table table-sm table-striped table-hover table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Id</th>
-                                                        <th>Cliente</th>
-                                                        <th>Servicio</th>
-                                                        <th>Total</th>
-                                                        <th>Descripción</th>
-                                                        <th>Fecha de registro</th>
-                                                        <th>Estado</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </section>
                         </div>
                     </div>
                 </div>
@@ -286,8 +316,17 @@ $resultadoCliente = mysqli_query($conexion, $queryCliente);
         $(document).ready(function() {
             listar();
             listarInsumos();
-            selectListaCliente();
+
         })
+    </script>
+
+    <script>
+        function mostrar() {
+        document.getElementById('showRegister').style.display = 'flex';
+        }
+        function ocultar() {
+        document.getElementById('showRegister').style.display = 'none';
+        }
     </script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
@@ -298,11 +337,10 @@ $resultadoCliente = mysqli_query($conexion, $queryCliente);
 
 </html>
 
-<div class="modal fade" id="detalleVenta" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="detalleVenta" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-blue"->
+            <div class="modal-header bg-blue" ->
                 <h5 class="modal-title" id="exampleModalLabel">Detalle de venta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -326,6 +364,11 @@ $resultadoCliente = mysqli_query($conexion, $queryCliente);
                             <input type="text" readonly class="form-control-plaintext" id="idServiceDetail">
                         </div>
 
+                        <label for="idEmployeeDetail" class="col-sm-2 col-form-label">Empleado</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="idEmployeeDetail">
+                        </div>
+
                         <label for="totalDetail" class="col-sm-2 col-form-label">Total</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="totalDetail">
@@ -334,6 +377,11 @@ $resultadoCliente = mysqli_query($conexion, $queryCliente);
                         <label for="descriptionSaleDetail" class="col-sm-2 col-form-label">Descripcion</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="descriptionSaleDetail">
+                        </div>
+
+                        <label for="dateRegistrationDetail" class="col-sm-2 col-form-label">Fecha</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="dateRegistrationDetail">
                         </div>
 
                         <label for="estadoDetail" class="col-sm-2 col-form-label">Estado</label>

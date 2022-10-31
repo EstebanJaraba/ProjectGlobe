@@ -105,7 +105,7 @@ function agregarFila_Servicios(idService, nameService, costService, stateService
         <td> ${costService} </td>
         <td> ${mostrarStateService} </td>
         <td>
-            <button data-toggle= "modal" data-target="#editarServicio" class= "btn btn-warning btn-sm " onclick="tomarDatos(${datosServicio})" ><i class="bi bi-pencil-square"></i> </button/>
+            <button data-toggle= "modal" data-target="#editarServicio" class= "btn btn-success btn-sm " onclick="tomarDatos(${datosServicio})" ><i class="bi bi-pencil-square"></i> </button/>
             <button class= "btn btn-danger btn-sm " onclick="anularServicio(${idService})"><i class="bi bi-trash3"></i></button/>
         </td>
     </tr>`;
@@ -126,10 +126,10 @@ function eliminarFilasTableServicios(){
 }
 
 
-function tomarDatos(idService, nameService, price, stateService){
+function tomarDatos(idService, nameService, costService, stateService){
     document.getElementById('idServiceEditar').value = idService
     document.getElementById('nameServiceEditar').value = nameService
-    document.getElementById('priceServiceEditar').value = costService
+    document.getElementById('costServiceEditar').value = costService
     document.getElementById('stateServiceEditar').value = stateService
 }
 
@@ -139,7 +139,7 @@ function editarServicio(){
         "accion": 'editarServicio',
         "idService": document.getElementById('idServiceEditar').value,
         "nameService": document.getElementById('nameServiceEditar').value,
-        "costService": document.getElementById('priceServiceEditar').value,
+        "costService": document.getElementById('costServiceEditar').value,
         "stateService": document.getElementById('stateServiceEditar').value
     };
 
@@ -194,7 +194,7 @@ function anularServicio(idService){
                 Swal.fire({
                     position: 'top',
                     icon: 'success',
-                    title: 'Servicio inactivo!...',
+                    title: 'Servicio inactivo!',
                     showConfirmButton: false,
                     timer: 1500
                   })

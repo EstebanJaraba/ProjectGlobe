@@ -56,7 +56,9 @@ if (trim($_POST['accion']) == 'select_ListUsers') {
 
    $respuesta = new stdClass();
 
-   $cadena = "SELECT * FROM users";
+   $cadena = "SELECT * FROM users AS u INNER JOIN role_management AS r ON u.id_rol = r.id_rol";
+
+   
 
 
    $result = mysqli_query($conexion, $cadena);
@@ -64,7 +66,7 @@ if (trim($_POST['accion']) == 'select_ListUsers') {
    $elementos = [];
    $i = 1;
    while ($datos = mysqli_fetch_array($result)) {
-      array_push($elementos, ['idUser' => $datos["idUser"], 'userName' => $datos["userName"], 'last_name' => $datos["last_name"], 'document' => $datos["document"], 'email' => $datos["email"], 'phone' => $datos["phone"], 'passwordUser' => $datos["passwordUser"], 'id_rol' => $datos["id_rol"], 'stateUser' => $datos["stateUser"]]);
+      array_push($elementos, ['idUser' => $datos["idUser"], 'userName' => $datos["userName"], 'last_name' => $datos["last_name"], 'document' => $datos["document"], 'email' => $datos["email"], 'phone' => $datos["phone"], 'passwordUser' => $datos["passwordUser"], 'id_rol' => $datos["name_rol"], 'stateUser' => $datos["stateUser"]]);
       $i++;
    }
    $respuesta->registros = $elementos;

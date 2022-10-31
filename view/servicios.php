@@ -214,8 +214,8 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="priceServiceEditar">Precio</label>
-                                <input type="number" class="form-control" id="priceServiceEditar" aria-describedby="emailHelp">
+                                <label for="costServiceEditar">Precio</label>
+                                <input type="number" class="form-control" id="costServiceEditar" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <div class="col-6">

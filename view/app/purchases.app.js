@@ -21,7 +21,6 @@ function registrarCompra() {
 
         },
         success: function (data) {
-            console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
                     position: "top",
@@ -31,12 +30,11 @@ function registrarCompra() {
                     timer: 1500,
                 });
                 listar();
-            }
-            if (JSON.parse(data) == "error") {
+            }else if (JSON.parse(data) == "error") {
                 Swal.fire({
-                    position: "top",
-                    icon: "success",
-                    title: "Registro f",
+                    position: "center",
+                    icon: "warning",
+                    title: "Registro fallido",
                     showConfirmButton: false,
                     timer: 1500,
                 });
@@ -73,12 +71,12 @@ function agregarProducto() {
     document.getElementById("totalCompra").innerHTML = valorTotalProCompra;
 
 
-    listarProducto();
+    listarInsumos();
 }
 
 
-function listarProducto() {
-    eliminaFilastablaProducto();
+function listarInsumos() {
+    eliminaFilastablaRegistrarInsumos();
 
     var tablaCompra = $("#tablaCompras").DataTable();
     tablaCompra.clear();
@@ -89,7 +87,7 @@ function listarProducto() {
     };
 
     for (var i in ArregloProductosAgregarCompra) {
-        agregarFilaProducto(
+        agregarFilaTablaInsumos(
             ArregloProductosAgregarCompra[i].productoId,
             ArregloProductosAgregarCompra[i].nombreProducto,
             ArregloProductosAgregarCompra[i].cantidad,
@@ -105,17 +103,17 @@ function listarProducto() {
     });
 }
 
-function eliminarProducto(productoId) {
+function eliminarInsumos(productoId) {
     for (let i = 0; i < ArregloProductosAgregarCompra.length; i++) {
         if (ArregloProductosAgregarCompra[i].productoId == productoId) {
             ArregloProductosAgregarCompra.splice(ArregloProductosAgregarCompra[i], 1);
         }
     }
 
-    listarProducto();
+    listarInsumos();
 }
 
-function agregarFilaProducto(
+function agregarFilaTablaInsumos(
     productoId,
     nombreProducto,
     cantidad,
@@ -129,13 +127,13 @@ function agregarFilaProducto(
       <td>${cantidad}</td>
       <td>${valorUnitario}</td>
       <td>${valorTotal}</td>
-      <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarProducto(${productoId})">x</button></td>
+      <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarInsumos(${productoId})">x</button></td>
       </tr>`;
 
     $("#tablaCompras tbody").append(htmlTags);
 }
 
-function eliminaFilastablaProducto() {
+function eliminaFilastablaRegistrarInsumos() {
     var n = 0;
     $("#tablaCompras tbody tr").each(function () {
         n++;
@@ -203,8 +201,8 @@ function selectListaProducto() {
 
 //Listar Productos Agregados
 
-function listarProducto() {
-    eliminaFilastablaProducto();
+function listarInsumos() {
+    eliminaFilastablaRegistrarInsumos();
 
     var tablaCompra = $("#tablaCompras").DataTable();
     tablaCompra.clear();
@@ -215,7 +213,7 @@ function listarProducto() {
     };
 
     for (var i in ArregloProductosAgregarCompra) {
-        agregarFilaProducto(
+        agregarFilaTablaInsumos(
             ArregloProductosAgregarCompra[i].productoId,
             ArregloProductosAgregarCompra[i].nombreProducto,
             ArregloProductosAgregarCompra[i].cantidad,
@@ -231,7 +229,7 @@ function listarProducto() {
     });
 }
 
-function eliminaFilastablaProducto() {
+function eliminaFilastablaRegistrarInsumos() {
     var n = 0;
     $("#tablaCompras tbody tr").each(function () {
         n++;
@@ -242,7 +240,7 @@ function eliminaFilastablaProducto() {
 }
 
 //   //Arreglo para enlistar productos agregados
-function agregarFilaProducto(
+function agregarFilaTablaInsumos(
     productoId,
     nombreProducto,
     cantidad,
@@ -256,20 +254,20 @@ function agregarFilaProducto(
     <td>${cantidad}</td>
     <td>${valorUnitario}</td>
     <td>${valorTotal}</td>
-    <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarProducto(${productoId})">x</button></td>
+    <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarInsumos(${productoId})">x</button></td>
     </tr>`;
 
     $("#tablaCompras tbody").append(htmlTags);
 }
 
-function eliminarProducto(productoId) {
+function eliminarInsumos(productoId) {
     for (let i = 0; i < ArregloProductosAgregarCompra.length; i++) {
         if (ArregloProductosAgregarCompra[i].productoId == productoId) {
             ArregloProductosAgregarCompra.splice(ArregloProductosAgregarCompra[i], 1);
         }
     }
 
-    listarProducto();
+    listarInsumos();
 }
 
 //Listar Compras
@@ -457,7 +455,7 @@ function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
         anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-cart-dash"></i></button>`
 
     } else if (estado == 0) {
-        anular = "";
+        anular = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado1(${IdFactura},${estado})"><i class="bi bi-bag-plus"></i></button>`
     }
 
     let datosProvider =
@@ -480,8 +478,8 @@ function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
        <td>${total}</td>
        <td>${varEstado}</td>
        <td>
-       <button data-toggle="modal" data-target="#updateUser" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button>
-            ${anular}
+       <button data-toggle="modal" data-target="#updateUser" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-eye"></i></button>
+            ${anular} 
        </td>
        </tr>`;
 
@@ -503,6 +501,37 @@ function eliminaFilastabla() {
 function actualizarEstado(IdFactura, estado) {
     let parametros = {
         accion: "actualizarEstadoActivo",
+        id: IdFactura,
+        estado: estado,
+    };
+
+    $.ajax({
+        data: parametros,
+        url: "../view/http/purchases.controller.php",
+        type: "POST",
+        beforeSend: function () {
+            //         //mostrar cargando
+        },
+        success: function (data) {
+            if (JSON.parse(data) == "ok") {
+                Swal.fire({
+                    position: "top",
+                    icon: "success",
+                    title: "Estado editado con exito",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listar();
+            }
+        },
+        error: function (error) {
+            console.log("No se a podido editar la información " + error);
+        },
+    });
+}
+function actualizarEstado1(IdFactura, estado) {
+    let parametros = {
+        accion: "actualizarEstadoInactivo",
         id: IdFactura,
         estado: estado,
     };

@@ -45,13 +45,14 @@ require('http/db/conexion.php');
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-   <!-- Navbar -->
-   <?php include 'layout/nav.php' ?>
+    <!-- Navbar -->
+    <?php include 'layout/nav.php' ?>
 
     <!-- Main Sidebar Container -->
     <?php include 'layout/aside.php' ?>
@@ -75,12 +76,106 @@ require('http/db/conexion.php');
         </div><!-- /.container-fluid -->
       </div>
 
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+              <?php
+                $countP = "SELECT idPurchase FROM purchases ORDER BY idPurchase";
+                $count_runP = mysqli_query($conexion, $countP);
+
+                $rowP = mysqli_num_rows($count_runP);
+
+                echo '<h3>' . $rowP . '<h3>';
+                ?>
+
+                <p>Compras</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+              <?php
+                $count = "SELECT idUser FROM users ORDER BY idUser";
+                $count_run = mysqli_query($conexion, $count);
+
+                $row = mysqli_num_rows($count_run);
+
+                echo '<h3>' . $row . '<h3>';
+                ?>
+
+                <p>Bounce Rate</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+
+                <?php
+                $count = "SELECT idUser FROM users ORDER BY idUser";
+                $count_run = mysqli_query($conexion, $count);
+
+                $row = mysqli_num_rows($count_run);
+
+                echo '<h3>' . $row . '<h3>';
+                ?>
+
+                <p>Usuarios registrados</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person"></i>
+              </div>
+
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+              <?php
+                $count = "SELECT idUser FROM users ORDER BY idUser";
+                $count_run = mysqli_query($conexion, $count);
+
+                $row = mysqli_num_rows($count_run);
+
+                echo '<h3>' . $row . '<h3>';
+                ?>
+
+                <p>Unique Visitors</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+      </div>
+
 
       <div class="container">
         <div class="row">
-          <div class="col-sm-6">
-            <div class="card card-primary">
-              <div class="card-header">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header border-0">
                 <h3 class="card-title">Usuarios</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -156,13 +251,14 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
-            <div class="card card-primary">
-              <div class="card-header">
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header border-0">
                 <h3 class="card-title">Proveedores</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -238,7 +334,7 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                
               </div>
             </div>
           </div>
@@ -247,9 +343,9 @@ require('http/db/conexion.php');
 
       <div class="container">
         <div class="row">
-          <div class="col-sm-6">
-            <div class="card card-primary">
-              <div class="card-header">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header border-0">
                 <h3 class="card-title">Compras</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -312,13 +408,13 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                
               </div>
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="card card-primary">
-              <div class="card-header">
+            <div class="card">
+              <div class="card-header border-0">
                 <h3 class="card-title">Ventas</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -343,7 +439,7 @@ require('http/db/conexion.php');
                           $query = mysqli_query($conexion, $sql);
 
                           while ($row = mysqli_fetch_array($query)) {
-                          ?> '<?php echo $row['name'] ?>',
+                          ?> '<?php echo $row['nameSale'] ?>',
                           <?php
                           }
 
@@ -381,7 +477,7 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                
               </div>
             </div>
           </div>
@@ -390,8 +486,8 @@ require('http/db/conexion.php');
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <div class="card card-primary">
-              <div class="card-header">
+            <div class="card">
+              <div class="card-header border-0">
                 <h3 class="card-title">Insumos</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -466,7 +562,7 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                
               </div>
             </div>
           </div>
@@ -475,8 +571,8 @@ require('http/db/conexion.php');
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <div class="card card-primary">
-              <div class="card-header">
+            <div class="card">
+              <div class="card-header border-0">
                 <h3 class="card-title">Compras vs Ventas</h3>
 
                 <div class="card-tools">
@@ -535,23 +631,20 @@ require('http/db/conexion.php');
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Summernote -->
-  <script src="assets/plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- <script src="assets/plugins/summernote/summernote-bs4.min.js"></script> -->
   <!-- overlayScrollbars -->
   <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
   <script src="assets/dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="assets/dist/js/pages/dashboard.js"></script>
-  <!-- jQuery -->
-  <script src="assets/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- uPlot -->
   <script src="assets/plugins/uplot/uPlot.iife.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="assets/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="assets/dist/js/demo.js"></script>
+  <!-- <script src="assets/dist/js/adminlte.min.js"></script> -->
+
+
+
   <script>
     $(function() {
       /* uPlot

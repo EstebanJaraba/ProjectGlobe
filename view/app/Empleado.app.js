@@ -22,13 +22,20 @@ function registroEmpleado() {
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'center',
                     icon: 'success',
-                    title: 'Registro exitoso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listarEmpleados()
+                    title: '¡Registro exitoso!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
+                listarEmpleados();
+                  $('#registroEmpleado').modal('hide');
+                  $('body').removeClass('modal-open');
+                  $('.modal-backdrop').remove();
+                setTimeout(function () {
+                    location.href = "empleados.php";
+                }, 1500);
+
             }
 
         },
@@ -162,13 +169,13 @@ function editarEmpleado(){
             
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
                     icon: 'success',
-                    title: 'Actualización exitosa!...',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listarEmpleados()
+                    title: '¡Actualizado con éxito!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
+                listarEmpleados()
             }
 
         },
@@ -198,12 +205,12 @@ function anularEmpleado(idEmployee){
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
                     icon: 'success',
-                    title: 'Empleado inactivo!...',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
+                    title: '¡Anulado!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
                 listarEmpleados()
             }
 
