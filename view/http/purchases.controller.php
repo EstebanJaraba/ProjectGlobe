@@ -18,24 +18,42 @@ if ($_POST['accion'] == 'registrarCompra') {
 
     if ($file) {
 
-        $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) 
-        VALUE ('$factura','$insumo','$total','$cantidad')";
+        $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) VALUE ('$factura','$insumo','$total','$cantidad')";
 
         $newfile = mysqli_query($conexion,$newquery);
 
         if($newfile){ 
-            echo json_encode('ok');
+            $descontar = "SELECT quantity FROM supplys WHERE idSupply = $insumo";
+
+            $fileDes = mysqli_query($conexion,$descontar);
+
+            $quantityActual = 0;
+            if($row = mysqli_fetch_array($fileDes)){
+                $quantityActual = $row[0];
+            }
+
+            $quantityActual += $cantidad;
+
+            $queryUp = "UPDATE supplys SET quantity=$quantityActual WHERE idSupply=$insumo";
+
+            $fileUp = mysqli_query($conexion,$queryUp);
+
+            if($fileUp){
+                echo json_encode('ok');
+            }else{
+                echo json_encode('errorIn');
+            }
         }else{
-            echo json_encode('error');
+            echo json_encode('errorDet');
         }
         
     } else {
-        echo json_encode('error');
+        echo json_encode('errorPur');
     }
     
 }
 
-if (trim($_POST['accion']) == 'listaProducto') {
+if (trim($_POST['accion']) == 'insumoPurchase') {
 
     $respuesta = new stdclass();
 
@@ -53,6 +71,30 @@ if (trim($_POST['accion']) == 'listaProducto') {
             [
                 'id' => $datos["idSupply"],
                 'nombre' => $datos["nameSupply"]         
+            ]);
+        $i++;
+    }
+    $respuesta->registros = $elementos;
+    echo json_encode($respuesta);
+}
+if (trim($_POST['accion']) == 'proveedorPurchase') {
+
+    $respuesta = new stdclass();
+
+    $cadena = "SELECT * FROM suppliers";
+
+    $resultado = mysqli_query($conexion, $cadena);
+
+    $elementos = [];
+    $i = 1;
+
+    while ($datos = mysqli_fetch_array($resultado)) {
+
+        array_push(
+            $elementos,
+            [
+                'id' => $datos["idSupplier"],
+                'nombre' => $datos["nameSupplier"]         
             ]);
         $i++;
     }
@@ -94,30 +136,7 @@ if (trim($_POST['accion']) == 'seleccionarListaCompra') {
 
 //Listar Proveedores
 
-if (trim($_POST['accion']) == 'listaProveedor') {
 
-    $respuesta = new stdclass();
-
-    $cadena = "SELECT * FROM suppliers";
-
-    $resultado = mysqli_query($conexion, $cadena);
-
-    $elementos = [];
-    $i = 1;
-
-    while ($datos = mysqli_fetch_array($resultado)) {
-
-        array_push(
-            $elementos,
-            [
-                'id' => $datos["id_provider"],
-                'nombre' => $datos["name_provider"]         
-            ]);
-        $i++;
-    }
-    $respuesta->registros = $elementos;
-    echo json_encode($respuesta);
-}
 
 //Listar Productos
 
