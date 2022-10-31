@@ -1,39 +1,69 @@
 <?php
-// Multiple recipients
-$to = 'Papercut@papercut.com'; // note the comma
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+require '../phpMailer/Exception.php';
+require '../phpMailer/PHPMailer.php';
+require '../phpMailer/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// Subject
-$subject = 'Restablecer password Globe';
-$codigo = rand(1000,9999);
+//Load Composer's autoloader
+require 'db/conexion.php';
+if($_POST['accion'] == 'recuperarContra'){
+  $correo = $_POST['correo'];
 
-// Message
-$message = '
-<html>
-<head>
-  <title>Birthday Reminders for August</title>
-</head>
-<body>
-  <h1>Here are the birthdays upcoming in August!</h1>
-  <div style="text-align:center; background-color:#ccc">
-  <p>Restablecer contraseña</p>
-    <h3>'.$codigo.'</h3>
-  <p><small>Ignorelo</small></p>
-  </div>
+  $query = "SELECT * FROM users WHERE email='$correo'";
+
+  $file = mysqli_query($conexion,$query);
   
-</body>
-</html>
-';
+  $filenew = mysqli_num_rows($file);
+  $nombre = mysqli_fetch_array($file);
+  $contraseña = $nombre['passwordUser'];
+  if($filenew > 0){
+    try {
+    
+      $mail = $correo;
+      $asunto = "Recuperacion de clave";
+      $cuerpo = "Su contraseña es: '$contraseña'";
+        //Server settings
+        $mail->isSMTP();
+        $mail->CharSet = "UTF8";  
+        $mail->SMTPDebug=0;                                       //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'nestortaranguife@gmail.com';                     //SMTP username
+        $mail->Password   = 'zresqayqnrvdnltx';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        //Recipients
+        $mail->setFrom('nestortaranguife@gmail.com', 'Globe');
+        $mail->addAddress($correo);     //Add a recipient
+        // $mail->addAddress('ellen@example.com');               //Name is optional
+        // $mail->addReplyTo('info@example.com', 'Information');
+        // $mail->addCC('cc@example.com');
+        // $mail->addBCC('bcc@example.com');
+    
+        //Attachments
+        // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = $asunto;
+        $mail->Body    = $cuerpo;
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
+        $mail->send();
+        echo json_encode('ok');
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+  }
 
-// To send HTML mail, the Content-type header must be set
-$headers[] = 'MIME-Version: 1.0';
-$headers[] = 'Content-type: text/html; charset=iso-8859-1';
+  
+}
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
 
-// // Additional headers
-// $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
-// $headers[] = 'From: Birthday Reminder <birthday@example.com>';
-// $headers[] = 'Cc: birthdayarchive@example.com';
-// $headers[] = 'Bcc: birthdaycheck@example.com';
-
-// Mail it
-mail($to, $subject, $message, implode("\r\n", $headers));
-?>
