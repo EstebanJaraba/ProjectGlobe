@@ -108,13 +108,13 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                     <div class="card-body">
                                                                         <form id="registroInsumo">
                                                                             <div class="row">
-                                                                                <div class="col-6">
+                                                                                <div class="col-4">
                                                                                     <div class="form-group">
                                                                                         <label for="dateRegistration">Fecha de registro</label>
                                                                                         <input type="date" class="form-control" id="dateRegistration" aria-describedby="">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-6">
+                                                                                <div class="col-8">
                                                                                     <div class="form-group">
                                                                                         <label for="total">Total</label>
                                                                                         <p class="form-label h2" id="totalVenta">000000</p>
@@ -157,6 +157,8 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
+
+                                                                                
                                                                             </div>
 
                                                                             <div class="mb-3">
@@ -249,8 +251,8 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                         <th>Empleado</th>
                                                                         <th>Total</th>
                                                                         <th>Descripción</th>
-                                                                        <th>Fecha de registro</th>
                                                                         <th>Estado</th>
+                                                                        <th>Fecha de registro</th>
                                                                         <th>Acciones</th>
                                                                     </tr>
                                                                 </thead>
@@ -316,7 +318,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
         $(document).ready(function() {
             listar();
             listarInsumos();
-
+            
         })
     </script>
 
@@ -379,14 +381,14 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                             <input type="text" readonly class="form-control-plaintext" id="descriptionSaleDetail">
                         </div>
 
-                        <label for="dateRegistrationDetail" class="col-sm-2 col-form-label">Fecha</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="dateRegistrationDetail">
-                        </div>
-
                         <label for="estadoDetail" class="col-sm-2 col-form-label">Estado</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="estadoDetail">
+                        </div>
+
+                        <label for="fechaRegisterDetail" class="col-sm-2 col-form-label">Fecha</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="fechaRegisterDetail">
                         </div>
                     </div>
                 </form>
