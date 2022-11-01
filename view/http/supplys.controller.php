@@ -9,9 +9,13 @@ if ($_POST['accion'] == 'registerSupplys') {
     $price = $_POST['price'];
     $state = $_POST['state'];
 
-    if ($name == "" || $partNumber = "" || $quantity == "" || $state == "") {
+    if ($name == "" || $partNumber = "" || $quantity == "" || $price = "" || $state == "") {
         echo json_encode('fallo');
-    } else {
+    }else if (strlen($name) <= 5){
+        echo json_encode('vali');
+    }else if (!is_numeric($price)){
+        echo json_encode('nume');
+    }else {
         $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','$state')";
 
         $file =  mysqli_query($conexion, $query);

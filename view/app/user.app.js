@@ -26,14 +26,14 @@ function registerUser() {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
-                    text: 'Número de documento incorrecto.'
+                    text: 'Ingrese un documento valido.'
                 })
                 listarUsuarios()
             }else if (JSON.parse(data) == 'max2') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
-                    text: 'Número de teléfono incorrecto.'
+                    text: 'Ingrese un número de telefono valido.'
                 })
                 listarUsuarios()
             }else if (JSON.parse(data) == 'fallo') {
@@ -48,7 +48,7 @@ function registerUser() {
                     icon: 'warning',
                     title: '',
                     position: 'center',
-                    text: '!El correo electrónico ya!',
+                    text: '!El correo electrónico ya existe!',
                     footer: ''
                 })
                 listarUsuarios()

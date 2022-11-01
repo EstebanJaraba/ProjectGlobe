@@ -10,6 +10,7 @@ function registrarCompra() {
         description: document.getElementById("descriptionPurchase").value,
         cantidad: document.getElementById("cantidadAgregar").value,
         valor: document.getElementById("v_unitario").value,
+        arreglo: ArregloProductosAgregarCompra
 
     };
 
@@ -35,6 +36,7 @@ function registrarCompra() {
                     position: "center",
                     icon: "warning",
                     title: "Registro fallido",
+                });
             }else if (JSON.parse(data) == "errorPur") {
                 Swal.fire({
                     position: "center",

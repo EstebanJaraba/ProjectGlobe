@@ -213,13 +213,13 @@ if (!isset($_SESSION['userName'])) {
           <div class="col-6">
             <div class="form-group">
               <label for="quantitySupply">Cantidad</label>
-              <input type="number" class="form-control" id="quantitySupply" aria-describedby="">
+              <input type="text" class="form-control" id="quantitySupply" aria-describedby="">
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
               <label for="priceSupply">Precio</label>
-              <input type="number" class="form-control" id="priceSupply" aria-describedby="">
+              <input type="text" class="form-control" id="priceSupply" aria-describedby="">
             </div>
           </div>
         </div>

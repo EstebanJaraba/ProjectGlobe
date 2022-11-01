@@ -9,6 +9,7 @@ if ($_POST['accion'] == 'registrarCompra') {
     $insumo = $_POST['insumo'];
     $description = $_POST['description'];
     $cantidad = $_POST['cantidad'];
+    $arreglo = $_POST['arreglo'];
 
 
     $query = "INSERT INTO purchases(id_invoice,amount_total,id_supplier,description,statePurchase) 
@@ -18,39 +19,37 @@ if ($_POST['accion'] == 'registrarCompra') {
 
     if ($file) {
 
-        $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) VALUE ('$factura','$insumo','$total','$cantidad')";
+        $newquery = '';
+        $newfile = false;
 
-        $newfile = mysqli_query($conexion,$newquery);
+        for ($i = 0; count($arreglo) > $i; $i++) {
+            $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) VALUE ('$factura','".$arreglo[$i]['productoId']."', '".$arreglo[$i]['valorTotal']."','".$arreglo[$i]['cantidad']."')";
+            $newfile = mysqli_query($conexion, $newquery);
 
-        if($newfile){ 
-            $descontar = "SELECT quantity FROM supplys WHERE idSupply = $insumo";
+            $descontar = "SELECT quantity FROM supplys WHERE idSupply = ".$arreglo[$i]['productoId']."";
 
-            $fileDes = mysqli_query($conexion,$descontar);
+            $fileDes = mysqli_query($conexion, $descontar);
 
             $quantityActual = 0;
-            if($row = mysqli_fetch_array($fileDes)){
+            if ($row = mysqli_fetch_array($fileDes)) {
                 $quantityActual = $row[0];
             }
 
             $quantityActual += $cantidad;
 
-            $queryUp = "UPDATE supplys SET quantity=$quantityActual WHERE idSupply=$insumo";
+            $queryUp = "UPDATE supplys SET quantity=$quantityActual WHERE idSupply= $insumo";
 
-            $fileUp = mysqli_query($conexion,$queryUp);
+            $fileUp = mysqli_query($conexion, $queryUp);
 
-            if($fileUp){
-                echo json_encode('ok');
-            }else{
-                echo json_encode('errorIn');
-            }
-        }else{
-            echo json_encode('errorDet');
         }
-        
+        if ($fileUp) {
+            echo json_encode('ok');
+        } else {
+            echo json_encode('errorIn');
+        }
     } else {
         echo json_encode('errorPur');
     }
-    
 }
 
 if (trim($_POST['accion']) == 'insumoPurchase') {
@@ -70,8 +69,9 @@ if (trim($_POST['accion']) == 'insumoPurchase') {
             $elementos,
             [
                 'id' => $datos["idSupply"],
-                'nombre' => $datos["nameSupply"]         
-            ]);
+                'nombre' => $datos["nameSupply"]
+            ]
+        );
         $i++;
     }
     $respuesta->registros = $elementos;
@@ -94,8 +94,9 @@ if (trim($_POST['accion']) == 'proveedorPurchase') {
             $elementos,
             [
                 'id' => $datos["idSupplier"],
-                'nombre' => $datos["nameSupplier"]         
-            ]);
+                'nombre' => $datos["nameSupplier"]
+            ]
+        );
         $i++;
     }
     $respuesta->registros = $elementos;
@@ -123,13 +124,13 @@ if (trim($_POST['accion']) == 'seleccionarListaCompra') {
                 'descripcion' => $datos["description_purchasing"],
                 'cantidad' => $datos["quantity_purchasing"],
                 'valor' => $datos["amount_purchasing"],
-                'estado' => $datos["state_purchasing"]               
+                'estado' => $datos["state_purchasing"]
             ]
         );
         $i++;
     }
     $respuesta->registros = $elementos;
-    
+
 
     echo json_encode($respuesta);
 }
@@ -157,15 +158,16 @@ if (trim($_POST['accion']) == 'listaProducto') {
             $elementos,
             [
                 'id' => $datos["id_product"],
-                'nombre' => $datos["description_product"]         
-            ]);
+                'nombre' => $datos["description_product"]
+            ]
+        );
         $i++;
     }
     $respuesta->registros = $elementos;
     echo json_encode($respuesta);
 }
 
-if($_POST['accion'] == 'agregarProducto'){
+if ($_POST['accion'] == 'agregarProducto') {
     $factura = $_POST['factura'];
     $producto = $_POST['producto'];
     $cantidad = $_POST['cantidad'];
@@ -173,14 +175,13 @@ if($_POST['accion'] == 'agregarProducto'){
 
     $query = "INSERT INTO purchasing_detail(id_invoice_detail, id_product, amount_product_detail, quantity_purchasing_detail ) VALUE('$factura','$producto','$valorProducto','$cantidad')";
 
-    $file = mysqli_query($conexion,$query);
+    $file = mysqli_query($conexion, $query);
 
-    if($file){
+    if ($file) {
         echo json_encode('ok');
-    }else{
+    } else {
         echo json_encode('error');
     }
-
 }
 
 if (trim($_POST['accion']) == 'seleccionarListaProducto') {
@@ -201,15 +202,15 @@ if (trim($_POST['accion']) == 'seleccionarListaProducto') {
             [
                 'factura' => $datos["id_invoice"],
                 'producto' => $datos["id_supply"],
-                'valorProducto' => $datos["amount_product"] ,
+                'valorProducto' => $datos["amount_product"],
                 'cantidadProducto' => $datos["quantity_detail"],
-                              
+
             ]
         );
         $i++;
     }
     $respuesta->registros = $elementos;
-    
+
 
     echo json_encode($respuesta);
 }
@@ -237,25 +238,25 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
                 'proveedor' => $datos["nameSupplier"],
                 'description' => $datos["description"],
                 'total' => $datos["amount_total"],
-                'estado' => $datos["statePurchase"]               
+                'estado' => $datos["statePurchase"]
             ]
         );
         $i++;
     }
     $respuesta->registros = $elementos;
-    
+
 
     echo json_encode($respuesta);
 }
 
 //Cambiar Estado
 
-if($_POST['accion'] == 'actualizarEstadoActivo') {
+if ($_POST['accion'] == 'actualizarEstadoActivo') {
     $id = $_POST['id'];
     $estado = $_POST['estado'];
-    if($estado == 1){
+    if ($estado == 1) {
         $varEstado = 0;
-    }elseif($estado == 0){
+    } elseif ($estado == 0) {
         $varEstado = 0;
     }
 
@@ -263,32 +264,31 @@ if($_POST['accion'] == 'actualizarEstadoActivo') {
 
 
 
-    $file = mysqli_query($conexion,$query);
+    $file = mysqli_query($conexion, $query);
 
-    if($file){
+    if ($file) {
         echo json_encode('ok');
-    }else{
+    } else {
         echo json_encode('error');
     }
 }
-if($_POST['accion'] == 'actualizarEstadoInactivo') {
+if ($_POST['accion'] == 'actualizarEstadoInactivo') {
     $id = $_POST['id'];
     $estado = $_POST['estado'];
-    if($estado == 0){
+    if ($estado == 0) {
         $varEstado = 1;
-    }else{
-
+    } else {
     }
 
     $query = "UPDATE purchases SET statePurchase = '$varEstado' WHERE id_invoice = '$id'";
 
 
 
-    $file = mysqli_query($conexion,$query);
+    $file = mysqli_query($conexion, $query);
 
-    if($file){
+    if ($file) {
         echo json_encode('ok');
-    }else{
+    } else {
         echo json_encode('error');
     }
 }

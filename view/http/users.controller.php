@@ -16,13 +16,13 @@ if ($_POST['accion'] == 'registerUsers') {
 
    
 
-   if (strlen($document) <= 9 || !is_numeric($document)){
-      echo json_encode('max');
-   } else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
-      echo json_encode('max2');
-   } else if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "" || $state == "") {
+   if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "" || $state == "") {
       echo json_encode('fallo');
-   } else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+   }else if (strlen($document) <= 9 || !is_numeric($document)){
+      echo json_encode('max');
+   }else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
+      echo json_encode('max2');
+   }else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $consulta = "SELECT document FROM users WHERE document='$document'";
       $consultaCorreo = "SELECT email FROM users WHERE email='$email'";
 

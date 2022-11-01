@@ -24,6 +24,20 @@ function registerSupply() {
                     text: 'Debes ingresar todos los campos'
                 })
                 listarInsumos()
+            }else if(JSON.parse(data) == 'vali') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un nombre valido.'
+                })
+                listarInsumos()
+            }else if(JSON.parse(data) == 'nume') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un número valido.'
+                })
+                listarInsumos()
             }
             else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
