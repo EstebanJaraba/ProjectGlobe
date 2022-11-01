@@ -35,6 +35,29 @@ function registrarCompra() {
                     position: "center",
                     icon: "warning",
                     title: "Registro fallido",
+            }else if (JSON.parse(data) == "errorPur") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "No se pudo realizar esta compra",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listar();
+            }else if (JSON.parse(data) == "errorDet") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Registro en detalle fallido",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listar();
+            }else if (JSON.parse(data) == "errorIn") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Actualización de stock fallida",
                     showConfirmButton: false,
                     timer: 1500,
                 });
@@ -54,7 +77,7 @@ function calcularValorTotal() {
 let ArregloProductosAgregarCompra = Array();
 let valorTotalProCompra = 0;
 
-function agregarProducto() {
+function agregarInsumo() {
     let selectorPruducto = document.getElementById("insumoPurchase");
 
     var productoAgregado = {
@@ -155,13 +178,13 @@ function ajaxMain(accion, url, nombreSelect) {
         url: url,
         type: "post",
         beforeSend: function () {
-            trar_loading();
+
         },
         success: function (data) {
-            if (accion == "listaProveedor") {
+            if (accion == "proveedorPurchase") {
                 loadingSelect(data, nombreSelect);
             }
-            if (accion == "listaProducto") {
+            if (accion == "insumoPurchase") {
                 loadingSelect(data, nombreSelect);
             }
         },
@@ -170,6 +193,7 @@ function ajaxMain(accion, url, nombreSelect) {
         },
     });
 }
+
 
 function loadingSelect(data, nombreSelect) {
     for (var i in JSON.parse(data).registros) {
@@ -182,20 +206,20 @@ function loadingSelect(data, nombreSelect) {
     }
 }
 
-function selectListaProveedor() {
+function selects() {
     ajaxMain(
-        "listaProveedor",
+        "insumoPurchase",
         "../view/http/purchases.controller.php",
-        "listaProveedor"
+        "insumoPurchase"
     );
-    cargando();
+
     setTimeout(() => {
-        selectListaProducto();
+        selectP();
     }, 200);
 }
 
-function selectListaProducto() {
-    ajaxMain("listaProducto", "../view/http/purchases.controller.php", "listaProducto");
+function selectP() {
+    ajaxMain("proveedorPurchase", "../view/http/purchases.controller.php", "proveedorPurchase");
     cerrarAlert();
 }
 
@@ -272,127 +296,105 @@ function eliminarInsumos(productoId) {
 
 //Listar Compras
 
-function listarCompra() {
-    eliminaFilastablaCompra();
+// function listarCompra() {
+//     eliminaFilastablaCompra();
 
-    var tablaCompra = $("#tablaCompras").DataTable();
-    tablaCompra.clear();
-    tablaCompra.destroy();
+//     var tablaCompra = $("#tablaCompras").DataTable();
+//     tablaCompra.clear();
+//     tablaCompra.destroy();
 
-    var parametros = {
-        accion: "seleccionarListaCompra",
-    };
+//     var parametros = {
+//         accion: "seleccionarListaCompra",
+//     };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/purchases.controller.php",
-        type: "post",
-        beforeSend: function () {
-            cargando();
-        },
-        success: function (data) {
-            //console.log(JSON.parse(data));
-            //if(JSON.parse(data).registros == ""){
-
-            for (var i in JSON.parse(data).registros) {
-                agregarFilaCompra(
-                    JSON.parse(data).registros[i].id,
-                    JSON.parse(data).registros[i].descripcion,
-                    JSON.parse(data).registros[i].cantidad,
-                    JSON.parse(data).registros[i].valor,
-                    JSON.parse(data).registros[i].estado
-                );
-            }
-
-            $("#tablaCompra").DataTable({
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-                },
-            });
-
-            setTimeout(() => {
-                cerrarAlert();
-            }, 1200);
-        },
-
-        error: function (error) {
-            console.log("No se ha podido obtener la información " + error);
-        },
-    });
-}
-
-// function cargando() {
-//     let timerInterval;
-//     Swal.fire({
-//         title: "cargando...",
-//         html: "Cargando registros",
-//         timer: 20000,
-//         timerProgressBar: true,
-//         didOpen: () => {
-//             Swal.showLoading();
-//             const b = Swal.getHtmlContainer().querySelector("b");
-//             timerInterval = setInterval(() => {}, 1000);
+//     $.ajax({
+//         data: parametros,
+//         url: "../view/http/purchases.controller.php",
+//         type: "post",
+//         beforeSend: function () {
+//             cargando();
 //         },
-//         willClose: () => {
-//             clearInterval(timerInterval);
+//         success: function (data) {
+//             //console.log(JSON.parse(data));
+//             //if(JSON.parse(data).registros == ""){
+
+//             for (var i in JSON.parse(data).registros) {
+//                 agregarFilaCompra(
+//                     JSON.parse(data).registros[i].id,
+//                     JSON.parse(data).registros[i].descripcion,
+//                     JSON.parse(data).registros[i].cantidad,
+//                     JSON.parse(data).registros[i].valor,
+//                     JSON.parse(data).registros[i].estado
+//                 );
+//             }
+
+//             $("#tablaCompra").DataTable({
+//                 language: {
+//                     url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+//                 },
+//             });
+
+//             setTimeout(() => {
+//                 cerrarAlert();
+//             }, 1200);
 //         },
-//     }).then((result) => {
-//         /* Read more about handling dismissals below */
-//         if (result.dismiss === Swal.DismissReason.timer) {
-//             console.log("Error de conexión con la BD");
-//         }
+
+//         error: function (error) {
+//             console.log("No se ha podido obtener la información " + error);
+//         },
 //     });
 // }
+
 
 function cerrarAlert() {
     Swal.close();
 }
 
-function eliminaFilastablaCompra() {
-    var n = 0;
-    $("#tablaCompras tbody tr").each(function () {
-        n++;
-    });
-    for (i = n - 1; i > 1; i--) {
-        $("#tablaCompras tbody tr:eq('" + i + "')").remove();
-    }
-}
+// function eliminaFilastablaCompra() {
+//     var n = 0;
+//     $("#tablaCompras tbody tr").each(function () {
+//         n++;
+//     });
+//     for (i = n - 1; i > 1; i--) {
+//         $("#tablaCompras tbody tr:eq('" + i + "')").remove();
+//     }
+// }
 
-function agregarFilaCompra(id, descripcion, cantidad, valor, estado) {
-    if (estado == 1) {
-        varEstado =
-            '<button class="btn btn-success btn-sm col-8" style="cursor: text">Activo</button>';
-    } else if (estado == 0) {
-        varEstado =
-            '<button class="btn btn-danger btn-sm col-8" style="cursor: text">Inactivo</button>';
-    }
+// function agregarFilaCompra(id, descripcion, cantidad, valor, estado) {
+//     if (estado == 1) {
+//         varEstado =
+//             '<button class="btn btn-success btn-sm col-8" style="cursor: text">Activo</button>';
+//     } else if (estado == 0) {
+//         varEstado =
+//             '<button class="btn btn-danger btn-sm col-8" style="cursor: text">Inactivo</button>';
+//     }
 
-    let datosProvider =
-        "'" +
-        id +
-        "', '" +
-        descripcion +
-        "', '" +
-        cantidad +
-        "', '" +
-        valor +
-        "', '" +
-        estado +
-        "' ";
+//     let datosProvider =
+//         "'" +
+//         id +
+//         "', '" +
+//         descripcion +
+//         "', '" +
+//         cantidad +
+//         "', '" +
+//         valor +
+//         "', '" +
+//         estado +
+//         "' ";
 
-    var htmlTags = `<tr>
-       <td>${id}</td>
-       <td>${descripcion}</td>
-       <td>${cantidad}</td>
-       <td>${valor}</td>
-       <td>Proveedor</td>
-       <td>Producto</td>
-       <td>${varEstado}</td>
-       <td><button data-toggle="modal" data-target="#actualizacionCompra" class="btn btn-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button></td>
-       </tr>`;
+//     var htmlTags = `<tr>
+//        <td>${id}</td>
+//        <td>${descripcion}</td>
+//        <td>${cantidad}</td>
+//        <td>${valor}</td>
+//        <td>Proveedor</td>
+//        <td>Producto</td>
+//        <td>${varEstado}</td>
+//        <td><button data-toggle="modal" data-target="#actualizacionCompra" class="btn btn-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-pencil-square"></i></button></td>
+//        </tr>`;
 
-    $("#tablaCompras tbody").append(htmlTags);
-}
+//     $("#tablaCompras tbody").append(htmlTags);
+// }
 
 // LISTAR ES LA TABLA DE COMPRAS REAL
 

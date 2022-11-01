@@ -14,7 +14,7 @@ if (isset($_POST['access'])) {
     } else if ($password == "") {
         header('location: ../../indexLogin.php?id=1');
     } else {
-        $query = "SELECT * FROM users  WHERE  userName = '$username' AND passwordUser = '$password'";
+        $query = "SELECT * FROM users AS u INNER JOIN role_management AS r ON u.id_rol = r.id_rol WHERE  userName = '$username' AND passwordUser = '$password'";
 
         $file = mysqli_query($conexion, $query);
 
@@ -24,7 +24,7 @@ if (isset($_POST['access'])) {
                 $_SESSION['nombreCompleto'] = $datos['userName'] . " " . $datos['last_name'];
                 $_SESSION['userName'] = $datos['userName'];
                 $_SESSION['last_name'] = $datos['last_name'];
-                $_SESSION['id_rol'] = $datos['id_rol'];
+                $_SESSION['id_rol'] = $datos['name_rol'];
                 $_SESSION['email'] = $datos['email'];
                 $_SESSION['phone'] = $datos['phone'];
             }

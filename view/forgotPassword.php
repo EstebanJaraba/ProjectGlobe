@@ -20,6 +20,7 @@ require "http/db/conexion.php";
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
   <!-- CDN para sweetalert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../view/app/recuperar.app.js"> </script>
 </head>
 
 <body class="hold-transition login-page">
@@ -30,7 +31,7 @@ require "http/db/conexion.php";
       </div>
       <div class="card-body">
         <p class="login-box-msg">¿Olvidaste tu contraseña? ingrese su correo para recuperarla.</p>
-        <form id="recoverForm" action="" method="post">
+        <form id="recoverForm">
           <div class="input-group mb-3">
             <input type="email" name="email" id="email" class="form-control" placeholder="Correo">
             <div class="input-group-append">
@@ -41,7 +42,7 @@ require "http/db/conexion.php";
           </div>
           <div class="row">
             <div class="col-12">
-              <button type="submit" id="recuperar" class="btn btn-primary btn-block">Recuperar contraseña</button>
+              <a type="submit" onclick="recuperar()" id="recuperar" class="btn btn-primary btn-block">Recuperar contraseña</a>
             </div>
             <!-- /.col -->
           </div>
