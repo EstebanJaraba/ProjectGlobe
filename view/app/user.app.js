@@ -9,7 +9,6 @@ function registerUser() {
         "phone": document.getElementById('phoneUser').value,
         "password": document.getElementById('passwordUser').value,
         "role": document.getElementById('roleUser').value,
-        "state": document.getElementById('stateUser').value,
     };
 
 
@@ -138,8 +137,6 @@ function listarUsuarios() {
                 );
             }
             $("#tableUsers").DataTable({
-                dom: "Bfrtip",
-                buttons: ["copy", "csv", "excel", "pdf", "print"],
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
                 },
@@ -159,6 +156,11 @@ function agregarFila_Users(idUser, userName, last_name, document, email, phone, 
         verEstado = '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>'
     } else if (stateUser == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-12" style="cursor: text">INACTIVO</button>'
+    }if (stateUser == 1) {
+        anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${idUser},${stateUser})"><i class="bi bi-person-dash"></i></button>`
+
+    } else if (stateUser == 0) {
+        anular = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado1(${idUser},${stateUser})"><i class="bi bi-person-plus"></i></button>`
     }
 
     let datosUser = "'" + idUser + "','" + userName + "','" + last_name + "','" + document + "','" + email + "','" + phone + "','" + passwordUser + "','" + idRole + "','" + stateUser + "'";
@@ -176,7 +178,7 @@ function agregarFila_Users(idUser, userName, last_name, document, email, phone, 
            <td> ${verEstado}</td>
            <td>
              <button data-toggle="modal" data-target="#updateUser" class="btn btn-outline-success btn-sm" onclick="tomarDatosUser(${datosUser})"><i class="bi bi-pencil-square"></i></button>
-             <button class="btn btn-outline-danger btn-sm" onclick="AnularUser(${idUser})"><i class="bi bi-person-dash"></i></button>
+                ${anular}
            </td>
          </tr>`;
     $("#tableUsers tbody").append(htmlTags);
@@ -254,35 +256,83 @@ function updateUsers() {
     });
 }
 
-
-function AnularUser(idUser) {
-    var parametros = {
-        "accion": "anularUser",
-        "id": idUser
+function actualizarEstado(idUser, stateUser) {
+    let parametros = {
+        accion: "actualizarEstadoActivo",
+        id: idUser,
+        estado: stateUser,
     };
 
     $.ajax({
         data: parametros,
         url: "../view/http/users.controller.php",
-        type: "post",
+        type: "POST",
         beforeSend: function () {
-
+            //         //mostrar cargando
         },
         success: function (data) {
-
-            if (JSON.parse(data) == 'ok') {
+            if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Anulación exitosa!',
-                    ShowConfirmbutton: false,
-                    timer: 1500
-                })
-                listarUsuarios()
+                    position: "center",
+                    icon: "success",
+                    text: "Estado editado con exito",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarUsuarios();
+            }else if (JSON.parse(data) == "error") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    text: "Actualización de estado fallido",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarUsuarios();
             }
         },
-        error: function () {
-            console.log("No se ha podido obtener la información")
+        error: function (error) {
+            console.log("No se a podido editar la información " + error);
+        },
+    });
+}
+function actualizarEstado1(idUser, stateUser) {
+    let parametros = {
+        accion: "actualizarEstadoInactivo",
+        id: idUser,
+        estado: stateUser,
+    };
+
+    $.ajax({
+        data: parametros,
+        url: "../view/http/users.controller.php",
+        type: "POST",
+        beforeSend: function () {
+            //         //mostrar cargando
+        },
+        success: function (data) {
+            if (JSON.parse(data) == "ok") {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    text: "Estado editado con exito",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarUsuarios();
+            } else if (JSON.parse(data) == "error") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    text: "Actualización de estado fallido",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarUsuarios();
+            }
+        },
+        error: function (error) {
+            console.log("No se a podido editar la información " + error);
         },
     });
 }

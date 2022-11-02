@@ -153,27 +153,6 @@ $resultado = mysqli_query($conexion, $query);
   <script src="assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-
-
-  <script>
-    $(function() {
-      $("#listadoUsuarios").DataTable({
-        "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#listadoUsuarios_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-  </script>
   <script src="app/user.app.js"></script>
 </body>
 
@@ -187,7 +166,7 @@ $resultado = mysqli_query($conexion, $query);
 
 
 <!-- Modal Register-->
-<div class="modal fade" data-backdrop="static" id="registerUsers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal fade" data-backdrop="static" id="registerUsers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -198,31 +177,46 @@ $resultado = mysqli_query($conexion, $query);
       </div>
       <div class="modal-body ">
 
-        <div class="form-group">
-          <label for="nameUser">Nombre</label>
-          <input type="text" class="form-control" id="nameUser" aria-describedby="error">
+        <div class="row">
+          <div class="col-6" style="margin-right:0;">
+            <div class="form-group">
+              <label for="nameUser">Nombre</label>
+              <input type="text" class="form-control" id="nameUser" aria-describedby="error">
+            </div>
+          </div>
+          <div class="col-6" style="margin-right:0;">
+            <div class="form-group">
+              <label for="last_nameUser">Apellidos</label>
+              <input type="text" class="form-control" id="last_nameUser" aria-describedby="">
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="last_nameUser">Apellidos</label>
-          <input type="text" class="form-control" id="last_nameUser" aria-describedby="">
+        <div class="row">
+          <div class="col-6" style="margin-right:0;">
+            <div class="form-group">
+              <label for="documentUser">Documento</label>
+              <input type="text" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" aria-describedby="">
+            </div>
+          </div>
+          <div class="col-6" style="margin-right:0;">
+            <div class="form-group">
+              <label for="phoneUser">Telefono</label>
+              <input type="text" class="form-control" id="phoneUser" aria-describedby="">
+            </div>
+          </div>
         </div>
 
 
-        <div class="form-group">
-          <label for="documentUser">Documento</label>
-          <input type="text" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" aria-describedby="">
-        </div>
+
+
 
         <div class="form-group">
           <label for="emailUser">Email</label>
           <input type="emal" class="form-control" id="emailUser" aria-describedby="">
         </div>
 
-        <div class="form-group">
-          <label for="phoneUser">Telefono</label>
-          <input type="text" class="form-control" id="phoneUser" aria-describedby="">
-        </div>
+
 
         <div class="row">
           <div class="col-6">
@@ -232,22 +226,12 @@ $resultado = mysqli_query($conexion, $query);
             </div>
           </div>
 
-          <div class="col-3" style="margin-right: 0;">
+          <div class="col-6" style="margin-right: 0;">
             <div class="form-group">
               <label for="roleUser">Rol</label>
               <select class="form-control" id="roleUser" aria-describedby="">
                 <option value="1">Admin</option>
                 <option value="0">Empleado</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="col-3" style="margin-left: 0;">
-            <div class="form-group">
-              <label for="stateUser">Estado</label>
-              <select class="form-control" id="stateUser" aria-describedby="">
-                <option value="1">Activo</option>
-                <option value="0">Inactivo</option>
               </select>
             </div>
           </div>
@@ -262,7 +246,7 @@ $resultado = mysqli_query($conexion, $query);
   </div>
 </div>
 <!-- Modal update -->
-<div class="modal fade" id="updateUser"  data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateUser" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">

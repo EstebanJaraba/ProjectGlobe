@@ -49,11 +49,10 @@
             <a href="account.php" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="assets/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="assets/dist/img/user.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     <?php echo $_SESSION['nombreCompleto']?>
-                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                   </h3>
                   <p class="text-sm"><?php echo $_SESSION['id_rol']?></p>
                   
