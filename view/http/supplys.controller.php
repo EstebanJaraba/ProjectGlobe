@@ -104,6 +104,7 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
         echo json_encode('error');
     }
 }
+
 if ($_POST['accion'] == 'actualizarEstadoInactivo') {
     $id = $_POST['id'];
     $estado = $_POST['estado'];
