@@ -224,16 +224,6 @@ if (!isset($_SESSION['userName'])) {
           </div>
         </div>
 
-
-        <div class="col-12" style="margin-left: 0;">
-          <div class="form-group">
-            <label for="stateSupply">Estado</label>
-            <select class="form-control" id="stateSupply" aria-describedby="">
-              <option value="1">Activo</option>
-              <option value="0">Inactivo</option>
-            </select>
-          </div>
-        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

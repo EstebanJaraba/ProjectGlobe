@@ -8,9 +8,8 @@ if ($_POST['accion'] == 'registerSuppliers') {
     $documento = $_POST['documento'];
     $email = $_POST['correo'];
     $phone = $_POST['celular'];
-    $state = $_POST['estado'];
 
-    if ($name == "" || $last_name == "" || $documento == "" || $email == "" || $phone == "" || $state == "") {
+    if ($name == "" || $last_name == "" || $documento == "" || $email == "" || $phone == "") {
         echo json_encode('fallo');
     } else if (strlen($documento) <= 9 || !is_numeric($documento)) {
         echo json_encode('max');
@@ -31,7 +30,7 @@ if ($_POST['accion'] == 'registerSuppliers') {
         } else if ($result2 > 0) {
             echo json_encode('emailError');
         } else {
-            $query = "INSERT INTO suppliers(nameSupplier,last_name,document,email,phone,stateSupplier) VALUE ('$name','$last_name','$documento','$email','$phone','$state')";
+            $query = "INSERT INTO suppliers(nameSupplier,last_name,document,email,phone,stateSupplier) VALUE ('$name','$last_name','$documento','$email','$phone','1')";
 
             $file =  mysqli_query($conexion, $query);
 

@@ -7,7 +7,7 @@ function registerSupplier() {
         "documento": document.getElementById('documentSupplier').value,
         "correo": document.getElementById('emailSupplier').value,
         "celular": document.getElementById('phoneSupplier').value,
-        "estado": document.getElementById('stateSupplier').value
+
     };
 
     $.ajax({
@@ -131,8 +131,6 @@ function listarProveedores() {
             }
 
             $("#tableSuppliers").DataTable({
-                dom: "Bfrtip",
-                buttons: ["copy", "csv", "excel", "pdf", "print"],
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
                 },

@@ -80,7 +80,7 @@ require('http/db/conexion.php');
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box" style="background-color:#58B6FA">
               <div class="inner">
               <?php
                 $countP = "SELECT idPurchase FROM purchases ORDER BY idPurchase";
@@ -102,7 +102,7 @@ require('http/db/conexion.php');
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box" style = "background-color: #6DE661">
               <div class="inner">
               <?php
                 $count = "SELECT idUser FROM users ORDER BY idUser";
@@ -124,7 +124,7 @@ require('http/db/conexion.php');
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box" style="background-color: #FAFF92">
               <div class="inner">
 
                 <?php
@@ -147,7 +147,7 @@ require('http/db/conexion.php');
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box" style="background-color: #FA8873">
               <div class="inner">
               <?php
                 $count = "SELECT idUser FROM users ORDER BY idUser";

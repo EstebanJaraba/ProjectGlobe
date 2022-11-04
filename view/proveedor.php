@@ -202,26 +202,21 @@ if (!isset($_SESSION['userName'])) {
       </div>
       <div class="modal-body">
 
-        <div class="form-group">
-          <label for="">Nombre</label>
-          <input type="text" class="form-control" id="nameSupplier" aria-describedby="">
-        </div>
+        <div class="row">
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="">Nombre</label>
+              <input type="text" class="form-control" id="nameSupplier" aria-describedby="">
+            </div>
+          </div>
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="">Apellido</label>
+              <input type="text" class="form-control" id="last_nameSupplier" aria-describedby="">
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label for="">Apellido</label>
-          <input type="text" class="form-control" id="last_nameSupplier" aria-describedby="">
         </div>
-
-        <div class="form-group">
-          <label for="">Documento</label>
-          <input type="text" class="form-control" id="documentSupplier" aria-describedby="">
-        </div>
-
-        <div class="form-group">
-          <label for="">Email</label>
-          <input type="text" class="form-control" id="emailSupplier" aria-describedby="">
-        </div>
-
         <div class="row">
           <div class="col-6" style="margin-left: 0;">
             <div class="form-group">
@@ -230,14 +225,16 @@ if (!isset($_SESSION['userName'])) {
             </div>
           </div>
           <div class="col-6" style="margin-left: 0;">
-            <div class="form-group">
-              <label for="">Estado</label>
-              <select class="form-control" id="stateSupplier" aria-describedby="">
-                <option value="1">Activo</option>
-                <option value="0">Inactivo</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="">Documento</label>
+            <input type="text" class="form-control" id="documentSupplier" aria-describedby="">
           </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Email</label>
+          <input type="text" class="form-control" id="emailSupplier" aria-describedby="">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -249,7 +246,7 @@ if (!isset($_SESSION['userName'])) {
 </div>
 
 <!-- Modal update -->
-<div class="modal fade" id="updateSupplier"  data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateSupplier" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">

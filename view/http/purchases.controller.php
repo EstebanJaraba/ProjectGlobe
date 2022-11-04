@@ -103,7 +103,6 @@ if (trim($_POST['accion']) == 'proveedorPurchase') {
     echo json_encode($respuesta);
 }
 
-
 if (trim($_POST['accion']) == 'seleccionarListaCompra') {
 
     $respuesta = new stdclass();
@@ -134,12 +133,6 @@ if (trim($_POST['accion']) == 'seleccionarListaCompra') {
 
     echo json_encode($respuesta);
 }
-
-//Listar Proveedores
-
-
-
-//Listar Productos
 
 if (trim($_POST['accion']) == 'listaProducto') {
 
@@ -214,8 +207,6 @@ if (trim($_POST['accion']) == 'seleccionarListaProducto') {
 
     echo json_encode($respuesta);
 }
-
-//LISTA
 
 if (trim($_POST['accion']) == 'seleccionarLista') {
 
