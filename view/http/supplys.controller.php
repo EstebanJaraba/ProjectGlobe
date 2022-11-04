@@ -9,13 +9,14 @@ if ($_POST['accion'] == 'registerSupplys') {
     $price = $_POST['price'];
     $state = $_POST['state'];
 
-    if ($name == "" || $partNumber = "" || $quantity == "" || $price = "" || $state == "") {
+    if ($name == ""  || $partNumber == "" || $quantity == "" || $price == "") {
         echo json_encode('fallo');
-    }else if (strlen($name) <= 5){
-        echo json_encode('vali');
-    }else if (!is_numeric($price)){
-        echo json_encode('nume');
-    }else {
+    } else if(strlen($name)<= 4){
+        echo json_encode('min');
+    } else if(!is_numeric($partNumber) || !is_numeric($quantity) || !is_numeric($price)){
+        echo json_encode('num');
+    }
+     else {
         $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','$state')";
 
         $file =  mysqli_query($conexion, $query);
@@ -26,6 +27,8 @@ if ($_POST['accion'] == 'registerSupplys') {
             echo json_encode('error');
         }
     }
+
+    
 }
 
 if (trim($_POST['accion']) == 'select_ListSupplys') {
@@ -38,7 +41,7 @@ if (trim($_POST['accion']) == 'select_ListSupplys') {
     $elementos = [];
     $i = 1;
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idSupply' => $datos["idSupply"], 'nameSupply' => $datos["nameSupply"], 'partNumber' => $datos["partNumber"], 'quantity' => $datos["quantity"],'price' => $datos["price"], 'stateSupply' => $datos["stateSupply"]]);
+        array_push($elementos, ['idSupply' => $datos["idSupply"], 'nameSupply' => $datos["nameSupply"], 'partNumber' => $datos["partNumber"], 'quantity' => $datos["quantity"], 'price' => $datos["price"], 'stateSupply' => $datos["stateSupply"]]);
         $i++;
     }
     $respuesta->registros = $elementos;

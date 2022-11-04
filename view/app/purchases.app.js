@@ -10,7 +10,8 @@ function registrarCompra() {
         description: document.getElementById("descriptionPurchase").value,
         cantidad: document.getElementById("cantidadAgregar").value,
         valor: document.getElementById("v_unitario").value,
-        arreglo: ArregloProductosAgregarCompra
+        arreglo: ArregloProductosAgregarCompra,
+        new: ArregloExistencias
 
     };
 
@@ -99,6 +100,17 @@ function agregarInsumo() {
     listarInsumos();
 }
 
+let ArregloExistencias = Array();
+
+function agregarExis() {
+
+    var ExisAgregado = {
+        productoId: document.getElementById("insumoPurchase").value,
+        cantidad: document.getElementById("cantidadAgregar").value,
+    };
+
+    ArregloExistencias.push(ExisAgregado);
+}
 
 function listarInsumos() {
     eliminaFilastablaRegistrarInsumos();

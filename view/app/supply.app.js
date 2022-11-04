@@ -14,7 +14,6 @@ function registerSupply() {
         url: "../view/http/supplys.controller.php",
         type: "post",
         beforeSend: function () {
-
         },
         success: function (data) {
             if (JSON.parse(data) == 'fallo') {
@@ -24,18 +23,22 @@ function registerSupply() {
                     text: 'Debes ingresar todos los campos'
                 })
                 listarInsumos()
-            }else if(JSON.parse(data) == 'vali') {
+            }else if(JSON.parse(data) == 'min'){
                 Swal.fire({
-                    icon: 'error',
                     position: 'center',
-                    text: 'Ingrese un nombre valido.'
+                    icon: 'warning',
+                    title: '¡Ingrese un nombre valido!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
                 })
                 listarInsumos()
-            }else if(JSON.parse(data) == 'nume') {
+            }else if (JSON.parse(data) == 'num'){
                 Swal.fire({
-                    icon: 'error',
                     position: 'center',
-                    text: 'Ingrese un número valido.'
+                    icon: 'warning',
+                    title: '¡Los campos deben ser numericos!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
                 })
                 listarInsumos()
             }
