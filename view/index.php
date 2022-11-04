@@ -82,7 +82,7 @@ require('http/db/conexion.php');
             <!-- small box -->
             <div class="small-box" style="background-color:#58B6FA">
               <div class="inner">
-              <?php
+                <?php
                 $countP = "SELECT idPurchase FROM purchases ORDER BY idPurchase";
                 $count_runP = mysqli_query($conexion, $countP);
 
@@ -102,9 +102,9 @@ require('http/db/conexion.php');
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box" style = "background-color: #6DE661">
+            <div class="small-box" style="background-color: #6DE661">
               <div class="inner">
-              <?php
+                <?php
                 $count = "SELECT idUser FROM users ORDER BY idUser";
                 $count_run = mysqli_query($conexion, $count);
 
@@ -116,7 +116,7 @@ require('http/db/conexion.php');
                 <p>Bounce Rate</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="icon ion-stats-bars"></i>
               </div>
 
             </div>
@@ -149,7 +149,7 @@ require('http/db/conexion.php');
             <!-- small box -->
             <div class="small-box" style="background-color: #FA8873">
               <div class="inner">
-              <?php
+                <?php
                 $count = "SELECT idUser FROM users ORDER BY idUser";
                 $count_run = mysqli_query($conexion, $count);
 
@@ -251,7 +251,7 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                
+
               </div>
             </div>
           </div>
@@ -259,7 +259,7 @@ require('http/db/conexion.php');
           <div class="col-lg-6">
             <div class="card">
               <div class="card-header border-0">
-                <h3 class="card-title">Proveedores</h3>
+                <h3 class="card-title">Compras vs Ventas</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -269,41 +269,39 @@ require('http/db/conexion.php');
               <div class="card-body">
 
                 <p class="card-text">
-                  <canvas id="myChartProveedores" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  <canvas id="myChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                   <script>
-                    const ctxProveedores = document.getElementById('myChartProveedores');
-                    const myChartProveedores = new Chart(ctxProveedores, {
-                      type: 'line',
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                      type: 'doughnut',
                       data: {
-                        labels: [
+                        labels: [<?php
+
+                                  $sql = "SELECT * FROM users";
+
+                                  $query = mysqli_query($conexion, $sql);
+
+                                  while ($row = mysqli_fetch_array($query)) {
+                                  ?> '<?php echo $row['userName'] ?>',
                           <?php
-
-                          $sql = "SELECT * FROM suppliers";
-
-                          $query = mysqli_query($conexion, $sql);
-
-                          while ($row = mysqli_fetch_array($query)) {
-                          ?> '<?php echo $row['nameSupplier'] ?>',
-                          <?php
-                          }
+                                  }
 
                           ?>
                         ],
                         datasets: [{
                           label: '# of Votes',
-                          data: [
+                          data: [<?php
+
+                                  $sql = "SELECT * FROM users";
+
+                                  $query = mysqli_query($conexion, $sql);
+
+                                  while ($row = mysqli_fetch_array($query)) {
+                                  ?> '<?php echo $row['idUser'] ?>',
                             <?php
+                                  }
 
-                            $sql = "SELECT * FROM suppliers";
-
-                            $query = mysqli_query($conexion, $sql);
-
-                            while ($row = mysqli_fetch_array($query)) {
-                            ?> '<?php echo $row['idSupplier'] ?>',
-                            <?php
-                            }
-
-                            ?>
+                            ?>,
                           ],
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -324,17 +322,18 @@ require('http/db/conexion.php');
                           borderWidth: 1
                         }]
                       },
-                      options: {
-                        scales: {
-                          y: {
-                            beginAtZero: true
-                          }
-                        }
-                      }
+                      // options: {
+                      //   scales: {
+                      //     y: {
+                      //       beginAtZero: true
+                      //     }
+                      //   }
+                      // }
                     });
                   </script>
+
                 </p>
-                
+
               </div>
             </div>
           </div>
@@ -408,7 +407,7 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                
+
               </div>
             </div>
           </div>
@@ -477,7 +476,7 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                
+
               </div>
             </div>
           </div>
@@ -562,7 +561,7 @@ require('http/db/conexion.php');
                     });
                   </script>
                 </p>
-                
+
               </div>
             </div>
           </div>
