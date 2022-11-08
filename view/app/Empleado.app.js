@@ -18,9 +18,58 @@ function registroEmpleado() {
             
         },
 
-        success: function(data){
-            console.log(data);
-            if (JSON.parse(data) == "ok") {
+        success: function (data) {
+
+            if (JSON.parse(data) == 'max') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un documento valido.'
+                })
+                listarEmpleados()
+            }else if (JSON.parse(data) == 'max2') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un número de teléfono valido.'
+                })
+                listarEmpleados()
+            }else if (JSON.parse(data) == 'fallo') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Por favor, completa todos los campos.'
+                })
+                listarEmpleados()
+            }else if (JSON.parse(data) == 'emailError') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El correo electrónico ya existe!',
+                    footer: ''
+                })
+                listarEmpleados()
+            }else if (JSON.parse(data) == 'email') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!Correo electrónico inválido!',
+                    footer: ''
+                })
+                listarEmpleados()
+            }else if (JSON.parse(data) == 'doc') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El número de documento ya existe!',
+                    footer: ''
+                })
+                listarEmpleados()
+            }
+            else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
                     icon: 'success',
                     title: '¡Registro exitoso!',
@@ -29,17 +78,16 @@ function registroEmpleado() {
                     confirmButtonText: "Aceptar",
                 })
                 listarEmpleados();
-                  $('#registroEmpleado').modal('hide');
-                  $('body').removeClass('modal-open');
-                  $('.modal-backdrop').remove();
-                setTimeout(function () {
-                    location.href = "empleados.php";
-                }, 1500);
-
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '',
+                    position: 'center',
+                    text: '¡Fallo en el registro!',
+                    footer: ''
+                })
             }
-
         },
-
         error: function(error){
             console.log("No se ha podido obtener la información " + error);
         },
@@ -88,7 +136,7 @@ function listarEmpleados(){
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
                 },
-                order: [[1, "asc"]],
+                order: [[1,"desc"]],
 
             });
         },

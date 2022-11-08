@@ -12,7 +12,7 @@ if ($_POST['accion'] == 'registrarVenta') {
     $total = $_POST['total'];
     $descriptionSale = $_POST['descriptionSale'];
     $dateRegistration = $_POST['dateRegistration'];
-
+    
 
     $query = "INSERT INTO sales_management (idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale, dateRegistration) 
     VALUE ('$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '1', '$dateRegistration')";
@@ -207,7 +207,7 @@ if (trim($_POST['accion']) == 'select_ListSupplys') {
            [
                'insumo' => $datos["idSupply"],
                'valorInsumo' => $datos["amount_supply_detail"] ,
-               'cantidadInsumo' => $datos["quantity_sales_detail"],
+               'cantidad' => $datos["quantity_sales_detail"],
                              
            ]
        );
@@ -269,4 +269,34 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
      }else{
         echo json_encode('error');
      }
+}
+
+if (trim($_POST['accion']) == 'seleccionarListaInsumos') {
+    $id = $_POST['id'];
+    $respuesta = new stdclass();
+
+    $cadena = "SELECT * FROM sales_detail AS p INNER JOIN supplys AS pr
+            ON p.idSupply = pr.idSupply WHERE id_sale_detail='$id'";
+
+    $resultado = mysqli_query($conexion, $cadena);
+
+    $elementos = [];
+    $i = 1;
+
+    while ($datos = mysqli_fetch_array($resultado)) {
+
+        array_push(
+            $elementos,
+            [
+                'insumo' => $datos["nameSupply"],
+                'cantidad' => $datos["quantity_sales_detail"],
+                'total' => $datos["amount_supply_detail"],
+            ]
+        );
+        $i++;
+    }
+    $respuesta->registros = $elementos;
+
+
+    echo json_encode($respuesta);
 }
