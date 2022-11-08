@@ -208,14 +208,14 @@ session_start();
 
                     <div class="form-group">
                         <label for="nameServiceEditar">Nombre</label>
-                        <input type="text" class="form-control" id="nameServiceEditar" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="nameServiceEditar" aria-describedby="emailHelp" require>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="costServiceEditar">Precio</label>
-                                <input type="number" class="form-control" id="costServiceEditar" aria-describedby="emailHelp">
+                                <input type="number" class="form-control" id="costServiceEditar" aria-describedby="emailHelp" require>
                             </div>
                         </div>
                         <div class="col-6">

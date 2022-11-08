@@ -14,11 +14,10 @@ if ($_POST['accion'] == 'registrarVenta') {
     $dateRegistration = $_POST['dateRegistration'];
 
 
-    $query = "INSERT INTO sales_management (idClient, idService, idEmployee, amount_total_sale, descriptionSale, dateRegistration, stateSale) 
-    VALUE ('$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '$dateRegistration', '1')";
+    $query = "INSERT INTO sales_management (idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale, dateRegistration) 
+    VALUE ('$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '1', '$dateRegistration')";
 
     $file = mysqli_query($conexion, $query);
-
     if ($file) {
 
         $newquery = "INSERT INTO sales_detail(idSupply, amount_supply_detail, quantity_sales_detail) 
@@ -26,33 +25,14 @@ if ($_POST['accion'] == 'registrarVenta') {
 
         $newfile = mysqli_query($conexion,$newquery);
 
-        if($newfile){ 
-            $descontar = "SELECT quantity FROM supplys WHERE idSupply = $insumo";
-
-            $fileDes = mysqli_query($conexion,$descontar);
-
-            $quantityActual = 0;
-            if($row = mysqli_fetch_array($fileDes)){
-                $quantityActual = $row[0];
-            }
-
-            $quantityActual -= $cantidad;
-
-            $queryUp = "UPDATE supplys SET quantity=$quantityActual WHERE idSupply=$insumo";
-
-            $fileUp = mysqli_query($conexion,$queryUp);
-
-            if($fileUp){
-                echo json_encode('ok');
-            }else{
-                echo json_encode('errorIn');
-            }
+        if($newfile){
+            echo json_encode('ok');
         }else{
-            echo json_encode('errorDet');
+            echo json_encode('error');
         }
-    }
-    else {
-        echo json_encode('errorPur');
+        
+    } else {
+        echo json_encode('error');
     }
 }
 
@@ -137,7 +117,7 @@ if (trim($_POST['accion']) == 'listaServicio') {
     echo json_encode($respuesta);
 }
 
- //Listar empleados
+//Listar empleados
 
 if (trim($_POST['accion']) == 'listaEmpleado') {
 
@@ -162,7 +142,7 @@ if (trim($_POST['accion']) == 'listaEmpleado') {
     }
     $respuesta->registros = $elementos;
     echo json_encode($respuesta);
-}
+ }
 
 //Listar insumos
 
@@ -245,7 +225,7 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
    $respuesta = new stdclass();
 
    $cadena = "SELECT * FROM sales_management AS p INNER JOIN clients AS pr
-           ON p.idClient = pr.idClient INNER JOIN services AS sr ON p.idService = sr.idService 
+           ON p.idClient = pr.idClient INNER JOIN services AS sr ON p.idService = sr.idService
            INNER JOIN employees AS em ON p.idEmployee = em.idEmployee";
 
    $resultado = mysqli_query($conexion, $cadena);
@@ -264,8 +244,8 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
                'empleado' => $datos["nameEmployee"],
                'total' => $datos["amount_total_sale"],
                'descriptionSale' => $datos["descriptionSale"],
-               'dateRegistration' => $datos["dateRegistration"],
-               'stateSale' => $datos["stateSale"],            
+               'stateSale' => $datos["stateSale"],   
+               'dateRegistration' => $datos["dateRegistration"],         
            ]
        );
        $i++;
@@ -279,9 +259,9 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
 
 if ($_POST['accion'] == 'actualizarEstadoActivo') {
 
-    $idSale = $_POST['idSale'];
+    $id = $_POST['id'];
     
-    $query = "UPDATE sales_management SET stateSale = '0' WHERE idSale = '$idSale'";
+    $query = "UPDATE sales_management SET stateSale = '0' WHERE idSale = '$id'";
 
     $file = mysqli_query($conexion, $query);
      if ($file){
