@@ -450,7 +450,7 @@ function actualizarEstado(id, estado) {
 
 
 //Ver detalles ventas
-function tomarDatos(id, cliente, servicio, empleado, total, descriptionSale, estado, dateRegistration) {
+function tomarDatos(id, cliente, servicio, empleado, total, descriptionSale, estado) {
   
   if(estado == 1){
     var status = 'Activo';
@@ -473,12 +473,12 @@ function tomarDatos(id, cliente, servicio, empleado, total, descriptionSale, est
   document.getElementById("totalDetail").value = amount;
   document.getElementById("descriptionSaleDetail").value = descriptionSale;
   document.getElementById("estadoDetail").value = status;
-  document.getElementById("fechaRegisterDetail").value = dateRegistration;
+  // document.getElementById("fechaRegisterDetail").value = dateRegistration;
   ListarDetalle();
     
 }
 
-function ListarDetalle(id) {
+function ListarDetalle() {
   eliminaFilastablaDetalleInsumos();
 
   var tablaInsumo = $("#tablaInsumos").DataTable();
