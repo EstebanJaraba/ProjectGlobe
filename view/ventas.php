@@ -88,7 +88,6 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                 <div id="container-fluid">
                     <div class="card">
                         <div class="card-body">
-
                             <div class="card">
                                 <div id="container-fluid">
                                     <div class="row" id="cancel-row">
@@ -265,13 +264,9 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -323,10 +318,11 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
 
     <script>
         function mostrar() {
-        document.getElementById('showRegister').style.display = 'flex';
+            document.getElementById('showRegister').style.display = 'flex';
         }
+
         function ocultar() {
-        document.getElementById('showRegister').style.display = 'none';
+            document.getElementById('showRegister').style.display = 'none';
         }
     </script>
     <!-- AdminLTE App -->

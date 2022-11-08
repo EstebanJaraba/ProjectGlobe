@@ -12,17 +12,17 @@ if ($_POST['accion'] == 'registerUsers') {
    $phone = $_POST['phone'];
    $password = $_POST['password'];
    $role = $_POST['role'];
-   $state = $_POST['state'];
 
-   
 
-   if (strlen($document) <= 9 || !is_numeric($document)){
-      echo json_encode('max');
-   } else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
-      echo json_encode('max2');
-   } else if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "" || $state == "") {
+   if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "") {
       echo json_encode('fallo');
-   } else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+   }else if (strlen($document) <= 9 || !is_numeric($document)){
+      echo json_encode('max');
+   }else if (strlen($password) <= 7){
+      echo json_encode('pass');
+   }else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
+      echo json_encode('max2');
+   }else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $consulta = "SELECT document FROM users WHERE document='$document'";
       $consultaCorreo = "SELECT email FROM users WHERE email='$email'";
 
@@ -37,7 +37,7 @@ if ($_POST['accion'] == 'registerUsers') {
       } else if ($result2 > 0) {
          echo json_encode('emailError');
       } else {
-         $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$password','$role','$state')";
+         $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$password','$role','1')";
 
          $file =  mysqli_query($conexion, $query);
 
@@ -74,8 +74,6 @@ if (trim($_POST['accion']) == 'select_ListUsers') {
    echo json_encode($respuesta);
 }
 
-
-
 if ($_POST['accion'] == 'updateUser') {
 
    $id = $_POST['id'];
@@ -101,16 +99,44 @@ if ($_POST['accion'] == 'updateUser') {
    }
 }
 
-if ($_POST['accion'] == 'anularUser') {
+if ($_POST['accion'] == 'actualizarEstadoActivo') {
    $id = $_POST['id'];
+   $estado = $_POST['estado'];
+   if ($estado == 1) {
+       $varEstado = 0;
+   } elseif ($estado == 0) {
+       $varEstado = 0;
+   }
 
    $query = "UPDATE users SET stateUser = '0' WHERE idUser = '$id'";
 
-   $file =  mysqli_query($conexion, $query);
+
+
+   $file = mysqli_query($conexion, $query);
 
    if ($file) {
-      echo json_encode('ok');
+       echo json_encode('ok');
    } else {
-      echo json_encode('error');
+       echo json_encode('error');
+   }
+}
+if ($_POST['accion'] == 'actualizarEstadoInactivo') {
+   $id = $_POST['id'];
+   $estado = $_POST['estado'];
+   if ($estado == 0) {
+       $varEstado = 1;
+   } else {
+   }
+
+   $query = "UPDATE users SET stateUser = '$varEstado' WHERE idUser = '$id'";
+
+
+
+   $file = mysqli_query($conexion, $query);
+
+   if ($file) {
+       echo json_encode('ok');
+   } else {
+       echo json_encode('error');
    }
 }

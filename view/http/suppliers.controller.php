@@ -8,20 +8,40 @@ if ($_POST['accion'] == 'registerSuppliers') {
     $documento = $_POST['documento'];
     $email = $_POST['correo'];
     $phone = $_POST['celular'];
-    $state = $_POST['estado'];
 
-    if ($name == "" || $last_name == "" || $documento == "" || $email == "" || $phone == "" || $state == "") {
+    if ($name == "" || $last_name == "" || $documento == "" || $email == "" || $phone == "") {
         echo json_encode('fallo');
-    } else {
-        $query = "INSERT INTO suppliers(nameSupplier,last_name,document,email,phone,stateSupplier) VALUE ('$name','$last_name','$documento','$email','$phone','$state')";
+    } else if (strlen($documento) <= 9 || !is_numeric($documento)) {
+        echo json_encode('max');
+    } else if (strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)) {
+        echo json_encode('max2');
+    } else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $consulta = "SELECT document FROM suppliers WHERE document='$documento'";
+        $consultaCorreo = "SELECT email FROM suppliers WHERE email='$email'";
 
-        $file =  mysqli_query($conexion, $query);
+        $conect = mysqli_query($conexion, $consulta);
+        $conect2 = mysqli_query($conexion, $consultaCorreo);
 
-        if ($file) {
-            echo json_encode('ok');
+        $result = mysqli_num_rows($conect);
+        $result2 = mysqli_num_rows($conect2);
+
+        if ($result > 0) {
+            echo json_encode('doc');
+        } else if ($result2 > 0) {
+            echo json_encode('emailError');
         } else {
-            echo json_encode('error');
+            $query = "INSERT INTO suppliers(nameSupplier,last_name,document,email,phone,stateSupplier) VALUE ('$name','$last_name','$documento','$email','$phone','1')";
+
+            $file =  mysqli_query($conexion, $query);
+
+            if ($file) {
+                echo json_encode('ok');
+            } else {
+                echo json_encode('error');
+            }
         }
+    } else {
+        echo json_encode('email');
     }
 }
 

@@ -7,7 +7,7 @@ function registerSupplier() {
         "documento": document.getElementById('documentSupplier').value,
         "correo": document.getElementById('emailSupplier').value,
         "celular": document.getElementById('phoneSupplier').value,
-        "estado": document.getElementById('stateSupplier').value
+
     };
 
     $.ajax({
@@ -18,11 +18,52 @@ function registerSupplier() {
 
         },
         success: function (data) {
-            if (JSON.parse(data) == 'fallo') {
+            if (JSON.parse(data) == 'max') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
-                    text: 'Debes ingresar todos los campos'
+                    text: 'Ingrese un documento valido.'
+                })
+                listarProveedores()
+            }else if (JSON.parse(data) == 'max2') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un número de telefono valido.'
+                })
+                listarProveedores()
+            }else if (JSON.parse(data) == 'fallo') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Por favor, completa todos los campos.'
+                })
+                listarProveedores()
+            }else if (JSON.parse(data) == 'emailError') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El correo electrónico ya existe!',
+                    footer: ''
+                })
+                listarProveedores()
+            }else if (JSON.parse(data) == 'email') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!Correo electrónico inválido!',
+                    footer: ''
+                })
+                listarProveedores()
+            }else if (JSON.parse(data) == 'doc') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El número de documento ya existe!',
+                    footer: ''
                 })
                 listarProveedores()
             }
@@ -90,8 +131,6 @@ function listarProveedores() {
             }
 
             $("#tableSuppliers").DataTable({
-                dom: "Bfrtip",
-                buttons: ["copy", "csv", "excel", "pdf", "print"],
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
                 },

@@ -6,7 +6,6 @@ function registerSupply() {
         "partNumber": document.getElementById('partNumberSupply').value,
         "quantity": document.getElementById('quantitySupply').value,
         "price": document.getElementById('priceSupply').value,
-        "state": document.getElementById('stateSupply').value,
     };
 
     $.ajax({
@@ -14,7 +13,6 @@ function registerSupply() {
         url: "../view/http/supplys.controller.php",
         type: "post",
         beforeSend: function () {
-
         },
         success: function (data) {
             if (JSON.parse(data) == 'fallo') {
@@ -22,6 +20,24 @@ function registerSupply() {
                     icon: 'error',
                     position: 'center',
                     text: 'Debes ingresar todos los campos'
+                })
+                listarInsumos()
+            }else if(JSON.parse(data) == 'min'){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: '¡Ingrese un nombre valido!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
+                })
+                listarInsumos()
+            }else if (JSON.parse(data) == 'num'){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: '¡Los campos deben ser numericos!',
+                    ShowConfirmbutton: false,
+                    timer: 1500
                 })
                 listarInsumos()
             }
@@ -88,8 +104,6 @@ function listarInsumos() {
             }
 
             $("#tableSupplys").DataTable({
-                dom: "Bfrtip",
-                buttons: ["copy", "csv", "excel", "pdf", "print"],
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
                 },
@@ -110,6 +124,11 @@ function agregarFila_Supplys(idSupply, nameSupply, partNumber,quantity, price, s
         verEstado = '<button class="btn btn-success btn-sm col-12 " style="cursor: text">ACTIVO</button>'
     } else if (stateSupply == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-12 " style="cursor: text">INACTIVO</button>'
+    }if (stateSupply == 1) {
+        anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${idSupply},${stateSupply})"><i class="bi bi-clipboard2-minus"></i></button>`
+
+    } else if (stateSupply == 0) {
+        anular = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado1(${idSupply},${stateSupply})"><i class="bi bi-clipboard2-plus"></i></button>`
     }
 
     let datosSupply = "'"+idSupply+"','"+nameSupply+"','"+partNumber+"','"+quantity+"','"+price+"','"+stateSupply+"'";
@@ -124,8 +143,8 @@ function agregarFila_Supplys(idSupply, nameSupply, partNumber,quantity, price, s
           <td > ${verEstado}</td>
           <td class="d-flex justify-content-center">
             <button data-toggle="modal" data-target="#updateSupplys" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosSupply})"><i class="bi bi-pencil-square"></i></button>
-            <button class="btn btn-outline-danger btn-sm" onclick="AnularSupply(${idSupply})"><i class="bi bi-file-earmark-minus"></i></button>
-          </td>
+            ${anular}
+            </td>
         </tr>`;
     $("#tableSupplys tbody").append(htmlTags);
 }
@@ -149,8 +168,6 @@ function tomarDatos(idSupply,nameSupply,partNumber,quantity,price,stateSupply){
     document.getElementById('priceSupplyUpdate').value=price
     document.getElementById('stateSupplyUpdate').value=stateSupply  
 }
-
-
 
 function updateSupply(){
     var parametros = {
@@ -190,34 +207,83 @@ function updateSupply(){
 }
 
 
-function AnularSupply(idSupply){
-    var parametros = {
-        "accion": "anularSupply",
-        "id": idSupply
+function actualizarEstado(idSupply, stateSupply) {
+    let parametros = {
+        accion: "actualizarEstadoActivo",
+        id: idSupply,
+        estado: stateSupply,
     };
 
     $.ajax({
         data: parametros,
         url: "../view/http/supplys.controller.php",
-        type: "post",
+        type: "POST",
         beforeSend: function () {
-
+            //         //mostrar cargando
         },
         success: function (data) {
-
-            if (JSON.parse(data) == 'ok') {
+            if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Anulación exitosa!',
-                    ShowConfirmbutton: false,
-                    timer: 1500
-                })
-                listarInsumos()
+                    position: "center",
+                    icon: "success",
+                    text: "Estado editado con exito",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarInsumos();
+            }else if (JSON.parse(data) == "error") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    text: "Actualización de estado fallida",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarInsumos();
             }
         },
-        error: function () {
-            console.log("No se ha podido obtener la información")
+        error: function (error) {
+            console.log("No se a podido editar la información " + error);
+        },
+    });
+}
+function actualizarEstado1(idSupply, stateSupply) {
+    let parametros = {
+        accion: "actualizarEstadoInactivo",
+        id: idSupply,
+        estado: stateSupply,
+    };
+
+    $.ajax({
+        data: parametros,
+        url: "../view/http/supplys.controller.php",
+        type: "POST",
+        beforeSend: function () {
+            //         //mostrar cargando
+        },
+        success: function (data) {
+            if (JSON.parse(data) == "ok") {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    text: "Estado editado con exito",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarInsumos();
+            } else if (JSON.parse(data) == "error") {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    text: "Actualización de estado fallida",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                listarInsumos();
+            }
+        },
+        error: function (error) {
+            console.log("No se a podido editar la información " + error);
         },
     });
 }
