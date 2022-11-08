@@ -9,15 +9,42 @@ if ($_POST['accion'] == 'registroEmpleado') {
     $phone = $_POST['phone'];
     $stateEmployee = $_POST['stateEmployee'];
 
-    $query = "INSERT INTO employees (documentEmployee, nameEmployee, email, phone, stateEmployee) 
-    VALUE ('$documentEmployee', '$nameEmployee', '$email', '$phone', '$stateEmployee')";
 
-    $file = mysqli_query($conexion, $query);
-     if ($file){
-        echo json_encode('ok');
-     }else{
-        echo json_encode('error');
-     }
+   if ($documentEmployee == "" || $nameEmployee == "" || $email == "" || $phone == "") {
+      echo json_encode('fallo');
+   }else if (strlen($documentEmployee) <= 9 || !is_numeric($documentEmployee)){
+      echo json_encode('max');
+   }else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
+      echo json_encode('max2');
+   }else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $consulta = "SELECT documentEmployee FROM employees WHERE documentEmployee='$documentEmployee'";
+      $consultaCorreo = "SELECT email FROM employees WHERE email='$email'";
+
+      $conect = mysqli_query($conexion, $consulta);
+      $conect2 = mysqli_query($conexion, $consultaCorreo);
+
+      $result = mysqli_num_rows($conect);
+      $result2 = mysqli_num_rows($conect2);
+
+      if ($result > 0) {
+         echo json_encode('doc');
+      } else if ($result2 > 0) {
+         echo json_encode('emailError');
+      } else {
+         $query = "INSERT INTO employees (documentEmployee, nameEmployee, email, phone, stateEmployee) 
+         VALUE ('$documentEmployee', '$nameEmployee', '$email', '$phone', '$stateEmployee')";
+
+         $file =  mysqli_query($conexion, $query);
+
+         if ($file) {
+            echo json_encode('ok');
+         } else {
+            echo json_encode('error');
+         }
+      }
+   } else {
+      echo json_encode('email');
+   }
 }
 
 if (trim($_POST['accion']) == 'select_listEmpleados'){

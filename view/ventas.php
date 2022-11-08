@@ -252,7 +252,6 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                         <th>Total</th>
                                                                         <th>Descripción</th>
                                                                         <th>Estado</th>
-                                                                        <th>Fecha de registro</th>
                                                                         <th>Acciones</th>
                                                                     </tr>
                                                                 </thead>
@@ -351,9 +350,9 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
             <div class="modal-body">
                 <form action="">
                     <div class="form-group row">
-                        <label for="idDetail" class="col-sm-2 col-form-label">Id</label>
+                        <label for="id_sale_detail" class="col-sm-2 col-form-label">Id</label>
                         <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="idDetail">
+                            <input type="text" readonly class="form-control-plaintext" id="id_sale_detail">
                         </div>
 
                         <label for="idClientDetail" class="col-sm-2 col-form-label">Cliente</label>
@@ -386,9 +385,21 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                             <input type="text" readonly class="form-control-plaintext" id="estadoDetail">
                         </div>
 
-                        <label for="fechaRegisterDetail" class="col-sm-2 col-form-label">Fecha</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="fechaRegisterDetail">
+                        <div class="card-body">
+                            <table class="table table" id="tablaInsumos">
+                                <thead>
+                                    <tr>
+                                    <th>Insumos</th>
+                                    <!-- <th>Precio</th> -->
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </form>
