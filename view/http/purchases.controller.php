@@ -40,28 +40,13 @@ if ($_POST['accion'] == 'registrarCompra') {
 
 
             // $quantityActual = 0;
-            // if ($row = mysqli_fetch_array($fileDes)) {
+            // if($row = mysqli_fetch_array($fileDes)){
             //     $quantityActual = $row[0];
             // }
 
             // $quantityActual += $cantidad;
 
-            // $queryUp = "UPDATE supplys SET quantity=$quantityActual WHERE idSupply= $insumo";
-
-            // $fileUp = mysqli_query($conexion, $queryUp);
-
-            // $querySuma = "SELECT SUM(quantity_purchasing_detail) AS quantity FROM purchasing_detail WHERE id_product = ".$arreglo[$i]['productoId'];
-
-            // $fileDetailSuma = mysqli_query($conexion,$querySuma);
-
-            // while ($arraySuma = mysqli_fetch_array($fileDetailSuma)) {
-
-            //     $quantity_suma = $arraySuma ["quantity"];
-
-            //     $queryActualizarCantidad = "UPDATE products_management SET quantity_product = $quantity_suma WHERE id_product = ".$arreglo[$i]['productoId'];
-
-            //     $fileDetailActualiza = mysqli_query($conexion,$queryActualizarCantidad);
-            // };
+            // $queryUp = "UPDATE supplys SET quantity=$quantityActual WHERE idSupply=$insumo";
         }
         if ($fileUp) {
             echo json_encode('ok');

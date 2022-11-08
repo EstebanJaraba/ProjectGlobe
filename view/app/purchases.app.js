@@ -398,15 +398,15 @@ function actualizarEstado1(IdFactura, estado) {
 
 function tomarDatos(IdFactura, proveedor, estado) {
 
-   if (estado == 1){
-    var estadoC = 'Activo'
-   }else if(estado == 0){
-    var estadoC = 'Anulado';
-   }
+//    if (estado == 1){
+//     var estadoC = 'Activo'
+//    }else if(estado == 0){
+//     var estadoC = 'Anulado';
+//    }
 
     document.getElementById("id_detalle").value = IdFactura;
     document.getElementById("proveedor").value = proveedor;
-    document.getElementById("estado").value = estadoC;
+    document.getElementById("estado").value = estado;
 
     ListarDetalle();
 }

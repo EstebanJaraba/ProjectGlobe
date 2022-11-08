@@ -17,9 +17,6 @@ if ($_POST['accion'] == 'registerSupplys') {
         echo json_encode('num');
     }
     else {
-        $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','$state')";
-
-
         $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','1')";
 
         $file =  mysqli_query($conexion, $query);
