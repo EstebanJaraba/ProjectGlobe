@@ -129,7 +129,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                             <label for="proveedorPurchase">Proveedor</label>
                                             <select class="form-control" id="proveedorPurchase" aria-describedby="">
                                               <option value="0">---</option>
-                                              
+
                                             </select>
                                           </div>
                                         </div>
@@ -140,7 +140,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                             <label for="insumoPurchase">Insumo</label>
                                             <select class="form-control" id="insumoPurchase" aria-describedby="">
                                               <option value="0">---</option>
-                                              
+
                                             </select>
                                           </div>
                                         </div>
@@ -289,27 +289,6 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
   <script src="assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-
-
-  <!-- <script>
-    $(function() {
-      $("#listadoUsuarios").DataTable({
-        "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#listadoUsuarios_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-  </script> -->
   <script src="app/purchases.app.js"></script>
 </body>
 
@@ -332,3 +311,57 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
 </script>
 
 </html>
+
+
+
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="detalleCompra" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle de compra</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label for="idDetail" class="col-sm-3 col-form-label">N° Factura</label>
+          <div class="col-sm-9">
+            <input type="text" readonly class="form-control-plaintext" id="id_detalle">
+          </div>
+        </div>
+        <div class="row">
+          <label for="totalDetail" class="col-sm-3 col-form-label">Proveedor</label>
+          <div class="col-sm-9">
+            <input type="text" readonly class="form-control-plaintext" id="proveedor">
+          </div>
+        </div>
+        <div class="row">
+          <label for="estadoDetail" class="col-sm-3 col-form-label">Estado</label>
+          <div class="col-sm-9">
+            <input type="text" readonly class="form-control-plaintext" id="estado">
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table" id="tablaInsumos">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <!-- <th>Precio</th> -->
+                <th>Cantidad</th>
+                <th>Total</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

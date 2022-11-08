@@ -14,12 +14,12 @@ if ($_POST['accion'] == 'registerUsers') {
    $role = $_POST['role'];
 
 
-   
-
    if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "") {
       echo json_encode('fallo');
    }else if (strlen($document) <= 9 || !is_numeric($document)){
       echo json_encode('max');
+   }else if (strlen($password) <= 7){
+      echo json_encode('pass');
    }else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
       echo json_encode('max2');
    }else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {

@@ -21,7 +21,62 @@ function registerUser() {
         },
         success: function (data) {
 
-            if (JSON.parse(data) == 'ok') {
+            if (JSON.parse(data) == 'max') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un documento valido.'
+                })
+                
+            }else if (JSON.parse(data) == 'max2') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un número de telefono valido.'
+                })
+                
+            }else if (JSON.parse(data) == 'pass') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese una contraseña valida de minimo 8 caracteres.'
+                })
+                
+            }else if (JSON.parse(data) == 'fallo') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Por favor, completa todos los campos.'
+                })
+                
+            }else if (JSON.parse(data) == 'emailError') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El correo electrónico ya existe!',
+                    footer: ''
+                })
+                
+            }else if (JSON.parse(data) == 'email') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!Correo electrónico inválido!',
+                    footer: ''
+                })
+                
+            }else if (JSON.parse(data) == 'doc') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El número de documento ya existe!',
+                    footer: ''
+                })
+                
+            }else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
                     icon: 'success',
                     title: '',

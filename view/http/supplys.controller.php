@@ -16,18 +16,19 @@ if ($_POST['accion'] == 'registerSupplys') {
     } else if(!is_numeric($partNumber) || !is_numeric($quantity) || !is_numeric($price)){
         echo json_encode('num');
     }
-     else {
+    else {
         $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','$state')";
 
 
-    $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','1')";
+        $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','1')";
 
-    $file =  mysqli_query($conexion, $query);
+        $file =  mysqli_query($conexion, $query);
 
-    if ($file) {
-        echo json_encode('ok');
-    } else {
-        echo json_encode('error');
+        if ($file) {
+            echo json_encode('ok');
+        } else {
+            echo json_encode('error');
+        }
     }
 
 }
@@ -125,3 +126,4 @@ if ($_POST['accion'] == 'actualizarEstadoInactivo') {
         echo json_encode('error');
     }
 }
+

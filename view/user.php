@@ -230,6 +230,7 @@ $resultado = mysqli_query($conexion, $query);
             <div class="form-group">
               <label for="roleUser">Rol</label>
               <select class="form-control" id="roleUser" aria-describedby="">
+                <option value="">----</option>
                 <option value="1">Admin</option>
                 <option value="0">Empleado</option>
               </select>
