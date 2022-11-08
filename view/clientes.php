@@ -79,7 +79,8 @@ session_start();
                                         <th>Documento</th>
                                         <th>Nombre</th>
                                         <th>Apellidos</th>
-                                        <th>Email</th>
+                                        <th>Correo</th>
+                                        <th>Dirección</th>
                                         <th>Telefono</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
@@ -186,9 +187,20 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="email">Correo</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control" id="address" aria-describedby="emailHelp">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -252,10 +264,22 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="emailClientEditar" aria-describedby="emailHelp">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="email">Correo</label>
+                                <input type="email" class="form-control" id="emailClientEditar" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="addressClientEditar">Dirección</label>
+                                <input type="text" class="form-control" id="addressClientEditar" aria-describedby="emailHelp">
+                            </div>
+                        </div>
                     </div>
+                        
 
                     <div class="row">
                         <div class="col-6">

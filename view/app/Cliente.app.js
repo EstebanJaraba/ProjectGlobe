@@ -7,6 +7,7 @@ function registroCliente() {
         "nameClient": document.getElementById('nameClient').value,
         "last_name": document.getElementById('last_name').value,
         "email": document.getElementById('email').value,
+        "address": document.getElementById('address').value,
         "phone": document.getElementById('phone').value,
         "stateClient": document.getElementById('stateClient').value
     };
@@ -19,15 +20,64 @@ function registroCliente() {
             
         },
 
-        success: function(data){
-            console.log(data);
-            if (JSON.parse(data) == "ok") {
+        success: function (data) {
+
+            if (JSON.parse(data) == 'max') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un documento valido.'
+                })
+                listarClientes()
+            }else if (JSON.parse(data) == 'max2') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Ingrese un número de teléfono valido.'
+                })
+                listarClientes()
+            }else if (JSON.parse(data) == 'fallo') {
+                Swal.fire({
+                    icon: 'error',
+                    position: 'center',
+                    text: 'Por favor, completa todos los campos.'
+                })
+                listarClientes()
+            }else if (JSON.parse(data) == 'emailError') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El correo electrónico ya existe!',
+                    footer: ''
+                })
+                listarClientes()
+            }else if (JSON.parse(data) == 'email') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!Correo electrónico inválido!',
+                    footer: ''
+                })
+                listarClientes()
+            }else if (JSON.parse(data) == 'doc') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '',
+                    position: 'center',
+                    text: '!El número de documento ya existe!',
+                    footer: ''
+                })
+                listarClientes()
+            }
+            else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
                     icon: 'success',
-                    title: '¡Registro exitoso!',
-                    text: '',
-                    heightAuto: false,
-                    confirmButtonText: "Aceptar",
+                    title: '',
+                    position: 'center',
+                    text: '¡Registro exitoso!',
+                    footer: ''
                 })
                 listarClientes();
                 $('#registroCliente').modal('hide');
@@ -36,8 +86,16 @@ function registroCliente() {
                 setTimeout(function () {
                     location.href = "clientes.php";
                 }, 1500);
+                listarClientes()
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '',
+                    position: 'center',
+                    text: '¡Fallo en el registro!',
+                    footer: ''
+                })
             }
-
         },
 
         error: function(error){
@@ -77,6 +135,7 @@ function listarClientes(){
                     JSON.parse(data).registros[i].nameClient,
                     JSON.parse(data).registros[i].last_name,
                     JSON.parse(data).registros[i].email,
+                    JSON.parse(data).registros[i].address,
                     JSON.parse(data).registros[i].phone,
                     JSON.parse(data).registros[i].stateClient,
                     ""
@@ -102,15 +161,15 @@ function listarClientes(){
 }
 
 
-function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, email, phone, stateClient, acciones){
+function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient, acciones){
 
     if(stateClient == 1){
-        verstateClient = '<button class= "btn btn-success btn-sm col-6">Activo</button/>'
+        verstateClient = '<button class= "btn btn-success btn-sm col-8">Activo</button/>'
     }else if(stateClient == 0){
-        verstateClient = '<button class= "btn btn-danger btn-sm col-6">Anulado</button/>'
+        verstateClient = '<button class= "btn btn-danger btn-sm col-8">Anulado</button/>'
     }
 
-    let datosClientes = "'"+idClient+"', '"+documentClient+"', '"+nameClient+"', '"+last_name+"', '"+email+"', '"+phone+"', '"+stateClient+"'";
+    let datosClientes = "'"+idClient+"', '"+documentClient+"', '"+nameClient+"', '"+last_name+"', '"+email+"', '"+address+"', '"+phone+"', '"+stateClient+"'";
 
     var htmlTags = `<tr>
         <td> ${idClient} </td>
@@ -118,6 +177,7 @@ function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, e
         <td> ${nameClient} </td>
         <td> ${last_name} </td>
         <td> ${email} </td>
+        <td> ${address} </td>
         <td> ${phone} </td>
         <td> ${verstateClient} </td>
         <td>
@@ -141,12 +201,13 @@ function eliminarFilasTableCliente(){
 }
 
 
-function tomarDatos(idClient, documentClient, nameClient, last_name, email, phone, stateClient){
+function tomarDatos(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient){
     document.getElementById('idClientEditar').value = idClient
     document.getElementById('documentClientEditar').value = documentClient
     document.getElementById('nameClientEditar').value = nameClient
     document.getElementById('last_nameClientEditar').value = last_name
     document.getElementById('emailClientEditar').value = email
+    document.getElementById('addressClientEditar').value = address
     document.getElementById('phoneClientEditar').value = phone
     document.getElementById('stateClientEditar').value = stateClient
 }
@@ -159,6 +220,7 @@ function editarCliente(){
         "nameClient": document.getElementById('nameClientEditar').value,
         "last_name": document.getElementById('last_nameClientEditar').value,
         "email": document.getElementById('emailClientEditar').value,
+        "address": document.getElementById('addressClientEditar').value,
         "phone": document.getElementById('phoneClientEditar').value,
         "stateClient": document.getElementById('stateClientEditar').value
     };
