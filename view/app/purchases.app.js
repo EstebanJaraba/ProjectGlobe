@@ -12,65 +12,52 @@ function registrarCompra() {
         valor: document.getElementById("v_unitario").value,
         arreglo: ArregloProductosAgregarCompra,
 
-
     };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/purchases.controller.php",
-        type: "post",
-        beforeSend: function () {
+    if(document.getElementById("facturaCompra").value == "" || document.getElementById("proveedorPurchase").value == "" || document.getElementById("insumoPurchase").value == "" || document.getElementById("descriptionPurchase").value == ""|| document.getElementById("cantidadAgregar").value == ""|| document.getElementById("v_unitario").value == "")
+    {
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Sin campos vacios por favor",
+        });
+        
+    }else{
+        $.ajax({
+            data: parametros,
+            url: "../view/http/purchases.controller.php",
+            type: "post",
+            beforeSend: function () {
+    
+            },
+            success: function (data) {
+                if (JSON.parse(data) == "ok") {
+                    Swal.fire({
+                        position: "top",
+                        icon: "success",
+                        title: "Registro exitoso",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    listar();
+                }else if (JSON.parse(data) == "errorIn") {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Actualización de stock fallida",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    listar();
+                }
+            },
+            error: function (error) {
+                console.log("No se a podido obtener la información " + error);
+            },
+        });
+    }
 
-        },
-        success: function (data) {
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: "top",
-                    icon: "success",
-                    title: "Registro exitoso",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listar();
-            }else if (JSON.parse(data) == "error") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Registro fallido",
-                });
-            }else if (JSON.parse(data) == "errorPur") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "No se pudo realizar esta compra",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listar();
-            }else if (JSON.parse(data) == "errorDet") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Registro en detalle fallido",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listar();
-            }else if (JSON.parse(data) == "errorIn") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Actualización de stock fallida",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listar();
-            }
-        },
-        error: function (error) {
-            console.log("No se a podido obtener la información " + error);
-        },
-    });
+    
 }
 
 function calcularValorTotal() {
@@ -282,13 +269,13 @@ function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
             '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>';
     } else if (estado == 0) {
         varEstado =
-            '<button class="btn btn-danger btn-sm col-12" style="cursor: text">INACTIVO</button>';
+            '<button class="btn btn-danger btn-sm col-12" style="cursor: text">ANULADO</button>';
     }
     if (estado == 1) {
         anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-cart-dash"></i></button>`
 
     } else if (estado == 0) {
-        anular = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado1(${IdFactura},${estado})"><i class="bi bi-bag-plus"></i></button>`
+        anular = ``
     }
 
     let datosProvider =
@@ -396,22 +383,24 @@ function actualizarEstado1(IdFactura, estado) {
 
 //Listar Detalles de Compra
 
-function tomarDatos(IdFactura, proveedor, estado) {
+function tomarDatos(IdFactura, proveedor, description,total ,estado) {
 
-//    if (estado == 1){
-//     var estadoC = 'Activo'
-//    }else if(estado == 0){
-//     var estadoC = 'Anulado';
-//    }
+   if (estado == 1){
+    var estadoC = 'Activo'
+   }else if(estado == 0){
+    var estadoC = 'Anulado';
+   }
 
     document.getElementById("id_detalle").value = IdFactura;
     document.getElementById("proveedor").value = proveedor;
-    document.getElementById("estado").value = estado;
+    document.getElementById("proveedor").value = description;
+    document.getElementById("proveedor").value = total;
+    document.getElementById("estado").value = estadoC;
 
     ListarDetalle();
 }
 
-function ListarDetalle(IdFactura) {
+function ListarDetalle() {
     eliminaFilastablaDetalleInsumos();
 
     var tablaInsumo = $("#tablaInsumos").DataTable();
@@ -440,11 +429,11 @@ function ListarDetalle(IdFactura) {
                 );
             }
 
-            $("#tablaInsumos").DataTable({
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-                },
-            });
+            // $("#tablaInsumos").DataTable({
+            //     language: {
+            //         url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+            //     },
+            // });
         },
 
         error: function (error) {

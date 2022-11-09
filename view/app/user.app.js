@@ -11,88 +11,105 @@ function registerUser() {
         "role": document.getElementById('roleUser').value,
     };
 
+    if (document.getElementById('nameUser').value == "" || document.getElementById('last_nameUser').value == "" || document.getElementById('documentUser').value == "" || document.getElementById('emailUser').value == "" || document.getElementById('phoneUser').value == "" || document.getElementById('passwordUser').value == "") {
+        Swal.fire({
+            icon: 'error',
+            position: 'center',
+            text: 'Por favor, completa todos los campos.'
+        })
+        listarUsuarios()
+    } else if (document.getElementById('documentUser').value.length <= 6) {
+        Swal.fire({
+            icon: 'error',
+            position: 'center',
+            text: 'Ingrese un documento valido.'
+        })
+        listarUsuarios()
+    } else {
+        $.ajax({
+            data: parametros,
+            url: "http/users.controller.php",
+            type: "post",
+            beforeSend: function () {
 
-    $.ajax({
-        data: parametros,
-        url: "http/users.controller.php",
-        type: "post",
-        beforeSend: function () {
+            },
+            success: function (data) {
 
-        },
-        success: function (data) {
+                // if (JSON.parse(data) == 'max') {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         position: 'center',
+                //         text: 'Ingrese un documento valido.'
+                //     })
+                //     listarUsuarios()
+                // }else if (JSON.parse(data) == 'max2') {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         position: 'center',
+                //         text: 'Ingrese un número de telefono valido.'
+                //     })
+                //     listarUsuarios()
+                // }else if (JSON.parse(data) == 'fallo') {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         position: 'center',
+                //         text: 'Por favor, completa todos los campos.'
+                //     })
+                //     listarUsuarios()
+                // }else if (JSON.parse(data) == 'emailError') {
+                //     Swal.fire({
+                //         icon: 'warning',
+                //         title: '',
+                //         position: 'center',
+                //         text: '!El correo electrónico ya existe!',
+                //         footer: ''
+                //     })
+                //     listarUsuarios()
+                // }else if (JSON.parse(data) == 'email') {
+                //     Swal.fire({
+                //         icon: 'warning',
+                //         title: '',
+                //         position: 'center',
+                //         text: '!Correo electrónico inválido!',
+                //         footer: ''
+                //     })
+                //     listarUsuarios()
+                // }else if (JSON.parse(data) == 'doc') {
+                //     Swal.fire({
+                //         icon: 'warning',
+                //         title: '',
+                //         position: 'center',
+                //         text: '!El número de documento ya existe!',
+                //         footer: ''
+                //     })
+                //     listarUsuarios()
+                // }
+                if (JSON.parse(data) == 'ok') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '',
+                        position: 'center',
+                        text: '¡Registro exitoso!',
+                        footer: ''
+                    })
+                    listarUsuarios()
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '',
+                        position: 'center',
+                        text: '¡Fallo en el registro!',
+                        footer: ''
+                    })
+                }
+            },
+            error: function () {
+                console.log("No se ha podido obtener la información")
+            },
+        });
+    }
 
-            if (JSON.parse(data) == 'max') {
-                Swal.fire({
-                    icon: 'error',
-                    position: 'center',
-                    text: 'Ingrese un documento valido.'
-                })
-                listarUsuarios()
-            }else if (JSON.parse(data) == 'max2') {
-                Swal.fire({
-                    icon: 'error',
-                    position: 'center',
-                    text: 'Ingrese un número de telefono valido.'
-                })
-                listarUsuarios()
-            }else if (JSON.parse(data) == 'fallo') {
-                Swal.fire({
-                    icon: 'error',
-                    position: 'center',
-                    text: 'Por favor, completa todos los campos.'
-                })
-                listarUsuarios()
-            }else if (JSON.parse(data) == 'emailError') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '',
-                    position: 'center',
-                    text: '!El correo electrónico ya existe!',
-                    footer: ''
-                })
-                listarUsuarios()
-            }else if (JSON.parse(data) == 'email') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '',
-                    position: 'center',
-                    text: '!Correo electrónico inválido!',
-                    footer: ''
-                })
-                listarUsuarios()
-            }else if (JSON.parse(data) == 'doc') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '',
-                    position: 'center',
-                    text: '!El número de documento ya existe!',
-                    footer: ''
-                })
-                listarUsuarios()
-            }
-            else if (JSON.parse(data) == 'ok') {
-                Swal.fire({
-                    icon: 'success',
-                    title: '',
-                    position: 'center',
-                    text: '¡Registro exitoso!',
-                    footer: ''
-                })
-                listarUsuarios()
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: '',
-                    position: 'center',
-                    text: '¡Fallo en el registro!',
-                    footer: ''
-                })
-            }
-        },
-        error: function () {
-            console.log("No se ha podido obtener la información")
-        },
-    });
+
 
 }
 
@@ -156,7 +173,8 @@ function agregarFila_Users(idUser, userName, last_name, document, email, phone, 
         verEstado = '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>'
     } else if (stateUser == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-12" style="cursor: text">INACTIVO</button>'
-    }if (stateUser == 1) {
+    }
+    if (stateUser == 1) {
         anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${idUser},${stateUser})"><i class="bi bi-person-dash"></i></button>`
 
     } else if (stateUser == 0) {
@@ -280,7 +298,7 @@ function actualizarEstado(idUser, stateUser) {
                     timer: 1500,
                 });
                 listarUsuarios();
-            }else if (JSON.parse(data) == "error") {
+            } else if (JSON.parse(data) == "error") {
                 Swal.fire({
                     position: "center",
                     icon: "warning",
@@ -296,6 +314,7 @@ function actualizarEstado(idUser, stateUser) {
         },
     });
 }
+
 function actualizarEstado1(idUser, stateUser) {
     let parametros = {
         accion: "actualizarEstadoInactivo",

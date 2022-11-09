@@ -37,24 +37,12 @@ if ($_POST['accion'] == 'registrarCompra') {
                 $queryUp = "UPDATE supplys SET quantity=$quantitySuma WHERE idSupply= ".$arreglo[$i]['productoId']."";
                 $fileUp = mysqli_query($conexion, $queryUp);
             }
-
-
-            // $quantityActual = 0;
-            // if($row = mysqli_fetch_array($fileDes)){
-            //     $quantityActual = $row[0];
-            // }
-
-            // $quantityActual += $cantidad;
-
-            // $queryUp = "UPDATE supplys SET quantity=$quantityActual WHERE idSupply=$insumo";
         }
         if ($fileUp) {
             echo json_encode('ok');
-        } else {
-            echo json_encode('errorIn');
         }
     } else {
-        echo json_encode('errorPur');
+        echo json_encode('error');
     }
 }
 

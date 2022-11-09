@@ -315,7 +315,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
 
 
 <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="detalleCompra" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Detalle de compra</h5>
