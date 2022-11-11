@@ -76,7 +76,7 @@ if (!isset($_SESSION['userName'])) {
         <div id="container-fluid">
           <div class="card">
             <div class="card-header d-flex justify-content-end">
-              <button data-toggle="modal" data-target="#registerSupplys" class="btn btn-primary btn-sm">Nuevo Insumo</button>
+              <button data-toggle="modal" data-target="#registerSupplys" class="btn btn-primary btn-sm">Nuevo insumo</button>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -89,7 +89,7 @@ if (!isset($_SESSION['userName'])) {
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th class="d-flex justify-content-center">Estado</th>
-                    <th >acciones</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -193,7 +193,7 @@ if (!isset($_SESSION['userName'])) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title" id="exampleModalLabel">Registro Insumo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo insumo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -226,7 +226,7 @@ if (!isset($_SESSION['userName'])) {
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <a onclick="registerSupply()" class="btn btn-primary" data-dismiss="modal">Guardar</a>
       </div>
     </div>
@@ -239,8 +239,10 @@ if (!isset($_SESSION['userName'])) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title" id="exampleModalLabel">Actualizar Insumo</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <input type="hidden" class="form-control" id="idSupplyUpdate" aria-describedby="">
 
@@ -256,34 +258,33 @@ if (!isset($_SESSION['userName'])) {
           <input type="number" class="form-control" id="partNumberSupplyUpdate" aria-describedby="">
         </div>
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             <div class="form-group">
               <label for="quantitySupplyUpdate">Cantidad</label>
               <input type="number" class="form-control" id="quantitySupplyUpdate" aria-describedby="">
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-4">
             <div class="form-group">
               <label for="priceSupplyUpdate">Precio</label>
               <input type="number" class="form-control" id="priceSupplyUpdate" aria-describedby="">
             </div>
           </div>
-        </div>
 
-
-        <div class="col-12" style="margin-left: 0;">
-          <div class="form-group">
-            <label for="stateSupplyUpdate">Estado</label>
-            <select class="form-control" id="stateSupplyUpdate" aria-describedby="">
-              <option value="1">Activo</option>
-              <option value="0">Inactivo</option>
-            </select>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="stateSupplyUpdate">Estado</label>
+              <select class="form-control" id="stateSupplyUpdate" aria-describedby="">
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerar</button>
-        <button onclick="updateSupply()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button onclick="updateSupply()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
       </div>
     </div>
   </div>

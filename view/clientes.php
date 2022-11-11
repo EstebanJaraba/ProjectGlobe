@@ -246,7 +246,7 @@ session_start();
 
                     <div class="form-group">
                         <label for="documentClientEditar">Documento</label>
-                        <input type="number" class="form-control" id="documentClientEditar" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="documentClientEditar" aria-describedby="emailHelp">
                     </div>
 
                     <div class="row">
