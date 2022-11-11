@@ -83,7 +83,7 @@ $resultado = mysqli_query($conexion, $query);
         <div id="container-fluid">
           <div class="card">
             <div class="card-header d-flex justify-content-end">
-              <button data-toggle="modal" data-target="#registerUsers" class="btn btn-primary btn-sm">Nuevo Usuario</button>
+              <button data-toggle="modal" data-target="#registerUsers" class="btn btn-primary btn-sm">Nuevo usuario</button>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -170,7 +170,7 @@ $resultado = mysqli_query($conexion, $query);
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title" id="exampleModalLabel">Registro Usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Información del usuario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -192,31 +192,25 @@ $resultado = mysqli_query($conexion, $query);
           </div>
         </div>
 
+        <div class="form-group">
+          <label for="documentUser">Documento</label>
+          <input type="text" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" aria-describedby="">
+        </div>
+
         <div class="row">
           <div class="col-6" style="margin-right:0;">
             <div class="form-group">
-              <label for="documentUser">Documento</label>
-              <input type="text" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" aria-describedby="">
+              <label for="phoneUser">Teléfono</label>
+              <input type="text" class="form-control" id="phoneUser" aria-describedby="">
             </div>
           </div>
           <div class="col-6" style="margin-right:0;">
             <div class="form-group">
-              <label for="phoneUser">Telefono</label>
-              <input type="text" class="form-control" id="phoneUser" aria-describedby="">
+              <label for="emailUser">Correo electrónico</label>
+              <input type="emal" class="form-control" id="emailUser" aria-describedby="">
             </div>
           </div>
         </div>
-
-
-
-
-
-        <div class="form-group">
-          <label for="emailUser">Email</label>
-          <input type="emal" class="form-control" id="emailUser" aria-describedby="">
-        </div>
-
-
 
         <div class="row">
           <div class="col-6">
@@ -230,8 +224,8 @@ $resultado = mysqli_query($conexion, $query);
             <div class="form-group">
               <label for="roleUser">Rol</label>
               <select class="form-control" id="roleUser" aria-describedby="">
-                <option value="">----</option>
-                <option value="1">Admin</option>
+                <option value="">--Seleccione--</option>
+                <option value="1">Administrador</option>
                 <option value="0">Empleado</option>
               </select>
             </div>
@@ -251,19 +245,28 @@ $resultado = mysqli_query($conexion, $query);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title" id="exampleModalLabel">Actualizar Usuario</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <input type="hidden" class="form-control" id="idUserUpdate" aria-describedby="">
       <div class="modal-body">
-        <div class="form-group">
-          <label for="nameUserUpdate">Nombre</label>
-          <input type="text" class="form-control" id="nameUserUpdate" aria-describedby="">
-        </div>
 
-        <div class="form-group">
-          <label for="last_nameUserUpdate">Apellidos</label>
-          <input type="text" class="form-control" id="last_nameUserUpdate" aria-describedby="">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="nameUserUpdate">Nombre</label>
+              <input type="text" class="form-control" id="nameUserUpdate" aria-describedby="">
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="last_nameUserUpdate">Apellidos</label>
+              <input type="text" class="form-control" id="last_nameUserUpdate" aria-describedby="">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -271,14 +274,20 @@ $resultado = mysqli_query($conexion, $query);
           <input type="number" class="form-control" id="documentUserUpdate" aria-describedby="">
         </div>
 
-        <div class="form-group">
-          <label for="emailUserUpdate">Email</label>
-          <input type="emal" class="form-control" id="emailUserUpdate" aria-describedby="">
-        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="emailUserUpdate">Email</label>
+              <input type="emal" class="form-control" id="emailUserUpdate" aria-describedby="">
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label for="phoneUserUpdate">Telefono</label>
-          <input type="text" class="form-control" id="phoneUserUpdate" aria-describedby="">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="phoneUserUpdate">Telefono</label>
+              <input type="text" class="form-control" id="phoneUserUpdate" aria-describedby="">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -292,7 +301,7 @@ $resultado = mysqli_query($conexion, $query);
             <div class="form-group">
               <label for="roleUserUpdate">Rol</label>
               <select class="form-control" id="roleUserUpdate" aria-describedby="">
-                <option value="">---</option>
+                <option value="">--Seleccione--</option>
                 <?php while ($row = $resultado->fetch_assoc()) { ?>
                   <option value="<?php echo $row['id_rol']; ?>"><?php echo $row['name_rol']; ?></option>
                 <?php }   ?>
@@ -312,7 +321,7 @@ $resultado = mysqli_query($conexion, $query);
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button type="button" onclick="updateUsers()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
       </div>
     </div>
