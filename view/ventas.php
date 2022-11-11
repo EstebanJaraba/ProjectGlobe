@@ -157,7 +157,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                     </div>
                                                                                 </div>
 
-                                                                                
+
                                                                             </div>
 
                                                                             <div class="mb-3">
@@ -312,7 +312,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
         $(document).ready(function() {
             listar();
             listarInsumos();
-            
+
         })
     </script>
 
@@ -334,75 +334,79 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
 
 </html>
 
-<div class="modal fade" id="detalleVenta" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="detalleVenta" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-blue" ->
-                <h5 class="modal-title" id="exampleModalLabel">Detalle de venta</h5>
+            <div class="modal-header bg-dark" >
+                <h5 class="modal-title">Detalle de venta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="">
-                    <div class="form-group row">
-                        <label for="id_sale_detail" class="col-sm-2 col-form-label">Id</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="id_sale_detail">
-                        </div>
-
-                        <label for="idClientDetail" class="col-sm-2 col-form-label">Cliente</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="idClientDetail">
-                        </div>
-
-                        <label for="idServiceDetail" class="col-sm-2 col-form-label">Servicio</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="idServiceDetail">
-                        </div>
-
-                        <label for="idEmployeeDetail" class="col-sm-2 col-form-label">Empleado</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="idEmployeeDetail">
-                        </div>
-
-                        <label for="totalDetail" class="col-sm-2 col-form-label">Total</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="totalDetail">
-                        </div>
-
-                        <label for="descriptionSaleDetail" class="col-sm-2 col-form-label">Descripcion</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="descriptionSaleDetail">
-                        </div>
-
-                        <label for="estadoDetail" class="col-sm-2 col-form-label">Estado</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="estadoDetail">
-                        </div>
-
-                        <div class="card-body">
-                            <table class="table table" id="tablaInsumos">
-                                <thead>
-                                    <tr>
-                                    <th>Insumos</th>
-                                    <!-- <th>Precio</th> -->
-                                    <th>Cantidad</th>
-                                    <th>Total</th>
-                
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="row">
+                    <label for="id_sale_detail" class="col-sm-2 col-form-label">Id:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="id_sale_detail">
                     </div>
-                </form>
+
+                    <label for="idClientDetail" class="col-sm-2 col-form-label">Cliente:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="idClientDetail">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="idServiceDetail" class="col-sm-2 col-form-label">Servicio:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="idServiceDetail">
+                    </div>
+
+                    <label for="idEmployeeDetail" class="col-sm-2 col-form-label">Empleado:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="idEmployeeDetail">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="totalDetail" class="col-sm-2 col-form-label">Total:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="totalDetail">
+                    </div>
+
+                    <label for="descriptionSaleDetail" class="col-sm-2 col-form-label">Descripción:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="descriptionSaleDetail">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="estadoDetail" class="col-sm-2 col-form-label">Estado:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="estadoDetail">
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table" id="tablaInsumos">
+                        <thead>
+                            <tr>
+                                <th>Insumos</th>
+                                <!-- <th>Precio</th> -->
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
+

@@ -78,10 +78,10 @@ session_start();
                                         <th>Id</th>
                                         <th>Documento</th>
                                         <th>Nombre</th>
-                                        <th>Apellidos</th>
-                                        <th>Correo</th>
+                                        <th>Apellido</th>
+                                        <th>Correo electrónico</th>
                                         <th>Dirección</th>
-                                        <th>Telefono</th>
+                                        <th>Teléfono</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -190,7 +190,7 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="email">Correo</label>
+                                <label for="email">Correo electrónico</label>
                                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                             </div>
                         </div>
@@ -206,7 +206,7 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="phone">Telefono</label>
+                                <label for="phone">Teléfono</label>
                                 <input type="number" class="form-control" id="phone" aria-describedby="emailHelp">
                             </div>
                         </div>
@@ -267,7 +267,7 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="email">Correo</label>
+                                <label for="email">Correo eletrónico</label>
                                 <input type="email" class="form-control" id="emailClientEditar" aria-describedby="emailHelp">
                             </div>
                         </div>
@@ -284,7 +284,7 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="phone">Telefono</label>
+                                <label for="phone">Teléfono</label>
                                 <input type="number" class="form-control" id="phoneClientEditar" aria-describedby="emailHelp">
                             </div>
                         </div>

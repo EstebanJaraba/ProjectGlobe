@@ -11,9 +11,21 @@ function registrarVenta() {
       descriptionSale: document.getElementById("descriptionSale").value,
       dateRegistration: document.getElementById("dateRegistration").value,
     };
-  
-  
-    $.ajax({
+
+    if(document.getElementById("listaCliente").value == "" || document.getElementById("listaServicio").value == "" || 
+      document.getElementById("listaEmpleado").value == "" || document.getElementById("listaInsumo").value == ""|| 
+      document.getElementById("cantidadAgregar").value == ""|| document.getElementById("v_unitario").value == "" ||
+      document.getElementById("descriptionSale").value == "")
+    {
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "¡Los campos son obligatorios!",
+        });
+        
+    }
+    else{
+      $.ajax({
         data: parametros,
         url: '../view/http/ventas.controller.php',
         type: 'post',
@@ -31,13 +43,21 @@ function registrarVenta() {
               heightAuto: false,
               confirmButtonText: "Aceptar",
             })
+            listar();
+            $('#registrarVenta').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
+              setTimeout(function () {
+                location.href = "ventas.php";
+              }, 1500);
               listar();
           }
         },
         error: function(error){
             console.log("No se ha podido obtener la información " + error);
         },
-    });
+      });
+    }
 }
 
 

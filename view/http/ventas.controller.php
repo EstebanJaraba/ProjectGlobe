@@ -13,6 +13,7 @@ if ($_POST['accion'] == 'registrarVenta') {
     $descriptionSale = $_POST['descriptionSale'];
     $dateRegistration = $_POST['dateRegistration'];
     
+    
 
     $query = "INSERT INTO sales_management (idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale, dateRegistration) 
     VALUE ('$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '1', '$dateRegistration')";

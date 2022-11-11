@@ -75,9 +75,9 @@ session_start();
                                     <tr>
                                         <th>Id</th>
                                         <th>Documento</th>
-                                        <th>Nombre</th>
-                                        <th>Correo Electrónico</th>
-                                        <th>Telefono</th>
+                                        <th>Nombre completo</th>
+                                        <th>Correo electrónico</th>
+                                        <th>Teléfono</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -160,13 +160,13 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="nameEmployee">Nombre</label>
+                                <label for="nameEmployee">Nombre completo</label>
                                 <input type="text" class="form-control" id="nameEmployee" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">Correo electrónico</label>
                                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                             </div>
                         </div>
@@ -175,7 +175,7 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="phone">Telefono</label>
+                                <label for="phone">Teléfono</label>
                                 <input type="number" class="form-control" id="phone" aria-describedby="emailHelp">
                             </div>
                         </div>
@@ -225,7 +225,7 @@ session_start();
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Correo eletrónico</label>
                             <input type="email" class="form-control" id="emailEmployeeEditar" aria-describedby="emailHelp">
                         </div>
                     </div>
@@ -233,7 +233,7 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="phone">Telefono</label>
+                                <label for="phone">Teléfono</label>
                                 <input type="number" class="form-control" id="phoneEmployeeEditar" aria-describedby="emailHelp">
                             </div>
                         </div>
