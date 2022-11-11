@@ -393,8 +393,7 @@ function tomarDatos(IdFactura, proveedor, description,total ,estado) {
 
     document.getElementById("id_detalle").value = IdFactura;
     document.getElementById("proveedor").value = proveedor;
-    document.getElementById("proveedor").value = description;
-    document.getElementById("proveedor").value = total;
+   
     document.getElementById("estado").value = estadoC;
 
     ListarDetalle();

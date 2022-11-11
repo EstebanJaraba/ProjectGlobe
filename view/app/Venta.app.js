@@ -10,6 +10,7 @@ function registrarVenta() {
       total: document.getElementById("totalVenta").innerHTML,
       descriptionSale: document.getElementById("descriptionSale").value,
       dateRegistration: document.getElementById("dateRegistration").value,
+      arreglo: ArregloInsumosAgregarVenta,
     };
 
     if(document.getElementById("listaCliente").value == "" || document.getElementById("listaServicio").value == "" || 
@@ -75,8 +76,7 @@ function agregarInsumo() {
 
   var insumoAgregado = {
     insumoId: document.getElementById("listaInsumo").value,
-    nombreInsumo:
-      selectorInsumo.options[selectorInsumo.selectedIndex].text,
+    nombreInsumo: selectorInsumo.options[selectorInsumo.selectedIndex].text,
     cantidad: document.getElementById("cantidadAgregar").value,
     valorUnitario: document.getElementById("v_unitario").value,
     valorTotal: document.getElementById("v_total").value,
