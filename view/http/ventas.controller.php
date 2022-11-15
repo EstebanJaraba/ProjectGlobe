@@ -41,6 +41,18 @@ if ($_POST['accion'] == 'registrarVenta') {
                 $queryUp = "UPDATE supplys SET quantity=$quantitySuma WHERE idSupply= ".$arreglo[$i]['insumoId']."";
                 $fileUp = mysqli_query($conexion, $queryUp);
             }
+
+            //while ($row = mysqli_fetch_assoc($consultaDetalle)) {
+                //$idSupply = $row['insumoId'];
+                //$quantity_sales_detail = $row['cantidad'];
+                //$amount_supply_detail = $row['valorTotal'];
+                //$insertarDet = mysqli_query($conexion, "INSERT INTO sales_detail(idSupply, quantity_sales_detail, amount_supply_detail) 
+                //VALUES ($insumoId, $cantidad, '$valorTotal')");
+                //$stockActual = mysqli_query($conexion, "SELECT * FROM supplys WHERE idSupply = $idSupply");
+                //$stockNuevo = mysqli_fetch_assoc($stockActual);
+                //$stockTotal = $stockNuevo['quantity'] - $cantidad;
+                //$stock = mysqli_query($conexion, "UPDATE supplys SET quantity = $stockTotal WHERE idSupply = $idSupply");
+            //}
         }
         if ($fileUp) {
             echo json_encode('ok');
