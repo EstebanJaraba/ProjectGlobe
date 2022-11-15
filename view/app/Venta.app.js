@@ -1,4 +1,5 @@
 function registrarVenta() {
+<<<<<<< HEAD
   var parametros = {
     accion: "registrarVenta",
     cliente: document.getElementById("listaCliente").value,
@@ -12,6 +13,21 @@ function registrarVenta() {
     dateRegistration: document.getElementById("dateRegistration").value,
     arreglo: ArregloInsumosAgregarVenta,
   };
+=======
+    var parametros = {
+      accion: "registrarVenta",
+      cliente: document.getElementById("listaCliente").value,
+      servicio: document.getElementById("listaServicio").value,
+      empleado: document.getElementById("listaEmpleado").value,
+      insumo: document.getElementById("listaInsumo").value,
+      cantidad: document.getElementById("cantidadAgregar").value,
+      valor: document.getElementById("v_unitario").value,
+      total: document.getElementById("totalVenta").innerHTML,
+      descriptionSale: document.getElementById("descriptionSale").value,
+      dateRegistration: document.getElementById("dateRegistration").value,
+      arreglo: ArregloInsumosAgregarVenta,
+    };
+>>>>>>> 7da392e23d6fc8cb38b5117063f6702daf9699fc
 
   if(document.getElementById("listaCliente").value == "" || document.getElementById("listaServicio").value == "" || 
     document.getElementById("listaEmpleado").value == "" || document.getElementById("listaInsumo").value == ""|| 
