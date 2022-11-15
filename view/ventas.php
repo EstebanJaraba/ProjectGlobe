@@ -328,7 +328,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
 
-    <!-- Archivo APP clientes -->
+    <!-- Archivo APP ventas -->
     <script src="app/Venta.app.js"></script>
 </body>
 

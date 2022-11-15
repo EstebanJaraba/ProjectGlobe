@@ -63,7 +63,7 @@ if (!isset($_SESSION['userName'])) {
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="inicio.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item active">Proveedores</li>
               </ol>
             </div>
@@ -83,12 +83,12 @@ if (!isset($_SESSION['userName'])) {
               <table id="tableSuppliers" class="table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>Id</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Documento</th>
-                    <th>Email</th>
-                    <th>Celular</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -195,7 +195,7 @@ if (!isset($_SESSION['userName'])) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title" id="exampleModalLabel">Registro Proveedor</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Información del proveedor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -237,7 +237,7 @@ if (!isset($_SESSION['userName'])) {
           <input type="text" class="form-control" id="emailSupplier" aria-describedby="">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <a onclick="registerSupplier()" class="btn btn-primary" data-dismiss="modal">Guardar</a>
         </div>
       </div>
@@ -250,47 +250,68 @@ if (!isset($_SESSION['userName'])) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title" id="exampleModalLabel">Actualizar Proveedor</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
         <input type="hidden" class="form-control" id="idSupplierUpdate" aria-describedby="">
-        <div class="form-group">
-          <label for="nameSupplierUpdate">Nombre</label>
-          <input type="text" class="form-control" id="nameSupplierUpdate" aria-describedby="">
+
+        <div class="row">
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="nameSupplierUpdate">Nombre</label>
+              <input type="text" class="form-control" id="nameSupplierUpdate" aria-describedby="">
+            </div>
+          </div> 
+
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="last_nameSupplierUpdate">Apellido</label>
+              <input type="text" class="form-control" id="last_nameSupplierUpdate" aria-describedby="">
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="last_nameSupplierUpdate">Apellido</label>
-          <input type="text" class="form-control" id="last_nameSupplierUpdate" aria-describedby="">
+        <div class="row">
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="documentSupplierUpdate">Documento</label>
+              <input type="text" class="form-control" id="documentSupplierUpdate" aria-describedby="">
+            </div>
+          </div>
+
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="emailSupplierUpdate">Email</label>
+              <input type="text" class="form-control" id="emailSupplierUpdate" aria-describedby="">
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="documentSupplierUpdate">Documento</label>
-          <input type="text" class="form-control" id="documentSupplierUpdate" aria-describedby="">
-        </div>
+        <div class="row">
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="phoneSupplierUpdate">Celular</label>
+              <input type="text" class="form-control" id="phoneSupplierUpdate" aria-describedby="">
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label for="emailSupplierUpdate">Email</label>
-          <input type="text" class="form-control" id="emailSupplierUpdate" aria-describedby="">
-        </div>
-
-        <div class="form-group">
-          <label for="phoneSupplierUpdate">Celular</label>
-          <input type="text" class="form-control" id="phoneSupplierUpdate" aria-describedby="">
-        </div>
-
-        <div class="form-group">
-          <label for="stateSupplierUpdate">Estado</label>
-          <select class="form-control" id="stateSupplierUpdate" aria-describedby="">
-            <option value="1">Activo</option>
-            <option value="0">Inactivo</option>
-          </select>
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="stateSupplierUpdate">Estado</label>
+                <select class="form-control" id="stateSupplierUpdate" aria-describedby="">
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
+                </select>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" onclick="updateSupplier()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="updateSupplier()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GLOBE | fumigaciones</title>
+    <title>GLOBE | Fumigaciones</title>
 
     <link href="assets/dist/img/Globee.jpeg" rel="icon">
     <!-- Google Font: Source Sans Pro -->
@@ -147,10 +147,6 @@ session_start();
 
     <!-- Archivo APP clientes -->
     <script src="app/Cliente.app.js"></script>
-
-
-
-
     <!-- Funcionalidad de javascript del modulo Clientes -->
     <script src="app/Cliente.app.js"></script>
 

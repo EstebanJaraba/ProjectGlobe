@@ -184,7 +184,7 @@ session_start();
                                 <label for="stateEmployee">Estado</label>
                                 <select class="form-control" id="stateEmployee" aria-describedby="emailHelp">
                                     <option value="1">Activo</option>
-                                    <option value="0">Anulado</option>
+                                    <option value="0">Anular</option>
                                 </select>
                             </div>
                         </div>
@@ -242,7 +242,7 @@ session_start();
                                 <label for="stateClient">Estado</label>
                                 <select class="form-control" id="stateEmployeeEditar" aria-describedby="emailHelp">
                                     <option value="1">Activo</option>
-                                    <option value="0">Anular</option>
+                                    <option value="0">Anulado</option>
                                 </select>
                             </div>
                         </div>

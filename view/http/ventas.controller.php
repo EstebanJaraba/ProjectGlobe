@@ -1,4 +1,5 @@
 
+
 <?php
 
 require_once 'db/conexion.php';
@@ -12,7 +13,7 @@ if ($_POST['accion'] == 'registrarVenta') {
     $total = $_POST['total'];
     $descriptionSale = $_POST['descriptionSale'];
     $dateRegistration = $_POST['dateRegistration'];
-    
+    $arreglo = $_POST['arreglo'];
     
 
     $query = "INSERT INTO sales_management (idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale, dateRegistration) 
@@ -21,20 +22,31 @@ if ($_POST['accion'] == 'registrarVenta') {
     $file = mysqli_query($conexion, $query);
     if ($file) {
 
-        $newquery = "INSERT INTO sales_detail(idSupply, amount_supply_detail, quantity_sales_detail) 
-        VALUE('$insumo', '$total','$cantidad')";
+        $newquery = '';
+        $newfile = false;
 
-        $newfile = mysqli_query($conexion,$newquery);
+        for ($i = 0; count($arreglo) > $i; $i++) {
+            $newquery = "INSERT INTO sales_detail(idSupply, amount_supply_detail, quantity_sales_detail) 
+            VALUE ('" . $arreglo[$i]['insumoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
+            $newfile = mysqli_query($conexion, $newquery);
 
-        if($newfile){
-            echo json_encode('ok');
-        }else{
-            echo json_encode('error');
+            $aumentar = "SELECT SUM(quantity_sales_detail) AS quantity FROM sales_detail WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
+
+            $filesSum = mysqli_query($conexion, $aumentar);
+
+
+            while ($array = mysqli_fetch_array($filesSum)){
+                $quantitySuma = $array["quantity"];
+
+                $queryUp = "UPDATE supplys SET quantity=$quantitySuma WHERE idSupply= ".$arreglo[$i]['insumoId']."";
+                $fileUp = mysqli_query($conexion, $queryUp);
+            }
         }
-        
-    } else {
-        echo json_encode('error');
+        if ($fileUp) {
+            echo json_encode('ok');
+        }
     }
+    
 }
 
 
