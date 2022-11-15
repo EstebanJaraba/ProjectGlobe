@@ -147,8 +147,6 @@ session_start();
 
     <!-- Archivo APP clientes -->
     <script src="app/Cliente.app.js"></script>
-    <!-- Funcionalidad de javascript del modulo Clientes -->
-    <script src="app/Cliente.app.js"></script>
 
 
     <!-- Modal de registro -->
