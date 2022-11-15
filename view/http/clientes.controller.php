@@ -102,14 +102,14 @@ if ($_POST['accion'] == 'editarCliente') {
 
 if ($_POST['accion'] == 'anularCliente') {
 
-    $idClient = $_POST['idClient'];
+   $idClient = $_POST['idClient'];
     
-    $query = "UPDATE clients SET stateClient = '0' WHERE idClient = '$idClient'";
+   $query = "UPDATE clients SET stateClient = '0' WHERE idClient = '$idClient'";
 
-    $file = mysqli_query($conexion, $query);
-     if ($file){
-        echo json_encode('ok');
-     }else{
-        echo json_encode('error');
-     }
+   $file = mysqli_query($conexion, $query);
+   if ($file){
+      echo json_encode('ok');
+   }else{
+      echo json_encode('error');
+   }
 }

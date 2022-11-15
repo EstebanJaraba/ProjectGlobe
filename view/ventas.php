@@ -107,13 +107,13 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                     <div class="card-body">
                                                                         <form id="registroInsumo">
                                                                             <div class="row">
-                                                                                <div class="col-4">
+                                                                                <div class="col-5">
                                                                                     <div class="form-group">
-                                                                                        <label for="dateRegistration">Fecha de registro</label>
-                                                                                        <input type="date" class="form-control" id="dateRegistration" aria-describedby="">
+                                                                                        <label for="facturaVenta">Número de factura</label>
+                                                                                        <input type="text" placeholder="Ingrese número de factura" class="form-control" id="facturaVenta" aria-describedby="">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-8">
+                                                                                <div class="col-7">
                                                                                     <div class="form-group">
                                                                                         <label for="total">Total</label>
                                                                                         <p class="form-label h2" id="totalVenta">000000</p>
@@ -244,7 +244,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                             <table id="tableInsumos" class="table table-sm table-striped table-hover table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Id</th>
+                                                                        <th>Factura</th>
                                                                         <th>Cliente</th>
                                                                         <th>Servicio</th>
                                                                         <th>Empleado</th>
@@ -328,12 +328,13 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
 
-    <!-- Archivo APP clientes -->
+    <!-- Archivo APP ventas -->
     <script src="app/Venta.app.js"></script>
 </body>
 
 </html>
 
+<!-- detalle de la venta -->
 <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="detalleVenta" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

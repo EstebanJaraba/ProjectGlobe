@@ -86,7 +86,7 @@ function registroCliente() {
                 setTimeout(function () {
                     location.href = "clientes.php";
                 }, 1500);
-                listarClientes()
+                listarClientes();
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -166,7 +166,7 @@ function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, e
     if(stateClient == 1){
         verstateClient = '<button class= "btn btn-success btn-sm col-8">Activo</button/>'
     }else if(stateClient == 0){
-        verstateClient = '<button class= "btn btn-danger btn-sm col-8">Anulado</button/>'
+        verstateClient = '<button class= "btn btn-danger btn-sm col-8">Inactivo</button/>'
     }
 
     let datosClientes = "'"+idClient+"', '"+documentClient+"', '"+nameClient+"', '"+last_name+"', '"+email+"', '"+address+"', '"+phone+"', '"+stateClient+"'";

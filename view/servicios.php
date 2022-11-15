@@ -11,6 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GLOBE | Fumigaciones</title>
 
+    <link href="assets/dist/img/Globee.jpeg" rel="icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -230,7 +231,7 @@ session_start();
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> <br><br><br><br><br>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" onclick="editarServicio()" data-dismiss="modal" class="btn btn-primary">Guardar cambios</button>
                 </div>
             </div>

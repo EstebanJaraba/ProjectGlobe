@@ -1,9 +1,11 @@
 
+
 <?php
 
 require_once 'db/conexion.php';
 
 if ($_POST['accion'] == 'registrarVenta') {
+    $factura = $_POST['factura'];
     $cliente = $_POST['cliente'];
     $servicio = $_POST['servicio'];
     $empleado = $_POST['empleado'];
@@ -11,12 +13,11 @@ if ($_POST['accion'] == 'registrarVenta') {
     $cantidad = $_POST['cantidad'];
     $total = $_POST['total'];
     $descriptionSale = $_POST['descriptionSale'];
-    $dateRegistration = $_POST['dateRegistration'];
     $arreglo = $_POST['arreglo'];
     
 
-    $query = "INSERT INTO sales_management (idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale, dateRegistration) 
-    VALUE ('$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '1', '$dateRegistration')";
+    $query = "INSERT INTO sales_management (id_invoice, idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale) 
+    VALUE ('$factura', '$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '1')";
 
     $file = mysqli_query($conexion, $query);
     if ($file) {
@@ -25,8 +26,8 @@ if ($_POST['accion'] == 'registrarVenta') {
         $newfile = false;
 
         for ($i = 0; count($arreglo) > $i; $i++) {
-            $newquery = "INSERT INTO sales_detail(idSupply, amount_supply_detail, quantity_sales_detail) 
-            VALUE ('" . $arreglo[$i]['insumoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
+            $newquery = "INSERT INTO sales_detail(id_invoice, idSupply, amount_supply_detail, quantity_sales_detail) 
+            VALUE ('$factura', '" . $arreglo[$i]['insumoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
             $newfile = mysqli_query($conexion, $newquery);
 
             $aumentar = "SELECT SUM(quantity_sales_detail) AS quantity FROM sales_detail WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
@@ -40,6 +41,18 @@ if ($_POST['accion'] == 'registrarVenta') {
                 $queryUp = "UPDATE supplys SET quantity=$quantitySuma WHERE idSupply= ".$arreglo[$i]['insumoId']."";
                 $fileUp = mysqli_query($conexion, $queryUp);
             }
+
+            //while ($row = mysqli_fetch_assoc($consultaDetalle)) {
+                //$idSupply = $row['insumoId'];
+                //$quantity_sales_detail = $row['cantidad'];
+                //$amount_supply_detail = $row['valorTotal'];
+                //$insertarDet = mysqli_query($conexion, "INSERT INTO sales_detail(idSupply, quantity_sales_detail, amount_supply_detail) 
+                //VALUES ($insumoId, $cantidad, '$valorTotal')");
+                //$stockActual = mysqli_query($conexion, "SELECT * FROM supplys WHERE idSupply = $idSupply");
+                //$stockNuevo = mysqli_fetch_assoc($stockActual);
+                //$stockTotal = $stockNuevo['quantity'] - $cantidad;
+                //$stock = mysqli_query($conexion, "UPDATE supplys SET quantity = $stockTotal WHERE idSupply = $idSupply");
+            //}
         }
         if ($fileUp) {
             echo json_encode('ok');
@@ -62,7 +75,7 @@ if (trim($_POST['accion']) == 'select_listVentas'){
    while ($datos = mysqli_fetch_array($result)) {
        array_push($elementos,
        [
-         'id' => $datos["idSale"], 
+         'id' => $datos["id_sale"], 
          'total' => $datos["amount_total_sale"], 
          'stateSale' => $datos["stateSale"]]);
        $i++;
@@ -183,22 +196,7 @@ if (trim($_POST['accion']) == 'listaInsumo') {
    echo json_encode($respuesta);
 }
 
-if($_POST['accion'] == 'agregarInsumo'){
-   $insumo = $_POST['insumo'];
-   $valorInsumo = $_POST['valorInsumo'];
-   $cantidad = $_POST['cantidad'];
 
-   $query = "INSERT INTO sales_detail(idSupply, amount_supply_detail, quantity_sales_detail ) VALUE('$insumo','$valorInsumo','$cantidad')";
-
-   $file = mysqli_query($conexion,$query);
-
-   if($file){
-       echo json_encode('ok');
-   }else{
-       echo json_encode('error');
-   }
-
-}
 
 
 if (trim($_POST['accion']) == 'select_ListSupplys') {
@@ -217,10 +215,11 @@ if (trim($_POST['accion']) == 'select_ListSupplys') {
        array_push(
            $elementos,
            [
-               'insumo' => $datos["idSupply"],
-               'valorInsumo' => $datos["amount_supply_detail"] ,
-               'cantidad' => $datos["quantity_sales_detail"],
-                             
+            'id_detail' => $datos["id_sale_detail"],
+            'factura' => $datos["id_invoice"],
+            'insumo' => $datos["idSupply"],
+            'valorInsumo' => $datos["amount_supply_detail"] ,
+            'cantidad' => $datos["quantity_sales_detail"],             
            ]
        );
        $i++;
@@ -250,14 +249,13 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
        array_push(
            $elementos,
            [
-               'id' => $datos["idSale"],
+               'idFactura' => $datos["id_invoice"],
                'cliente' => $datos["nameClient"],
                'servicio' => $datos["nameService"],
                'empleado' => $datos["nameEmployee"],
                'total' => $datos["amount_total_sale"],
                'descriptionSale' => $datos["descriptionSale"],
-               'stateSale' => $datos["stateSale"],   
-               'dateRegistration' => $datos["dateRegistration"],         
+               'stateSale' => $datos["stateSale"],        
            ]
        );
        $i++;
@@ -273,7 +271,7 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
 
     $id = $_POST['id'];
     
-    $query = "UPDATE sales_management SET stateSale = '0' WHERE idSale = '$id'";
+    $query = "UPDATE sales_management SET stateSale = '0' WHERE id_invoice = '$id'";
 
     $file = mysqli_query($conexion, $query);
      if ($file){
@@ -284,11 +282,11 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
 }
 
 if (trim($_POST['accion']) == 'seleccionarListaInsumos') {
-    $id = $_POST['id'];
+    $idFactura = $_POST['id'];
     $respuesta = new stdclass();
 
     $cadena = "SELECT * FROM sales_detail AS p INNER JOIN supplys AS pr
-            ON p.idSupply = pr.idSupply WHERE id_sale_detail='$id'";
+            ON p.idSupply = pr.idSupply WHERE id_invoice ='$idFactura'";
 
     $resultado = mysqli_query($conexion, $cadena);
 

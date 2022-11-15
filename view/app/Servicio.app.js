@@ -19,13 +19,13 @@ function registroServicio() {
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
                     icon: 'success',
-                    title: 'Registro exitoso!...',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listarServicio()
+                    title: '¡Registro exitoso!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
+                listarServicio()
             }
 
         },
@@ -155,13 +155,13 @@ function editarServicio(){
             
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
                     icon: 'success',
-                    title: 'Actualización exitosa!...',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listarServicio()
+                    title: '¡Acualizado con éxito!',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
+                listarServicio()
             }
 
         },
@@ -192,13 +192,13 @@ function anularServicio(idService){
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
-                    position: 'top',
                     icon: 'success',
-                    title: 'Servicio inactivo!',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  listarServicio()
+                    title: 'Cambio de estado con éxito',
+                    text: '',
+                    heightAuto: false,
+                    confirmButtonText: "Aceptar",
+                })
+                listarServicio()
             }
 
         },
