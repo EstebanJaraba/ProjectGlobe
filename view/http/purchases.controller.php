@@ -50,7 +50,7 @@ if (trim($_POST['accion']) == 'insumoPurchase') {
 
     $respuesta = new stdclass();
 
-    $cadena = "SELECT * FROM supplys";
+    $cadena = "SELECT * FROM supplys WHERE stateSupply='1'";
 
     $resultado = mysqli_query($conexion, $cadena);
 
@@ -75,7 +75,7 @@ if (trim($_POST['accion']) == 'proveedorPurchase') {
 
     $respuesta = new stdclass();
 
-    $cadena = "SELECT * FROM suppliers";
+    $cadena = "SELECT * FROM suppliers WHERE stateSupplier='1'";
 
     $resultado = mysqli_query($conexion, $cadena);
 

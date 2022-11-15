@@ -261,9 +261,10 @@ function AnularSupplier(idSupplier) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Acción exitosa!',
-                    ShowConfirmbutton: false,
+                    text: 'Acción exitosa!',
+                    showConfirmButton: false,
                     timer: 1500
+                    
                 })
                 listarProveedores()
             }

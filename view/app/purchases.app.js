@@ -1,6 +1,5 @@
-
 function registrarCompra() {
-    
+
     var parametros = {
         accion: "registrarCompra",
         factura: document.getElementById("facturaCompra").value,
@@ -14,21 +13,20 @@ function registrarCompra() {
 
     };
 
-    if(document.getElementById("facturaCompra").value == "" || document.getElementById("proveedorPurchase").value == "" || document.getElementById("insumoPurchase").value == "" || document.getElementById("descriptionPurchase").value == ""|| document.getElementById("cantidadAgregar").value == ""|| document.getElementById("v_unitario").value == "")
-    {
+    if (document.getElementById("facturaCompra").value == "" || document.getElementById("proveedorPurchase").value == "" || document.getElementById("insumoPurchase").value == "" || document.getElementById("descriptionPurchase").value == "" || document.getElementById("cantidadAgregar").value == "" || document.getElementById("v_unitario").value == "") {
         Swal.fire({
             position: "center",
             icon: "warning",
             title: "Sin campos vacios por favor",
         });
-        
-    }else{
+
+    } else {
         $.ajax({
             data: parametros,
             url: "../view/http/purchases.controller.php",
             type: "post",
             beforeSend: function () {
-    
+
             },
             success: function (data) {
                 if (JSON.parse(data) == "ok") {
@@ -40,7 +38,9 @@ function registrarCompra() {
                         timer: 1500,
                     });
                     listar();
-                }else if (JSON.parse(data) == "errorIn") {
+                    ocultar();
+                    limpiar();
+                } else if (JSON.parse(data) == "errorIn") {
                     Swal.fire({
                         position: "center",
                         icon: "warning",
@@ -49,6 +49,7 @@ function registrarCompra() {
                         timer: 1500,
                     });
                     listar();
+                    ocultar();
                 }
             },
             error: function (error) {
@@ -57,7 +58,22 @@ function registrarCompra() {
         });
     }
 
-    
+
+}
+
+function limpiar(){
+    $('#showRegister').on('card.showRegister ', function (event) {
+        $("#showRegister input").val("");
+        $("#showRegister select").val("");
+    });
+}
+
+function mostrar() {
+    document.getElementById('showRegister').style.display = 'flex';
+}
+
+function ocultar() {
+    document.getElementById('showRegister').style.display = 'none';
 }
 
 function calcularValorTotal() {
@@ -70,23 +86,33 @@ let valorTotalProCompra = 0;
 function agregarInsumo() {
     let selectorPruducto = document.getElementById("insumoPurchase");
 
-    var productoAgregado = {
-        productoId: document.getElementById("insumoPurchase").value,
-        nombreProducto: selectorPruducto.options[selectorPruducto.selectedIndex].text,
-        cantidad: document.getElementById("cantidadAgregar").value,
-        valorUnitario: document.getElementById("v_unitario").value,
-        valorTotal: document.getElementById("v_total").value,
-    };
+    if (document.getElementById("insumoPurchase").value == "" || document.getElementById("cantidadAgregar").value == "" || document.getElementById("v_unitario").value == "" || document.getElementById("v_total").value == "") {
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Sin campos vacios por favor",
+        });
 
-    ArregloProductosAgregarCompra.push(productoAgregado);
+    } else {
+        var productoAgregado = {
+            productoId: document.getElementById("insumoPurchase").value,
+            nombreProducto: selectorPruducto.options[selectorPruducto.selectedIndex].text,
+            cantidad: document.getElementById("cantidadAgregar").value,
+            valorUnitario: document.getElementById("v_unitario").value,
+            valorTotal: document.getElementById("v_total").value,
+        };
 
-    valorTotalProCompra = valorTotalProCompra + parseInt(document.getElementById("v_total").value);
-    document.getElementById("totalCompra").innerHTML = valorTotalProCompra;
+        ArregloProductosAgregarCompra.push(productoAgregado);
+
+        valorTotalProCompra = valorTotalProCompra + parseInt(document.getElementById("v_total").value);
+        document.getElementById("totalCompra").innerHTML = valorTotalProCompra;
 
 
-    listarInsumos();
+        listarInsumos();
+    }
+
+
 }
-
 
 function listarInsumos() {
     eliminaFilastablaRegistrarInsumos();
@@ -349,6 +375,7 @@ function actualizarEstado(IdFactura, estado) {
         },
     });
 }
+
 function actualizarEstado1(IdFactura, estado) {
     let parametros = {
         accion: "actualizarEstadoInactivo",
@@ -383,17 +410,17 @@ function actualizarEstado1(IdFactura, estado) {
 
 //Listar Detalles de Compra
 
-function tomarDatos(IdFactura, proveedor, description,total ,estado) {
+function tomarDatos(IdFactura, proveedor, description, total, estado) {
 
-   if (estado == 1){
-    var estadoC = 'Activo'
-   }else if(estado == 0){
-    var estadoC = 'Anulado';
-   }
+    if (estado == 1) {
+        var estadoC = 'Activo'
+    } else if (estado == 0) {
+        var estadoC = 'Anulado';
+    }
 
     document.getElementById("id_detalle").value = IdFactura;
     document.getElementById("proveedor").value = proveedor;
-   
+
     document.getElementById("estado").value = estadoC;
 
     ListarDetalle();
@@ -466,14 +493,3 @@ function eliminaFilastablaDetalleInsumos() {
         $("#tablaInsumos tbody tr:eq('" + i + "')").remove();
     }
 }
-
-
-
-
-
-
-
-
-
-
-

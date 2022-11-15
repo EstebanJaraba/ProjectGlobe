@@ -97,8 +97,8 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                             <div class=" d-flex justify-content-end p-4 pr-5">
                               <button class="btn btn-danger" onclick="ocultar()"><i class="bi bi-x-lg"></i></button>
                             </div>
-                            <div class="row m-2">
-                              <div class="col-6">
+                            <div class=" m-2">
+                              <div class="col-">
                                 <div class="card">
                                   <div class="card-header">
                                     <h3 class="card-title">Registrar compra</h3>
@@ -106,13 +106,22 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                   <div class="card-body">
                                     <form id="registroProducto">
                                       <div class="row">
-                                        <div class="col-5">
+                                        <div class="col-4">
                                           <div class="form-group">
                                             <label for="nombre">Numero de factura</label>
                                             <input name="descripcion" type="text" placeholder="Ingrese numero de factura" class="form-control" id="facturaCompra">
                                           </div>
                                         </div>
-                                        <div class="col-7">
+                                        <div class="col-4">
+                                          <div class="form-group">
+                                            <label for="proveedorPurchase">Proveedor</label>
+                                            <select class="form-control" id="proveedorPurchase" aria-describedby="">
+                                              <option value=" ">---</option>
+
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-4">
                                           <div class="form-group">
                                             <label for="total">Total</label>
                                             <p class="form-label h1" id="totalCompra">000000</p>
@@ -123,49 +132,35 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                         <label for="descriptionPurchase" class="form-label">Descripción</label>
                                         <textarea class="form-control" id="descriptionPurchase" rows="3"></textarea>
                                       </div>
-                                      <div class="mb-3">
-                                        <div class="col-12">
-                                          <div class="form-group">
-                                            <label for="proveedorPurchase">Proveedor</label>
-                                            <select class="form-control" id="proveedorPurchase" aria-describedby="">
-                                              <option value="0">---</option>
 
-                                            </select>
-                                          </div>
-                                        </div>
-                                      </div>
                                       <div class="row">
-                                        <div class="col-6" style="margin-left: 0;">
+                                        <div class="col-3" style="margin-left: 0;">
                                           <div class="form-group">
                                             <label for="insumoPurchase">Insumo</label>
                                             <select class="form-control" id="insumoPurchase" aria-describedby="">
-                                              <option value="0">---</option>
+                                              <option value=" ">---</option>
 
                                             </select>
                                           </div>
                                         </div>
-                                        <div class="col-6" style="margin-left:0;">
+                                        <div class="col-3" style="margin-left:0;">
                                           <div class="form-gruop">
                                             <label for="cantidad">Cantidad</label>
                                             <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" class="form-control" id="cantidadAgregar">
                                           </div>
                                         </div>
-                                      </div>
-
-                                      <div class="row">
-
-                                        <div class="col-6">
+                                        <div class="col-3">
                                           <label for="cantidad">V. Unitario</label>
                                           <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" class="form-control" id="v_unitario">
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-3">
                                           <label for="cantidad">V. Total</label>
                                           <input name="v_total" type="number" disabled style="background:white" class="form-control" id="v_total">
                                         </div>
                                       </div>
                                       <div>
                                         <div class="modal-footer">
-                                          <button type="button" onclick="agregarInsumo()" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                                          <button type="button" onclick="agregarInsumo()" class="btn btn-primary">Agregar</button>
                                         </div>
                                       </div>
 
@@ -174,8 +169,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
 
                                 </div>
                               </div>
-                              <div class="col-6">
-
+                              <div class="col-12">
                                 <div class=" scroll">
                                   <div class="card">
                                     <div class="card-header">
@@ -299,16 +293,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
   })
 </script>
 
-<script>
-  function mostrar() {
-    document.getElementById('showRegister').style.display = 'flex';
-  }
 
-
-  function ocultar() {
-    document.getElementById('showRegister').style.display = 'none';
-  }
-</script>
 
 </html>
 
@@ -348,7 +333,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                 <!-- <th>Precio</th> -->
                 <th>Cantidad</th>
                 <th>Total</th>
-                
+
               </tr>
             </thead>
             <tbody>

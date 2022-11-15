@@ -167,7 +167,6 @@
           </div>
         </div>
         <div class="card-body">
-          <p class="login-box-msg">Registrar un nuevo usuario</p>
           <form action="../../index.html" method="post">
             <div class="row">
               <div class="col-6">

@@ -35,55 +35,55 @@ function registerUser() {
             },
             success: function (data) {
 
-                // if (JSON.parse(data) == 'max') {
-                //     Swal.fire({
-                //         icon: 'error',
-                //         position: 'center',
-                //         text: 'Ingrese un documento valido.'
-                //     })
-                //     listarUsuarios()
-                // }else if (JSON.parse(data) == 'max2') {
-                //     Swal.fire({
-                //         icon: 'error',
-                //         position: 'center',
-                //         text: 'Ingrese un número de telefono valido.'
-                //     })
-                //     listarUsuarios()
-                // }else if (JSON.parse(data) == 'fallo') {
-                //     Swal.fire({
-                //         icon: 'error',
-                //         position: 'center',
-                //         text: 'Por favor, completa todos los campos.'
-                //     })
-                //     listarUsuarios()
-                // }else if (JSON.parse(data) == 'emailError') {
-                //     Swal.fire({
-                //         icon: 'warning',
-                //         title: '',
-                //         position: 'center',
-                //         text: '!El correo electrónico ya existe!',
-                //         footer: ''
-                //     })
-                //     listarUsuarios()
-                // }else if (JSON.parse(data) == 'email') {
-                //     Swal.fire({
-                //         icon: 'warning',
-                //         title: '',
-                //         position: 'center',
-                //         text: '!Correo electrónico inválido!',
-                //         footer: ''
-                //     })
-                //     listarUsuarios()
-                // }else if (JSON.parse(data) == 'doc') {
-                //     Swal.fire({
-                //         icon: 'warning',
-                //         title: '',
-                //         position: 'center',
-                //         text: '!El número de documento ya existe!',
-                //         footer: ''
-                //     })
-                //     listarUsuarios()
-                // }
+                //  if (JSON.parse(data) == 'max') {
+                //      Swal.fire({
+                //          icon: 'error',
+                //          position: 'center',
+                //          text: 'Ingrese un documento valido.'
+                //      })
+                //      listarUsuarios()
+                //  }else if (JSON.parse(data) == 'max2') {
+                //      Swal.fire({
+                //          icon: 'error',
+                //          position: 'center',
+                //          text: 'Ingrese un número de telefono valido.'
+                //      })
+                //      listarUsuarios()
+                //  }else if (JSON.parse(data) == 'fallo') {
+                //      Swal.fire({
+                //          icon: 'error',
+                //          position: 'center',
+                //          text: 'Por favor, completa todos los campos.'
+                //      })
+                //      listarUsuarios()
+                //  }else if (JSON.parse(data) == 'emailError') {
+                //      Swal.fire({
+                //          icon: 'warning',
+                //          title: '',
+                //          position: 'center',
+                //          text: '!El correo electrónico ya existe!',
+                //          footer: ''
+                //      })
+                //      listarUsuarios()
+                //  }else if (JSON.parse(data) == 'email') {
+                //      Swal.fire({
+                //          icon: 'warning',
+                //          title: '',
+                //          position: 'center',
+                //          text: '!Correo electrónico inválido!',
+                //          footer: ''
+                //      })
+                //      listarUsuarios()
+                //  }else if (JSON.parse(data) == 'doc') {
+                //      Swal.fire({
+                //          icon: 'warning',
+                //          title: '',
+                //          position: 'center',
+                //          text: '!El número de documento ya existe!',
+                //          footer: ''
+                //      })
+                //      listarUsuarios()
+                //  }
                 if (JSON.parse(data) == 'ok') {
                     Swal.fire({
                         icon: 'success',
@@ -93,6 +93,7 @@ function registerUser() {
                         footer: ''
                     })
                     listarUsuarios()
+                    limpiar();
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -111,6 +112,13 @@ function registerUser() {
 
 
 
+}
+
+function limpiar(){
+    $('#registerUsers').on('show.bs.modal', function (event) {
+        $("#registerUsers input").val("");
+        $("#registerUsers select").val("");
+    });
 }
 
 function assinmenetPassword() {

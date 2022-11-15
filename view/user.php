@@ -162,6 +162,7 @@ $resultado = mysqli_query($conexion, $query);
   })
 </script>
 
+
 </html>
 
 

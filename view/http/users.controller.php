@@ -13,16 +13,7 @@ if ($_POST['accion'] == 'registerUsers') {
    $password = $_POST['password'];
    $role = $_POST['role'];
 
-
-   if ($name == "" || $last_name == "" || $document == "" || $email == "" || $phone == "" || $password == "" || $role == "") {
-      echo json_encode('fallo');
-   }else if (strlen($document) <= 9 || !is_numeric($document)){
-      echo json_encode('max');
-   }else if (strlen($password) <= 7){
-      echo json_encode('pass');
-   }else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
-      echo json_encode('max2');
-   }else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+   if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $consulta = "SELECT document FROM users WHERE document='$document'";
       $consultaCorreo = "SELECT email FROM users WHERE email='$email'";
 
@@ -37,15 +28,6 @@ if ($_POST['accion'] == 'registerUsers') {
       } else if ($result2 > 0) {
          echo json_encode('emailError');
       } else {
-         $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$password','$role','1')";
-
-         $file =  mysqli_query($conexion, $query);
-
-         if ($file) {
-            echo json_encode('ok');
-         } else {
-            echo json_encode('error');
-         }
       }
    } else {
       echo json_encode('email');
@@ -58,7 +40,7 @@ if (trim($_POST['accion']) == 'select_ListUsers') {
 
    $cadena = "SELECT * FROM users AS u INNER JOIN role_management AS r ON u.id_rol = r.id_rol";
 
-   
+
 
 
    $result = mysqli_query($conexion, $cadena);
@@ -103,9 +85,9 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
    $id = $_POST['id'];
    $estado = $_POST['estado'];
    if ($estado == 1) {
-       $varEstado = 0;
+      $varEstado = 0;
    } elseif ($estado == 0) {
-       $varEstado = 0;
+      $varEstado = 0;
    }
 
    $query = "UPDATE users SET stateUser = '0' WHERE idUser = '$id'";
@@ -115,16 +97,16 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
    $file = mysqli_query($conexion, $query);
 
    if ($file) {
-       echo json_encode('ok');
+      echo json_encode('ok');
    } else {
-       echo json_encode('error');
+      echo json_encode('error');
    }
 }
 if ($_POST['accion'] == 'actualizarEstadoInactivo') {
    $id = $_POST['id'];
    $estado = $_POST['estado'];
    if ($estado == 0) {
-       $varEstado = 1;
+      $varEstado = 1;
    } else {
    }
 
@@ -135,8 +117,8 @@ if ($_POST['accion'] == 'actualizarEstadoInactivo') {
    $file = mysqli_query($conexion, $query);
 
    if ($file) {
-       echo json_encode('ok');
+      echo json_encode('ok');
    } else {
-       echo json_encode('error');
+      echo json_encode('error');
    }
 }
