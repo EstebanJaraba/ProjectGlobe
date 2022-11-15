@@ -14,20 +14,6 @@ function registrarVenta() {
     arreglo: ArregloInsumosAgregarVenta,
   };
 
-    var parametros = {
-      accion: "registrarVenta",
-      cliente: document.getElementById("listaCliente").value,
-      servicio: document.getElementById("listaServicio").value,
-      empleado: document.getElementById("listaEmpleado").value,
-      insumo: document.getElementById("listaInsumo").value,
-      cantidad: document.getElementById("cantidadAgregar").value,
-      valor: document.getElementById("v_unitario").value,
-      total: document.getElementById("totalVenta").innerHTML,
-      descriptionSale: document.getElementById("descriptionSale").value,
-      dateRegistration: document.getElementById("dateRegistration").value,
-      arreglo: ArregloInsumosAgregarVenta,
-    };
-
 
   if(document.getElementById("listaCliente").value == "" || document.getElementById("listaServicio").value == "" || 
     document.getElementById("listaEmpleado").value == "" || document.getElementById("listaInsumo").value == ""|| 
