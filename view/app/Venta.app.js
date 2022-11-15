@@ -2,6 +2,7 @@ function registrarVenta() {
 
   var parametros = {
     accion: "registrarVenta",
+    factura: document.getElementById("facturaVenta").value,
     cliente: document.getElementById("listaCliente").value,
     servicio: document.getElementById("listaServicio").value,
     empleado: document.getElementById("listaEmpleado").value,
@@ -10,15 +11,14 @@ function registrarVenta() {
     valor: document.getElementById("v_unitario").value,
     total: document.getElementById("totalVenta").innerHTML,
     descriptionSale: document.getElementById("descriptionSale").value,
-    dateRegistration: document.getElementById("dateRegistration").value,
     arreglo: ArregloInsumosAgregarVenta,
   };
 
 
-  if(document.getElementById("listaCliente").value == "" || document.getElementById("listaServicio").value == "" || 
-    document.getElementById("listaEmpleado").value == "" || document.getElementById("listaInsumo").value == ""|| 
-    document.getElementById("cantidadAgregar").value == ""|| document.getElementById("v_unitario").value == "" ||
-    document.getElementById("descriptionSale").value == "")
+  if(document.getElementById("facturaVenta").value == "" || document.getElementById("listaCliente").value == "" || 
+    document.getElementById("listaServicio").value == "" || document.getElementById("listaEmpleado").value == "" ||
+    document.getElementById("listaInsumo").value == ""|| document.getElementById("cantidadAgregar").value == ""|| 
+    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "")
   {
       Swal.fire({
           position: "center",
@@ -269,7 +269,7 @@ function listarVentas(){
           for (var i in JSON.parse(data).registros) {
 
               agregarFila_Ventas(
-                  JSON.parse(data).registros[i].id,
+                  JSON.parse(data).registros[i].idFactura,
                   JSON.parse(data).registros[i].total,
                   JSON.parse(data).registros[i].stateSale,
                   ""
@@ -305,7 +305,7 @@ function eliminarFilasTableVentas() {
 }
 
 
-function agregarFila_Ventas(id, cantidad, valor, stateSale, acciones){
+function agregarFila_Ventas(idFactura, cantidad, valor, stateSale, acciones){
 
   if(stateSale == 1){
       mostrarStateSale = '<button class= "btn btn-success btn-sm col-6">Activo</button/>'
@@ -313,10 +313,10 @@ function agregarFila_Ventas(id, cantidad, valor, stateSale, acciones){
       mostrarStateSale = '<button class= "btn btn-danger btn-sm col-6">Anulada</button/>'
   }
 
-  let datosVentas = "'"+id+"', '"+cantidad+"', '"+valor+"', '"+stateSale+"'";
+  let datosVentas = "'"+idFactura+"', '"+cantidad+"', '"+valor+"', '"+stateSale+"'";
 
   var htmlTags = `<tr>
-      <td> ${id} </td>
+      <td> ${idFactura} </td>
       <td> ${cantidad} </td>
       <td> ${valor} </td>
       <td> ${idSupply} </td>
@@ -324,7 +324,7 @@ function agregarFila_Ventas(id, cantidad, valor, stateSale, acciones){
       <td>Insumo</td>
       <td> ${mostrarStateSale} </td>
       <td>
-        <button class= "btn btn-danger btn-sm " onclick="anularVenta(${id})"><i class="bi bi-trash"></i></button/>
+        <button class= "btn btn-danger btn-sm " onclick="anularVenta(${idFactura})"><i class="bi bi-trash"></i></button/>
       </td>
   </tr>`;
   $("#tableVentas tbody").append(htmlTags);
@@ -354,7 +354,7 @@ function listar() {
     success: function (data) {
       for (var i in JSON.parse(data).registros) {
         agregarFila(
-          JSON.parse(data).registros[i].id,
+          JSON.parse(data).registros[i].idFactura,
           JSON.parse(data).registros[i].cliente,
           JSON.parse(data).registros[i].servicio,
           JSON.parse(data).registros[i].empleado,
@@ -381,7 +381,7 @@ function listar() {
 }
 
 
-function agregarFila(id, cliente, servicio, empleado, total, descriptionSale, stateSale, accion) {
+function agregarFila(idFactura, cliente, servicio, empleado, total, descriptionSale, stateSale, accion) {
   if (stateSale == 1) {
       mostrarStateSale =
       '<button class="btn btn-success btn-sm col-8">Activo</button>';
@@ -390,15 +390,15 @@ function agregarFila(id, cliente, servicio, empleado, total, descriptionSale, st
       '<button class="btn btn-danger btn-sm col-8">Anulada</button>';
   }
   if (stateSale == 1) {
-    anular = `<button class="btn btn-danger btn-sm" onclick="actualizarEstado(${id},${stateSale})"><i class="bi bi-trash3"></button>`;
+    anular = `<button class="btn btn-danger btn-sm" onclick="actualizarEstado(${idFactura},${stateSale})"><i class="bi bi-trash3"></button>`;
   } else if (stateSale == 0) {
     anular = "";
   }
 
-  let datosVentas = "'"+id+"', '"+cliente+"', '"+servicio+"', '"+empleado+"', '"+total+"', '"+descriptionSale+"', '"+stateSale+"'";
+  let datosVentas = "'"+idFactura+"', '"+cliente+"', '"+servicio+"', '"+empleado+"', '"+total+"', '"+descriptionSale+"', '"+stateSale+"'";
 
   var htmlTags = `<tr>
-    <td>${id}</td>
+    <td>${idFactura}</td>
     <td>${cliente}</td>
     <td>${servicio}</td>
     <td>${empleado}</td>
@@ -426,10 +426,10 @@ function eliminaFilastabla() {
 
 //Cambiar de ESTADO
 
-function actualizarEstado(id, estado) {
+function actualizarEstado(idFactura, estado) {
   let parametros = {
     accion: "actualizarEstadoActivo",
-    id: id,
+    id: idFactura,
     estado: estado,
   };
 
@@ -460,7 +460,7 @@ function actualizarEstado(id, estado) {
 
 
 //Ver detalles ventas
-function tomarDatos(id, cliente, servicio, empleado, total, descriptionSale, estado) {
+function tomarDatos(idFactura, cliente, servicio, empleado, total, descriptionSale, estado) {
 
 if(estado == 1){
   var status = 'Activo';
@@ -476,7 +476,7 @@ const formatoPesoDetalle = new Intl.NumberFormat("en-US", {
 var amount = formatoPesoDetalle.format(total);
 
 
-document.getElementById("id_sale_detail").value = id;
+document.getElementById("id_sale_detail").value = idFactura;
 document.getElementById("idClientDetail").value = cliente;
 document.getElementById("idServiceDetail").value = servicio;
 document.getElementById("idEmployeeDetail").value = empleado;
@@ -553,8 +553,6 @@ function eliminaFilastablaDetalleInsumos() {
     $("#tablaInsumos tbody tr:eq('" + i + "')").remove();
   }
 }
-
-
 
 function anularVenta(id){
   var parametros = {
