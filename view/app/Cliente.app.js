@@ -1,6 +1,6 @@
 
 function registroCliente() {
-    
+
     var parametros = {
         "accion": 'registroCliente',
         "documentClient": document.getElementById('documentClient').value,
@@ -16,8 +16,8 @@ function registroCliente() {
         data: parametros,
         url: '../view/http/clientes.controller.php',
         type: 'post',
-        beforeSend: function(){
-            
+        beforeSend: function () {
+
         },
 
         success: function (data) {
@@ -29,21 +29,21 @@ function registroCliente() {
                     text: 'Ingrese un documento valido.'
                 })
                 listarClientes()
-            }else if (JSON.parse(data) == 'max2') {
+            } else if (JSON.parse(data) == 'max2') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
                     text: 'Ingrese un número de teléfono valido.'
                 })
                 listarClientes()
-            }else if (JSON.parse(data) == 'fallo') {
+            } else if (JSON.parse(data) == 'fallo') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
                     text: 'Por favor, completa todos los campos.'
                 })
                 listarClientes()
-            }else if (JSON.parse(data) == 'emailError') {
+            } else if (JSON.parse(data) == 'emailError') {
                 Swal.fire({
                     icon: 'warning',
                     title: '',
@@ -52,7 +52,7 @@ function registroCliente() {
                     footer: ''
                 })
                 listarClientes()
-            }else if (JSON.parse(data) == 'email') {
+            } else if (JSON.parse(data) == 'email') {
                 Swal.fire({
                     icon: 'warning',
                     title: '',
@@ -61,7 +61,7 @@ function registroCliente() {
                     footer: ''
                 })
                 listarClientes()
-            }else if (JSON.parse(data) == 'doc') {
+            } else if (JSON.parse(data) == 'doc') {
                 Swal.fire({
                     icon: 'warning',
                     title: '',
@@ -80,13 +80,7 @@ function registroCliente() {
                     footer: ''
                 })
                 listarClientes();
-                $('#registroCliente').modal('hide');
-                  $('body').removeClass('modal-open');
-                  $('.modal-backdrop').remove();
-                setTimeout(function () {
-                    location.href = "clientes.php";
-                }, 1500);
-                listarClientes();
+                limpiar();
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -98,18 +92,27 @@ function registroCliente() {
             }
         },
 
-        error: function(error){
+        error: function (error) {
             console.log("No se ha podido obtener la información " + error);
         },
 
     });
 }
 
-function listarClientes(){
+function limpiar() {
+    $('#registroCliente').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    setTimeout(function () {
+        location.href = "clientes.php";
+    }, 1500);
+}
+
+function listarClientes() {
     eliminarFilasTableCliente();
 
     var tableClientes = $("#tableClientes").DataTable();
-    
+
     tableClientes.clear();
     tableClientes.destroy();
 
@@ -121,12 +124,12 @@ function listarClientes(){
         data: parametros,
         url: "../view/http/clientes.controller.php",
         type: "post",
-        beforeSend: function(){
-           
+        beforeSend: function () {
+
         },
 
-        success: function(data){
-            
+        success: function (data) {
+
             for (var i in JSON.parse(data).registros) {
 
                 agregarFila_Clientes(
@@ -153,7 +156,7 @@ function listarClientes(){
             });
         },
 
-        error: function(){
+        error: function () {
             console.log("No se ha podido obtener la información");
         },
     });
@@ -161,15 +164,15 @@ function listarClientes(){
 }
 
 
-function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient, acciones){
+function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient, acciones) {
 
-    if(stateClient == 1){
+    if (stateClient == 1) {
         verstateClient = '<button class= "btn btn-success btn-sm col-8">Activo</button/>'
-    }else if(stateClient == 0){
+    } else if (stateClient == 0) {
         verstateClient = '<button class= "btn btn-danger btn-sm col-8">Inactivo</button/>'
     }
 
-    let datosClientes = "'"+idClient+"', '"+documentClient+"', '"+nameClient+"', '"+last_name+"', '"+email+"', '"+address+"', '"+phone+"', '"+stateClient+"'";
+    let datosClientes = "'" + idClient + "', '" + documentClient + "', '" + nameClient + "', '" + last_name + "', '" + email + "', '" + address + "', '" + phone + "', '" + stateClient + "'";
 
     var htmlTags = `<tr>
         <td> ${idClient} </td>
@@ -189,19 +192,19 @@ function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, e
 }
 
 
-function eliminarFilasTableCliente(){
+function eliminarFilasTableCliente() {
     var n = 0;
     $("#tableClientes tbody tr").each(function () {
         n++;
     });
     for (i = n - 1; i > 1; i--) {
         $("#tableClientes tbody tr:eq('" + i + "')").remove();
-        
+
     }
 }
 
 
-function tomarDatos(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient){
+function tomarDatos(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient) {
     document.getElementById('idClientEditar').value = idClient
     document.getElementById('documentClientEditar').value = documentClient
     document.getElementById('nameClientEditar').value = nameClient
@@ -212,7 +215,7 @@ function tomarDatos(idClient, documentClient, nameClient, last_name, email, addr
     document.getElementById('stateClientEditar').value = stateClient
 }
 
-function editarCliente(){
+function editarCliente() {
     var parametros = {
         "accion": 'editarCliente',
         "idClient": document.getElementById('idClientEditar').value,
@@ -229,12 +232,12 @@ function editarCliente(){
         data: parametros,
         url: '../view/http/clientes.controller.php',
         type: 'post',
-        beforeSend: function(){
-            
+        beforeSend: function () {
+
         },
 
-        success: function(data){
-            
+        success: function (data) {
+
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
                     icon: 'success',
@@ -248,7 +251,7 @@ function editarCliente(){
 
         },
 
-        error: function(error){
+        error: function (error) {
             console.log("No se ha podido obtener la información " + error);
         },
 
@@ -256,7 +259,7 @@ function editarCliente(){
 }
 
 
-function anularCliente(idClient){
+function anularCliente(idClient) {
     var parametros = {
         "accion": "anularCliente",
         "idClient": idClient
@@ -266,26 +269,28 @@ function anularCliente(idClient){
         data: parametros,
         url: '../view/http/clientes.controller.php',
         type: 'post',
-        beforeSend: function(){
-            
+        beforeSend: function () {
+
         },
 
-        success: function(data){
+        success: function (data) {
             console.log(data);
             if (JSON.parse(data) == "ok") {
                 Swal.fire({
                     icon: 'success',
-                    title: '¡Anulado!',
-                    text: '',
+                    title: '',
+                    text: '¡Anulado!',
                     heightAuto: false,
-                    confirmButtonText: "Aceptar",
+                    position: "center",
+                    showConfirmButton: false,
+                    timer: 1500,
                 })
                 listarClientes()
             }
 
         },
 
-        error: function(error){
+        error: function (error) {
             console.log("No se ha podido obtener la información " + error);
         },
 

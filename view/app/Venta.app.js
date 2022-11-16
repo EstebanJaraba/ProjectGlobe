@@ -15,25 +15,24 @@ function registrarVenta() {
   };
 
 
-  if(document.getElementById("facturaVenta").value == "" || document.getElementById("listaCliente").value == "" || 
+  if (document.getElementById("facturaVenta").value == "" || document.getElementById("listaCliente").value == "" ||
     document.getElementById("listaServicio").value == "" || document.getElementById("listaEmpleado").value == "" ||
-    document.getElementById("listaInsumo").value == ""|| document.getElementById("cantidadAgregar").value == ""|| 
-    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "")
-  {
-      Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "¡Los campos son obligatorios!",
-      });
-      
+    document.getElementById("listaInsumo").value == "" || document.getElementById("cantidadAgregar").value == "" ||
+    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "") {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "¡Los campos son obligatorios!",
+    });
+
   }
-  else{
+  else {
     $.ajax({
       data: parametros,
       url: '../view/http/ventas.controller.php',
       type: 'post',
-      beforeSend: function(){
-          
+      beforeSend: function () {
+
       },
 
       success: function (data) {
@@ -47,27 +46,29 @@ function registrarVenta() {
             confirmButtonText: "Aceptar",
           })
           listar();
-          $('#registrarVenta').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
-            setTimeout(function () {
-              location.href = "ventas.php";
-            }, 1500);
-          listar();
+          limpiar();
         }
       },
-      error: function(error){
-          console.log("No se ha podido obtener la información " + error);
+      error: function (error) {
+        console.log("No se ha podido obtener la información " + error);
       },
     });
   }
 }
 
+function limpiar() {
+  $('#registrarVenta').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+  setTimeout(function () {
+    location.href = "ventas.php";
+  }, 1500);
+}
 
 function calcularValorTotal() {
   document.getElementById("v_total").value =
-  document.getElementById("cantidadAgregar").value *
-  document.getElementById("v_unitario").value;
+    document.getElementById("cantidadAgregar").value *
+    document.getElementById("v_unitario").value;
 }
 
 
@@ -143,30 +144,30 @@ function selectListaCliente() {
     "listaCliente"
   );
   setTimeout(() => {
-      selectListaCliente();
+    selectListaCliente();
   }, 200);
 }
 
 function selectListaServicio() {
-ajaxMain(
-  "listaServicio",
-  '../view/http/ventas.controller.php',
-  "listaServicio"
-);
-setTimeout(() => {
-  selectListaServicio();
-}, 200);
+  ajaxMain(
+    "listaServicio",
+    '../view/http/ventas.controller.php',
+    "listaServicio"
+  );
+  setTimeout(() => {
+    selectListaServicio();
+  }, 200);
 }
 
 function selectListaEmpleado() {
-ajaxMain(
-  "listaEmpleado",
-  '../view/http/ventas.controller.php',
-  "listaEmpleado"
-);
-setTimeout(() => {
-  selectListaEmpleado();
-}, 200);
+  ajaxMain(
+    "listaEmpleado",
+    '../view/http/ventas.controller.php',
+    "listaEmpleado"
+  );
+  setTimeout(() => {
+    selectListaEmpleado();
+  }, 200);
 }
 
 function selectListaInsumo() {
@@ -199,14 +200,14 @@ function listarInsumos() {
   }
 }
 
-function eliminarFilasTableInsumo(){
+function eliminarFilasTableInsumo() {
   var n = 0;
   $("#tableVentas tbody tr").each(function () {
-      n++;
+    n++;
   });
   for (i = n - 1; i > 1; i--) {
-      $("#tableVentas tbody tr:eq('" + i + "')").remove();
-      
+    $("#tableVentas tbody tr:eq('" + i + "')").remove();
+
   }
 }
 
@@ -236,7 +237,7 @@ function agregarFilaInsumo(
 function eliminarInsumo(insumoId) {
   for (let i = 0; i < ArregloInsumosAgregarVenta.length; i++) {
     if (ArregloInsumosAgregarVenta[i].insumoId == insumoId) {
-      ArregloInsumosAgregarVenta.splice(ArregloInsumosAgregarVenta[i],1);
+      ArregloInsumosAgregarVenta.splice(ArregloInsumosAgregarVenta[i], 1);
     }
   }
   listarInsumos();
@@ -244,52 +245,52 @@ function eliminarInsumo(insumoId) {
 
 
 //Listar ventas.
-function listarVentas(){
+function listarVentas() {
   eliminarFilasTableVentas();
 
   var tableVentas = $("#tableVentas").DataTable();
-  
+
   tableVentas.clear();
   tableVentas.destroy();
 
   var parametros = {
-      accion: "select_listVentas",
+    accion: "select_listVentas",
   };
 
   $.ajax({
-      data: parametros,
-      url: "../view/http/ventas.controller.php",
-      type: "post",
-      beforeSend: function(){
-      
-      },
+    data: parametros,
+    url: "../view/http/ventas.controller.php",
+    type: "post",
+    beforeSend: function () {
 
-      success: function(data){
-          
-          for (var i in JSON.parse(data).registros) {
+    },
 
-              agregarFila_Ventas(
-                  JSON.parse(data).registros[i].idFactura,
-                  JSON.parse(data).registros[i].total,
-                  JSON.parse(data).registros[i].stateSale,
-                  ""
-              );
-          }
+    success: function (data) {
 
-          $("#tableVentas").DataTable({
-              dom: "Bfrtip",
-              buttons: ["copy", "csv", "excel", "pdf", "print"],
-              language: {
-                  url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
-              },
-              order: [[1, "desc"]],
+      for (var i in JSON.parse(data).registros) {
 
-          });
-      },
+        agregarFila_Ventas(
+          JSON.parse(data).registros[i].idFactura,
+          JSON.parse(data).registros[i].total,
+          JSON.parse(data).registros[i].stateSale,
+          ""
+        );
+      }
 
-      error: function(){
-          console.log("No se ha podido obtener la información");
-      },
+      $("#tableVentas").DataTable({
+        dom: "Bfrtip",
+        buttons: ["copy", "csv", "excel", "pdf", "print"],
+        language: {
+          url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+        },
+        order: [[1, "desc"]],
+
+      });
+    },
+
+    error: function () {
+      console.log("No se ha podido obtener la información");
+    },
   });
 
 }
@@ -305,15 +306,15 @@ function eliminarFilasTableVentas() {
 }
 
 
-function agregarFila_Ventas(idFactura, cantidad, valor, stateSale, acciones){
+function agregarFila_Ventas(idFactura, cantidad, valor, stateSale, acciones) {
 
-  if(stateSale == 1){
-      mostrarStateSale = '<button class= "btn btn-success btn-sm col-6">Activo</button/>'
-  }else if(stateSale == 0){
-      mostrarStateSale = '<button class= "btn btn-danger btn-sm col-6">Anulada</button/>'
+  if (stateSale == 1) {
+    mostrarStateSale = '<button class= "btn btn-success btn-sm col-6">Activo</button/>'
+  } else if (stateSale == 0) {
+    mostrarStateSale = '<button class= "btn btn-danger btn-sm col-6">Anulada</button/>'
   }
 
-  let datosVentas = "'"+idFactura+"', '"+cantidad+"', '"+valor+"', '"+stateSale+"'";
+  let datosVentas = "'" + idFactura + "', '" + cantidad + "', '" + valor + "', '" + stateSale + "'";
 
   var htmlTags = `<tr>
       <td> ${idFactura} </td>
@@ -349,7 +350,7 @@ function listar() {
     url: '../view/http/ventas.controller.php',
     type: "post",
     beforeSend: function () {
-      
+
     },
     success: function (data) {
       for (var i in JSON.parse(data).registros) {
@@ -361,17 +362,17 @@ function listar() {
           JSON.parse(data).registros[i].total,
           JSON.parse(data).registros[i].descriptionSale,
           JSON.parse(data).registros[i].stateSale,
-          
-          
+
+
           ""
         );
       }
 
       $("#tableInsumos").DataTable({
         language: {
-            url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+          url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
         },
-    });
+      });
     },
 
     error: function (error) {
@@ -383,10 +384,10 @@ function listar() {
 
 function agregarFila(idFactura, cliente, servicio, empleado, total, descriptionSale, stateSale, accion) {
   if (stateSale == 1) {
-      mostrarStateSale =
+    mostrarStateSale =
       '<button class="btn btn-success btn-sm col-8">Activo</button>';
   } else if (stateSale == 0) {
-      mostrarStateSale =
+    mostrarStateSale =
       '<button class="btn btn-danger btn-sm col-8">Anulada</button>';
   }
   if (stateSale == 1) {
@@ -395,7 +396,7 @@ function agregarFila(idFactura, cliente, servicio, empleado, total, descriptionS
     anular = "";
   }
 
-  let datosVentas = "'"+idFactura+"', '"+cliente+"', '"+servicio+"', '"+empleado+"', '"+total+"', '"+descriptionSale+"', '"+stateSale+"'";
+  let datosVentas = "'" + idFactura + "', '" + cliente + "', '" + servicio + "', '" + empleado + "', '" + total + "', '" + descriptionSale + "', '" + stateSale + "'";
 
   var htmlTags = `<tr>
     <td>${idFactura}</td>
@@ -462,86 +463,86 @@ function actualizarEstado(idFactura, estado) {
 //Ver detalles ventas
 function tomarDatos(idFactura, cliente, servicio, empleado, total, descriptionSale, estado) {
 
-if(estado == 1){
-  var status = 'Activo';
-}else if(estado == 0){
-  var status = 'Anulado';
-}
+  if (estado == 1) {
+    var status = 'Activo';
+  } else if (estado == 0) {
+    var status = 'Anulado';
+  }
 
-const formatoPesoDetalle = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-});
-var amount = formatoPesoDetalle.format(total);
+  const formatoPesoDetalle = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  });
+  var amount = formatoPesoDetalle.format(total);
 
 
-document.getElementById("id_sale_detail").value = idFactura;
-document.getElementById("idClientDetail").value = cliente;
-document.getElementById("idServiceDetail").value = servicio;
-document.getElementById("idEmployeeDetail").value = empleado;
-document.getElementById("totalDetail").value = amount;
-document.getElementById("descriptionSaleDetail").value = descriptionSale;
-document.getElementById("estadoDetail").value = status;
-// document.getElementById("fechaRegisterDetail").value = dateRegistration;
-ListarDetalle();
-  
+  document.getElementById("id_sale_detail").value = idFactura;
+  document.getElementById("idClientDetail").value = cliente;
+  document.getElementById("idServiceDetail").value = servicio;
+  document.getElementById("idEmployeeDetail").value = empleado;
+  document.getElementById("totalDetail").value = amount;
+  document.getElementById("descriptionSaleDetail").value = descriptionSale;
+  document.getElementById("estadoDetail").value = status;
+  // document.getElementById("fechaRegisterDetail").value = dateRegistration;
+  ListarDetalle();
+
 }
 
 function ListarDetalle() {
-eliminaFilastablaDetalleInsumos();
+  eliminaFilastablaDetalleInsumos();
 
-var tablaInsumo = $("#tablaInsumos").DataTable();
-tablaInsumo.clear();
-tablaInsumo.destroy();
+  var tablaInsumo = $("#tablaInsumos").DataTable();
+  tablaInsumo.clear();
+  tablaInsumo.destroy();
 
-let parametros = {
+  let parametros = {
     accion: "seleccionarListaInsumos",
     id: document.getElementById("id_sale_detail").value
-};
+  };
 
-$.ajax({
+  $.ajax({
     data: parametros,
     url: "../view/http/ventas.controller.php",
     type: "post",
     beforeSend: function () {
-        //cargando();
+      //cargando();
     },
     success: function (data) {
-        for (var i in JSON.parse(data).registros) {
-            agregarFilaTablaInsumoss(
-                JSON.parse(data).registros[i].insumo,
-                JSON.parse(data).registros[i].cantidad,
-                JSON.parse(data).registros[i].total,
-                ""
-            );
-        }
+      for (var i in JSON.parse(data).registros) {
+        agregarFilaTablaInsumoss(
+          JSON.parse(data).registros[i].insumo,
+          JSON.parse(data).registros[i].cantidad,
+          JSON.parse(data).registros[i].total,
+          ""
+        );
+      }
 
-       
+
     },
 
     error: function (error) {
-        console.log("No se ha podido obtener la información " + error);
+      console.log("No se ha podido obtener la información " + error);
     },
-});
+  });
 
 }
 
 
 
 function agregarFilaTablaInsumoss(
-nombreInsumo,
-cantidad,
-valorTotal
+  nombreInsumo,
+  cantidad,
+  valorTotal
 
 ) {
-var htmlTags = `<tr>
+  var htmlTags = `<tr>
   <td>${nombreInsumo}</td>
   <td>${cantidad}</td>
   <td>${valorTotal}</td>
   </tr>`;
 
-$("#tablaInsumos tbody").append(htmlTags);
+  $("#tablaInsumos tbody").append(htmlTags);
 }
 
 function eliminaFilastablaDetalleInsumos() {
@@ -554,38 +555,38 @@ function eliminaFilastablaDetalleInsumos() {
   }
 }
 
-function anularVenta(id){
+function anularVenta(id) {
   var parametros = {
-      "accion": "anularVenta",
-      "idSale": id
+    "accion": "anularVenta",
+    "idSale": id
   };
 
   $.ajax({
-      data: parametros,
-      url: '../view/http/ventas.controller.php',
-      type: 'post',
-      beforeSend: function(){
-          
-      },
+    data: parametros,
+    url: '../view/http/ventas.controller.php',
+    type: 'post',
+    beforeSend: function () {
 
-      success: function(data){
-          console.log(data);
-          if (JSON.parse(data) == "ok") {
-            Swal.fire({
-              icon: 'success',
-              title: '¡Venta anulada!',
-              text: '',
-              heightAuto: false,
-              confirmButtonText: "Aceptar",
-            })
-            listarVentas()
-          }
+    },
 
-      },
+    success: function (data) {
+      console.log(data);
+      if (JSON.parse(data) == "ok") {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Venta anulada!',
+          text: '',
+          heightAuto: false,
+          confirmButtonText: "Aceptar",
+        })
+        listarVentas()
+      }
 
-      error: function(error){
-          console.log("No se ha podido obtener la información " + error);
-      },
+    },
+
+    error: function (error) {
+      console.log("No se ha podido obtener la información " + error);
+    },
 
   });
 }

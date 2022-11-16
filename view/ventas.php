@@ -13,7 +13,7 @@ require('http/db/conexion.php');
 $queryVenta = "SELECT * FROM services";
 $queryInsumo = "SELECT * FROM supplys";
 $queryCliente = "SELECT * FROM clients";
-$queryEmpleado = "SELECT * FROM employees";
+$queryEmpleado = "SELECT * FROM employees WHERE stateEmployee='1'";
 
 $resultadoServicio = mysqli_query($conexion, $queryVenta);
 $resultadoInsumo = mysqli_query($conexion, $queryInsumo);
@@ -98,8 +98,8 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                         <div class=" d-flex justify-content-end p-4 pr-5">
                                                             <button class="btn btn-danger" onclick="ocultar()"><i class="bi bi-x-lg"></i></button>
                                                         </div>
-                                                        <div class="row m-2">
-                                                            <div class="col-6">
+                                                        <div class=" m-2">
+                                                            <div class="col-12">
                                                                 <div class="card">
                                                                     <div class="card-header">
                                                                         <h3 class="card-title">Registrar venta</h3>
@@ -107,20 +107,12 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                     <div class="card-body">
                                                                         <form id="registroInsumo">
                                                                             <div class="row">
-                                                                                <div class="col-5">
+                                                                                <div class="col-4">
                                                                                     <div class="form-group">
                                                                                         <label for="facturaVenta">Número de factura</label>
                                                                                         <input type="text" placeholder="Ingrese número de factura" class="form-control" id="facturaVenta" aria-describedby="">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-7">
-                                                                                    <div class="form-group">
-                                                                                        <label for="total">Total</label>
-                                                                                        <p class="form-label h2" id="totalVenta">000000</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
                                                                                 <div class="col-4" style="margin-right: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="idClient">Cliente</label>
@@ -132,8 +124,17 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
+                                                                                <div class="col-4">
+                                                                                    <div class="form-group">
+                                                                                        <label for="total">Total</label>
+                                                                                        <p class="form-label h2" id="totalVenta">000000</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                
 
-                                                                                <div class="col-4" style="margin-left: 0;">
+                                                                                <div class="col-6" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="idService">Servicio</label>
                                                                                         <select name="servicio" class="form-control" aria-required="" id="listaServicio">
@@ -145,7 +146,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-4" style="margin-left: 0;">
+                                                                                <div class="col-6" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="idEmpleado">Empleado</label>
                                                                                         <select name="empleado" class="form-control" aria-required="" id="listaEmpleado">
@@ -166,7 +167,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                             </div>
 
                                                                             <div class="row">
-                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                <div class="col-3" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="idSupply">Insumo</label>
                                                                                         <select name="insumo" class="form-control" aria-required="" id="listaInsumo">
@@ -178,21 +179,21 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                <div class="col-3" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="cantidad">Cantidad</label>
                                                                                         <input onkeyup="calcularValorTotal()" name="cantidadAgregar" type="number" class="form-control" id="cantidadAgregar">
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                <div class="col-3" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="cantidad">V. Unitario</label>
                                                                                         <input onkeyup="calcularValorTotal()" name="v_unitario" type="number" class="form-control" id="v_unitario">
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                <div class="col-3" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="cantidad">Total</label>
                                                                                         <input name="v_total" type="number" disabled style="background:white" class="form-control" id="v_total">
@@ -207,7 +208,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-6">
+                                                            <div class="col-12">
                                                                 <div class="card">
                                                                     <!-- /.card-header -->
                                                                     <div class="card-body p-0">
