@@ -7,7 +7,12 @@ if (!isset($_SESSION['userName'])) {
 }
 ?>
 <?php
+
 require('http/db/conexion.php');
+
+$query = "SELECT * FROM role_management";
+
+$resultado = mysqli_query($conexion, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,20 +86,20 @@ require('http/db/conexion.php');
                                         <img class="profile-user-img img-fluid img-circle" src="assets/dist/img/user.jpg" alt="User profile picture">
                                     </div>
 
-                                    <h3 class="profile-username text-center"><?php echo $_SESSION['nombreCompleto']?></h3>
+                                    <h3 class="profile-username text-center"><?php echo $_SESSION['nombreCompleto'] ?></h3>
 
-                                    <p class="text-muted text-center"><?php echo $_SESSION['id_rol']?></p>
+                                    <p class="text-muted text-center"><?php echo $_SESSION['id_rol'] ?></p>
 
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
-                                            <b>Correo</b> <a class="float-right"><?php echo $_SESSION['email']?></a>
+                                            <b>Correo</b> <a class="float-right"><?php echo $_SESSION['email'] ?></a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Teléfono</b> <a class="float-right"><?php echo $_SESSION['phone']?></a>
+                                            <b>Teléfono</b> <a class="float-right"><?php echo $_SESSION['phone'] ?></a>
                                         </li>
                                     </ul>
 
-                                    <a href="#" class="btn btn-primary btn-block"><b>Editar</b></a>
+                                    <a data-toggle="modal" data-target="#updateUser" class="btn btn-primary btn-block"><b>Editar</b></a>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -172,10 +177,10 @@ require('http/db/conexion.php');
 
                                                 <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
                                             </div>
- 
+
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -221,7 +226,88 @@ require('http/db/conexion.php');
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="assets/dist/js/pages/dashboard.js"></script>
+    <script src="app/user.app.js"></script>
 </body>
 
 </html>
+
+<div class="modal fade" id="updateUser" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" class="form-control" id="idUserUpdate" aria-describedby="">
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="nameUserUpdate">Nombre *</label>
+                            <input type="text" class="form-control" id="nameUserUpdate" aria-describedby="">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="last_nameUserUpdate">Apellidos *</label>
+                            <input type="text" class="form-control" id="last_nameUserUpdate" aria-describedby="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="documentUserUpdate">Documento *</label>
+                    <input type="number" class="form-control" id="documentUserUpdate" aria-describedby="">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="emailUserUpdate">Email *</label>
+                            <input type="emal" class="form-control" id="emailUserUpdate" aria-describedby="">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="phoneUserUpdate">Telefono *</label>
+                            <input type="text" class="form-control" id="phoneUserUpdate" aria-describedby="">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="passwordUserUpdate">Contraseña *</label>
+                            <input type="number" style="background-color: white" class="form-control" id="passwordUserUpdate" aria-describedby="">
+                        </div>
+                    </div>
+                    <div class="col-6" style="margin-right: 0;">
+                        <div class="form-group">
+                            <label for="roleUserUpdate">Rol *</label>
+                            <select class="form-control" id="roleUserUpdate" aria-describedby="">
+                                <option value="">--Seleccione--</option>
+                                <?php while ($row = $resultado->fetch_assoc()) { ?>
+                                    <option value="<?php echo $row['id_rol']; ?>"><?php echo $row['name_rol']; ?></option>
+                                <?php }   ?>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="updateUsers()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

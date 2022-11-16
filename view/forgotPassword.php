@@ -30,7 +30,7 @@ require "http/db/conexion.php";
         <a href="" class="h1"><b>Globe</b></a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">¿Olvidaste tu contraseña? ingrese su correo para recuperarla.</p>
+        <p class="login-box-msg">¿Olvidaste tu contraseña?</p>
         <form id="recoverForm">
           <div class="input-group mb-3">
             <input type="email" name="email" id="email" class="form-control" placeholder="Correo">
@@ -40,9 +40,17 @@ require "http/db/conexion.php";
               </div>
             </div>
           </div>
+          <div class="input-group mb-3">
+            <input type="text" name="text" id="text" class="form-control" placeholder="documento">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-12">
-              <a type="submit" onclick="recuperar()" id="recuperar" class="btn btn-primary btn-block">Recuperar contraseña</a>
+              <a type="submit" href="recoverPassword.php" id="recuperar" class="btn btn-primary btn-block">Enviar</a>
             </div>
             <!-- /.col -->
           </div>

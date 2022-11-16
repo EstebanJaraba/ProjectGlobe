@@ -66,11 +66,9 @@ if ($_POST['accion'] == 'updateUser') {
    $phone = $_POST['phone'];
    $password = $_POST['password'];
    $role = $_POST['role'];
-   $state = $_POST['state'];
 
 
-
-   $query = "UPDATE users SET userName = '$name', last_name = '$last_name', document = '$document', email = '$email', phone = '$phone', passwordUser = '$password', id_rol = '$role', stateUser = '$state' WHERE idUser = '$id'";
+   $query = "UPDATE users SET userName = '$name', last_name = '$last_name', document = '$document', email = '$email', phone = '$phone', passwordUser = '$password', id_rol = '$role', stateUser = '1' WHERE idUser = '$id'";
 
    $file =  mysqli_query($conexion, $query);
 

@@ -244,7 +244,7 @@ function updateUsers() {
         "phone": document.getElementById('phoneUserUpdate').value,
         "password": document.getElementById('passwordUserUpdate').value,
         "role": document.getElementById('roleUserUpdate').value,
-        "state": document.getElementById('stateUserUpdate').value,
+
     };
 
     $.ajax({
