@@ -41,7 +41,7 @@ require "http/db/conexion.php";
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="text" name="text" id="text" class="form-control" placeholder="documento">
+            <input type="text" name="text" id="text" class="form-control" placeholder="Documento">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>

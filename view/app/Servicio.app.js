@@ -7,33 +7,54 @@ function registroServicio() {
         "stateService": document.getElementById('stateService').value
     };
 
-    $.ajax({
-        data: parametros,
-        url: '../view/http/servicios.controller.php',
-        type: 'post',
-        beforeSend: function(){
-            
-        },
+    if (document.getElementById("nameService").value == "" || document.getElementById("costService").value == "" ||
+    document.getElementById("stateService").value == "") 
+    {
+        Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "¡Los campos son obligatorios!",
+        });
+    }
+    else {
+        $.ajax({
+            data: parametros,
+            url: '../view/http/servicios.controller.php',
+            type: 'post',
+            beforeSend: function(){
+                
+            },
+    
+            success: function(data){
+                console.log(data);
+                if (JSON.parse(data) == "ok") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Registro exitoso!',
+                        text: '',
+                        heightAuto: false,
+                        confirmButtonText: "Aceptar",
+                    })
+                    listarServicio();
+                    limpiar();
+                }
+    
+            },
+    
+            error: function(error){
+                console.log("No se ha podido obtener la información " + error);
+            },
+        });
+    }
+}
 
-        success: function(data){
-            console.log(data);
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Registro exitoso!',
-                    text: '',
-                    heightAuto: false,
-                    confirmButtonText: "Aceptar",
-                })
-                listarServicio()
-            }
-
-        },
-
-        error: function(error){
-            console.log("No se ha podido obtener la información " + error);
-        },
-    });
+function limpiar() {
+    $('#registroServicio').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    setTimeout(function () {
+        location.href = "servicios.php";
+    }, 1500);
 }
 
 

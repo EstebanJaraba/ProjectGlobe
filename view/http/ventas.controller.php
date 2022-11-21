@@ -30,9 +30,9 @@ if ($_POST['accion'] == 'registrarVenta') {
             VALUE ('$factura', '" . $arreglo[$i]['insumoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
             $newfile = mysqli_query($conexion, $newquery);
 
-            $aumentar = "SELECT SUM(quantity_sales_detail) AS quantity FROM sales_detail WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
+            $disminuir = "SELECT (-(quantity_sales_detail)) AS quantity FROM sales_detail WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
 
-            $filesSum = mysqli_query($conexion, $aumentar);
+            $filesSum = mysqli_query($conexion, $disminuir);
 
 
             while ($array = mysqli_fetch_array($filesSum)){

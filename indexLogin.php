@@ -48,7 +48,7 @@
 
 
           <div class="input-group mb-3">
-            <input type="password" name="pass" require class="form-control" placeholder="Password">
+            <input type="password" name="pass" require class="form-control" placeholder="Contraseña">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -158,7 +158,7 @@
       <div class="card-outline card-primary">
         <div class="modal-header ">
           <div class="col-6 ">
-            <b class="h3">Registro Usuario</b>
+            <b class="h3">Registro usuario</b>
           </div>
           <div class="col-6">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -200,7 +200,7 @@
             </div>
 
             <div class="input-group mb-3">
-              <input type="text" class="form-control" id="phoneUser" placeholder="Telefono">
+              <input type="text" class="form-control" id="phoneUser" placeholder="Teléfono">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-phone"></span>

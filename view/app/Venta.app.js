@@ -18,15 +18,15 @@ function registrarVenta() {
   if (document.getElementById("facturaVenta").value == "" || document.getElementById("listaCliente").value == "" ||
     document.getElementById("listaServicio").value == "" || document.getElementById("listaEmpleado").value == "" ||
     document.getElementById("listaInsumo").value == "" || document.getElementById("cantidadAgregar").value == "" ||
-    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "") {
-    Swal.fire({
-      position: "center",
-      icon: "warning",
-      title: "¡Los campos son obligatorios!",
-    });
-
-  }
-  else {
+    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "") 
+    {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "¡Los campos son obligatorios!",
+      });
+    }
+    else {
     $.ajax({
       data: parametros,
       url: '../view/http/ventas.controller.php',
@@ -78,13 +78,25 @@ let valorTotalProVenta = 0;
 function agregarInsumo() {
   let selectorInsumo = document.getElementById("listaInsumo");
 
-  var insumoAgregado = {
-    insumoId: document.getElementById("listaInsumo").value,
-    nombreInsumo: selectorInsumo.options[selectorInsumo.selectedIndex].text,
-    cantidad: document.getElementById("cantidadAgregar").value,
-    valorUnitario: document.getElementById("v_unitario").value,
-    valorTotal: document.getElementById("v_total").value,
-  };
+  if (document.getElementById("listaInsumo").value == "" || 
+      document.getElementById("cantidadAgregar").value == "" || 
+      document.getElementById("v_unitario").value == "" || 
+      document.getElementById("v_total").value == "") {
+    Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "¡Los campos son obligatorios!",
+    });
+
+  } else {
+    var insumoAgregado = {
+      insumoId: document.getElementById("listaInsumo").value,
+      nombreInsumo: selectorInsumo.options[selectorInsumo.selectedIndex].text,
+      cantidad: document.getElementById("cantidadAgregar").value,
+      valorUnitario: document.getElementById("v_unitario").value,
+      valorTotal: document.getElementById("v_total").value,
+    };
+  }
 
   ArregloInsumosAgregarVenta.push(insumoAgregado);
   //Formato de valor a dolar
