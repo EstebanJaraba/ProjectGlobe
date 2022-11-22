@@ -14,7 +14,6 @@ if ($_POST['accion'] == 'registrarVenta') {
     $total = $_POST['total'];
     $descriptionSale = $_POST['descriptionSale'];
     $arreglo = $_POST['arreglo'];
-    
 
     $query = "INSERT INTO sales_management (id_invoice, idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale) 
     VALUE ('$factura', '$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '1')";
@@ -24,7 +23,6 @@ if ($_POST['accion'] == 'registrarVenta') {
 
         $newquery = '';
         $newfile = false;
-
         for ($i = 0; count($arreglo) > $i; $i++) {
             $newquery = "INSERT INTO sales_detail(id_invoice, idSupply, amount_supply_detail, quantity_sales_detail) 
             VALUE ('$factura', '" . $arreglo[$i]['insumoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
@@ -38,27 +36,16 @@ if ($_POST['accion'] == 'registrarVenta') {
             while ($array = mysqli_fetch_array($filesSum)){
                 $quantitySuma = $array["quantity"];
 
-                $queryUp = "UPDATE supplys SET quantity=$quantitySuma WHERE idSupply= ".$arreglo[$i]['insumoId']."";
+                $queryUp = "UPDATE supplys SET quantity = $quantitySuma WHERE idSupply= ".$arreglo[$i]['insumoId']."";
                 $fileUp = mysqli_query($conexion, $queryUp);
             }
-
-            //while ($row = mysqli_fetch_assoc($consultaDetalle)) {
-                //$idSupply = $row['insumoId'];
-                //$quantity_sales_detail = $row['cantidad'];
-                //$amount_supply_detail = $row['valorTotal'];
-                //$insertarDet = mysqli_query($conexion, "INSERT INTO sales_detail(idSupply, quantity_sales_detail, amount_supply_detail) 
-                //VALUES ($insumoId, $cantidad, '$valorTotal')");
-                //$stockActual = mysqli_query($conexion, "SELECT * FROM supplys WHERE idSupply = $idSupply");
-                //$stockNuevo = mysqli_fetch_assoc($stockActual);
-                //$stockTotal = $stockNuevo['quantity'] - $cantidad;
-                //$stock = mysqli_query($conexion, "UPDATE supplys SET quantity = $stockTotal WHERE idSupply = $idSupply");
-            //}
         }
         if ($fileUp) {
             echo json_encode('ok');
         }
+    }else {
+        echo json_encode('error');
     }
-    
 }
 
 
@@ -268,18 +255,62 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
 
 
 if ($_POST['accion'] == 'actualizarEstadoActivo') {
-
     $id = $_POST['id'];
-    
-    $query = "UPDATE sales_management SET stateSale = '0' WHERE id_invoice = '$id'";
+    $estado = $_POST['estado'];
+    if ($estado == 1) {
+        $mostrarStateSale = 0;
+    } elseif ($estado == 0) {
+        $mostrarStateSale = 0;
+    };
 
-    $file = mysqli_query($conexion, $query);
-     if ($file){
-        echo json_encode('ok');
-     }else{
-        echo json_encode('error');
-     }
-}
+    $query = "UPDATE sales_management SET stateSale = '$mostrarStateSale' WHERE id_invoice = '$id'";
+
+    $file = mysqli_query($conexion, $query) or die(mysqli_errno($conexion));
+
+    if ($file > 0) {
+        $queryProducto = "SELECT idSupply FROM `sales_detail` WHERE id_invoice = $id;";
+
+        $fileProducto = mysqli_query($conexion, $queryProducto);
+
+        if ($fileProducto) {
+
+            $queryEliminarDetalle = "DELETE FROM sales_detail WHERE id_invoice = '$id'";
+
+            $fileDetailEliminar = mysqli_query($conexion, $queryEliminarDetalle);
+
+            while ($arregloProductos = mysqli_fetch_array($fileProducto)) {
+
+                $insumo = $arregloProductos['idSupply'];
+
+                $querySuma = "SELECT (-(quantity_sales_detail)) AS quantity FROM `sales_detail` WHERE idSupply = '$insumo'";
+
+                $fileDetailSuma = mysqli_query($conexion, $querySuma);
+
+                while ($arraySuma = mysqli_fetch_array($fileDetailSuma)) {
+
+                    $quantity_suma = $arraySuma["quantity"];
+                        
+                    if(empty($quantity_suma)){
+                        $queryActualizarCantidad = "UPDATE supplys SET quantity = 0 WHERE idSupply = '$insumo'";
+
+                        $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
+                    }else{
+
+                        $queryActualizarCantidad = "UPDATE supplys SET quantity = $quantity_suma WHERE idSupply = '$insumo'";
+
+                        $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
+                    }
+                };
+            };
+
+            echo json_encode('ok');
+        } else {
+            echo json_encode('error al sumar');
+        }
+    } else {
+        echo json_encode('error al entrar al eliminar');
+    };
+};
 
 if (trim($_POST['accion']) == 'seleccionarListaInsumos') {
     $idFactura = $_POST['id'];
