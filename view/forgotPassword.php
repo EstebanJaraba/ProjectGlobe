@@ -40,6 +40,16 @@ require "http/db/conexion.php";
               </div>
             </div>
           </div>
+
+          <div class="input-group mb-3">
+            <input type="text" name="text" id="text" class="form-control" placeholder="Documento">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-12">
               <button type="submit" name="recuperar"  id="recuperar" class="btn btn-primary btn-block">Enviar</button>

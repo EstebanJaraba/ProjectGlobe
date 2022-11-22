@@ -10,10 +10,10 @@ require('http/db/conexion.php');
 
 
 
-$queryVenta = "SELECT * FROM services";
+$queryVenta = "SELECT * FROM services WHERE stateService = '1'";
 $queryInsumo = "SELECT * FROM supplys";
-$queryCliente = "SELECT * FROM clients";
-$queryEmpleado = "SELECT * FROM employees WHERE stateEmployee='1'";
+$queryCliente = "SELECT * FROM clients WHERE stateClient = '1'";
+$queryEmpleado = "SELECT * FROM employees WHERE stateEmployee = '1'";
 
 $resultadoServicio = mysqli_query($conexion, $queryVenta);
 $resultadoInsumo = mysqli_query($conexion, $queryInsumo);

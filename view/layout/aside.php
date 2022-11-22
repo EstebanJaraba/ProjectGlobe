@@ -29,7 +29,11 @@
           </a>
         </li>
         
+
         <li class="nav-item">
+
+         <li class="nav-item">
+
           <a href="pages/widgets.html" class="nav-link">
             <i class="bi bi-cart3"></i>
             <p>
@@ -96,7 +100,11 @@
               </a>
             </li>
           </ul>
+
         </li>
+
+        </li> 
+
 
         <li class="nav-item">
           <a href="calendar.php" class="nav-link">
