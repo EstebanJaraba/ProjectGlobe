@@ -78,95 +78,117 @@ require('http/db/conexion.php');
 
       <div class="container">
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box" style="background-color:#58B6FA">
-              <div class="inner">
-                <?php
-                $countP = "SELECT idPurchase FROM purchases ORDER BY idPurchase";
-                $count_runP = mysqli_query($conexion, $countP);
+          <div class="col-xl-3  col-md-6 mb-1">
+            <div class="card card-primary card-outline border-left-primary shadow h-200 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      Compras</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php
+                      $countP = "SELECT idPurchase FROM purchases ORDER BY idPurchase";
+                      $count_runP = mysqli_query($conexion, $countP);
 
-                $rowP = mysqli_num_rows($count_runP);
+                      $rowP = mysqli_num_rows($count_runP);
 
-                echo '<h3>' . $rowP . '<h3>';
-                ?>
-
-                <p>Compras</p>
+                      echo '<h3>' . $rowP . '<h3>';
+                      ?>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box" style="background-color: #6DE661">
-              <div class="inner">
-                <?php
-                $count = "SELECT idUser FROM users ORDER BY idUser";
-                $count_run = mysqli_query($conexion, $count);
 
-                $row = mysqli_num_rows($count_run);
+          <div class="col-xl-3 col-md-6 mb-1">
+            <div class="card card-success card-outline border-left-success shadow h-200 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                      Bounce Rate</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php
+                      $count = "SELECT idUser FROM users ORDER BY idUser";
+                      $count_run = mysqli_query($conexion, $count);
 
-                echo '<h3>' . $row . '<h3>';
-                ?>
+                      $row = mysqli_num_rows($count_run);
 
-                <p>Bounce Rate</p>
+                      echo '<h3>' . $row . '<h3>';
+                      ?>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                  </div>
+                </div>
               </div>
-              <div class="icon">
-                <i class="icon ion-stats-bars"></i>
-              </div>
-
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box" style="background-color: #FAFF92">
-              <div class="inner">
+          <div class="col-xl-3 col-md-6 mb-1">
+            <div class="card card-info card-outline border-left-info shadow h-200 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Usuarios registrados
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                          <?php
+                          $count = "SELECT idUser FROM users ORDER BY idUser";
+                          $count_run = mysqli_query($conexion, $count);
 
-                <?php
-                $count = "SELECT idUser FROM users ORDER BY idUser";
-                $count_run = mysqli_query($conexion, $count);
+                          $row = mysqli_num_rows($count_run);
 
-                $row = mysqli_num_rows($count_run);
-
-                echo '<h3>' . $row . '<h3>';
-                ?>
-
-                <p>Usuarios registrados</p>
+                          echo '<h3>' . $row . '<h3>';
+                          ?>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="progress progress-sm mr-2">
+                          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                  </div>
+                </div>
               </div>
-              <div class="icon">
-                <i class="ion ion-person"></i>
-              </div>
-
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box" style="background-color: #FA8873">
-              <div class="inner">
-                <?php
-                $count = "SELECT idUser FROM users ORDER BY idUser";
-                $count_run = mysqli_query($conexion, $count);
+          <div class="col-xl-3 col-md-6 mb-1">
+            <div class="card card-warning card-outline border-left-warning shadow h-200 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                      Unique Visitors</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php
+                      $count = "SELECT idUser FROM users ORDER BY idUser";
+                      $count_run = mysqli_query($conexion, $count);
 
-                $row = mysqli_num_rows($count_run);
+                      $row = mysqli_num_rows($count_run);
 
-                echo '<h3>' . $row . '<h3>';
-                ?>
-
-                <p>Unique Visitors</p>
+                      echo '<h3>' . $row . '<h3>';
+                      ?>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                  </div>
+                </div>
               </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-
             </div>
           </div>
-          <!-- ./col -->
+
         </div>
       </div>
 

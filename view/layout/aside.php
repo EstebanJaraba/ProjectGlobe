@@ -28,67 +28,8 @@
             <p>&nbsp;&nbsp;&nbsp;Usuarios</p>
           </a>
         </li>
-
+        
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link">
-          <i class="bi bi-bag-check"></i>
-            <p>
-              &nbsp;&nbsp;&nbsp;Gestión
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="compra.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Compra</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="proveedor.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Proveedores</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="insumo.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Insumos</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="ventas.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Ventas</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="servicios.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Servicios</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="clientes.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Clientes</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="empleados.php" class="nav-link">
-                <i class="bi bi-chevron-double-right nav-icon"></i>
-                <p>Empleados</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        
-        
-        <!-- <li class="nav-item">
           <a href="pages/widgets.html" class="nav-link">
             <i class="bi bi-cart3"></i>
             <p>
@@ -155,7 +96,7 @@
               </a>
             </li>
           </ul>
-        </li> -->
+        </li>
 
         <li class="nav-item">
           <a href="calendar.php" class="nav-link">

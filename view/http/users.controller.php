@@ -1,7 +1,5 @@
 <?php
 
-use LDAP\Result;
-
 require_once 'db/conexion.php';
 
 if ($_POST['accion'] == 'registerUsers') {
@@ -12,6 +10,8 @@ if ($_POST['accion'] == 'registerUsers') {
    $phone = $_POST['phone'];
    $password = $_POST['password'];
    $role = $_POST['role'];
+
+   $pass_encrip = password_hash($password, PASSWORD_DEFAULT);
 
    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $consulta = "SELECT document FROM users WHERE document='$document'";
@@ -28,6 +28,15 @@ if ($_POST['accion'] == 'registerUsers') {
       } else if ($result2 > 0) {
          echo json_encode('emailError');
       } else {
+         $query = "INSERT INTO users(userName,last_name,document,email,phone,passwordUser,id_rol,stateUser) VALUE ('$name','$last_name','$document','$email','$phone','$pass_encrip','$role','1')";
+
+         $file =  mysqli_query($conexion, $query);
+
+         if ($file) {
+            echo json_encode('ok');
+         } else {
+            echo json_encode('error');
+         }
       }
    } else {
       echo json_encode('email');
@@ -48,7 +57,7 @@ if (trim($_POST['accion']) == 'select_ListUsers') {
    $elementos = [];
    $i = 1;
    while ($datos = mysqli_fetch_array($result)) {
-      array_push($elementos, ['idUser' => $datos["idUser"], 'userName' => $datos["userName"], 'last_name' => $datos["last_name"], 'document' => $datos["document"], 'email' => $datos["email"], 'phone' => $datos["phone"], 'passwordUser' => $datos["passwordUser"], 'id_rol' => $datos["name_rol"], 'stateUser' => $datos["stateUser"]]);
+      array_push($elementos, ['idUser' => $datos["idUser"], 'userName' => $datos["userName"], 'last_name' => $datos["last_name"], 'document' => $datos["document"], 'email' => $datos["email"], 'phone' => $datos["phone"], 'id_rol' => $datos["name_rol"], 'stateUser' => $datos["stateUser"]]);
       $i++;
    }
    $respuesta->registros = $elementos;
@@ -67,8 +76,10 @@ if ($_POST['accion'] == 'updateUser') {
    $password = $_POST['password'];
    $role = $_POST['role'];
 
+   $pass_encrip = password_hash($password, PASSWORD_DEFAULT);
 
-   $query = "UPDATE users SET userName = '$name', last_name = '$last_name', document = '$document', email = '$email', phone = '$phone', passwordUser = '$password', id_rol = '$role', stateUser = '1' WHERE idUser = '$id'";
+
+   $query = "UPDATE users SET userName = '$name', last_name = '$last_name', document = '$document', email = '$email', phone = '$phone', passwordUser = '$pass_encrip', id_rol = '$role', stateUser = '1' WHERE idUser = '$id'";
 
    $file =  mysqli_query($conexion, $query);
 

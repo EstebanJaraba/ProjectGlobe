@@ -46,6 +46,7 @@ $resultado = mysqli_query($conexion, $query);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse layout-fixed">
@@ -99,18 +100,17 @@ $resultado = mysqli_query($conexion, $query);
                                         </li>
                                     </ul>
 
-                                    <a data-toggle="modal" data-target="#updateUser" class="btn btn-primary btn-block"><b>Editar</b></a>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
 
                             <!-- About Me Box -->
-                            <div class="card card-primary">
+                            <!-- <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Sobre mi</h3>
                                 </div>
-                                <!-- /.card-header -->
+
                                 <div class="card-body">
 
                                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Ubicación</strong>
@@ -131,56 +131,71 @@ $resultado = mysqli_query($conexion, $query);
 
 
                                 </div>
-                                <!-- /.card-body -->
-                            </div>
+
+                            </div> -->
                             <!-- /.card -->
                         </div>
                         <!-- /.col -->
                         <div class="col-md-9">
                             <div class="card">
-                                <div class="card-header p-2">
-                                    <ul class="nav nav-pills">
-                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-                                    </ul>
-                                </div><!-- /.card-header -->
+                                <div class="card-header">
+                                    Editar perfil
+                                </div>
                                 <div class="card-body">
-                                    <div class="tab-content">
-                                        <div class="active tab-pane" id="activity">
-                                            <!-- Post -->
-                                            <div class="post">
-                                                <div class="user-block">
-                                                    <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image">
-                                                    <span class="username">
-                                                        <a href="#">Jonathan Burke Jr.</a>
-                                                        <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                                                    </span>
-                                                    <span class="description">Shared publicly - 7:30 PM today</span>
-                                                </div>
-                                                <!-- /.user-block -->
-                                                <p>
-                                                    Lorem ipsum represents a long-held tradition for designers,
-                                                    typographers and the like. Some people hate it and argue for
-                                                    its demise, but others ignore the hate as they create awesome
-                                                    tools to help create filler text for everyone from bacon lovers
-                                                    to Charlie Sheen fans.
-                                                </p>
+                                    <input type="hidden" class="form-control" id="idUserUpdate" value="<?php echo $_SESSION['idUser']?>">    
+                                    <input type="hidden" class="form-control" id="roleUserUpdate" value="<?php echo $_SESSION['id_rol'] ?>">
 
-                                                <p>
-                                                    <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                                                    <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                                                    <span class="float-right">
-                                                        <a href="#" class="link-black text-sm">
-                                                            <i class="far fa-comments mr-1"></i> Comments (5)
-                                                        </a>
-                                                    </span>
-                                                </p>
-
-                                                <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="nameUserUpdate">Nombre</label>
+                                                <input type="text" class="form-control" id="nameUserUpdate" aria-describedby="">
                                             </div>
+                                        </div>
 
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="last_nameUserUpdate">Apellidos</label>
+                                                <input type="text" class="form-control" id="last_nameUserUpdate" aria-describedby="">
+                                            </div>
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="documentUserUpdate">Documento</label>
+                                                <input type="number" class="form-control" id="documentUserUpdate" aria-describedby="">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="phoneUserUpdate">Telefono</label>
+                                                <input type="text" class="form-control" id="phoneUserUpdate" aria-describedby="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="emailUserUpdate">Email</label>
+                                                <input type="emal" class="form-control" id="emailUserUpdate" aria-describedby="">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="passwordUserUpdate">Contraseña</label>
+                                                <input type="emal" class="form-control" id="passwordUserUpdate" aria-describedby="">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="updateUsers()" class="btn btn-primary">Guardar</button>
                                 </div>
                             </div>
                         </div>
@@ -226,88 +241,7 @@ $resultado = mysqli_query($conexion, $query);
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="app/user.app.js"></script>
+    <script src="app/edit.app.js"></script>
 </body>
 
 </html>
-
-<div class="modal fade" id="updateUser" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-dark">
-                <h5 class="modal-title" id="exampleModalLabel">Actualizar datos</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <input type="hidden" class="form-control" id="idUserUpdate" aria-describedby="">
-            <div class="modal-body">
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="nameUserUpdate">Nombre *</label>
-                            <input type="text" class="form-control" id="nameUserUpdate" aria-describedby="">
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="last_nameUserUpdate">Apellidos *</label>
-                            <input type="text" class="form-control" id="last_nameUserUpdate" aria-describedby="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="documentUserUpdate">Documento *</label>
-                    <input type="number" class="form-control" id="documentUserUpdate" aria-describedby="">
-                </div>
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="emailUserUpdate">Email *</label>
-                            <input type="emal" class="form-control" id="emailUserUpdate" aria-describedby="">
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="phoneUserUpdate">Telefono *</label>
-                            <input type="text" class="form-control" id="phoneUserUpdate" aria-describedby="">
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="passwordUserUpdate">Contraseña *</label>
-                            <input type="number" style="background-color: white" class="form-control" id="passwordUserUpdate" aria-describedby="">
-                        </div>
-                    </div>
-                    <div class="col-6" style="margin-right: 0;">
-                        <div class="form-group">
-                            <label for="roleUserUpdate">Rol *</label>
-                            <select class="form-control" id="roleUserUpdate" aria-describedby="">
-                                <option value="">--Seleccione--</option>
-                                <?php while ($row = $resultado->fetch_assoc()) { ?>
-                                    <option value="<?php echo $row['id_rol']; ?>"><?php echo $row['name_rol']; ?></option>
-                                <?php }   ?>
-                            </select>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="updateUsers()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>

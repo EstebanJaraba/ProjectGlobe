@@ -1,11 +1,9 @@
 <?php
 
-  session_start();
-
- 
+session_start();
 
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -18,8 +16,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
-    <!-- fullCalendar -->
-    <link rel="stylesheet" href="assets/plugins/fullcalendar/main.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -37,141 +33,134 @@
     <!-- summernote -->
     <link rel="stylesheet" href="assets/plugins/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.js"></script>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
 
-       <!-- Navbar -->
-       <?php include 'layout/nav.php' ?>
+<body class="hold-transition sidebar-collapse sidebar-mini layout-fixed">
 
-       <!-- Main Sidebar Container -->
-       <?php include 'layout/aside.php' ?>
-    
-    <div class="content-wrapper">
 
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Agendamiento</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <section class="content">
+    <div class="wrapper">
+
+        <?php include 'layout/nav.php' ?>
+
+        <?php include 'layout/aside.php' ?>
+
+        <div class="content-wrapper">
+            <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="sticky-top mb-3">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Eventos</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <!-- the events -->
-                                        <div id="external-events">
-                                            <div class="external-event bg-success">Lunch</div>
-                                            <div class="external-event bg-warning">Go home</div>
-                                            <div class="external-event bg-info">Do homework</div>
-                                            <div class="external-event bg-primary">Work on UI design</div>
-                                            <div class="external-event bg-danger">Sleep tight</div>
-                                            <div class="checkbox">
-                                                <label for="drop-remove">
-                                                    <input type="checkbox" id="drop-remove">
-                                                    remove after drop
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Create Event</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                                            <ul class="fc-color-picker" id="color-chooser">
-                                                <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
-                                                <li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>
-                                                <li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>
-                                                <li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>
-                                                <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- /btn-group -->
-                                        <div class="input-group">
-                                            <input id="new-event" type="text" class="form-control" placeholder="Event Title">
-
-                                            <div class="input-group-append">
-                                                <button id="add-new-event" type="button"  class="btn btn-primary">Add</button>
-                                            </div>
-                                            <!-- /btn-group -->
-                                        </div>
-                                        <!-- /input-group -->
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Agendamiento</h1>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-md-9">
-                            <div class="card card-primary">
-                                <div class="card-body p-0">
-                                    <!-- THE CALENDAR -->
-                                    <div id="calendar"></div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="inicio.php">Home</a></li>
+                                <li class="breadcrumb-item active">Agendamiento</li>
+                            </ol>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
-                </div><!-- /.container-fluid -->
+                </div>
+            </div>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="col-md-12">
+                            <div id='calendar'></div>
+
+                        </div>
+                    </div>
+                </div>
             </section>
-      
-      
 
-
-
-
-
-
-
-      
+        </div>
     </div>
-    <!-- /.content-wrapper -->
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: "es",
+                headerToolbar:{
+                    left:'prev,next today',
+                    center:'title',
+                    right:'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                customButtons:{
+                    Miboton:{
+                        text:"Hola",
+                        click:function(){
+                            alert("Accion del boton");
+                        }
+                    }
+                },
+                eventClick:function(mouseEnterInfo){
+                    $(this).css('background-color','red');
+                    $("#exampleModal").modal();
+                },
+                events:[
+                    {
+                        title:'Añel pipi',
+                        start:'2022-11-09',
+                        end:'2022-11-15'
+                    }
+                ]
+            });
+            calendar.render();
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- jQuery -->
-  <script src="assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery UI -->
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
     <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="assets/dist/js/adminlte.min.js"></script>
-    <!-- fullCalendar 2.2.5 -->
-    <script src="assets/plugins/moment/moment.min.js"></script>
-    <script src="assets/plugins/fullcalendar/main.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <!-- <script src="assets/dist/js/demo.js"></script> -->
-    <!-- Page specific script -->
-  <script src="app/calendar.app.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- jQuery Knob Chart -->
+    <script src="assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="assets/plugins/moment/moment.min.js"></script>
+    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="assets/dist/js/adminlte.js"></script>
 </body>
 
-
 </html>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
