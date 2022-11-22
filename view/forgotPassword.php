@@ -40,16 +40,6 @@ require "http/db/conexion.php";
               </div>
             </div>
           </div>
-
-          <div class="input-group mb-3">
-            <input type="text" name="text" id="text" class="form-control" placeholder="Documento">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-
           <div class="row">
             <div class="col-12">
               <button type="submit" name="recuperar"  id="recuperar" class="btn btn-primary btn-block">Enviar</button>
@@ -97,13 +87,13 @@ require "http/db/conexion.php";
         $mail->isSMTP();                                    //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';               //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                           //Enable SMTP authentication
-        $mail->Username   = 'nestortaranguife@gmail.com';  //SMTP username
-        $mail->Password   = 'xyatloarrowgkxtb';             //SMTP password
+        $mail->Username   = 'fernandogarces925@gmail.com';  //SMTP username
+        $mail->Password   = 'durbpfgpvphzqyvl';             //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    //Enable implicit TLS encryption
         $mail->Port       = 465;                            //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('esteban08249@gmail.com', 'Globe');
+        $mail->setFrom('fernandogarces925@gmail.com', 'Globe');
         $mail->addAddress($mailRecipient);     //Add a recipient
 
         //Content

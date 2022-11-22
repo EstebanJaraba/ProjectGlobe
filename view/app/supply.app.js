@@ -40,6 +40,15 @@ function registerSupply() {
                     timer: 1500
                 })
                 listarInsumos()
+            }else if (JSON.parse(data) == 'pa'){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Este insumo ya existe, ingrese otro',
+                    ShowConfirmbutton: false,
+                    timer: 1500
+                })
+                listarInsumos()
             }
             else if (JSON.parse(data) == 'ok') {
                 Swal.fire({

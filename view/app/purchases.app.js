@@ -20,7 +20,7 @@ function registrarCompra() {
             title: "Sin campos vacios por favor",
         });
 
-    }else if(document.getElementById("facturaCompra").value < 1) {
+    }else if(document.getElementById("facturaCompra").value < 1 || document.getElementById("totalCompra") < 1 || document.getElementById("cantidadAgregar").value<1 || document.getElementById("v_unitario").value <1 ) {
         Swal.fire({
             position: "center",
             icon: "warning",
@@ -46,7 +46,17 @@ function registrarCompra() {
                     listar();
                     ocultar();
                     limpiar();
-                } else if (JSON.parse(data) == "errorIn") {
+                } else if (JSON.parse(data) == "fac") {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "La factura ya existe, ingrese una diferente",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    listar();
+                    ocultar();
+                }else if (JSON.parse(data) == "errorIn") {
                     Swal.fire({
                         position: "center",
                         icon: "warning",
@@ -96,10 +106,17 @@ function agregarInsumo() {
         Swal.fire({
             position: "center",
             icon: "warning",
-            title: "Sin campos vacios por favor",
+            text: "Sin campos vacios por favor",
         });
 
-    } else {
+    } else if (document.getElementById("cantidadAgregar").value < 1){
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            text: "Los valores del número de factura no pueden ser negativos",
+        });
+    }
+    else {
         var productoAgregado = {
             productoId: document.getElementById("insumoPurchase").value,
             nombreProducto: selectorPruducto.options[selectorPruducto.selectedIndex].text,
