@@ -221,6 +221,29 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
 
 //Cambiar Estado
 
+// if ($_POST['accion'] == 'actualizarEstadoActivo') {
+//     $id = $_POST['id'];
+//     $estado = $_POST['estado'];
+//     if ($estado == 1) {
+//         $varEstado = 0;
+//     } elseif ($estado == 0) {
+//         $varEstado = 0;
+//     }
+
+//     $query = "UPDATE purchases SET statePurchase = '$varEstado' WHERE id_invoice = '$id'";
+
+
+
+//     $file = mysqli_query($conexion, $query);
+
+//     if ($file) {
+//         echo json_encode('ok');
+//     } else {
+//         echo json_encode('error');
+//     }
+// }
+
+
 if ($_POST['accion'] == 'actualizarEstadoActivo') {
     $id = $_POST['id'];
     $estado = $_POST['estado'];
@@ -228,20 +251,58 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
         $varEstado = 0;
     } elseif ($estado == 0) {
         $varEstado = 0;
-    }
+    };
 
     $query = "UPDATE purchases SET statePurchase = '$varEstado' WHERE id_invoice = '$id'";
 
+    $file = mysqli_query($conexion, $query) or die(mysqli_errno($conexion));
 
+    if ($file > 0) {
+        $queryInsumos = "SELECT id_supply  FROM `purchases_detail` WHERE id_invoice = $id;";
 
-    $file = mysqli_query($conexion, $query);
+        $fileInsumos = mysqli_query($conexion, $queryInsumos);
 
-    if ($file) {
-        echo json_encode('ok');
+        if ($fileInsumos) {
+
+            $queryEliminarDetalle = "DELETE FROM purchases_detail WHERE id_invoice = '$id'";
+
+            $fileDetailEliminar = mysqli_query($conexion, $queryEliminarDetalle);
+
+            while ($arregloInsumoss = mysqli_fetch_array($fileInsumos)) {
+
+                $Insumos = $arregloInsumoss['id_supply'];
+
+                $querySuma = "SELECT SUM(quantity_detail) AS quantity FROM `purchases_detail` WHERE id_supply = '$Insumos'";
+
+                $fileDetailSuma = mysqli_query($conexion, $querySuma);
+
+                while ($arraySuma = mysqli_fetch_array($fileDetailSuma)) {
+
+                    $quantity_suma = $arraySuma["quantity"];
+                        
+                    if(empty($quantity_suma)){
+                        $queryActualizarCantidad = "UPDATE supplys SET quantity = 0 WHERE idSupply = '$Insumos'";
+
+                        $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
+                    }else{
+
+                        $queryActualizarCantidad = "UPDATE supplys SET quantity = $quantity_suma WHERE idSupply = '$Insumos'";
+
+                        $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
+                    }
+                };
+            };
+
+            echo json_encode('ok');
+        } else {
+            echo json_encode('error al sumar');
+        }
     } else {
-        echo json_encode('error');
-    }
-}
+        echo json_encode('error al entrar al eliminar');
+    };
+};
+
+
 if ($_POST['accion'] == 'actualizarEstadoInactivo') {
     $id = $_POST['id'];
     $estado = $_POST['estado'];

@@ -20,7 +20,13 @@ function registrarCompra() {
             title: "Sin campos vacios por favor",
         });
 
-    } else {
+    }else if(document.getElementById("facturaCompra").value < 1) {
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Los valores del número de factura no pueden ser negativos",
+        });
+    }else {
         $.ajax({
             data: parametros,
             url: "../view/http/purchases.controller.php",

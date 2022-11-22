@@ -35,56 +35,34 @@ function registerUser() {
             },
             success: function (data) {
 
-                //  if (JSON.parse(data) == 'max') {
-                //      Swal.fire({
-                //          icon: 'error',
-                //          position: 'center',
-                //          text: 'Ingrese un documento valido.'
-                //      })
-                //      listarUsuarios()
-                //  }else if (JSON.parse(data) == 'max2') {
-                //      Swal.fire({
-                //          icon: 'error',
-                //          position: 'center',
-                //          text: 'Ingrese un número de telefono valido.'
-                //      })
-                //      listarUsuarios()
-                //  }else if (JSON.parse(data) == 'fallo') {
-                //      Swal.fire({
-                //          icon: 'error',
-                //          position: 'center',
-                //          text: 'Por favor, completa todos los campos.'
-                //      })
-                //      listarUsuarios()
-                //  }else if (JSON.parse(data) == 'emailError') {
-                //      Swal.fire({
-                //          icon: 'warning',
-                //          title: '',
-                //          position: 'center',
-                //          text: '!El correo electrónico ya existe!',
-                //          footer: ''
-                //      })
-                //      listarUsuarios()
-                //  }else if (JSON.parse(data) == 'email') {
-                //      Swal.fire({
-                //          icon: 'warning',
-                //          title: '',
-                //          position: 'center',
-                //          text: '!Correo electrónico inválido!',
-                //          footer: ''
-                //      })
-                //      listarUsuarios()
-                //  }else if (JSON.parse(data) == 'doc') {
-                //      Swal.fire({
-                //          icon: 'warning',
-                //          title: '',
-                //          position: 'center',
-                //          text: '!El número de documento ya existe!',
-                //          footer: ''
-                //      })
-                //      listarUsuarios()
-                //  }
-                if (JSON.parse(data) == 'ok') {
+                if (JSON.parse(data) == 'emailError') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '',
+                        position: 'center',
+                        text: '!El correo electrónico ya existe!',
+                        footer: ''
+                    })
+                    listarUsuarios()
+                } else if (JSON.parse(data) == 'email') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '',
+                        position: 'center',
+                        text: '!Correo electrónico inválido!',
+                        footer: ''
+                    })
+                    listarUsuarios()
+                } else if (JSON.parse(data) == 'doc') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '',
+                        position: 'center',
+                        text: '!El número de documento ya existe!',
+                        footer: ''
+                    })
+                    listarUsuarios()
+                } else if (JSON.parse(data) == 'ok') {
                     Swal.fire({
                         icon: 'success',
                         title: '',
@@ -93,7 +71,7 @@ function registerUser() {
                         footer: ''
                     })
                     listarUsuarios()
-                    limpiar();
+                    Cerrar();
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -114,11 +92,11 @@ function registerUser() {
 
 }
 
-function limpiar(){
-    $('#registerUsers').on('show.bs.modal', function (event) {
-        $("#registerUsers input").val("");
-        $("#registerUsers select").val("");
-    });
+function Cerrar() {
+    $('#registerUsers').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $("#registerUsers input").val("");
 }
 
 function assinmenetPassword() {
@@ -155,7 +133,7 @@ function listarUsuarios() {
                     JSON.parse(data).registros[i].document,
                     JSON.parse(data).registros[i].email,
                     JSON.parse(data).registros[i].phone,
-                    JSON.parse(data).registros[i].passwordUser,
+
                     JSON.parse(data).registros[i].id_rol,
                     JSON.parse(data).registros[i].stateUser,
                     ""
@@ -176,7 +154,7 @@ function listarUsuarios() {
     });
 }
 
-function agregarFila_Users(idUser, userName, last_name, document, email, phone, passwordUser, idRole, stateUser, acciones) {
+function agregarFila_Users(idUser, userName, last_name, document, email, phone, idRole, stateUser, acciones) {
     if (stateUser == 1) {
         verEstado = '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>'
     } else if (stateUser == 0) {
@@ -189,7 +167,7 @@ function agregarFila_Users(idUser, userName, last_name, document, email, phone, 
         anular = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado1(${idUser},${stateUser})"><i class="bi bi-person-plus"></i></button>`
     }
 
-    let datosUser = "'" + idUser + "','" + userName + "','" + last_name + "','" + document + "','" + email + "','" + phone + "','" + passwordUser + "','" + idRole + "','" + stateUser + "'";
+    let datosUser = "'" + idUser + "','" + userName + "','" + last_name + "','" + document + "','" + email + "','" + phone + "','" + idRole + "','" + stateUser + "'";
 
     var htmlTags = `
          <tr>
@@ -199,7 +177,7 @@ function agregarFila_Users(idUser, userName, last_name, document, email, phone, 
            <td> ${document}</td>
            <td> ${email}</td>
            <td> ${phone}</td>
-           <td> ${passwordUser}</td>
+
            <td> ${idRole}</td>
            <td> ${verEstado}</td>
            <td>
@@ -221,14 +199,14 @@ function eliminarFilasTableUsers() {
     }
 }
 
-function tomarDatosUser(idUser, name, last_name, documento, email, phone, passwordUser, idRole, stateUser) {
+function tomarDatosUser(idUser, name, last_name, documento, email, phone, idRole, stateUser) {
     document.getElementById('idUserUpdate').value = idUser
     document.getElementById('nameUserUpdate').value = name
     document.getElementById('last_nameUserUpdate').value = last_name
     document.getElementById('documentUserUpdate').value = documento
     document.getElementById('emailUserUpdate').value = email
     document.getElementById('phoneUserUpdate').value = phone
-    document.getElementById('passwordUserUpdate').value = passwordUser
+
     document.getElementById('roleUserUpdate').value = idRole
     document.getElementById('stateUserUpdate').value = stateUser
 }
@@ -258,12 +236,13 @@ function updateUsers() {
 
             if (JSON.parse(data) == 'ok') {
                 Swal.fire({
-                    position: 'center',
                     icon: 'success',
-                    title: '¡Actualizacion exitosa!',
-                    ShowConfirmbutton: false,
-                    timer: 1500
+                    title: '',
+                    position: 'center',
+                    text: '¡Actualizacion exitosa!',
+                    footer: ''
                 })
+                
                 listarUsuarios()
             } else if (JSON.parse(data) == 'error') {
                 Swal.fire({

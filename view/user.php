@@ -96,7 +96,6 @@ $resultado = mysqli_query($conexion, $query);
                     <th>Documento</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
-                    <th>Contaseña</th>
                     <th>Rol</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -137,8 +136,7 @@ $resultado = mysqli_query($conexion, $query);
   <script src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Summernote -->
   <script src="assets/plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
   <!-- AdminLTE App -->
   <script src="assets/dist/js/adminlte.js"></script>
 
@@ -236,7 +234,7 @@ $resultado = mysqli_query($conexion, $query);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <a onclick="registerUser()" class="btn btn-primary" data-dismiss="modal">Guardar</a>
+        <a onclick="registerUser()" class="btn btn-primary">Guardar</a>
       </div>
     </div>
   </div>
@@ -252,6 +250,7 @@ $resultado = mysqli_query($conexion, $query);
         </button>
       </div>
       <input type="hidden" class="form-control" id="idUserUpdate" aria-describedby="">
+      <input type="hidden" class="form-control" id="passwordUserUpdate" value="<?php echo $_SESSION['passwordUser']?>">
       <div class="modal-body">
 
         <div class="row">
@@ -290,19 +289,13 @@ $resultado = mysqli_query($conexion, $query);
             </div>
           </div>
         </div>
-
-        <div class="form-group">
-          <label for="passwordUserUpdate">Contraseña</label>
-          <input type="number" style="background-color: white" class="form-control" id="passwordUserUpdate" aria-describedby="">
-        </div>
-
+        
         <div class="row">
 
           <div class="col-6" style="margin-right: 0;">
             <div class="form-group">
               <label for="roleUserUpdate">Rol</label>
               <select class="form-control" id="roleUserUpdate" aria-describedby="">
-                <option value="">--Seleccione--</option>
                 <?php while ($row = $resultado->fetch_assoc()) { ?>
                   <option value="<?php echo $row['id_rol']; ?>"><?php echo $row['name_rol']; ?></option>
                 <?php }   ?>

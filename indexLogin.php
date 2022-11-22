@@ -29,10 +29,6 @@
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title"> Inicio de sesión </h3>
-        <!-- <a data-toggle="modal" data-target="#registerUsers">
-          <h6 class="text-lg-right">Crear cuenta</h6>
-        </a> -->
-
       </div>
       <div class="card-body login-card-body">
         <form action="view/http/access.controller.php" method="post">
@@ -216,7 +212,8 @@
                 </div>
               </div>
             </div>
-            <input type="hidden" class="form-control" id="roleUser" value="1">
+
+            <input type="hidden" class="form-control" id="roleUser" value="0">
             <input type="hidden" class="form-control" id="stateUser" value="1">
 
             <div class="row">
