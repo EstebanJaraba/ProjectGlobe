@@ -48,6 +48,17 @@ function registrarVenta() {
           listar();
           limpiar();
         }
+        else if (JSON.parse(data) == "error") {
+          Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Hay un error",
+              showConfirmButton: false,
+              timer: 1500,
+          });
+          listar();
+          ocultar();
+      }
       },
       error: function (error) {
         console.log("No se ha podido obtener la información " + error);
