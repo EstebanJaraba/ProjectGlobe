@@ -11,38 +11,47 @@ if ($_POST['accion'] == 'registrarCompra') {
     $cantidad = $_POST['cantidad'];
     $arreglo = $_POST['arreglo'];
 
+    $consulta = "SELECT * FROM purchases WHERE id_invoice='$factura'";
 
-    $query = "INSERT INTO purchases(id_invoice,amount_total,id_supplier,description,statePurchase) 
-    VALUE ('$factura','$total','$proveedor','$description','1')";
+    $conect = mysqli_query($conexion, $consulta);
 
-    $file =  mysqli_query($conexion, $query);
+    $result = mysqli_num_rows($conect);
 
-    if ($file) {
-
-        $newquery = '';
-        $newfile = false;
-
-        for ($i = 0; count($arreglo) > $i; $i++) {
-            $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) VALUE ('$factura','" . $arreglo[$i]['productoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
-            $newfile = mysqli_query($conexion, $newquery);
-
-            $aumentar = "SELECT SUM(quantity_detail) AS quantity FROM purchases_detail WHERE id_supply = " . $arreglo[$i]['productoId'] . "";
-
-            $filesSum = mysqli_query($conexion, $aumentar);
-
-
-            while ($array = mysqli_fetch_array($filesSum)){
-                $quantitySuma = $array["quantity"];
-
-                $queryUp = "UPDATE supplys SET quantity=$quantitySuma WHERE idSupply= ".$arreglo[$i]['productoId']."";
-                $fileUp = mysqli_query($conexion, $queryUp);
-            }
-        }
-        if ($fileUp) {
-            echo json_encode('ok');
-        }
+    if ($result > 0) {
+        echo json_encode("fac");
     } else {
-        echo json_encode('error');
+        $query = "INSERT INTO purchases(id_invoice,amount_total,id_supplier,description,statePurchase) 
+        VALUE ('$factura','$total','$proveedor','$description','1')";
+
+        $file =  mysqli_query($conexion, $query);
+
+        if ($file) {
+
+            $newquery = '';
+            $newfile = false;
+
+            for ($i = 0; count($arreglo) > $i; $i++) {
+                $newquery = "INSERT INTO purchases_detail(id_invoice,id_supply,amount_product,quantity_detail) VALUE ('$factura','" . $arreglo[$i]['productoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
+                $newfile = mysqli_query($conexion, $newquery);
+
+                $aumentar = "SELECT SUM(quantity_detail) AS quantity FROM purchases_detail WHERE id_supply = " . $arreglo[$i]['productoId'] . "";
+
+                $filesSum = mysqli_query($conexion, $aumentar);
+
+
+                while ($array = mysqli_fetch_array($filesSum)) {
+                    $quantitySuma = $array["quantity"];
+
+                    $queryUp = "UPDATE supplys SET quantity=$quantitySuma WHERE idSupply= " . $arreglo[$i]['productoId'] . "";
+                    $fileUp = mysqli_query($conexion, $queryUp);
+                }
+            }
+            if ($fileUp) {
+                echo json_encode('ok');
+            }
+        } else {
+            echo json_encode('error');
+        }
     }
 }
 
@@ -279,12 +288,12 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
                 while ($arraySuma = mysqli_fetch_array($fileDetailSuma)) {
 
                     $quantity_suma = $arraySuma["quantity"];
-                        
-                    if(empty($quantity_suma)){
+
+                    if (empty($quantity_suma)) {
                         $queryActualizarCantidad = "UPDATE supplys SET quantity = 0 WHERE idSupply = '$Insumos'";
 
                         $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
-                    }else{
+                    } else {
 
                         $queryActualizarCantidad = "UPDATE supplys SET quantity = $quantity_suma WHERE idSupply = '$Insumos'";
 

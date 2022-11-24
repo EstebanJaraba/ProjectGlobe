@@ -34,7 +34,7 @@
 
          <li class="nav-item">
 
-          <a href="pages/widgets.html" class="nav-link">
+          <a class="nav-link">
             <i class="bi bi-cart3"></i>
             <p>
               &nbsp;&nbsp;&nbsp;Gestión compras
@@ -64,7 +64,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a class="nav-link">
             <i class="bi bi-bag-check"></i>
             <p>
               &nbsp;&nbsp;&nbsp;Gestión ventas
@@ -113,12 +113,6 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="bi bi-info-circle"></i>
-            <p>&nbsp;&nbsp;&nbsp;Ayuda</p>
-          </a>
-        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

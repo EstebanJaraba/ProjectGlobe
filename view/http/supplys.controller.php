@@ -17,15 +17,28 @@ if ($_POST['accion'] == 'registerSupplys') {
         echo json_encode('num');
     }
     else {
-        $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','1')";
 
-        $file =  mysqli_query($conexion, $query);
+        $consulta = "SELECT * FROM supplys WHERE partNumber='$partNumber'";
 
-        if ($file) {
-            echo json_encode('ok');
-        } else {
-            echo json_encode('error');
+        $conect = mysqli_query($conexion, $consulta);
+
+        $result = mysqli_num_rows($conect);
+
+        if($result > 0){
+            echo json_encode("pa");
+        }else{
+            $query = "INSERT INTO supplys(nameSupply,partNumber,quantity,price,stateSupply) VALUE ('$name','$partNumber','$quantity','$price','1')";
+
+            $file =  mysqli_query($conexion, $query);
+    
+            if ($file) {
+                echo json_encode('ok');
+            } else {
+                echo json_encode('error');
+            }
         }
+
+        
     }
 
 }
