@@ -1,3 +1,4 @@
+//var parametros = "";
 function registrarVenta() {
 
   var parametros = {
@@ -24,6 +25,12 @@ function registrarVenta() {
         position: "center",
         icon: "warning",
         title: "¡Los campos son obligatorios!",
+      });
+    }else if(document.getElementById("facturaVenta").value < 1) {
+      Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Los valores del número de factura no pueden ser negativos",
       });
     }
     else {
@@ -100,13 +107,17 @@ function agregarInsumo() {
     });
 
   } else {
-    var insumoAgregado = {
-      insumoId: document.getElementById("listaInsumo").value,
-      nombreInsumo: selectorInsumo.options[selectorInsumo.selectedIndex].text,
-      cantidad: document.getElementById("cantidadAgregar").value,
-      valorUnitario: document.getElementById("v_unitario").value,
-      valorTotal: document.getElementById("v_total").value,
-    };
+    parametros.id_insumo = document.getElementById("cantidadAgregar").value;
+    parametros.cantidad = document.getElementById("cantidadAgregar").value;
+    if(ajaxMain("validar_stock","../view/http/ventas.controller.php",null)){
+      var insumoAgregado = {
+        insumoId: document.getElementById("listaInsumo").value,
+        nombreInsumo: selectorInsumo.options[selectorInsumo.selectedIndex].text,
+        cantidad: document.getElementById("cantidadAgregar").value,
+        valorUnitario: document.getElementById("v_unitario").value,
+        valorTotal: document.getElementById("v_total").value,
+      };
+    }
   }
 
   ArregloInsumosAgregarVenta.push(insumoAgregado);
@@ -140,6 +151,13 @@ function ajaxMain(accion, url, nombreSelect) {
       }
       if (accion == "listaEmpleado") {
         loadingSelect(data, nombreSelect);
+      }else if(JSON.parse(data) == "stock"){
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "No hay stock suficiente",
+      });
+      return;
       }
     },
     error: function (error) {

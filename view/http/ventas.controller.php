@@ -28,15 +28,13 @@ if ($_POST['accion'] == 'registrarVenta') {
             VALUE ('$factura', '" . $arreglo[$i]['insumoId'] . "', '" . $arreglo[$i]['valorTotal'] . "','" . $arreglo[$i]['cantidad'] . "')";
             $newfile = mysqli_query($conexion, $newquery);
 
-            $disminuir = "SELECT (-(quantity_sales_detail)) AS quantity FROM sales_detail WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
+            $disminuir = "SELECT quantity AS quantity FROM supplys WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
 
             $filesSum = mysqli_query($conexion, $disminuir);
 
-
-            while ($array = mysqli_fetch_array($filesSum)){
-                $quantitySuma = $array["quantity"];
-
-                $queryUp = "UPDATE supplys SET quantity = $quantitySuma WHERE idSupply= ".$arreglo[$i]['insumoId']."";
+            while ($array = mysqli_fetch_assoc($filesSum)){
+                $quantitySuma = $array["quantity"] - $arreglo[$i]['cantidad'];
+                $queryUp = "UPDATE supplys SET quantity = $quantitySuma WHERE idSupply = ".$arreglo[$i]['insumoId']."";
                 $fileUp = mysqli_query($conexion, $queryUp);
             }
         }
@@ -340,4 +338,14 @@ if (trim($_POST['accion']) == 'seleccionarListaInsumos') {
 
 
     echo json_encode($respuesta);
+}
+
+if(isset($_POST['validar_stock'])){
+    $idInsumo = $_POST['id_insumo'];
+    $cantidad = $_POST['cantidad'];
+
+    $queryCantidad = mysqli_query($conexion,"SELECT quantity from supplys sp where idSupply = $idInsumo and $cantidad < sp.cantidad ");
+    if(!mysqli_num_rows($queryCantidad) > 0){
+       echo json_encode("stock"); 
+    }
 }
