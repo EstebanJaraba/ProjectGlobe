@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GLOBE | Fumigaciones</title>
+    <title>GLOBE</title>
 
     <link href="assets/dist/img/Globee.jpeg" rel="icon">
     <!-- Google Font: Source Sans Pro -->
@@ -94,7 +94,7 @@ session_start();
                         <!-- /.card-body -->
                         
                     </div>
-                    <a href="reportes/reporte.clientes.php" target="_blank" class="btn btn-primary btn-sm">Ver reporte cliente</a>
+                   <!-- <a href="reportes/reporte.clientes.php" target="_blank" class="btn btn-primary btn-sm">Ver reporte cliente</a> -->
                     
 
                 </div>

@@ -9,7 +9,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GLOBE | Fumigaciones</title>
+    <title>GLOBE</title>
 
     <link href="assets/dist/img/Globee.jpeg" rel="icon">
     <!-- Google Font: Source Sans Pro -->
@@ -77,7 +77,7 @@ session_start();
                                     <tr>
                                         <th>Id</th>
                                         <th>Nombre</th>
-                                        <th>Precio</th>
+                                        <th>Descripción</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -168,8 +168,8 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="costService">Precio</label>
-                                <input type="number" class="form-control" id="costService" aria-describedby="emailHelp">
+                                <label for="costService">Descripción</label>
+                                <input type="text" class="form-control" id="costService" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <div class="col-6">
@@ -215,8 +215,8 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="costServiceEditar">Precio</label>
-                                <input type="number" class="form-control" id="costServiceEditar" aria-describedby="emailHelp" require>
+                                <label for="costServiceEditar">Descripción</label>
+                                <input type="text" class="form-control" id="costServiceEditar" aria-describedby="emailHelp" require>
                             </div>
                         </div>
                         <div class="col-6">
