@@ -284,7 +284,7 @@ $resultado = mysqli_query($conexion, $query);
 
           <div class="col-6">
             <div class="form-group">
-              <label for="phoneUserUpdate">Telefono</label><label for="">*</label>
+              <label for="phoneUserUpdate">Teléfono</label><label for="">*</label>
               <input type="text" class="form-control" id="phoneUserUpdate" aria-describedby="">
             </div>
           </div>
@@ -292,7 +292,7 @@ $resultado = mysqli_query($conexion, $query);
         
         <div class="row">
 
-          <div class="col-6" style="margin-right: 0;">
+           <div class="col-6" style="margin-right: 0;">
             <div class="form-group">
               <label for="roleUserUpdate">Rol</label><label for="">*</label>
               <select class="form-control" id="roleUserUpdate" aria-describedby="">
@@ -301,7 +301,7 @@ $resultado = mysqli_query($conexion, $query);
                 <?php }   ?>
               </select>
             </div>
-          </div>
+          </div> 
 
           <div class="col-6" style="margin-left: 0;">
             <div class="form-group">

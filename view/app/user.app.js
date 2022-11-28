@@ -21,7 +21,7 @@ function registerUser() {
         Swal.fire({
             icon: 'error',
             position: 'center',
-            text: 'Ingrese un documento valido.'
+            text: 'Ingrese un documento válido.'
         })
         listarUsuarios()
     } else {
@@ -48,7 +48,7 @@ function registerUser() {
                         icon: 'warning',
                         title: '',
                         position: 'center',
-                        text: '!Correo electrónico inválido!',
+                        text: '¡Correo electrónico inválido!',
                         footer: ''
                     })
                     listarUsuarios()
@@ -65,6 +65,7 @@ function registerUser() {
                     Swal.fire({
                         icon: 'success',
                         title: '',
+                        confirmButtonText: 'Aceptar',
                         position: 'center',
                         text: '¡Registro exitoso!',
                         footer: ''
@@ -144,7 +145,7 @@ function listarUsuarios() {
             });
         },
         error: function () {
-            console.log("no se ha podido obtener la informacion");
+            console.log("no se ha podido obtener la información");
         },
     });
 }
@@ -233,7 +234,8 @@ function updateUsers() {
                     icon: 'success',
                     title: '',
                     position: 'center',
-                    text: '¡Actualizacion exitosa!',
+                    confirmButtonText: 'Aceptar',
+                    text: '¡Actualización exitosa!',
                     footer: ''
                 })
 
@@ -258,9 +260,10 @@ function updateUsers() {
 function actualizarEstado(idUser, stateUser) {
 
     Swal.fire({
-        title: '¿Estas seguro?',
-        text: "Vas a deshabilitar un usuario!",
+        title: '¿Estás seguro?',
+        text: "¿Vas a deshabilitar un usuario?",
         icon: 'warning',
+        cancelButtonText: 'Cancelar',
         showCancelButton: true,
 
         confirmButtonText: 'Si'
@@ -301,7 +304,7 @@ function actualizarEstado(idUser, stateUser) {
                     }
                 },
                 error: function (error) {
-                    console.log("No se a podido editar la información " + error);
+                    console.log("No se ha podido editar la información " + error);
                 },
             });
         }
@@ -356,7 +359,7 @@ function actualizarEstado1(idUser, stateUser) {
                     }
                 },
                 error: function (error) {
-                    console.log("No se a podido editar la información " + error);
+                    console.log("No se ha podido editar la información " + error);
                 },
             });
         }
