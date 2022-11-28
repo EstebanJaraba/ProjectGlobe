@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GLOBE | fumigaciones</title>
+    <title>GLOBE</title>
 
     <link href="assets/dist/img/Globee.jpeg" rel="icon">
     <!-- Google Font: Source Sans Pro -->

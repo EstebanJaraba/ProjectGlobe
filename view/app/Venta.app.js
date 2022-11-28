@@ -1,4 +1,4 @@
-//var parametros = "";
+var parametros = "";
 function registrarVenta() {
 
   var parametros = {
@@ -12,6 +12,7 @@ function registrarVenta() {
     valor: document.getElementById("v_unitario").value,
     total: document.getElementById("totalVenta").innerHTML,
     descriptionSale: document.getElementById("descriptionSale").value,
+    dateRegistration: document.getElementById("dateRegistration").value,
     arreglo: ArregloInsumosAgregarVenta,
   };
 
@@ -107,24 +108,48 @@ function agregarInsumo() {
     });
 
   } else {
-    parametros.id_insumo = document.getElementById("cantidadAgregar").value;
-    parametros.cantidad = document.getElementById("cantidadAgregar").value;
-    if(ajaxMain("validar_stock","../view/http/ventas.controller.php",null)){
-      var insumoAgregado = {
-        insumoId: document.getElementById("listaInsumo").value,
-        nombreInsumo: selectorInsumo.options[selectorInsumo.selectedIndex].text,
-        cantidad: document.getElementById("cantidadAgregar").value,
-        valorUnitario: document.getElementById("v_unitario").value,
-        valorTotal: document.getElementById("v_total").value,
-      };
-    }
+    $.ajax({
+      data: {
+       accion : "validar_stock",
+       id_insumo : document.getElementById("listaInsumo").value,
+       cantidad : document.getElementById("cantidadAgregar").value,
+      },
+      url: "../view/http/ventas.controller.php",
+      type: "post",
+      beforeSend: function () {
+        //mostrar_loading();
+      },
+      success: function (data) {
+        let response = JSON.parse(data);
+        if (response == "sin_stock") {
+          Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "No hay stock suficiente",
+        });
+        return;
+        }
+        if (response == "disponible") {
+          var insumoAgregado = {
+            insumoId: document.getElementById("listaInsumo").value,
+            nombreInsumo: selectorInsumo.options[selectorInsumo.selectedIndex].text,
+            cantidad: document.getElementById("cantidadAgregar").value,
+            valorUnitario: document.getElementById("v_unitario").value,
+            valorTotal: document.getElementById("v_total").value,
+          };
+          ArregloInsumosAgregarVenta.push(insumoAgregado);
+          //Formato de valor a dolar
+          valorTotalProVenta = valorTotalProVenta + parseInt(document.getElementById("v_total").value);
+          document.getElementById("totalVenta").innerHTML = valorTotalProVenta;
+          listarInsumos();
+        }
+      },
+      error: function (error) {
+        console.log("No se ha podido obtener la información " + error);
+      },
+    });
   }
 
-  ArregloInsumosAgregarVenta.push(insumoAgregado);
-  //Formato de valor a dolar
-  valorTotalProVenta = valorTotalProVenta + parseInt(document.getElementById("v_total").value);
-  document.getElementById("totalVenta").innerHTML = valorTotalProVenta;
-  listarInsumos();
 }
 
 function ajaxMain(accion, url, nombreSelect) {
@@ -524,8 +549,8 @@ function tomarDatos(idFactura, cliente, servicio, empleado, total, descriptionSa
   document.getElementById("idEmployeeDetail").value = empleado;
   document.getElementById("totalDetail").value = amount;
   document.getElementById("descriptionSaleDetail").value = descriptionSale;
+  //document.getElementById("dateRegistrationDetail").value = dateRegistration;
   document.getElementById("estadoDetail").value = status;
-  // document.getElementById("fechaRegisterDetail").value = dateRegistration;
   ListarDetalle();
 
 }

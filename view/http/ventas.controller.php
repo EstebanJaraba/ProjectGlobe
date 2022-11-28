@@ -13,10 +13,11 @@ if ($_POST['accion'] == 'registrarVenta') {
     $cantidad = $_POST['cantidad'];
     $total = $_POST['total'];
     $descriptionSale = $_POST['descriptionSale'];
+    $dateRegistration = $_POST['dateRegistration'];
     $arreglo = $_POST['arreglo'];
 
-    $query = "INSERT INTO sales_management (id_invoice, idClient, idService, idEmployee, amount_total_sale, descriptionSale, stateSale) 
-    VALUE ('$factura', '$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '1')";
+    $query = "INSERT INTO sales_management (id_invoice, idClient, idService, idEmployee, amount_total_sale, descriptionSale, dateRegistration, stateSale) 
+    VALUE ('$factura', '$cliente', '$servicio', '$empleado', '$total', '$descriptionSale', '$dateRegistration', '1')";
 
     $file = mysqli_query($conexion, $query);
     if ($file) {
@@ -240,6 +241,7 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
                'empleado' => $datos["nameEmployee"],
                'total' => $datos["amount_total_sale"],
                'descriptionSale' => $datos["descriptionSale"],
+                'dateRegistration' => $datos["dateRegistration"],
                'stateSale' => $datos["stateSale"],        
            ]
        );
@@ -276,13 +278,13 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
 
             $fileDetailEliminar = mysqli_query($conexion, $queryEliminarDetalle);
 
-            while ($arregloProductos = mysqli_fetch_array($fileProducto)) {
+            while ($arregloInsumoss = mysqli_fetch_array($fileProducto)) {
 
-                $insumo = $arregloProductos['idSupply'];
+                $insumo = $arregloInsumoss['idSupply'];
 
-                $querySuma = "SELECT (-(quantity_sales_detail)) AS quantity FROM `sales_detail` WHERE idSupply = '$insumo'";
+                $queryResta = "SELECT quantity AS quantity FROM supplys WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
 
-                $fileDetailSuma = mysqli_query($conexion, $querySuma);
+                $fileDetailSuma = mysqli_query($conexion, $queryResta);
 
                 while ($arraySuma = mysqli_fetch_array($fileDetailSuma)) {
 
@@ -294,7 +296,7 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
                         $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
                     }else{
 
-                        $queryActualizarCantidad = "UPDATE supplys SET quantity = $quantity_suma WHERE idSupply = '$insumo'";
+                        $queryActualizarCantidad = "UPDATE supplys SET quantity = $quantitySuma WHERE idSupply = ".$arreglo[$i]['insumoId']."";
 
                         $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
                     }
@@ -340,12 +342,14 @@ if (trim($_POST['accion']) == 'seleccionarListaInsumos') {
     echo json_encode($respuesta);
 }
 
-if(isset($_POST['validar_stock'])){
+if($_POST['accion'] == "validar_stock"){
     $idInsumo = $_POST['id_insumo'];
     $cantidad = $_POST['cantidad'];
 
-    $queryCantidad = mysqli_query($conexion,"SELECT quantity from supplys sp where idSupply = $idInsumo and $cantidad < sp.cantidad ");
-    if(!mysqli_num_rows($queryCantidad) > 0){
-       echo json_encode("stock"); 
+    $queryCantidad = mysqli_query($conexion,"SELECT quantity from supplys sp where idSupply = $idInsumo and $cantidad <= sp.quantity");
+    if(mysqli_num_rows($queryCantidad) > 0){
+        echo json_encode("disponible"); 
+    }else{
+        echo json_encode("sin_stock"); 
     }
 }

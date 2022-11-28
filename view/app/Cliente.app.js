@@ -38,10 +38,10 @@ function registroCliente() {
                 listarClientes()
             } else if (JSON.parse(data) == 'fallo') {
                 Swal.fire({
-                    icon: 'error',
-                    position: 'center',
-                    text: 'Por favor, completa todos los campos.'
-                })
+                    position: "center",
+                    icon: "warning",
+                    title: "¡Los campos son obligatorios!",
+                });
                 listarClientes()
             } else if (JSON.parse(data) == 'emailError') {
                 Swal.fire({

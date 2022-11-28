@@ -132,9 +132,9 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
-                                                                                
 
-                                                                                <div class="col-6" style="margin-left: 0;">
+
+                                                                                <div class="col-4" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="idService">Servicio</label>
                                                                                         <select name="servicio" class="form-control" aria-required="" id="listaServicio">
@@ -146,7 +146,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-6" style="margin-left: 0;">
+                                                                                <div class="col-4" style="margin-left: 0;">
                                                                                     <div class="form-group">
                                                                                         <label for="idEmpleado">Empleado</label>
                                                                                         <select name="empleado" class="form-control" aria-required="" id="listaEmpleado">
@@ -155,6 +155,13 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                                                                                                 <option value="<?php echo $row['idEmployee']; ?>"><?php echo $row['nameEmployee']; ?></option>
                                                                                             <?php }   ?>
                                                                                         </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-4" style="margin-left: 0;">
+                                                                                    <div class="form-group">
+                                                                                        <label for="dateRegistration">Fecha del servicio</label>
+                                                                                        <input type="datetime-local" class="form-control" id="dateRegistration" aria-describedby="">
                                                                                     </div>
                                                                                 </div>
 
@@ -339,7 +346,7 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
 <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="detalleVenta" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-dark" >
+            <div class="modal-header bg-dark">
                 <h5 class="modal-title">Detalle de venta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -383,6 +390,11 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
                 </div>
 
                 <div class="row">
+                    <!--  <label for="dateRegistrationDetail" class="col-sm-2 col-form-label">Fecha del servicio:</label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="dateRegistrationDetail">
+                    </div> --->
+
                     <label for="estadoDetail" class="col-sm-2 col-form-label">Estado:</label>
                     <div class="col-sm-4">
                         <input type="text" readonly class="form-control-plaintext" id="estadoDetail">
@@ -411,4 +423,3 @@ $resultadoEmpleado = mysqli_query($conexion, $queryEmpleado);
         </div>
     </div>
 </div>
-

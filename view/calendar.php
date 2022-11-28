@@ -100,16 +100,34 @@ session_start();
                         }
                     }
                 },
-                eventClick:function(mouseEnterInfo){
-                    $(this).css('background-color','red');
-                    $("#exampleModal").modal();
+                eventClick:function(info){
+                    let event = info.event;
+                    $("#exampleModal").modal('show');
+                    $("#exampleModal").find('#id_title').text(event.title);  
+                    $("#exampleModal").find('#id_service').val(event.extendedProps.service);  
+                    $("#exampleModal").find('#id_client').val(event.extendedProps.client);  
+                    $("#exampleModal").find('#id_employee').val(event.extendedProps.employee);
                 },
                 events:[
-                    {
-                        title:'Añel pipi',
-                        start:'2022-11-09',
-                        end:'2022-11-15'
+                <?php
+                    require('http/db/conexion.php');
+                    $datesCalendar = mysqli_query($conexion,"SELECT descriptionSale,sl.dateRegistration,cl.nameClient,se.nameService,em.nameEmployee
+                    FROM sales_management sl JOIN clients cl on (sl.idClient = cl.idClient)
+                    JOIN services se on (sl.idService = se.idService) 
+                    JOIN employees em on (sl.idEmployee = em.idEmployee)"); 
+                    while($calendarRow = mysqli_fetch_assoc($datesCalendar)){
+                    echo "
+                        {
+                            title: '".$calendarRow['descriptionSale']."',
+                            client: '".$calendarRow['nameClient']."',
+                            service: '".$calendarRow['nameService']."',
+                            employee: '".$calendarRow['nameEmployee']."',
+                            start: '".$calendarRow['dateRegistration']."',
+                            end: '".$calendarRow['dateRegistration']."',
+                        },
+                    ";
                     }
+                ?>
                 ]
             });
             calendar.render();
@@ -147,19 +165,29 @@ session_start();
 
 </html>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="id_title"></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="form-group">
+            <label for="dateRegistration">Servicio</label>
+            <input type="text" class="form-control" id="id_service" disabled>
+        </div>
+        <div class="form-group">
+            <label for="dateRegistration">Cliente</label>
+            <input type="text" class="form-control" id="id_client" disabled>
+        </div>
+        <div class="form-group">
+            <label for="dateRegistration">Empleado</label>
+            <input type="text" class="form-control" id="id_employee" disabled>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
