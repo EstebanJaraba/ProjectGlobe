@@ -180,33 +180,33 @@ $resultado = mysqli_query($conexion, $query);
           <div class="col-6" style="margin-right:0;">
             <div class="form-group">
               <label for="nameUser">Nombre</label>
-              <input type="text" class="form-control" id="nameUser" aria-describedby="error">
+              <input type="text" class="form-control" id="nameUser" placeholder="*" >
             </div>
           </div>
           <div class="col-6" style="margin-right:0;">
             <div class="form-group">
               <label for="last_nameUser">Apellidos</label>
-              <input type="text" class="form-control" id="last_nameUser" aria-describedby="">
+              <input type="text" class="form-control" id="last_nameUser" placeholder="*" >
             </div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="documentUser">Documento</label>
-          <input type="text" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" aria-describedby="">
+          <input type="text" onkeyup="assinmenetPassword()" class="form-control" id="documentUser" placeholder="*" >
         </div>
 
         <div class="row">
           <div class="col-6" style="margin-right:0;">
             <div class="form-group">
               <label for="phoneUser">Teléfono</label>
-              <input type="text" class="form-control" id="phoneUser" aria-describedby="">
+              <input type="text" class="form-control" id="phoneUser" placeholder="*" >
             </div>
           </div>
           <div class="col-6" style="margin-right:0;">
             <div class="form-group">
               <label for="emailUser">Correo electrónico</label>
-              <input type="emal" class="form-control" id="emailUser" aria-describedby="">
+              <input type="emal" class="form-control" id="emailUser" placeholder="*" >
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@ $resultado = mysqli_query($conexion, $query);
           <div class="col-6">
             <div class="form-group">
               <label for="passwordUser">Contraseña</label>
-              <input type="number" disabled style="background-color: white" class="form-control" id="passwordUser" aria-describedby="">
+              <input type="number" disabled style="background-color: white" class="form-control" id="passwordUser" placeholder="*" >
             </div>
           </div>
 
@@ -256,35 +256,35 @@ $resultado = mysqli_query($conexion, $query);
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="nameUserUpdate">Nombre</label>
+              <label for="nameUserUpdate">Nombre</label><label for="">*</label>
               <input type="text" class="form-control" id="nameUserUpdate" aria-describedby="">
             </div>
           </div>
 
           <div class="col-6">
             <div class="form-group">
-              <label for="last_nameUserUpdate">Apellidos</label>
+              <label for="last_nameUserUpdate">Apellidos</label><label for="">*</label>
               <input type="text" class="form-control" id="last_nameUserUpdate" aria-describedby="">
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="documentUserUpdate">Documento</label>
+          <label for="documentUserUpdate">Documento</label><label for="">*</label>
           <input type="number" class="form-control" id="documentUserUpdate" aria-describedby="">
         </div>
 
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="emailUserUpdate">Email</label>
+              <label for="emailUserUpdate">Email</label><label for="">*</label>
               <input type="emal" class="form-control" id="emailUserUpdate" aria-describedby="">
             </div>
           </div>
 
           <div class="col-6">
             <div class="form-group">
-              <label for="phoneUserUpdate">Telefono</label>
+              <label for="phoneUserUpdate">Telefono</label><label for="">*</label>
               <input type="text" class="form-control" id="phoneUserUpdate" aria-describedby="">
             </div>
           </div>
@@ -294,7 +294,7 @@ $resultado = mysqli_query($conexion, $query);
 
           <div class="col-6" style="margin-right: 0;">
             <div class="form-group">
-              <label for="roleUserUpdate">Rol</label>
+              <label for="roleUserUpdate">Rol</label><label for="">*</label>
               <select class="form-control" id="roleUserUpdate" aria-describedby="">
                 <?php while ($row = $resultado->fetch_assoc()) { ?>
                   <option value="<?php echo $row['id_rol']; ?>"><?php echo $row['name_rol']; ?></option>
@@ -305,7 +305,7 @@ $resultado = mysqli_query($conexion, $query);
 
           <div class="col-6" style="margin-left: 0;">
             <div class="form-group">
-              <label for="stateUserUpdate">Estado</label>
+              <label for="stateUserUpdate">Estado</label><label for="">*</label>
               <select class="form-control" id="stateUserUpdate" aria-describedby="">
                 <option value="1">Activo</option>
                 <option value="0">Inactivo</option>

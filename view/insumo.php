@@ -202,24 +202,24 @@ if (!isset($_SESSION['userName'])) {
 
         <div class="form-group">
           <label for="nameSupply">Nombre</label>
-          <input type="text" class="form-control" id="nameSupply" aria-describedby="">
+          <input type="text" class="form-control" id="nameSupply" placeholder="*">
         </div>
 
         <div class="form-group">
           <label for="partNumberSupply">Número de parte</label>
-          <input type="number" class="form-control" id="partNumberSupply" aria-describedby="">
+          <input type="number" class="form-control" id="partNumberSupply" placeholder="*">
         </div>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
               <label for="quantitySupply">Cantidad</label>
-              <input type="number" class="form-control" id="quantitySupply" aria-describedby="">
+              <input type="number" class="form-control" id="quantitySupply" placeholder="*">
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
               <label for="priceSupply">Precio</label>
-              <input type="number" class="form-control" id="priceSupply" aria-describedby="">
+              <input type="number" class="form-control" id="priceSupply" placeholder="*">
             </div>
           </div>
         </div>
@@ -227,7 +227,7 @@ if (!isset($_SESSION['userName'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a onclick="registerSupply()" class="btn btn-primary" data-dismiss="modal">Guardar</a>
+        <a onclick="registerSupply()" class="btn btn-primary">Guardar</a>
       </div>
     </div>
 
@@ -249,31 +249,31 @@ if (!isset($_SESSION['userName'])) {
       <div class="modal-body">
 
         <div class="form-group">
-          <label for="nameSupplyUpdate">Nombre</label>
+          <label for="nameSupplyUpdate">Nombre</label><label for="">*</label>
           <input type="text" class="form-control" id="nameSupplyUpdate" aria-describedby="">
         </div>
 
         <div class="form-group">
-          <label for="partNumberSupplyUpdate">Número de parte</label>
+          <label for="partNumberSupplyUpdate">Número de parte</label><label for="">*</label>
           <input type="number" class="form-control" id="partNumberSupplyUpdate" aria-describedby="">
         </div>
         <div class="row">
           <div class="col-4">
             <div class="form-group">
-              <label for="quantitySupplyUpdate">Cantidad</label>
+              <label for="quantitySupplyUpdate">Cantidad</label><label for="">*</label>
               <input type="number" class="form-control" id="quantitySupplyUpdate" aria-describedby="">
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
-              <label for="priceSupplyUpdate">Precio</label>
+              <label for="priceSupplyUpdate">Precio</label><label for="">*</label>
               <input type="number" class="form-control" id="priceSupplyUpdate" aria-describedby="">
             </div>
           </div>
 
           <div class="col-4">
             <div class="form-group">
-              <label for="stateSupplyUpdate">Estado</label>
+              <label for="stateSupplyUpdate">Estado</label><label for="">*</label>
               <select class="form-control" id="stateSupplyUpdate" aria-describedby="">
                 <option value="1">Activo</option>
                 <option value="0">Inactivo</option>
@@ -284,7 +284,7 @@ if (!isset($_SESSION['userName'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button onclick="updateSupply()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
+        <button onclick="updateSupply()" class="btn btn-primary">Guardar cambios</button>
       </div>
     </div>
   </div>

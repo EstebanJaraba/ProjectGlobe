@@ -3,8 +3,7 @@ function registerSupplier() {
     var parametros = {
         "accion": "registerSuppliers",
         "nombre": document.getElementById('nameSupplier').value,
-        "apellido": document.getElementById('last_nameSupplier').value,
-        "documento": document.getElementById('documentSupplier').value,
+        "direction": document.getElementById('dire').value,
         "correo": document.getElementById('emailSupplier').value,
         "celular": document.getElementById('phoneSupplier').value,
 
@@ -25,21 +24,21 @@ function registerSupplier() {
                     text: 'Ingrese un documento valido.'
                 })
                 listarProveedores()
-            }else if (JSON.parse(data) == 'max2') {
+            } else if (JSON.parse(data) == 'max2') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
                     text: 'Ingrese un número de telefono valido.'
                 })
                 listarProveedores()
-            }else if (JSON.parse(data) == 'fallo') {
+            } else if (JSON.parse(data) == 'fallo') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
                     text: 'Por favor, completa todos los campos.'
                 })
                 listarProveedores()
-            }else if (JSON.parse(data) == 'emailError') {
+            } else if (JSON.parse(data) == 'emailError') {
                 Swal.fire({
                     icon: 'warning',
                     title: '',
@@ -48,7 +47,7 @@ function registerSupplier() {
                     footer: ''
                 })
                 listarProveedores()
-            }else if (JSON.parse(data) == 'email') {
+            } else if (JSON.parse(data) == 'email') {
                 Swal.fire({
                     icon: 'warning',
                     title: '',
@@ -57,7 +56,7 @@ function registerSupplier() {
                     footer: ''
                 })
                 listarProveedores()
-            }else if (JSON.parse(data) == 'doc') {
+            } else if (JSON.parse(data) == 'doc') {
                 Swal.fire({
                     icon: 'warning',
                     title: '',
@@ -66,8 +65,7 @@ function registerSupplier() {
                     footer: ''
                 })
                 listarProveedores()
-            }
-            else if (JSON.parse(data) == 'ok') {
+            } else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -121,10 +119,9 @@ function listarProveedores() {
                 agregarFila_Suppliers(
                     JSON.parse(data).registros[i].idSupplier,
                     JSON.parse(data).registros[i].nameSupplier,
-                    JSON.parse(data).registros[i].last_name,
-                    JSON.parse(data).registros[i].document,
-                    JSON.parse(data).registros[i].email,
                     JSON.parse(data).registros[i].phone,
+                    JSON.parse(data).registros[i].direction,
+                    JSON.parse(data).registros[i].email,
                     JSON.parse(data).registros[i].stateSupplier,
                     " "
                 );
@@ -146,23 +143,22 @@ function listarProveedores() {
     });
 }
 
-function agregarFila_Suppliers(idSupplier, name, last_name, document, email, phone, stateSupplier, acciones) {
+function agregarFila_Suppliers(idSupplier, name, phone, direction, email, stateSupplier, acciones) {
     if (stateSupplier == 1) {
         verEstado = '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>'
     } else if (stateSupplier == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-12" style="cursor: text">INACTIVO</button>'
     }
 
-    let datosSupplier = "'" + idSupplier + "','" + name + "','" + last_name + "','" + document + "','" + email + "','" + phone + "','" + stateSupplier + "'";
+    let datosSupplier = "'" + idSupplier + "','" + name + "','" + phone + "','" + direction + "','" + email + "','" + stateSupplier + "'";
 
     var htmlTags = `
          <tr>
            <td> ${idSupplier}</td>
            <td> ${name}</td>
-           <td> ${last_name}</td>
-           <td> ${document}</td>
-           <td> ${email}</td>
            <td> ${phone}</td>
+           <td> ${direction}</td>
+           <td> ${email}</td>
            <td> ${verEstado}</td>
            <td>
              <button data-toggle="modal" data-target="#updateSupplier" class="btn btn-outline-success btn-sm" onclick="tomarDatosSupplier(${datosSupplier})"><i class="bi bi-pencil-square"></i></button>
@@ -183,26 +179,24 @@ function eliminarFilasTableSuppliers() {
     }
 }
 
-function tomarDatosSupplier(idSupplier, name, last_name, documento, email, phone, stateSupplier){    
-    document.getElementById('idSupplierUpdate').value=idSupplier
-    document.getElementById('nameSupplierUpdate').value=name
-    document.getElementById('last_nameSupplierUpdate').value=last_name
-    document.getElementById('documentSupplierUpdate').value=documento
-    document.getElementById('emailSupplierUpdate').value=email
-    document.getElementById('phoneSupplierUpdate').value=phone
-    document.getElementById('stateSupplierUpdate').value=stateSupplier
+function tomarDatosSupplier(idSupplier, name, phone, dire, email, stateSupplier) {
+    document.getElementById('idSupplierUpdate').value = idSupplier
+    document.getElementById('nameUpdate').value = name
+    document.getElementById('phoneUpdate').value = phone
+    document.getElementById('direUpdate').value = dire
+    document.getElementById('emailUpdate').value = email
+    document.getElementById('stateUpdate').value = stateSupplier
 }
 
 function updateSupplier() {
     var parametros = {
         "accion": "updateSupplier",
         "id": document.getElementById('idSupplierUpdate').value,
-        "nombre": document.getElementById('nameSupplierUpdate').value,
-        "apellido": document.getElementById('last_nameSupplierUpdate').value,
-        "documento": document.getElementById('documentSupplierUpdate').value,
-        "correo": document.getElementById('emailSupplierUpdate').value,
-        "celular": document.getElementById('phoneSupplierUpdate').value,
-        "estado": document.getElementById('stateSupplierUpdate').value
+        "nombre": document.getElementById('nameUpdate').value,
+        "celular": document.getElementById('phoneUpdate').value,
+        "direction": document.getElementById('direUpdate').value,
+        "correo": document.getElementById('emailUpdate').value,
+        "estado": document.getElementById('stateUpdate').value
     };
 
     $.ajax({
@@ -243,34 +237,45 @@ function updateSupplier() {
 
 
 function AnularSupplier(idSupplier) {
-    var parametros = {
-        "accion": "anularSupplier",
-        "id": idSupplier
-    };
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Vas ha deshabilitar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var parametros = {
+                "accion": "anularSupplier",
+                "id": idSupplier
+            };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/suppliers.controller.php",
-        type: "post",
-        beforeSend: function () {
+            $.ajax({
+                data: parametros,
+                url: "../view/http/suppliers.controller.php",
+                type: "post",
+                beforeSend: function () {
 
-        },
-        success: function (data) {
+                },
+                success: function (data) {
 
-            if (JSON.parse(data) == 'ok') {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    text: 'Acción exitosa!',
-                    showConfirmButton: false,
-                    timer: 1500
-                    
-                })
-                listarProveedores()
-            }
-        },
-        error: function () {
-            console.log("No se ha podido obtener la información")
-        },
-    });
+                    if (JSON.parse(data) == 'ok') {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            text: 'Acción exitosa!',
+                            showConfirmButton: false,
+                            timer: 1500
+
+                        })
+                        listarProveedores()
+                    }
+                },
+                error: function () {
+                    console.log("No se ha podido obtener la información")
+                },
+            });
+        }
+    })
+
 }

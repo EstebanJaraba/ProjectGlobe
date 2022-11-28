@@ -61,7 +61,7 @@
               <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
-            <a href="account.php" class="dropdown-item dropdown-footer"><i class="bi bi-pencil-square"></i> Editar perfil</a>
+            <a href="account.php" class="dropdown-item dropdown-footer"><i class="bi bi-pencil-square"></i> Ver Perfil</a>
             <a href="http/logout.controller.php" class="dropdown-item dropdown-footer"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
           </div>
         </li>

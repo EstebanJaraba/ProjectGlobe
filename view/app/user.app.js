@@ -1,5 +1,4 @@
 function registerUser() {
-
     var parametros = {
         "accion": "registerUsers",
         "name": document.getElementById('nameUser').value,
@@ -87,9 +86,6 @@ function registerUser() {
             },
         });
     }
-
-
-
 }
 
 function Cerrar() {
@@ -133,7 +129,6 @@ function listarUsuarios() {
                     JSON.parse(data).registros[i].document,
                     JSON.parse(data).registros[i].email,
                     JSON.parse(data).registros[i].phone,
-
                     JSON.parse(data).registros[i].id_rol,
                     JSON.parse(data).registros[i].stateUser,
                     ""
@@ -206,7 +201,6 @@ function tomarDatosUser(idUser, name, last_name, documento, email, phone, idRole
     document.getElementById('documentUserUpdate').value = documento
     document.getElementById('emailUserUpdate').value = email
     document.getElementById('phoneUserUpdate').value = phone
-
     document.getElementById('roleUserUpdate').value = idRole
     document.getElementById('stateUserUpdate').value = stateUser
 }
@@ -242,7 +236,7 @@ function updateUsers() {
                     text: '¡Actualizacion exitosa!',
                     footer: ''
                 })
-                
+
                 listarUsuarios()
             } else if (JSON.parse(data) == 'error') {
                 Swal.fire({
@@ -262,83 +256,110 @@ function updateUsers() {
 }
 
 function actualizarEstado(idUser, stateUser) {
-    let parametros = {
-        accion: "actualizarEstadoActivo",
-        id: idUser,
-        estado: stateUser,
-    };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/users.controller.php",
-        type: "POST",
-        beforeSend: function () {
-            //         //mostrar cargando
-        },
-        success: function (data) {
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    text: "Estado editado con exito",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarUsuarios();
-            } else if (JSON.parse(data) == "error") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    text: "Actualización de estado fallido",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarUsuarios();
-            }
-        },
-        error: function (error) {
-            console.log("No se a podido editar la información " + error);
-        },
-    });
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Vas a deshabilitar un usuario!",
+        icon: 'warning',
+        showCancelButton: true,
+
+        confirmButtonText: 'Si'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let parametros = {
+                accion: "actualizarEstadoActivo",
+                id: idUser,
+                estado: stateUser,
+            };
+
+            $.ajax({
+                data: parametros,
+                url: "../view/http/users.controller.php",
+                type: "POST",
+                beforeSend: function () {
+                    //         //mostrar cargando
+                },
+                success: function (data) {
+                    if (JSON.parse(data) == "ok") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            text: "Estado editado con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarUsuarios();
+                    } else if (JSON.parse(data) == "error") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "warning",
+                            text: "Actualización de estado fallido",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarUsuarios();
+                    }
+                },
+                error: function (error) {
+                    console.log("No se a podido editar la información " + error);
+                },
+            });
+        }
+    })
+
+
+
+
 }
 
 function actualizarEstado1(idUser, stateUser) {
-    let parametros = {
-        accion: "actualizarEstadoInactivo",
-        id: idUser,
-        estado: stateUser,
-    };
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Este usuario se habilitara!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let parametros = {
+                accion: "actualizarEstadoInactivo",
+                id: idUser,
+                estado: stateUser,
+            };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/users.controller.php",
-        type: "POST",
-        beforeSend: function () {
-            //         //mostrar cargando
-        },
-        success: function (data) {
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    text: "Estado editado con exito",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarUsuarios();
-            } else if (JSON.parse(data) == "error") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    text: "Actualización de estado fallido",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarUsuarios();
-            }
-        },
-        error: function (error) {
-            console.log("No se a podido editar la información " + error);
-        },
-    });
+            $.ajax({
+                data: parametros,
+                url: "../view/http/users.controller.php",
+                type: "POST",
+                beforeSend: function () {
+                    //         //mostrar cargando
+                },
+                success: function (data) {
+                    if (JSON.parse(data) == "ok") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            text: "Estado editado con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarUsuarios();
+                    } else if (JSON.parse(data) == "error") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "warning",
+                            text: "Actualización de estado fallido",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarUsuarios();
+                    }
+                },
+                error: function (error) {
+                    console.log("No se a podido editar la información " + error);
+                },
+            });
+        }
+    })
+
 }

@@ -65,6 +65,37 @@ if (trim($_POST['accion']) == 'select_ListUsers') {
    echo json_encode($respuesta);
 }
 
+if (trim($_POST['accion']) == 'listup') {
+
+   $id = $_POST['id'];
+
+   $respuesta = new stdclass();
+
+   $cadena = "SELECT * FROM users AS u INNER JOIN role_management AS r ON u.id_rol = r.id_rol WHERE idUser = '$id'";
+
+   $result = mysqli_query($conexion, $cadena);
+
+
+   while ($datos = mysqli_fetch_array($result)) {
+      array_push(
+         $elementos,
+         [
+            'idUser' => $datos["idUser"],
+            'userName' => $datos["userName"],
+            'last_name' => $datos["last_name"],
+            'document' => $datos["document"],
+            'email' => $datos["email"],
+            'phone' => $datos["phone"]
+         ]
+      );
+      $i++;
+   }
+   $respuesta->registros = $elementos;
+
+   echo json_encode($respuesta);
+}
+
+
 if ($_POST['accion'] == 'updateUser') {
 
    $id = $_POST['id'];
@@ -89,6 +120,7 @@ if ($_POST['accion'] == 'updateUser') {
       echo json_encode('error');
    }
 }
+
 
 if ($_POST['accion'] == 'actualizarEstadoActivo') {
    $id = $_POST['id'];

@@ -1,27 +1,85 @@
-function updateUsers() {
-    var parametros = {
-        "accion": "updateUser",
-        "id": document.getElementById('idUserUpdate').value,
-        "name": document.getElementById('nameUserUpdate').value,
-        "last_name": document.getElementById('last_nameUserUpdate').value,
-        "document": document.getElementById('documentUserUpdate').value,
-        "email": document.getElementById('emailUserUpdate').value,
-        "phone": document.getElementById('phoneUserUpdate').value,
-        "password": document.getElementById('passwordUserUpdate').value,
-        "role": document.getElementById('roleUserUpdate').value,
+// function updateAccount() {
+//     var parametros = {
+//         "accion": "upAccount",
+//         "id": document.getElementById('idAccount').value,
+//         "name": document.getElementById('nameAccount').value,
+//         "last_name": document.getElementById('last_nameAccount').value,
+//         "document": document.getElementById('documentAccount').value,
+//         "email": document.getElementById('emailAccount').value,
+//         "phone": document.getElementById('phoneAccount').value,
+//         "role": document.getElementById('roleAccount').value,
 
+//     };
+
+//     if (document.getElementById('nameAccount').value == "") {
+//         Swal.fire({
+//             icon: 'error',
+//             position: 'center',
+//             text: 'Por favor, completa todos los campos.'
+//         })
+//     } else {
+//         $.ajax({
+//             data: parametros,
+//             url: "../view/http/account.controller.php",
+//             type: "post",
+//             beforeSend: function () {
+
+//             },
+//             success: function (data) {
+
+//                 if (JSON.parse(data) == 'ok') {
+//                     Swal.fire({
+//                         icon: 'success',
+//                         title: '',
+//                         position: 'center',
+//                         text: 'Perfil actualizado',
+//                         footer: ''
+//                     }).then(function (isConfirm) {
+//                         if (isConfirm) {
+//                             location.href = 'http/logout.controller.php';
+//                         } else {
+
+//                         }
+//                     });
+//                 } else if (JSON.parse(data) == 'error') {
+//                     Swal.fire({
+//                         position: 'center',
+//                         icon: 'error',
+//                         title: '¡Actualizacion fallida!',
+//                         ShowConfirmbutton: false,
+//                         timer: 1500
+//                     })
+//                 }
+//             },
+//             error: function () {
+//                 console.log("No se ha podido obtener la información")
+//             },
+//         });
+//     }
+
+
+// }
+
+function updatePass() {
+    var parametros = {
+        "accion": "updatePass",
+        "id": document.getElementById('idup').value,
+        "pass": document.getElementById('passUpdate').value,
+        "repetir": document.getElementById('passr').value,
     };
 
-    if (document.getElementById('nameUserUpdate').value == "") {
+    if (document.getElementById('passUpdate').value != document.getElementById('passr').value) {
         Swal.fire({
-            icon: 'error',
+            icon: 'warning',
+            title: '',
             position: 'center',
-            text: 'Por favor, completa todos los campos.'
+            text: 'las contraseñas no cinciden',
+            footer: ''
         })
     } else {
         $.ajax({
             data: parametros,
-            url: "../view/http/users.controller.php",
+            url: "../view/http/account.controller.php",
             type: "post",
             beforeSend: function () {
 
@@ -33,20 +91,28 @@ function updateUsers() {
                         icon: 'success',
                         title: '',
                         position: 'center',
-                        text: '¡Perfil actualizado!',
+                        text: 'Contraseña actualizada',
                         footer: ''
-                    }).then(function(isConfirm) {
+                    }).then(function (isConfirm) {
                         if (isConfirm) {
-                          location.href = 'http/logout.controller.php';
+                            location.href = 'http/logout.controller.php';
                         } else {
-                          
+
                         }
-                      });
+                    });
+                } else if (JSON.parse(data) == 'no') {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        text: 'Las contraseñas no coinciden',
+                        ShowConfirmbutton: false,
+                        timer: 1500
+                    })
                 } else if (JSON.parse(data) == 'error') {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
-                        title: '¡Actualizacion fallida!',
+                        text: '¡Actualizacion fallida!',
                         ShowConfirmbutton: false,
                         timer: 1500
                     })
@@ -59,4 +125,13 @@ function updateUsers() {
     }
 
 
+}
+
+
+function mostrar() {
+    document.getElementById('update').style.display = 'flex';
+}
+
+function ocultar() {
+    document.getElementById('update').style.display = 'none';
 }

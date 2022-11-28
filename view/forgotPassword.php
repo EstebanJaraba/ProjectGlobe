@@ -42,7 +42,7 @@ require "http/db/conexion.php";
           </div>
           <div class="row">
             <div class="col-12">
-              <button type="submit" name="recuperar"  id="recuperar" class="btn btn-primary btn-block">Enviar</button>
+              <button type="submit" name="recuperar" id="recuperar" class="btn btn-primary btn-block">Enviar</button>
             </div>
             <!-- /.col -->
           </div>
@@ -62,6 +62,7 @@ require "http/db/conexion.php";
 
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
+
   $mail = new PHPMailer(true);
 
   include 'http/db/conexion.php';
@@ -124,15 +125,17 @@ require "http/db/conexion.php";
         <script>
           Swal.fire({
             heightAuto: false,
+            position: 'center',
             icon: 'success',
-            title: '¡Correo electrónico enviado!',
+            confirmButtonText: 'Aceptar',
+            text: '¡Correo electrónico enviado!',
           }).then(function(isConfirm) {
-          if (isConfirm) {
-            location.href = '../indexLogin.php';
-          } else {
-            
-          }
-        });
+            if (isConfirm) {
+              location.href = '../indexLogin.php';
+            } else {
+
+            }
+          });
         </script>
       <?php
       }
@@ -141,7 +144,9 @@ require "http/db/conexion.php";
       <script>
         Swal.fire({
           icon: 'warning',
-          title: '¡Correo electrónico no encontrado!',
+          heightAuto: false,
+          position: 'center',
+          text: '¡Correo electrónico no encontrado!',
           confirmButtonText: 'Aceptar',
         })
       </script>

@@ -12,8 +12,7 @@ function registerSupply() {
         data: parametros,
         url: "../view/http/supplys.controller.php",
         type: "post",
-        beforeSend: function () {
-        },
+        beforeSend: function () {},
         success: function (data) {
             if (JSON.parse(data) == 'fallo') {
                 Swal.fire({
@@ -22,50 +21,44 @@ function registerSupply() {
                     text: 'Debes ingresar todos los campos'
                 })
                 listarInsumos()
-            }else if(JSON.parse(data) == 'min'){
+            } else if (JSON.parse(data) == 'min') {
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    title: '¡Ingrese un nombre valido!',
-                    ShowConfirmbutton: false,
+                    text: '¡Ingrese un nombre valido!',
                     timer: 1500
                 })
                 listarInsumos()
-            }else if (JSON.parse(data) == 'num'){
+            } else if (JSON.parse(data) == 'num') {
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    title: '¡Los campos deben ser numericos!',
-                    ShowConfirmbutton: false,
+                    text: '¡Los campos deben ser numericos!',
                     timer: 1500
                 })
                 listarInsumos()
-            }else if (JSON.parse(data) == 'pa'){
+            } else if (JSON.parse(data) == 'pa') {
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    title: 'Este insumo ya existe, ingrese otro',
-                    ShowConfirmbutton: false,
+                    text: 'Este insumo ya existe, ingrese otro',
                     timer: 1500
                 })
                 listarInsumos()
-            }
-            else if (JSON.parse(data) == 'ok') {
+            } else if (JSON.parse(data) == 'ok') {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: '¡Registro exitoso!',
-                    ShowConfirmbutton: false,
+                    text: '¡Registro exitoso!',
                     timer: 1500
                 })
                 listarInsumos()
-            }
-            else if (JSON.parse(data) == 'error') {
+                Cerrar()
+            } else if (JSON.parse(data) == 'error') {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: '¡Registro fallido!',
-                    ShowConfirmbutton: false,
+                    text: '¡Registro fallido!',
                     timer: 1500
                 })
                 listarInsumos()
@@ -76,6 +69,13 @@ function registerSupply() {
         },
     });
 
+}
+
+function Cerrar() {
+    $('#registerSupplys').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $("#registerSupplys input").val("");
 }
 
 function listarInsumos() {
@@ -128,19 +128,20 @@ function listarInsumos() {
     });
 }
 
-function agregarFila_Supplys(idSupply, nameSupply, partNumber,quantity, price, stateSupply, acciones) {
+function agregarFila_Supplys(idSupply, nameSupply, partNumber, quantity, price, stateSupply, acciones) {
     if (stateSupply == 1) {
         verEstado = '<button class="btn btn-success btn-sm col-12 " style="cursor: text">ACTIVO</button>'
     } else if (stateSupply == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-12 " style="cursor: text">INACTIVO</button>'
-    }if (stateSupply == 1) {
+    }
+    if (stateSupply == 1) {
         anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${idSupply},${stateSupply})"><i class="bi bi-clipboard2-minus"></i></button>`
 
     } else if (stateSupply == 0) {
         anular = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado1(${idSupply},${stateSupply})"><i class="bi bi-clipboard2-plus"></i></button>`
     }
 
-    let datosSupply = "'"+idSupply+"','"+nameSupply+"','"+partNumber+"','"+quantity+"','"+price+"','"+stateSupply+"'";
+    let datosSupply = "'" + idSupply + "','" + nameSupply + "','" + partNumber + "','" + quantity + "','" + price + "','" + stateSupply + "'";
 
     var htmlTags = `
         <tr>
@@ -169,16 +170,16 @@ function eliminarFilasTableSupplys() {
     }
 }
 
-function tomarDatos(idSupply,nameSupply,partNumber,quantity,price,stateSupply){
-    document.getElementById('idSupplyUpdate').value=idSupply  
-    document.getElementById('nameSupplyUpdate').value=nameSupply 
-    document.getElementById('partNumberSupplyUpdate').value=partNumber
-    document.getElementById('quantitySupplyUpdate').value=quantity
-    document.getElementById('priceSupplyUpdate').value=price
-    document.getElementById('stateSupplyUpdate').value=stateSupply  
+function tomarDatos(idSupply, nameSupply, partNumber, quantity, price, stateSupply) {
+    document.getElementById('idSupplyUpdate').value = idSupply
+    document.getElementById('nameSupplyUpdate').value = nameSupply
+    document.getElementById('partNumberSupplyUpdate').value = partNumber
+    document.getElementById('quantitySupplyUpdate').value = quantity
+    document.getElementById('priceSupplyUpdate').value = price
+    document.getElementById('stateSupplyUpdate').value = stateSupply
 }
 
-function updateSupply(){
+function updateSupply() {
     var parametros = {
         "accion": "updateSupply",
         "id": document.getElementById('idSupplyUpdate').value,
@@ -203,7 +204,6 @@ function updateSupply(){
                     position: 'center',
                     icon: 'success',
                     title: '¡Actualizacion exitosa!',
-                    ShowConfirmbutton: false,
                     timer: 1500
                 })
                 listarInsumos()
@@ -217,82 +217,107 @@ function updateSupply(){
 
 
 function actualizarEstado(idSupply, stateSupply) {
-    let parametros = {
-        accion: "actualizarEstadoActivo",
-        id: idSupply,
-        estado: stateSupply,
-    };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/supplys.controller.php",
-        type: "POST",
-        beforeSend: function () {
-            //         //mostrar cargando
-        },
-        success: function (data) {
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    text: "Estado editado con exito",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarInsumos();
-            }else if (JSON.parse(data) == "error") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    text: "Actualización de estado fallida",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarInsumos();
-            }
-        },
-        error: function (error) {
-            console.log("No se a podido editar la información " + error);
-        },
-    });
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Vas ha deshabilitar un insumo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let parametros = {
+                accion: "actualizarEstadoActivo",
+                id: idSupply,
+                estado: stateSupply,
+            };
+        
+            $.ajax({
+                data: parametros,
+                url: "../view/http/supplys.controller.php",
+                type: "POST",
+                beforeSend: function () {
+                    //         //mostrar cargando
+                },
+                success: function (data) {
+                    if (JSON.parse(data) == "ok") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            text: "Estado editado con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarInsumos();
+                    } else if (JSON.parse(data) == "error") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "warning",
+                            text: "Actualización de estado fallida",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarInsumos();
+                    }
+                },
+                error: function (error) {
+                    console.log("No se a podido editar la información " + error);
+                },
+            });
+        }
+    })
+    
 }
-function actualizarEstado1(idSupply, stateSupply) {
-    let parametros = {
-        accion: "actualizarEstadoInactivo",
-        id: idSupply,
-        estado: stateSupply,
-    };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/supplys.controller.php",
-        type: "POST",
-        beforeSend: function () {
-            //         //mostrar cargando
-        },
-        success: function (data) {
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    text: "Estado editado con exito",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarInsumos();
-            } else if (JSON.parse(data) == "error") {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    text: "Actualización de estado fallida",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listarInsumos();
-            }
-        },
-        error: function (error) {
-            console.log("No se a podido editar la información " + error);
-        },
-    });
+function actualizarEstado1(idSupply, stateSupply) {
+
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Vas ha habilitar este insumo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let parametros = {
+                accion: "actualizarEstadoInactivo",
+                id: idSupply,
+                estado: stateSupply,
+            };
+        
+            $.ajax({
+                data: parametros,
+                url: "../view/http/supplys.controller.php",
+                type: "POST",
+                beforeSend: function () {
+                    //         //mostrar cargando
+                },
+                success: function (data) {
+                    if (JSON.parse(data) == "ok") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            text: "Estado editado con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarInsumos();
+                    } else if (JSON.parse(data) == "error") {
+                        Swal.fire({
+                            position: "center",
+                            icon: "warning",
+                            text: "Actualización de estado fallida",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listarInsumos();
+                    }
+                },
+                error: function (error) {
+                    console.log("No se a podido editar la información " + error);
+                },
+            });
+        }
+    })
+    
 }
