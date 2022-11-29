@@ -278,9 +278,11 @@ $resultado = mysqli_query($conexion, $query);
           </div>
         </div>
 
+
         <div class="form-group">
           <label for="emailUserUpdate">Correo electrónico</label><label for="">*</label>
           <input type="emal" class="form-control" id="emailUserUpdate" aria-describedby="">
+
         </div>
 
       </div>

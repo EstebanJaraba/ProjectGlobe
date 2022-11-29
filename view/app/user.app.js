@@ -65,6 +65,7 @@ function registerUser() {
                     Swal.fire({
                         icon: 'success',
                         title: '',
+                        confirmButtonText: 'Aceptar',
                         position: 'center',
                         text: '¡Registro exitoso!',
                         footer: ''
@@ -144,7 +145,7 @@ function listarUsuarios() {
             });
         },
         error: function () {
-            console.log("no se ha podido obtener la informacion");
+            console.log("no se ha podido obtener la información");
         },
     });
 }
@@ -232,6 +233,7 @@ function updateUsers() {
                     icon: 'success',
                     title: '',
                     position: 'center',
+                    confirmButtonText: 'Aceptar',
                     text: '¡Actualización exitosa!',
                     footer: ''
                 })
@@ -241,7 +243,7 @@ function updateUsers() {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: '¡Actualización fallida!',
+                    text: '¡Actualización fallida!',
                     ShowConfirmbutton: false,
                     timer: 1500
                 })
@@ -257,9 +259,10 @@ function updateUsers() {
 function actualizarEstado(idUser, stateUser) {
 
     Swal.fire({
-        title: '¿Estas seguro?',
-        text: "Vas a deshabilitar un usuario!",
+        title: '¿Estás seguro?',
+        text: "¿Vas a deshabilitar un usuario?",
         icon: 'warning',
+        cancelButtonText: 'Cancelar',
         showCancelButton: true,
 
         confirmButtonText: 'Si'
@@ -300,7 +303,7 @@ function actualizarEstado(idUser, stateUser) {
                     }
                 },
                 error: function (error) {
-                    console.log("No se a podido editar la información " + error);
+                    console.log("No se ha podido editar la información " + error);
                 },
             });
         }
@@ -355,7 +358,7 @@ function actualizarEstado1(idUser, stateUser) {
                     }
                 },
                 error: function (error) {
-                    console.log("No se a podido editar la información " + error);
+                    console.log("No se ha podido editar la información " + error);
                 },
             });
         }
