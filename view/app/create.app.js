@@ -21,7 +21,7 @@ function registerUser() {
         Swal.fire({
             icon: 'error',
             position: 'center',
-            text: 'Ingrese un documento valido.'
+            text: 'Ingrese un documento válido.'
         })
     }else{
         $.ajax({
@@ -41,12 +41,13 @@ function registerUser() {
                         text: '¡Registro exitoso!',
                         footer: ''
                     })
+                    Cerrar()
                 }else if (JSON.parse(data) == 'emailError') {
                     Swal.fire({
                         icon: 'warning',
                         title: '',
                         position: 'center',
-                        text: '!El correo electrónico ya existe!',
+                        text: '¡El correo electrónico ya existe!',
                         footer: ''
                     })
                     
@@ -55,7 +56,7 @@ function registerUser() {
                         icon: 'warning',
                         title: '',
                         position: 'center',
-                        text: '!Correo electrónico inválido!',
+                        text: '¡Correo electrónico inválido!',
                         footer: ''
                     })
                     
@@ -64,7 +65,7 @@ function registerUser() {
                         icon: 'warning',
                         title: '',
                         position: 'center',
-                        text: '!El número de documento ya existe!',
+                        text: '¡El número de documento ya existe!',
                         footer: ''
                     })
                     
@@ -73,7 +74,7 @@ function registerUser() {
                         icon: 'error',
                         title: '',
                         position: 'center',
-                        text: '¡Fallo en el registro!',
+                        text: '¡Algo salió mal, intenta de nuevo!',
                         footer: ''
                     })
                 }
@@ -86,4 +87,11 @@ function registerUser() {
 
     
 
+}
+
+function Cerrar() {
+    $('#registerUsers').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $("#registerUsers input").val("");
 }

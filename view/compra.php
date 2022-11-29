@@ -116,7 +116,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                           <div class="form-group">
                                             <label for="proveedorPurchase">Proveedor</label>
                                             <select class="form-control" id="proveedorPurchase" aria-describedby="">
-                                              <option value=" ">---</option>
+                                              <option value=""> </option>
 
                                             </select>
                                           </div>
@@ -138,7 +138,7 @@ $resultadoCompras = mysqli_query($conexion, $queryCompras);
                                           <div class="form-group">
                                             <label for="insumoPurchase">Insumo</label>
                                             <select class="form-control" id="insumoPurchase" aria-describedby="">
-                                              <option value=" ">---</option>
+                                              <option value=""> </option>
 
                                             </select>
                                           </div>

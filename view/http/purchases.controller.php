@@ -11,7 +11,7 @@ if ($_POST['accion'] == 'registrarCompra') {
     $cantidad = $_POST['cantidad'];
     $arreglo = $_POST['arreglo'];
 
-    $consulta = "SELECT * FROM purchases WHERE id_invoice='$factura'";
+    $consulta = "SELECT * FROM purchases WHERE id_invoice='$factura' AND statePurchase = '1'";
 
     $conect = mysqli_query($conexion, $consulta);
 
@@ -72,7 +72,8 @@ if (trim($_POST['accion']) == 'insumoPurchase') {
             $elementos,
             [
                 'id' => $datos["idSupply"],
-                'nombre' => $datos["nameSupply"]
+                'nombre' => $datos["nameSupply"],
+                'price' => $datos['price']
             ]
         );
         $i++;
@@ -97,7 +98,7 @@ if (trim($_POST['accion']) == 'proveedorPurchase') {
             $elementos,
             [
                 'id' => $datos["idSupplier"],
-                'nombre' => $datos["nameSupplier"]
+                'nombre' => $datos["nameSupplier"],
             ]
         );
         $i++;
@@ -105,6 +106,7 @@ if (trim($_POST['accion']) == 'proveedorPurchase') {
     $respuesta->registros = $elementos;
     echo json_encode($respuesta);
 }
+
 
 if (trim($_POST['accion']) == 'seleccionarListaCompra') {
 

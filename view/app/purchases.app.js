@@ -1,32 +1,54 @@
 function registrarCompra() {
 
-    var parametros = {
-        accion: "registrarCompra",
-        factura: document.getElementById("facturaCompra").value,
-        total: document.getElementById("totalCompra").innerHTML,
-        proveedor: document.getElementById("proveedorPurchase").value,
-        insumo: document.getElementById("insumoPurchase").value,
-        description: document.getElementById("descriptionPurchase").value,
-        cantidad: document.getElementById("cantidadAgregar").value,
-        valor: document.getElementById("v_unitario").value,
-        arreglo: ArregloProductosAgregarCompra,
+    var factura = document.getElementById("facturaCompra").value;
+    var total = document.getElementById("totalCompra").value;
+    var provee = document.getElementById("proveedorPurchase").value;
+    var insumo = document.getElementById("insumoPurchase").value;
+    var des = document.getElementById("descriptionPurchase").value;
+    var cant = document.getElementById("cantidadAgregar").value;
+    var uni = document.getElementById("v_unitario").value;
 
-    };
-
-    if (document.getElementById("facturaCompra").value == "" || document.getElementById("proveedorPurchase").value == "" || document.getElementById("insumoPurchase").value == "" || document.getElementById("descriptionPurchase").value == "" || document.getElementById("cantidadAgregar").value == "" || document.getElementById("v_unitario").value == "") {
+    if ( 
+        factura.length == 0 || 
+        provee.length == 0 || 
+        insumo.length == 0 || 
+        des.length == 0 || 
+        cant.length == 0 || 
+        uni.length == 0
+        ){
         Swal.fire({
             position: "center",
             icon: "warning",
-            title: "Sin campos vacios por favor",
+            text: "Sin campos vacios por favor",
         });
-
-    }else if(document.getElementById("facturaCompra").value < 1 || document.getElementById("totalCompra") < 1 || document.getElementById("cantidadAgregar").value<1 || document.getElementById("v_unitario").value <1 ) {
+    }
+    else if(factura < 1 || total < 1 || cant < 1 || uni < 1 ) {
         Swal.fire({
             position: "center",
             icon: "warning",
-            title: "Los valores del número de factura no pueden ser negativos",
+            text: "Los valores del número de factura no pueden ser negativos",
+        });
+    }else if(cant >= 101 ){
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            text: "La cantidad no debe sobrepasar las 100 unidades",
         });
     }else {
+
+        var parametros = {
+            accion: "registrarCompra",
+            "factura": document.getElementById("facturaCompra").value,
+            "total": document.getElementById("totalCompra").innerHTML,
+            "proveedor": document.getElementById("proveedorPurchase").value,
+            "insumo": document.getElementById("insumoPurchase").value,
+            "description": document.getElementById("descriptionPurchase").value,
+            "cantidad": document.getElementById("cantidadAgregar").value,
+            "valor": document.getElementById("v_unitario").value,
+            "arreglo": ArregloProductosAgregarCompra,
+    
+        };
+
         $.ajax({
             data: parametros,
             url: "../view/http/purchases.controller.php",
@@ -39,9 +61,15 @@ function registrarCompra() {
                     Swal.fire({
                         position: "top",
                         icon: "success",
-                        title: "Registro exitoso",
-                        showConfirmButton: false,
+                        tittle: "Hecho",
+                        text: "Registro exitoso",
                         timer: 1500,
+                    }).then(function(isConfirm) {
+                        if (isConfirm) {
+                          location.href = 'compra.php';
+                        } else {
+                          //if no clicked => do something else
+                        }
                     });
                     listar();
                     ocultar();
@@ -50,17 +78,16 @@ function registrarCompra() {
                     Swal.fire({
                         position: "center",
                         icon: "warning",
-                        title: "La factura ya existe, ingrese una diferente",
+                        text: "La factura ya existe, ingrese una diferente",
                         showConfirmButton: false,
                         timer: 1500,
                     });
                     listar();
-                    ocultar();
                 }else if (JSON.parse(data) == "errorIn") {
                     Swal.fire({
                         position: "center",
                         icon: "warning",
-                        title: "Actualización de stock fallida",
+                        text: "Actualización de stock fallida",
                         showConfirmButton: false,
                         timer: 1500,
                     });
@@ -74,15 +101,8 @@ function registrarCompra() {
         });
     }
 
-
 }
 
-function limpiar(){
-    $('#showRegister').on('card.showRegister ', function (event) {
-        $("#showRegister input").val("");
-        $("#showRegister select").val("");
-    });
-}
 
 function mostrar() {
     document.getElementById('showRegister').style.display = 'flex';
@@ -90,6 +110,13 @@ function mostrar() {
 
 function ocultar() {
     document.getElementById('showRegister').style.display = 'none';
+}
+
+function limpiar(){
+    let formulario = document.getElementById('registroProducto');
+    formulario.addEventListener('submit', function() {
+      formulario.reset();
+    });
 }
 
 function calcularValorTotal() {
@@ -102,14 +129,19 @@ let valorTotalProCompra = 0;
 function agregarInsumo() {
     let selectorPruducto = document.getElementById("insumoPurchase");
 
-    if (document.getElementById("insumoPurchase").value == "" || document.getElementById("cantidadAgregar").value == "" || document.getElementById("v_unitario").value == "" || document.getElementById("v_total").value == "") {
+    var insumo = document.getElementById("insumoPurchase").value;
+    var cantidad = document.getElementById("cantidadAgregar").value;
+    var unitario = document.getElementById("v_unitario").value;
+    var total = document.getElementById("v_total").value;
+
+    if (insumo.length == 0 || cantidad.length == 0 || unitario.length == 0 ||total.length == 0) {
         Swal.fire({
             position: "center",
             icon: "warning",
             text: "Sin campos vacios por favor",
         });
 
-    } else if (document.getElementById("cantidadAgregar").value < 1){
+    } else if (cantidad < 1){
         Swal.fire({
             position: "center",
             icon: "warning",
@@ -226,7 +258,7 @@ function ajaxMain(accion, url, nombreSelect) {
             }
         },
         error: function (error) {
-            console.log("No se ha podido obtener la informaciín " + error);
+            console.log("No se ha podido obtener la información " + error);
         },
     });
 }
@@ -386,7 +418,7 @@ function actualizarEstado(IdFactura, estado) {
                 Swal.fire({
                     position: "top",
                     icon: "success",
-                    title: "Estado editado con exito",
+                    text: "Estado editado con exito",
                     showConfirmButton: false,
                     timer: 1500,
                 });
@@ -418,7 +450,7 @@ function actualizarEstado1(IdFactura, estado) {
                 Swal.fire({
                     position: "top",
                     icon: "success",
-                    title: "Estado editado con exito",
+                    text: "Estado editado con exito",
                     showConfirmButton: false,
                     timer: 1500,
                 });

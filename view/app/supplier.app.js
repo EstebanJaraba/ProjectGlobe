@@ -17,14 +17,7 @@ function registerSupplier() {
 
         },
         success: function (data) {
-            if (JSON.parse(data) == 'max') {
-                Swal.fire({
-                    icon: 'error',
-                    position: 'center',
-                    text: 'Ingrese un documento valido.'
-                })
-                listarProveedores()
-            } else if (JSON.parse(data) == 'max2') {
+            if (JSON.parse(data) == 'max2') {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',

@@ -115,8 +115,8 @@ require "http/db/conexion.php";
       } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
-      $pass = password_hash($pass, PASSWORD_DEFAULT);
-      $query = "UPDATE users SET passwordUser = '$pass' WHERE email = '$correo_recuperar'";
+      $passC = password_hash($pass, PASSWORD_DEFAULT);
+      $query = "UPDATE users SET passwordUser = '$passC' WHERE email = '$correo_recuperar'";
 
       $resultado = mysqli_query($conexion, $query);
 

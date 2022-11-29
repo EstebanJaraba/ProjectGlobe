@@ -19,9 +19,7 @@ if ($_POST['accion'] == 'registerSuppliers') {
 
         $result2 = mysqli_num_rows($conect2);
 
-        if ($result > 0) {
-            echo json_encode('doc');
-        } else if ($result2 > 0) {
+        if ($result2 > 0) {
             echo json_encode('emailError');
         } else {
             $query = "INSERT INTO suppliers(nameSupplier,phone,direction,email,stateSupplier) VALUE ('$name','$phone','$direction','$email','1')";

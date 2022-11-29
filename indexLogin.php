@@ -54,27 +54,23 @@
 
 
           <div class="row">
-            <div class="col-4">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Recordar
-                </label>
-              </div>
-            </div>
 
-            <div class="col-4">
-              <button type="button" name="access" data-toggle="modal" data-target="#registerUsers" class="btn btn-primary btn-block">Crear</button>
+
+            <div class="col-6">
+              <button type="button" name="access" data-toggle="modal" data-target="#registerUsers" class="btn btn-primary btn-block">Registrarse</button>
             </div>
-            <div class="col-4">
-              <button type="submit"  name="access" class="btn btn-success btn-block">Acceder</button>
+            <div class="col-6 mb-2">
+              <button type="submit" name="access" class="btn btn-success btn-block">Acceder</button>
             </div>
 
           </div>
         </form>
-        <p class="mb-1">
-          <a href="view/forgotPassword.php">Olvidé mi contraseña</a>
-        </p>
+        <div>
+          <p class="mb-1">
+            <a href="view/forgotPassword.php">Olvidé mi contraseña</a>
+          </p>
+        </div>
+
 
       </div>
       <!-- /.login-card-body -->
@@ -117,13 +113,13 @@
         });
     </script>
     ";
-  }else if ($_GET['id'] == "3") {
+  } else if ($_GET['id'] == "3") {
     echo "
     <script>
         Swal.fire({
             icon: 'warning',
             heightAuto: false,
-            title: 'error'
+            title: 'Algo salió mal, intenta de nuevo.'
         }).then(function(isConfirm) {
           if (isConfirm) {
             location.href = 'indexLogin.php';
@@ -133,7 +129,6 @@
         });
     </script>
     ";
-    
   }
   ?>
 
@@ -154,7 +149,7 @@
       <div class="card-outline card-primary">
         <div class="modal-header ">
           <div class="col-6 ">
-            <b class="h3">Registro usuario</b>
+            <b class="h3">Crear cuenta</b>
           </div>
           <div class="col-6">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -187,7 +182,7 @@
             </div>
 
             <div class="input-group mb-3">
-              <input type="email" class="form-control" id="emailUser" placeholder="Email">
+              <input type="email" class="form-control" id="emailUser" placeholder="Correo electrónico">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -217,17 +212,8 @@
             <input type="hidden" class="form-control" id="stateUser" value="1">
 
             <div class="row">
-              <div class="col-6">
-                <div class="icheck-primary">
-                  <input type="checkbox" id="axgreeTerms" name="terms" value="agree">
-                  <label for="agreeTerms">
-                    Acepto envio de datos
-                  </label>
-                </div>
-              </div>
-              <!-- /.col -->
-              <div class="col-6 text-lg-right">
-                <button type="button" onclick="registerUser()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+              <div class="col-12 text-lg-right">
+                <button type="button" onclick="registerUser()" class="btn btn-primary">Guardar</button>
               </div>
             </div>
           </form>

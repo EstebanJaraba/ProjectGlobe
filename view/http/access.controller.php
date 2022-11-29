@@ -33,7 +33,7 @@ if (isset($_POST['access'])) {
                     $_SESSION['id_rol'] = $datos['name_rol'];
                     $_SESSION['email'] = $datos['email'];
                     $_SESSION['phone'] = $datos['phone'];
-                    $_SESSION['passwordUser']=$datos['passwordUser'];
+ 
                 }
                 header('location: ../index.php');
             } else if (mysqli_num_rows($file) == 0) {
