@@ -264,8 +264,7 @@ function actualizarEstado(idUser, stateUser) {
         icon: 'warning',
         cancelButtonText: 'Cancelar',
         showCancelButton: true,
-
-        confirmButtonText: 'Si'
+        confirmButtonText: 'Aceptar'
     }).then((result) => {
         if (result.isConfirmed) {
             let parametros = {
@@ -319,8 +318,8 @@ function actualizarEstado1(idUser, stateUser) {
         title: '¿Estas seguro?',
         text: "Este usuario se habilitara!",
         icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si'
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Aceptar'
     }).then((result) => {
         if (result.isConfirmed) {
             let parametros = {
