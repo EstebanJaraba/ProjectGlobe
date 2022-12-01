@@ -7,9 +7,6 @@ session_start();
 
 require('http/db/conexion.php');
 
-
-
-
 $queryVenta = "SELECT * FROM services WHERE stateService = '1'";
 $queryInsumo = "SELECT * FROM supplys";
 $queryCliente = "SELECT * FROM clients WHERE stateClient = '1'";

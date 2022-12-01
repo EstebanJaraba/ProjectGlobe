@@ -213,7 +213,7 @@
 
             <div class="row">
               <div class="col-12 text-lg-right">
-                <button type="button" onclick="registerUser()" class="btn btn-primary">Guardar</button>
+                <button type="button" onclick="registerUser()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
               </div>
             </div>
           </form>

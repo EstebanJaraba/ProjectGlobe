@@ -1,5 +1,6 @@
 
 
+
 <?php
 
 require_once 'db/conexion.php';
@@ -254,61 +255,32 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
 }
 
 
-if ($_POST['accion'] == 'actualizarEstadoActivo') {
+if($_POST['accion'] == 'actualizarEstadoActivo') {
     $id = $_POST['id'];
     $estado = $_POST['estado'];
-    if ($estado == 1) {
+    if($estado == 1){
         $mostrarStateSale = 0;
-    } elseif ($estado == 0) {
+    }elseif($estado == 0){
         $mostrarStateSale = 0;
     };
-
+    $newquery = mysqli_query($conexion,"SELECT idSupply, quantity_sales_detail FROM sales_detail WHERE
+    id_sale_detail = $id");
+    while($dataSaleDetail = mysqli_fetch_assoc($newquery)){
+        // consultar stock
+        $queryProducto = mysqli_query($conexion,"SELECT quantity from supplys where idSupply = '".$dataSaleDetail['idSupply']."'");
+        $quantitySuma = mysqli_fetch_assoc($queryProducto);
+        //actualizar stock
+        mysqli_query($conexion,"UPDATE supplys set quantity = ".$quantitySuma['quantity'] + 
+        $dataSaleDetail['quantity_sales_detail']." WHERE idSupply = ".$dataSaleDetail['idSupply']."");
+    }
     $query = "UPDATE sales_management SET stateSale = '$mostrarStateSale' WHERE id_invoice = '$id'";
 
-    $file = mysqli_query($conexion, $query) or die(mysqli_errno($conexion));
+    $file = mysqli_query($conexion,$query) or die(mysqli_errno($conexion));
 
-    if ($file > 0) {
-        $queryProducto = "SELECT idSupply FROM `sales_detail` WHERE id_invoice = $id;";
-
-        $fileProducto = mysqli_query($conexion, $queryProducto);
-
-        if ($fileProducto) {
-
-            $queryEliminarDetalle = "DELETE FROM sales_detail WHERE id_invoice = '$id'";
-
-            $fileDetailEliminar = mysqli_query($conexion, $queryEliminarDetalle);
-
-            while ($arregloInsumoss = mysqli_fetch_array($fileProducto)) {
-
-                $insumo = $arregloInsumoss['idSupply'];
-
-                $queryResta = "SELECT quantity AS quantity FROM supplys WHERE idSupply = " . $arreglo[$i]['insumoId'] . "";
-
-                $fileDetailSuma = mysqli_query($conexion, $queryResta);
-
-                while ($arraySuma = mysqli_fetch_array($fileDetailSuma)) {
-
-                    $quantity_suma = $arraySuma["quantity"];
-                        
-                    if(empty($quantity_suma)){
-                        $queryActualizarCantidad = "UPDATE supplys SET quantity = 0 WHERE idSupply = '$insumo'";
-
-                        $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
-                    }else{
-
-                        $queryActualizarCantidad = "UPDATE supplys SET quantity = $quantitySuma WHERE idSupply = ".$arreglo[$i]['insumoId']."";
-
-                        $fileDetailActualiza = mysqli_query($conexion, $queryActualizarCantidad);
-                    }
-                };
-            };
-
-            echo json_encode('ok');
-        } else {
-            echo json_encode('error al sumar');
-        }
-    } else {
-        echo json_encode('error al entrar al eliminar');
+    if($file > 0){
+        echo json_encode('ok');
+    }else{
+        echo json_encode('error');
     };
 };
 

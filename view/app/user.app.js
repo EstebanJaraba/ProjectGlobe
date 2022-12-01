@@ -17,7 +17,7 @@ function registerUser() {
             text: 'Por favor, completa todos los campos.'
         })
         listarUsuarios()
-    } else if (document.getElementById('documentUser').value.length <= 6) {
+    } else if (document.getElementById('documentUser').value.length <= 8) {
         Swal.fire({
             icon: 'error',
             position: 'center',
@@ -260,7 +260,7 @@ function actualizarEstado(idUser, stateUser) {
 
     Swal.fire({
         title: '¿Estás seguro?',
-        text: "¿Vas a deshabilitar un usuario?",
+        text: "¡Vas a inhabilitar un usuario!",
         icon: 'warning',
         cancelButtonText: 'Cancelar',
         showCancelButton: true,
@@ -319,6 +319,7 @@ function actualizarEstado1(idUser, stateUser) {
         text: "Este usuario se habilitara!",
         icon: 'warning',
         cancelButtonText: 'Cancelar',
+        showCancelButton: true,
         confirmButtonText: 'Aceptar'
     }).then((result) => {
         if (result.isConfirmed) {

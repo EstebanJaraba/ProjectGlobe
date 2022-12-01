@@ -110,10 +110,10 @@ require('http/db/conexion.php');
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                      Bounce Rate</div>
+                      Ventas</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                       <?php
-                      $count = "SELECT idUser FROM users ORDER BY idUser";
+                      $count = "SELECT idSale FROM sales_management ORDER BY idSale";
                       $count_run = mysqli_query($conexion, $count);
 
                       $row = mysqli_num_rows($count_run);
@@ -169,10 +169,10 @@ require('http/db/conexion.php');
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                      Unique Visitors</div>
+                      Proveedores</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                       <?php
-                      $count = "SELECT idUser FROM users ORDER BY idUser";
+                      $count = "SELECT idSupplier FROM suppliers ORDER BY idSupplier";
                       $count_run = mysqli_query($conexion, $count);
 
                       $row = mysqli_num_rows($count_run);
@@ -455,12 +455,12 @@ require('http/db/conexion.php');
                         labels: [
                           <?php
 
-                          $sql = "SELECT * FROM sales";
+                          $sql = "SELECT * FROM sales_management";
 
                           $query = mysqli_query($conexion, $sql);
 
                           while ($row = mysqli_fetch_array($query)) {
-                          ?> '<?php echo $row['nameSale'] ?>',
+                          ?> '<?php echo $row['	idSale'] ?>',
                           <?php
                           }
 
@@ -651,8 +651,7 @@ require('http/db/conexion.php');
   <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <!-- <script src="assets/plugins/summernote/summernote-bs4.min.js"></script> -->
+  
   <!-- overlayScrollbars -->
   <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
@@ -661,8 +660,6 @@ require('http/db/conexion.php');
   <script src="assets/dist/js/pages/dashboard.js"></script>
   <!-- uPlot -->
   <script src="assets/plugins/uplot/uPlot.iife.min.js"></script>
-  <!-- AdminLTE App -->
-  <!-- <script src="assets/dist/js/adminlte.min.js"></script> -->
 
 
 

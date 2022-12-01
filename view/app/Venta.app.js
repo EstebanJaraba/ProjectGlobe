@@ -1,4 +1,5 @@
 var parametros = "";
+
 function registrarVenta() {
 
   var parametros = {
@@ -16,25 +17,22 @@ function registrarVenta() {
     arreglo: ArregloInsumosAgregarVenta,
   };
 
-
   if (document.getElementById("facturaVenta").value == "" || document.getElementById("listaCliente").value == "" ||
     document.getElementById("listaServicio").value == "" || document.getElementById("listaEmpleado").value == "" ||
     document.getElementById("listaInsumo").value == "" || document.getElementById("cantidadAgregar").value == "" ||
-    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "") 
-    {
-      Swal.fire({
-        position: "center",
-        icon: "warning",
-        title: "¡Los campos son obligatorios!",
-      });
-    }else if(document.getElementById("facturaVenta").value < 1) {
-      Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "Los valores del número de factura no pueden ser negativos",
-      });
-    }
-    else {
+    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "") {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "¡Los campos son obligatorios!",
+    });
+  } else if (document.getElementById("facturaVenta").value < 1) {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "Los valores del número de factura no pueden ser negativos",
+    });
+  } else {
     $.ajax({
       data: parametros,
       url: '../view/http/ventas.controller.php',
@@ -55,18 +53,17 @@ function registrarVenta() {
           })
           listar();
           limpiar();
-        }
-        else if (JSON.parse(data) == "error") {
+        } else if (JSON.parse(data) == "error") {
           Swal.fire({
-              position: "center",
-              icon: "warning",
-              title: "Hay un error",
-              showConfirmButton: false,
-              timer: 1500,
+            position: "center",
+            icon: "warning",
+            title: "Hay un error",
+            showConfirmButton: false,
+            timer: 1500,
           });
           listar();
           ocultar();
-      }
+        }
       },
       error: function (error) {
         console.log("No se ha podido obtener la información " + error);
@@ -94,25 +91,38 @@ function calcularValorTotal() {
 let ArregloInsumosAgregarVenta = Array();
 let valorTotalProVenta = 0;
 
+//Agregar insumo
 function agregarInsumo() {
   let selectorInsumo = document.getElementById("listaInsumo");
 
-  if (document.getElementById("listaInsumo").value == "" || 
-      document.getElementById("cantidadAgregar").value == "" || 
-      document.getElementById("v_unitario").value == "" || 
-      document.getElementById("v_total").value == "") {
+  if (document.getElementById("listaInsumo").value == "" ||
+    document.getElementById("cantidadAgregar").value == "" ||
+    document.getElementById("v_unitario").value == "" ||
+    document.getElementById("v_total").value == "") {
     Swal.fire({
-        position: "center",
-        icon: "warning",
-        title: "¡Los campos son obligatorios!",
+      position: "center",
+      icon: "warning",
+      title: "¡Los campos son obligatorios!",
     });
 
+  } else if (document.getElementById("cantidadAgregar").value < 1) {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "La cantidad ingresada no puede ser negativa",
+    });
+  } else if (document.getElementById("v_unitario").value < 1) {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "El valor ingresado no puede ser negativo",
+    });
   } else {
     $.ajax({
       data: {
-       accion : "validar_stock",
-       id_insumo : document.getElementById("listaInsumo").value,
-       cantidad : document.getElementById("cantidadAgregar").value,
+        accion: "validar_stock",
+        id_insumo: document.getElementById("listaInsumo").value,
+        cantidad: document.getElementById("cantidadAgregar").value,
       },
       url: "../view/http/ventas.controller.php",
       type: "post",
@@ -126,8 +136,8 @@ function agregarInsumo() {
             position: "center",
             icon: "warning",
             title: "No hay stock suficiente",
-        });
-        return;
+          });
+          return;
         }
         if (response == "disponible") {
           var insumoAgregado = {
@@ -176,13 +186,13 @@ function ajaxMain(accion, url, nombreSelect) {
       }
       if (accion == "listaEmpleado") {
         loadingSelect(data, nombreSelect);
-      }else if(JSON.parse(data) == "stock"){
+      } else if (JSON.parse(data) == "stock") {
         Swal.fire({
           position: "center",
           icon: "warning",
           title: "No hay stock suficiente",
-      });
-      return;
+        });
+        return;
       }
     },
     error: function (error) {
@@ -278,7 +288,7 @@ function eliminarFilasTableInsumo() {
 }
 
 
-//Arreglo para listar insumos agregados
+//Arreglo para enlistar insumos agregados
 function agregarFilaInsumo(
   insumoId,
   nombreInsumo,
@@ -349,7 +359,9 @@ function listarVentas() {
         language: {
           url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
         },
-        order: [[1, "desc"]],
+        order: [
+          [1, "desc"]
+        ],
 
       });
     },
@@ -435,6 +447,8 @@ function listar() {
       }
 
       $("#tableInsumos").DataTable({
+        dom: "Bfrtip",
+        buttons: ["copy", "csv", "excel", "pdf", "print"],
         language: {
           url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
         },
@@ -620,7 +634,7 @@ function eliminaFilastablaDetalleInsumos() {
     $("#tablaInsumos tbody tr:eq('" + i + "')").remove();
   }
 }
-
+/*
 function anularVenta(id) {
   var parametros = {
     "accion": "anularVenta",
@@ -656,3 +670,4 @@ function anularVenta(id) {
 
   });
 }
+*/

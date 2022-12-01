@@ -165,7 +165,6 @@ if (trim($_POST['accion']) == 'listaProducto') {
     echo json_encode($respuesta);
 }
 
-
 if (trim($_POST['accion']) == 'seleccionarListaProducto') {
 
     $respuesta = new stdclass();

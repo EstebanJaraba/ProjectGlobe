@@ -8,33 +8,32 @@ function registrarCompra() {
     var cant = document.getElementById("cantidadAgregar").value;
     var uni = document.getElementById("v_unitario").value;
 
-    if ( 
-        factura.length == 0 || 
-        provee.length == 0 || 
-        insumo.length == 0 || 
-        des.length == 0 || 
-        cant.length == 0 || 
+    if (
+        factura.length == 0 ||
+        provee.length == 0 ||
+        insumo.length == 0 ||
+        des.length == 0 ||
+        cant.length == 0 ||
         uni.length == 0
-        ){
+    ) {
         Swal.fire({
             position: "center",
             icon: "warning",
             text: "Sin campos vacios por favor",
         });
-    }
-    else if(factura < 1 || total < 1 || cant < 1 || uni < 1 ) {
+    } else if (factura < 1 || total < 1 || cant < 1 || uni < 1) {
         Swal.fire({
             position: "center",
             icon: "warning",
             text: "Los valores del número de factura no pueden ser negativos",
         });
-    }else if(cant >= 101 ){
+    } else if (cant >= 101) {
         Swal.fire({
             position: "center",
             icon: "warning",
             text: "La cantidad no debe sobrepasar las 100 unidades",
         });
-    }else {
+    } else {
 
         var parametros = {
             accion: "registrarCompra",
@@ -46,7 +45,7 @@ function registrarCompra() {
             "cantidad": document.getElementById("cantidadAgregar").value,
             "valor": document.getElementById("v_unitario").value,
             "arreglo": ArregloProductosAgregarCompra,
-    
+
         };
 
         $.ajax({
@@ -64,11 +63,11 @@ function registrarCompra() {
                         tittle: "Hecho",
                         text: "Registro exitoso",
                         timer: 1500,
-                    }).then(function(isConfirm) {
+                    }).then(function (isConfirm) {
                         if (isConfirm) {
-                          location.href = 'compra.php';
+                            location.href = 'compra.php';
                         } else {
-                          //if no clicked => do something else
+                            //if no clicked => do something else
                         }
                     });
                     listar();
@@ -83,7 +82,7 @@ function registrarCompra() {
                         timer: 1500,
                     });
                     listar();
-                }else if (JSON.parse(data) == "errorIn") {
+                } else if (JSON.parse(data) == "errorIn") {
                     Swal.fire({
                         position: "center",
                         icon: "warning",
@@ -112,10 +111,10 @@ function ocultar() {
     document.getElementById('showRegister').style.display = 'none';
 }
 
-function limpiar(){
+function limpiar() {
     let formulario = document.getElementById('registroProducto');
-    formulario.addEventListener('submit', function() {
-      formulario.reset();
+    formulario.addEventListener('submit', function () {
+        formulario.reset();
     });
 }
 
@@ -134,21 +133,20 @@ function agregarInsumo() {
     var unitario = document.getElementById("v_unitario").value;
     var total = document.getElementById("v_total").value;
 
-    if (insumo.length == 0 || cantidad.length == 0 || unitario.length == 0 ||total.length == 0) {
+    if (insumo.length == 0 || cantidad.length == 0 || unitario.length == 0 || total.length == 0) {
         Swal.fire({
             position: "center",
             icon: "warning",
             text: "Sin campos vacios por favor",
         });
 
-    } else if (cantidad < 1){
+    } else if (cantidad < 1) {
         Swal.fire({
             position: "center",
             icon: "warning",
             text: "Los valores del número de factura no pueden ser negativos",
         });
-    }
-    else {
+    } else {
         var productoAgregado = {
             productoId: document.getElementById("insumoPurchase").value,
             nombreProducto: selectorPruducto.options[selectorPruducto.selectedIndex].text,
@@ -328,6 +326,8 @@ function listar() {
             }
 
             $("#tablePurchases").DataTable({
+                dom: "Bfrtip",
+                buttons: ["copy", "csv", "excel", "pdf", "print"],
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
                 },
@@ -400,35 +400,48 @@ function eliminaFilastabla() {
 //Cambiar de ESTADO
 
 function actualizarEstado(IdFactura, estado) {
-    let parametros = {
-        accion: "actualizarEstadoActivo",
-        id: IdFactura,
-        estado: estado,
-    };
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¿Vas a deshabilitar una compra?",
+        icon: 'warning',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let parametros = {
+                accion: "actualizarEstadoActivo",
+                id: IdFactura,
+                estado: estado,
+            };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/purchases.controller.php",
-        type: "POST",
-        beforeSend: function () {
-            //         //mostrar cargando
-        },
-        success: function (data) {
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: "top",
-                    icon: "success",
-                    text: "Estado editado con exito",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listar();
-            }
-        },
-        error: function (error) {
-            console.log("No se a podido editar la información " + error);
-        },
-    });
+            $.ajax({
+                data: parametros,
+                url: "../view/http/purchases.controller.php",
+                type: "POST",
+                beforeSend: function () {
+                    //         //mostrar cargando
+                },
+                success: function (data) {
+                    if (JSON.parse(data) == "ok") {
+                        Swal.fire({
+                            position: "top",
+                            icon: "success",
+                            text: "Estado editado con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listar();
+                    }
+                },
+                error: function (error) {
+                    console.log("No se a podido editar la información " + error);
+                },
+            });
+        }
+    })
+    
+
 }
 
 function actualizarEstado1(IdFactura, estado) {
@@ -475,8 +488,6 @@ function tomarDatos(IdFactura, proveedor, description, total, estado) {
 
     document.getElementById("id_detalle").value = IdFactura;
     document.getElementById("proveedor").value = proveedor;
-    document.getElementById("proveedor").value = description;
-    document.getElementById("proveedor").value = total;
     document.getElementById("estado").value = estadoC;
 
     ListarDetalle();

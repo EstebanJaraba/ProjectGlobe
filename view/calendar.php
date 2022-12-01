@@ -118,7 +118,7 @@ session_start();
                     while($calendarRow = mysqli_fetch_assoc($datesCalendar)){
                     echo "
                         {
-                            title: '".$calendarRow['descriptionSale']."',
+                            title: '".$calendarRow['nameService']."',
                             client: '".$calendarRow['nameClient']."',
                             service: '".$calendarRow['nameService']."',
                             employee: '".$calendarRow['nameEmployee']."',
@@ -165,7 +165,7 @@ session_start();
 
 </html>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true" >
+<div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

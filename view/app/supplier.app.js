@@ -142,6 +142,12 @@ function agregarFila_Suppliers(idSupplier, name, phone, direction, email, stateS
     } else if (stateSupplier == 0) {
         verEstado = '<button class="btn btn-danger btn-sm col-12" style="cursor: text">INACTIVO</button>'
     }
+    if (stateSupplier == 1) {
+        bot = `<button class="btn btn-outline-danger btn-sm" onclick="AnularSupplier(${idSupplier},${stateSupplier})"><i class="bi bi-folder-minus"></i></button>`
+
+    } else if (stateSupplier == 0) {
+        bot = ``
+    }
 
     let datosSupplier = "'" + idSupplier + "','" + name + "','" + phone + "','" + direction + "','" + email + "','" + stateSupplier + "'";
 
@@ -155,7 +161,7 @@ function agregarFila_Suppliers(idSupplier, name, phone, direction, email, stateS
            <td> ${verEstado}</td>
            <td>
              <button data-toggle="modal" data-target="#updateSupplier" class="btn btn-outline-success btn-sm" onclick="tomarDatosSupplier(${datosSupplier})"><i class="bi bi-pencil-square"></i></button>
-             <button class="btn btn-outline-danger btn-sm" onclick="AnularSupplier(${idSupplier})"><i class="bi bi-folder-minus"></i></button>
+              ${bot}
            </td>
          </tr>`;
     $("#tableSuppliers tbody").append(htmlTags);
@@ -232,10 +238,11 @@ function updateSupplier() {
 function AnularSupplier(idSupplier) {
     Swal.fire({
         title: '¿Estas seguro?',
-        text: "Vas ha deshabilitar",
+        text: "¡Vas a inhabilitar un proveedor!",
         icon: 'warning',
+        cancelButtonText: 'Cancelar',
         showCancelButton: true,
-        confirmButtonText: 'Si'
+        confirmButtonText: 'Aceptar'
     }).then((result) => {
         if (result.isConfirmed) {
             var parametros = {

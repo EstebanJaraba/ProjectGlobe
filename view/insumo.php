@@ -85,7 +85,7 @@ if (!isset($_SESSION['userName'])) {
                   <tr>
                     <th class="d-flex justify-content-center">ID</th>
                     <th>Nombre</th>
-                    <th>Número de parte</th>
+                    <th>Código</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th class="d-flex justify-content-center">Estado</th>
@@ -206,7 +206,7 @@ if (!isset($_SESSION['userName'])) {
         </div>
 
         <div class="form-group">
-          <label for="partNumberSupply">Número de parte</label>
+          <label for="partNumberSupply">Código</label>
           <input type="number" class="form-control" id="partNumberSupply" placeholder="*">
         </div>
         <div class="row">

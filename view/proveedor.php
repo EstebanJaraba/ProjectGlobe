@@ -76,7 +76,7 @@ if (!isset($_SESSION['userName'])) {
         <div id="container-fluid">
           <div class="card">
             <div class="card-header d-flex justify-content-end">
-              <button data-toggle="modal" data-target="#registerSuppliers" class="btn btn-primary btn-sm">Nuevo Proveedor</button>
+              <button data-toggle="modal" data-target="#registerSuppliers" class="btn btn-primary btn-sm">Nuevo proveedor</button>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -87,7 +87,7 @@ if (!isset($_SESSION['userName'])) {
                     <th>Nombre</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>
-                    <th>Correo</th>
+                    <th>Correo electrónico</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -189,7 +189,7 @@ if (!isset($_SESSION['userName'])) {
           </div>
           <div class="col-6" style="margin-left: 0;">
             <div class="form-group">
-              <label for="">Celular</label>
+              <label for="">Teléfono</label>
               <input type="text" class="form-control" id="phoneSupplier" placeholder="*">
             </div>
           </div>
@@ -197,12 +197,12 @@ if (!isset($_SESSION['userName'])) {
 
         </div>
         <div class="form-group">
-          <label for="">Direccion</label>
+          <label for="">Dirección</label>
           <input type="text" class="form-control" id="dire" placeholder="*">
         </div>
 
         <div class="form-group">
-          <label for="">Email</label>
+          <label for="">Correo electrónico</label>
           <input type="text" class="form-control" id="emailSupplier" placeholder="*">
         </div>
         <div class="modal-footer">
@@ -236,7 +236,7 @@ if (!isset($_SESSION['userName'])) {
           </div>
           <div class="col-6" style="margin-left: 0;">
             <div class="form-group">
-              <label for="">Celular</label><label for="">*</label>
+              <label for="">Teléfono</label><label for="">*</label>
               <input type="text" class="form-control" id="phoneUpdate" aria-describedby="">
             </div>
           </div>
@@ -249,7 +249,7 @@ if (!isset($_SESSION['userName'])) {
         </div>
 
         <div class="form-group">
-          <label for="">Email</label><label for="">*</label>
+          <label for="">Correo electrónico</label><label for="">*</label>
           <input type="text" class="form-control" id="emailUpdate" aria-describedby="">
         </div>
         <div class="form-group">

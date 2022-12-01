@@ -203,10 +203,11 @@ function updateSupply() {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: '¡Actualizacion exitosa!',
+                    title: '¡Actualización exitosa!',
                     timer: 1500
                 })
                 listarInsumos()
+                CerrarU()
             }
         },
         error: function () {
@@ -215,15 +216,24 @@ function updateSupply() {
     });
 }
 
+function CerrarU() {
+    $('#updateSupplys').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $("#updateSupplys input").val("");
+}
+
+
 
 function actualizarEstado(idSupply, stateSupply) {
 
     Swal.fire({
         title: '¿Estas seguro?',
-        text: "Vas ha deshabilitar un insumo",
+        text: "Vas ha inhabilitar un insumo",
         icon: 'warning',
+        cancelButtonText: 'Cancelar',
         showCancelButton: true,
-        confirmButtonText: 'Si'
+        confirmButtonText: 'Aceptar'
     }).then((result) => {
         if (result.isConfirmed) {
             let parametros = {
@@ -275,8 +285,9 @@ function actualizarEstado1(idSupply, stateSupply) {
         title: '¿Estas seguro?',
         text: "Vas ha habilitar este insumo",
         icon: 'warning',
+        cancelButtonText: 'Cancelar',
         showCancelButton: true,
-        confirmButtonText: 'Si'
+        confirmButtonText: 'Aceptar'
     }).then((result) => {
         if (result.isConfirmed) {
             let parametros = {

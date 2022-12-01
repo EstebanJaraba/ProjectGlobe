@@ -11,7 +11,7 @@ if ($_POST['accion'] == 'registerSupplys') {
 
     if ($name == ""  || $partNumber == "" || $quantity == "" || $price == "") {
         echo json_encode('fallo');
-    } else if(strlen($name)<= 4){
+    } else if(strlen($name)<= 3){
         echo json_encode('min');
     } else if(!is_numeric($partNumber) || !is_numeric($quantity) || !is_numeric($price)){
         echo json_encode('num');
