@@ -3,11 +3,11 @@ function registroServicio() {
     var parametros = {
         "accion": 'registroServicio',
         "nameService": document.getElementById('nameService').value,
-        "costService": document.getElementById('costService').value,
+        "descriptionService": document.getElementById('descriptionService').value,
         "stateService": document.getElementById('stateService').value
     };
 
-    if (document.getElementById("nameService").value == "" || document.getElementById("costService").value == "" ||
+    if (document.getElementById("nameService").value == "" || document.getElementById("descriptionService").value == "" ||
     document.getElementById("stateService").value == "") 
     {
         Swal.fire({
@@ -85,7 +85,7 @@ function  listarServicio(){
                 agregarFila_Servicios(
                     JSON.parse(data).registros[i].idService,
                     JSON.parse(data).registros[i].nameService,
-                    JSON.parse(data).registros[i].costService,
+                    JSON.parse(data).registros[i].descriptionService,
                     JSON.parse(data).registros[i].stateService,
                     ""
                 );
@@ -110,24 +110,29 @@ function  listarServicio(){
 
 
 
-function agregarFila_Servicios(idService, nameService, costService, stateService, acciones){
+function agregarFila_Servicios(idService, nameService, descriptionService, stateService, acciones){
 
     if(stateService == 1){
         mostrarStateService = '<button class= "btn btn-success btn-sm col-6">Disponible</button/>'
     }else if(stateService == 0){
         mostrarStateService = '<button class= "btn btn-danger btn-sm col-6">No disponible</button/>'
     }
+    if(stateService == 1){
+        bot = `<button class="btn btn-danger btn-sm" onclick="anularServicio(${idService},${stateService})"><i class="bi bi-trash3"></i></button>`
+    }else if (stateService == 0) {
+        bot = ``
+    }
 
-    let datosServicio = "'"+idService+"', '"+nameService+"', '"+costService+"', '"+stateService+"'";
+    let datosServicio = "'"+idService+"', '"+nameService+"', '"+descriptionService+"', '"+stateService+"'";
 
     var htmlTags = `<tr>
         <td> ${idService} </td>
         <td> ${nameService} </td>
-        <td> ${costService} </td>
+        <td> ${descriptionService} </td>
         <td> ${mostrarStateService} </td>
         <td>
             <button data-toggle= "modal" data-target="#editarServicio" class= "btn btn-success btn-sm " onclick="tomarDatos(${datosServicio})" ><i class="bi bi-pencil-square"></i> </button/>
-            <button class= "btn btn-danger btn-sm " onclick="anularServicio(${idService})"><i class="bi bi-trash3"></i></button/>
+            ${bot}
         </td>
     </tr>`;
     $("#tableServicio tbody").append(htmlTags);
@@ -147,10 +152,10 @@ function eliminarFilasTableServicios(){
 }
 
 
-function tomarDatos(idService, nameService, costService, stateService){
+function tomarDatos(idService, nameService, descriptionService, stateService){
     document.getElementById('idServiceEditar').value = idService
     document.getElementById('nameServiceEditar').value = nameService
-    document.getElementById('costServiceEditar').value = costService
+    document.getElementById('descriptionServiceEditar').value = descriptionService
     document.getElementById('stateServiceEditar').value = stateService
 }
 
@@ -160,7 +165,7 @@ function editarServicio(){
         "accion": 'editarServicio',
         "idService": document.getElementById('idServiceEditar').value,
         "nameService": document.getElementById('nameServiceEditar').value,
-        "costService": document.getElementById('costServiceEditar').value,
+        "descriptionService": document.getElementById('descriptionServiceEditar').value,
         "stateService": document.getElementById('stateServiceEditar').value
     };
 
@@ -194,40 +199,45 @@ function editarServicio(){
     });
 }
 
+function anularServicio(idService) {
+    Swal.fire({
+        title: '¿El servicio no estará disponible?',
+        icon: 'warning',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var parametros = {
+                "accion": "anularServicio",
+                "idService": idService
+            };
 
-function anularServicio(idService){
-    var parametros = {
-        "accion": "anularServicio",
-        "idService": idService
-    };
+            $.ajax({
+                data: parametros,
+                url: "../view/http/servicios.controller.php",
+                type: "post",
+                beforeSend: function () {
 
-    $.ajax({
-        data: parametros,
-        url: '../view/http/servicios.controller.php',
-        type: 'post',
-        beforeSend: function(){
-            
-        },
+                },
+                success: function (data) {
 
-        success: function(data){
-            console.log(data);
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Cambio de estado con éxito',
-                    text: '',
-                    heightAuto: false,
-                    confirmButtonText: "Aceptar",
-                })
-                listarServicio()
-            }
+                    if (JSON.parse(data) == 'ok') {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            text: '¡El servicio no está disponible!',
+                            showConfirmButton: false,
+                            timer: 1500
 
-        },
-
-        error: function(error){
-            console.log("No se ha podido obtener la información " + error);
-        },
-
-    });
+                        })
+                        listarServicio()
+                    }
+                },
+                error: function () {
+                    console.log("No se ha podido obtener la información")
+                },
+            });
+        }
+    })
 }
-

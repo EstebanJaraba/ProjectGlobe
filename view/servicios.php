@@ -77,7 +77,8 @@ session_start();
                                     <tr>
                                         <th>Id</th>
                                         <th>Nombre</th>
-                                        <th>Descripción</th>
+                                        <th>Descripción</th> 
+                                        
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -161,15 +162,15 @@ session_start();
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="nameService">Nombre</label>
-                        <input type="text" class="form-control" id="nameService" aria-describedby="emailHelp">
+                        <label for="nameService">Nombre*</label>
+                        <input type="text" class="form-control" id="nameService" aria-describedby="emailHelp" placeholder="Nombre del servicio">
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="costService">Descripción</label>
-                                <input type="text" class="form-control" id="costService" aria-describedby="emailHelp">
+                                <label for="descriptionService" class="form-label">Descripción*</label>
+                                <textarea class="form-control" id="descriptionService" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="col-6">
@@ -213,10 +214,10 @@ session_start();
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="costServiceEditar">Descripción</label>
-                                <input type="text" class="form-control" id="costServiceEditar" aria-describedby="emailHelp" require>
+                                <label for="descriptionServiceEditar" class="form-label" >Descripción</label>
+                                <textarea class="form-control" id="descriptionServiceEditar" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="col-6">

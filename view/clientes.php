@@ -77,9 +77,9 @@ session_start();
                                     <tr>
                                         <th>Id</th>
                                         <th>Documento</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
+                                        <th>Nombre completo</th>
                                         <th>Correo electrónico</th>
+                                        <th>Sector</th>
                                         <th>Dirección</th>
                                         <th>Teléfono</th>
                                         <th>Estado</th>
@@ -162,37 +162,21 @@ session_start();
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="documentClient">Documento</label>
-                        <input type="number" class="form-control" id="documentClient" aria-describedby="emailHelp">
+                        <label for="documentClient">Documento*</label>
+                        <input type="number" class="form-control" id="documentClient" aria-describedby="emailHelp" placeholder="Número de documento">
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="nameClient">Nombre</label>
-                                <input type="text" class="form-control" id="nameClient" aria-describedby="emailHelp">
+                                <label for="nameClient">Nombre Completo*</label>
+                                <input type="text" class="form-control" id="nameClient" aria-describedby="emailHelp" placeholder="Nombre completo">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="last_name">Apellidos</label>
-                                <input type="text" class="form-control" id="last_name" aria-describedby="emailHelp">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="email">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="address">Dirección</label>
-                                <input type="text" class="form-control" id="address" aria-describedby="emailHelp">
+                                <label for="email">Correo electrónico*</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
                             </div>
                         </div>
                     </div>
@@ -200,8 +184,24 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="phone">Teléfono</label>
-                                <input type="number" class="form-control" id="phone" aria-describedby="emailHelp">
+                                <label for="neighborhood">Sector*</label>
+                                <input type="text" class="form-control" id="neighborhood" aria-describedby="emailHelp" placeholder="Sector">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="address">Dirección*</label>
+                                <input type="text" class="form-control" id="address" aria-describedby="emailHelp" placeholder="Dirección">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="phone">Teléfono*</label>
+                                <input type="number" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Número de teléfono">
                             </div>
                         </div>
                         <div class="col-6">
@@ -252,8 +252,8 @@ session_start();
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="last_nameClient">Apellidos</label>
-                                <input type="text" class="form-control" id="last_nameClientEditar" aria-describedby="emailHelp">
+                                <label for="email">Correo eletrónico</label>
+                                <input type="email" class="form-control" id="emailClientEditar" aria-describedby="emailHelp">
                             </div>
                         </div>
                     </div>
@@ -261,8 +261,8 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="email">Correo eletrónico</label>
-                                <input type="email" class="form-control" id="emailClientEditar" aria-describedby="emailHelp">
+                                <label for="neighborhoodClientEditar">Sector</label>
+                                <input type="text" class="form-control" id="neighborhoodClientEditar" aria-describedby="emailHelp">
                             </div>
                         </div>
 

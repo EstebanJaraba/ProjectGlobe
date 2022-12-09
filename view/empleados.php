@@ -136,7 +136,6 @@ session_start();
     </script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
-
     <!-- Archivo APP clientes -->
     <script src="app/Empleado.app.js"></script>
 
@@ -153,21 +152,21 @@ session_start();
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="documentEmployee">Documento</label>
-                        <input type="number" class="form-control" id="documentEmployee" aria-describedby="emailHelp">
+                        <label for="documentEmployee">Documento*</label>
+                        <input type="number" class="form-control" id="documentEmployee" aria-describedby="emailHelp" placeholder="Número de documento" required>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="nameEmployee">Nombre completo</label>
-                                <input type="text" class="form-control" id="nameEmployee" aria-describedby="emailHelp">
+                                <label for="nameEmployee">Nombre completo*</label>
+                                <input type="text" class="form-control" id="nameEmployee" aria-describedby="emailHelp" placeholder="Nombre completo">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="email">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                                <label for="email">Correo electrónico*</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
                             </div>
                         </div>
                     </div>
@@ -175,8 +174,8 @@ session_start();
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="phone">Teléfono</label>
-                                <input type="number" class="form-control" id="phone" aria-describedby="emailHelp">
+                                <label for="phone">Teléfono*</label>
+                                <input type="number" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Número de teléfono">
                             </div>
                         </div>
                         <div class="col-6">
