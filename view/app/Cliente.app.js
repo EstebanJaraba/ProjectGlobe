@@ -5,8 +5,8 @@ function registroCliente() {
         "accion": 'registroCliente',
         "documentClient": document.getElementById('documentClient').value,
         "nameClient": document.getElementById('nameClient').value,
-        "last_name": document.getElementById('last_name').value,
         "email": document.getElementById('email').value,
+        "neighborhood": document.getElementById('neighborhood').value,
         "address": document.getElementById('address').value,
         "phone": document.getElementById('phone').value,
         "stateClient": document.getElementById('stateClient').value
@@ -136,8 +136,8 @@ function listarClientes() {
                     JSON.parse(data).registros[i].idClient,
                     JSON.parse(data).registros[i].documentClient,
                     JSON.parse(data).registros[i].nameClient,
-                    JSON.parse(data).registros[i].last_name,
                     JSON.parse(data).registros[i].email,
+                    JSON.parse(data).registros[i].neighborhood,
                     JSON.parse(data).registros[i].address,
                     JSON.parse(data).registros[i].phone,
                     JSON.parse(data).registros[i].stateClient,
@@ -164,28 +164,33 @@ function listarClientes() {
 }
 
 
-function agregarFila_Clientes(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient, acciones) {
+function agregarFila_Clientes(idClient, documentClient, nameClient, email, neighborhood, address, phone, stateClient, acciones) {
 
     if (stateClient == 1) {
         verstateClient = '<button class= "btn btn-success btn-sm col-8">Activo</button/>'
     } else if (stateClient == 0) {
-        verstateClient = '<button class= "btn btn-danger btn-sm col-8">Inactivo</button/>'
+        verstateClient = '<button class= "btn btn-danger btn-sm col-10">Inactivo</button/>'
+    }
+    if(stateClient == 1){
+        bot = `<button class="btn btn-danger btn-sm" onclick="anularCliente(${idClient},${stateClient})"><i class="bi bi-trash3"></i></button>`
+    }else if (stateClient == 0) {
+        bot = ``
     }
 
-    let datosClientes = "'" + idClient + "', '" + documentClient + "', '" + nameClient + "', '" + last_name + "', '" + email + "', '" + address + "', '" + phone + "', '" + stateClient + "'";
+    let datosClientes = "'" + idClient + "', '" + documentClient + "', '" + nameClient + "', '" + email + "', '" + neighborhood + "', '" + address + "', '" + phone + "', '" + stateClient + "'";
 
     var htmlTags = `<tr>
         <td> ${idClient} </td>
         <td> ${documentClient} </td>
         <td> ${nameClient} </td>
-        <td> ${last_name} </td>
         <td> ${email} </td>
+        <td> ${neighborhood} </td>
         <td> ${address} </td>
         <td> ${phone} </td>
         <td> ${verstateClient} </td>
         <td>
             <button data-toggle= "modal" data-target="#editarCliente" class= "btn btn-success btn-sm " onclick="tomarDatos(${datosClientes})" ><i class="bi bi-pencil-square"></i> </button/>
-            <button class= "btn btn-danger btn-sm " onclick="anularCliente(${idClient})"><i class="bi bi-trash3"></i></button/>
+            ${bot}
         </td>
     </tr>`;
     $("#tableClientes tbody").append(htmlTags);
@@ -204,12 +209,12 @@ function eliminarFilasTableCliente() {
 }
 
 
-function tomarDatos(idClient, documentClient, nameClient, last_name, email, address, phone, stateClient) {
+function tomarDatos(idClient, documentClient, nameClient, email, neighborhood, address, phone, stateClient) {
     document.getElementById('idClientEditar').value = idClient
     document.getElementById('documentClientEditar').value = documentClient
     document.getElementById('nameClientEditar').value = nameClient
-    document.getElementById('last_nameClientEditar').value = last_name
     document.getElementById('emailClientEditar').value = email
+    document.getElementById('neighborhoodClientEditar').value = neighborhood
     document.getElementById('addressClientEditar').value = address
     document.getElementById('phoneClientEditar').value = phone
     document.getElementById('stateClientEditar').value = stateClient
@@ -221,8 +226,8 @@ function editarCliente() {
         "idClient": document.getElementById('idClientEditar').value,
         "documentClient": document.getElementById('documentClientEditar').value,
         "nameClient": document.getElementById('nameClientEditar').value,
-        "last_name": document.getElementById('last_nameClientEditar').value,
         "email": document.getElementById('emailClientEditar').value,
+        "neighborhood": document.getElementById('neighborhoodClientEditar').value,
         "address": document.getElementById('addressClientEditar').value,
         "phone": document.getElementById('phoneClientEditar').value,
         "stateClient": document.getElementById('stateClientEditar').value
@@ -258,42 +263,47 @@ function editarCliente() {
     });
 }
 
-
 function anularCliente(idClient) {
-    var parametros = {
-        "accion": "anularCliente",
-        "idClient": idClient
-    };
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "¡Vas a inhabilitar un cliente!",
+        icon: 'warning',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var parametros = {
+                "accion": "anularCliente",
+                "idClient": idClient
+            };
 
-    $.ajax({
-        data: parametros,
-        url: '../view/http/clientes.controller.php',
-        type: 'post',
-        beforeSend: function () {
+            $.ajax({
+                data: parametros,
+                url: "../view/http/clientes.controller.php",
+                type: "post",
+                beforeSend: function () {
 
-        },
+                },
+                success: function (data) {
 
-        success: function (data) {
-            console.log(data);
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    icon: 'success',
-                    title: '',
-                    text: '¡Anulado!',
-                    heightAuto: false,
-                    position: "center",
-                    showConfirmButton: false,
-                    timer: 1500,
-                })
-                listarClientes()
-            }
+                    if (JSON.parse(data) == 'ok') {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            text: '¡Se inhabilitó con éxito!',
+                            showConfirmButton: false,
+                            timer: 1500
 
-        },
+                        })
+                        listarClientes()
+                    }
+                },
+                error: function () {
+                    console.log("No se ha podido obtener la información")
+                },
+            });
+        }
+    })
 
-        error: function (error) {
-            console.log("No se ha podido obtener la información " + error);
-        },
-
-    });
 }
-

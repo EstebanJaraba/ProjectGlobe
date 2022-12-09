@@ -59,7 +59,7 @@ session_start();
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="inicio.php">Home</a></li>
+                                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                                 <li class="breadcrumb-item active">Agendamiento</li>
                             </ol>
                         </div>
@@ -112,7 +112,8 @@ session_start();
                 <?php
                     require('http/db/conexion.php');
                     $datesCalendar = mysqli_query($conexion,"SELECT descriptionSale,sl.dateRegistration,cl.nameClient,se.nameService,em.nameEmployee
-                    FROM sales_management sl JOIN clients cl on (sl.idClient = cl.idClient)
+                    FROM sales_management sl 
+                    JOIN clients cl on (sl.idClient = cl.idClient)
                     JOIN services se on (sl.idService = se.idService) 
                     JOIN employees em on (sl.idEmployee = em.idEmployee)"); 
                     while($calendarRow = mysqli_fetch_assoc($datesCalendar)){
@@ -185,6 +186,7 @@ session_start();
             <label for="dateRegistration">Empleado</label>
             <input type="text" class="form-control" id="id_employee" disabled>
         </div>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

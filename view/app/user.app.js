@@ -316,7 +316,7 @@ function actualizarEstado(idUser, stateUser) {
 function actualizarEstado1(idUser, stateUser) {
     Swal.fire({
         title: '¿Estas seguro?',
-        text: "Este usuario se habilitara!",
+        text: "Este usuario se habilitará!",
         icon: 'warning',
         cancelButtonText: 'Cancelar',
         showCancelButton: true,

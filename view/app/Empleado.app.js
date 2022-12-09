@@ -155,6 +155,11 @@ function agregarFila_Empleados(idEmployee, documentEmployee, nameEmployee, email
     }else if(stateEmployee == 0){
         verstateEmployee = '<button class= "btn btn-danger btn-sm col-8">Anulado</button/>'
     }
+    if(stateEmployee == 1){
+        bot = `<button class="btn btn-danger btn-sm" onclick="anularEmpleado(${idEmployee},${stateEmployee})"><i class="bi bi-trash3"></i></button>`
+    }else if (stateEmployee == 0) {
+        bot = ``
+    }
 
     let datosEmpleado = "'"+idEmployee+"', '"+documentEmployee+"', '"+nameEmployee+"', '"+email+"', '"+phone+"', '"+stateEmployee+"'";
 
@@ -167,7 +172,7 @@ function agregarFila_Empleados(idEmployee, documentEmployee, nameEmployee, email
         <td> ${verstateEmployee} </td>
         <td>
             <button data-toggle= "modal" data-target="#editarEmpleado" class= "btn btn-success btn-sm " onclick="tomarDatos(${datosEmpleado})" ><i class="bi bi-pencil-square"></i> </button/>
-            <button class= "btn btn-danger btn-sm " onclick="anularEmpleado(${idEmployee})"><i class="bi bi-trash3"></i></button/>
+            ${bot}
         </td>
     </tr>`;
     $("#tableEmpleados tbody").append(htmlTags);
@@ -235,38 +240,47 @@ function editarEmpleado(){
     });
 }
 
-function anularEmpleado(idEmployee){
-    var parametros = {
-        "accion": "anularEmpleado",
-        "idEmployee": idEmployee
-    };
+function anularEmpleado(idEmployee) {
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "¡Vas a inhabilitar un empleado!",
+        icon: 'warning',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var parametros = {
+                "accion": "anularEmpleado",
+                "idEmployee": idEmployee
+            };
 
-    $.ajax({
-        data: parametros,
-        url: '../view/http/empleados.controller.php',
-        type: 'post',
-        beforeSend: function(){
-            
-        },
+            $.ajax({
+                data: parametros,
+                url: "../view/http/empleados.controller.php",
+                type: "post",
+                beforeSend: function () {
 
-        success: function(data){
-            console.log(data);
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Anulado!',
-                    text: '',
-                    heightAuto: false,
-                    confirmButtonText: "Aceptar",
-                })
-                listarEmpleados()
-            }
+                },
+                success: function (data) {
 
-        },
+                    if (JSON.parse(data) == 'ok') {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            text: '¡Se inhabilitó con éxito!',
+                            showConfirmButton: false,
+                            timer: 1500
 
-        error: function(error){
-            console.log("No se ha podido obtener la información " + error);
-        },
+                        })
+                        listarEmpleados()
+                    }
+                },
+                error: function () {
+                    console.log("No se ha podido obtener la información")
+                },
+            });
+        }
+    })
 
-    });
 }

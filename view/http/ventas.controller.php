@@ -1,6 +1,5 @@
 
 
-
 <?php
 
 require_once 'db/conexion.php';
@@ -254,6 +253,7 @@ if (trim($_POST['accion']) == 'seleccionarLista') {
    echo json_encode($respuesta);
 }
 
+//Cambiar estado
 
 if($_POST['accion'] == 'actualizarEstadoActivo') {
     $id = $_POST['id'];
@@ -263,14 +263,14 @@ if($_POST['accion'] == 'actualizarEstadoActivo') {
     }elseif($estado == 0){
         $mostrarStateSale = 0;
     };
-    $newquery = mysqli_query($conexion,"SELECT idSupply, quantity_sales_detail FROM sales_detail WHERE
+    $newquery = mysqli_query($conexion,"SELECT idSupply, amount_supply_detail, quantity_sales_detail FROM sales_detail WHERE
     id_sale_detail = $id");
     while($dataSaleDetail = mysqli_fetch_assoc($newquery)){
         // consultar stock
-        $queryProducto = mysqli_query($conexion,"SELECT quantity from supplys where idSupply = '".$dataSaleDetail['idSupply']."'");
+        $queryProducto = mysqli_query($conexion,"SELECT quantity_sales_detail from supplys where idSupply = '".$dataSaleDetail['idSupply']."'");
         $quantitySuma = mysqli_fetch_assoc($queryProducto);
         //actualizar stock
-        mysqli_query($conexion,"UPDATE supplys set quantity = ".$quantitySuma['quantity'] + 
+        mysqli_query($conexion,"UPDATE supplys set quantity_sales_detail = ".$quantitySuma['quantity_sales_detail'] + 
         $dataSaleDetail['quantity_sales_detail']." WHERE idSupply = ".$dataSaleDetail['idSupply']."");
     }
     $query = "UPDATE sales_management SET stateSale = '$mostrarStateSale' WHERE id_invoice = '$id'";

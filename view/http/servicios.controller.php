@@ -5,10 +5,11 @@ require_once 'db/conexion.php';
 
 if ($_POST['accion'] == 'registroServicio') {
     $nameService = $_POST['nameService'];
-    $costService = $_POST['costService'];
+    $descriptionService = $_POST['descriptionService'];
     $stateService = $_POST['stateService'];
 
-    $query = "INSERT INTO services (nameService, costService, stateService) VALUE ('$nameService', '$costService', '$stateService')";
+    $query = "INSERT INTO services (nameService, descriptionService, stateService) 
+    VALUE ('$nameService', '$descriptionService', '$stateService')";
 
     $file = mysqli_query($conexion, $query);
      if ($file){
@@ -31,8 +32,8 @@ if (trim($_POST['accion']) == 'select_listServicios'){
     $i= 1;
 
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idService' => $datos["idService"], 'nameService' => $datos["nameService"], 'costService' => $datos
-        ["costService"], 'stateService' => $datos["stateService"]]);
+        array_push($elementos, ['idService' => $datos["idService"], 'nameService' => $datos["nameService"], 'descriptionService' => $datos
+        ["descriptionService"], 'stateService' => $datos["stateService"]]);
         $i++;
 
     }
@@ -48,10 +49,10 @@ if (trim($_POST['accion']) == 'select_listServicios'){
 if ($_POST['accion'] == 'editarServicio') {
     $idService = $_POST['idService'];
     $nameService = $_POST['nameService'];
-    $costService = $_POST['costService'];
+    $descriptionService = $_POST['descriptionService'];
     $stateService = $_POST['stateService'];
 
-    $query = "UPDATE services SET nameService = '$nameService', costService = '$costService',  stateService = '$stateService' WHERE idService = '$idService'";
+    $query = "UPDATE services SET nameService = '$nameService', descriptionService = '$descriptionService',  stateService = '$stateService' WHERE idService = '$idService'";
 
     $file = mysqli_query($conexion, $query);
      if ($file){

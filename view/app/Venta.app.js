@@ -1,5 +1,4 @@
 var parametros = "";
-
 function registrarVenta() {
 
   var parametros = {
@@ -17,22 +16,25 @@ function registrarVenta() {
     arreglo: ArregloInsumosAgregarVenta,
   };
 
+
   if (document.getElementById("facturaVenta").value == "" || document.getElementById("listaCliente").value == "" ||
     document.getElementById("listaServicio").value == "" || document.getElementById("listaEmpleado").value == "" ||
     document.getElementById("listaInsumo").value == "" || document.getElementById("cantidadAgregar").value == "" ||
-    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "") {
-    Swal.fire({
-      position: "center",
-      icon: "warning",
-      title: "¡Los campos son obligatorios!",
-    });
-  } else if (document.getElementById("facturaVenta").value < 1) {
-    Swal.fire({
-      position: "center",
-      icon: "warning",
-      title: "Los valores del número de factura no pueden ser negativos",
-    });
-  } else {
+    document.getElementById("v_unitario").value == "" || document.getElementById("descriptionSale").value == "") 
+    {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "¡Los campos son obligatorios!",
+      });
+    }else if(document.getElementById("facturaVenta").value < 1) {
+      Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Los valores del número de factura no pueden ser negativos",
+      });
+    }
+    else {
     $.ajax({
       data: parametros,
       url: '../view/http/ventas.controller.php',
@@ -53,17 +55,18 @@ function registrarVenta() {
           })
           listar();
           limpiar();
-        } else if (JSON.parse(data) == "error") {
+        }
+        else if (JSON.parse(data) == "error") {
           Swal.fire({
-            position: "center",
-            icon: "warning",
-            title: "Hay un error",
-            showConfirmButton: false,
-            timer: 1500,
+              position: "center",
+              icon: "warning",
+              title: "Hay un error",
+              showConfirmButton: false,
+              timer: 1500,
           });
           listar();
           ocultar();
-        }
+      }
       },
       error: function (error) {
         console.log("No se ha podido obtener la información " + error);
@@ -186,13 +189,13 @@ function ajaxMain(accion, url, nombreSelect) {
       }
       if (accion == "listaEmpleado") {
         loadingSelect(data, nombreSelect);
-      } else if (JSON.parse(data) == "stock") {
+      }else if(JSON.parse(data) == "stock"){
         Swal.fire({
           position: "center",
           icon: "warning",
           title: "No hay stock suficiente",
-        });
-        return;
+      });
+      return;
       }
     },
     error: function (error) {
@@ -359,9 +362,7 @@ function listarVentas() {
         language: {
           url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
         },
-        order: [
-          [1, "desc"]
-        ],
+        order: [[1, "desc"]],
 
       });
     },
@@ -452,6 +453,7 @@ function listar() {
         language: {
           url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
         },
+        order: [[1, "desc"]],
       });
     },
 
@@ -540,7 +542,8 @@ function actualizarEstado(idFactura, estado) {
 }
 
 
-//Ver detalles ventas
+//Ver detalles de ventas
+
 function tomarDatos(idFactura, cliente, servicio, empleado, total, descriptionSale, estado) {
 
   if (estado == 1) {

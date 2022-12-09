@@ -6,18 +6,18 @@ require_once 'db/conexion.php';
 if ($_POST['accion'] == 'registroCliente') {
     $documentClient = $_POST['documentClient'];
     $nameClient = $_POST['nameClient'];
-    $last_name = $_POST['last_name'];
     $email = $_POST['email'];
+    $neighborhood = $_POST['neighborhood'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
     $stateClient = $_POST['stateClient'];
 
 
-   if ($documentClient == "" || $nameClient == "" || $last_name == "" || $email == "" || $address == "" || $phone == "") {
+   if ($documentClient == "" || $nameClient == "" || $email == "" || $neighborhood == "" || $address == "" || $phone == "") {
       echo json_encode('fallo');
    }else if (strlen($documentClient) <= 9 || !is_numeric($documentClient)){
       echo json_encode('max');
-   }else if(strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)){
+   }else if(strlen($phone) <= 6 || strlen($phone) > 15 || !is_numeric($phone)){
       echo json_encode('max2');
    }else if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $consulta = "SELECT documentClient FROM clients WHERE documentClient='$documentClient'";
@@ -34,8 +34,8 @@ if ($_POST['accion'] == 'registroCliente') {
       } else if ($result2 > 0) {
          echo json_encode('emailError');
       } else {
-         $query = "INSERT INTO clients (documentClient, nameClient, last_name, email, address, phone, stateClient) 
-         VALUE ('$documentClient', '$nameClient', '$last_name', '$email', '$address', '$phone', '$stateClient')";
+         $query = "INSERT INTO clients (documentClient, nameClient, email, neighborhood, address, phone, stateClient) 
+         VALUE ('$documentClient', '$nameClient', '$email', '$neighborhood', '$address', '$phone', '$stateClient')";
 
          $file =  mysqli_query($conexion, $query);
 
@@ -64,8 +64,8 @@ if (trim($_POST['accion']) == 'select_listClientes'){
     $i= 1;
 
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idClient' => $datos["idClient"], 'documentClient' => $datos["documentClient"], 'nameClient' => $datos["nameClient"], 'last_name' => $datos
-        ["last_name"], 'email' => $datos["email"], 'address' => $datos["address"], 'phone' => $datos["phone"], 'stateClient' => $datos["stateClient"]]);
+        array_push($elementos, ['idClient' => $datos["idClient"], 'documentClient' => $datos["documentClient"], 'nameClient' => $datos["nameClient"],
+         'email' => $datos["email"], 'neighborhood' => $datos["neighborhood"], 'address' => $datos["address"], 'phone' => $datos["phone"], 'stateClient' => $datos["stateClient"]]);
         $i++;
 
     }
@@ -82,13 +82,14 @@ if ($_POST['accion'] == 'editarCliente') {
     $idClient = $_POST['idClient'];
     $documentClient = $_POST['documentClient'];
     $nameClient = $_POST['nameClient'];
-    $last_name = $_POST['last_name'];
     $email = $_POST['email'];
+    $neighborhood = $_POST['neighborhood'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
     $stateClient = $_POST['stateClient'];
 
-    $query = "UPDATE clients SET documentClient = '$documentClient', nameClient = '$nameClient', last_name = '$last_name', email = '$email', address = '$address', phone = '$phone', stateClient = '$stateClient' WHERE idClient = '$idClient'";
+    $query = "UPDATE clients SET documentClient = '$documentClient', nameClient = '$nameClient', email = '$email', 
+    neighborhood = '$neighborhood', address = '$address', phone = '$phone', stateClient = '$stateClient' WHERE idClient = '$idClient'";
 
     $file = mysqli_query($conexion, $query);
      if ($file){
