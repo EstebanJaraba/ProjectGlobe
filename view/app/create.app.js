@@ -15,13 +15,15 @@ function registerUser() {
         Swal.fire({
             icon: 'error',
             position: 'center',
-            text: 'Por favor, completa todos los campos.'
+            text: 'Por favor, completa todos los campos.',
+            confirmButtonText: 'Aceptar'
         })
     } else if (document.getElementById('documentUser').value.length <= 6) {
         Swal.fire({
             icon: 'error',
             position: 'center',
-            text: 'Ingrese un documento válido.'
+            text: 'Ingrese un documento válido.',
+            confirmButtonText: 'Aceptar'
         })
     }else{
         $.ajax({
@@ -39,6 +41,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡Registro exitoso!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     Cerrar()
@@ -48,6 +51,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡El correo electrónico ya existe!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     
@@ -57,6 +61,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡Correo electrónico inválido!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     
@@ -66,6 +71,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡El número de documento ya existe!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     
@@ -75,6 +81,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡Algo salió mal, intenta de nuevo!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                 }

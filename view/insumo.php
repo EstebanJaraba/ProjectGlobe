@@ -201,25 +201,25 @@ if (!isset($_SESSION['userName'])) {
       <div class="modal-body">
 
         <div class="form-group">
-          <label for="nameSupply">Nombre</label>
-          <input type="text" class="form-control" id="nameSupply" placeholder="*">
+          <label for="nameSupply">Nombre</label><label for="">*</label>
+          <input type="text" class="form-control" id="nameSupply" placeholder="Nombre del insumo">
         </div>
 
         <div class="form-group">
-          <label for="partNumberSupply">Código</label>
-          <input type="number" class="form-control" id="partNumberSupply" placeholder="*">
+          <label for="partNumberSupply">Código</label><label for="">*</label>
+          <input type="number" class="form-control" id="partNumberSupply" placeholder="Código del insumo">
         </div>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="quantitySupply">Cantidad</label>
-              <input type="number" class="form-control" id="quantitySupply" placeholder="*">
+              <label for="quantitySupply">Cantidad</label><label for="">*</label>
+              <input type="number" disabled class="form-control" id="quantitySupply" placeholder="Este campo va en 0" value="0">
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="priceSupply">Precio</label>
-              <input type="number" class="form-control" id="priceSupply" placeholder="*">
+              <label for="priceSupply">Precio</label><label for="">*</label>
+              <input type="number" disabled class="form-control" id="priceSupply" placeholder="Este campo va en 0" value="0">
             </div>
           </div>
         </div>
@@ -254,7 +254,7 @@ if (!isset($_SESSION['userName'])) {
         </div>
 
         <div class="form-group">
-          <label for="partNumberSupplyUpdate">Número de parte</label><label for="">*</label>
+          <label for="partNumberSupplyUpdate">Código</label><label for="">*</label>
           <input type="number" class="form-control" id="partNumberSupplyUpdate" aria-describedby="">
         </div>
         <div class="row">

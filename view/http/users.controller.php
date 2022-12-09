@@ -131,9 +131,7 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
       $varEstado = 0;
    }
 
-   $query = "UPDATE users SET stateUser = '0' WHERE idUser = '$id'";
-
-
+   $query = "DELETE FROM users WHERE `users`.`idUser` = $id";
 
    $file = mysqli_query($conexion, $query);
 
@@ -143,23 +141,23 @@ if ($_POST['accion'] == 'actualizarEstadoActivo') {
       echo json_encode('error');
    }
 }
-if ($_POST['accion'] == 'actualizarEstadoInactivo') {
-   $id = $_POST['id'];
-   $estado = $_POST['estado'];
-   if ($estado == 0) {
-      $varEstado = 1;
-   } else {
-   }
+// if ($_POST['accion'] == 'actualizarEstadoInactivo') {
+//    $id = $_POST['id'];
+//    $estado = $_POST['estado'];
+//    if ($estado == 0) {
+//       $varEstado = 1;
+//    } else {
+//    }
 
-   $query = "UPDATE users SET stateUser = '$varEstado' WHERE idUser = '$id'";
+//    $query = "UPDATE users SET stateUser = '$varEstado' WHERE idUser = '$id'";
 
 
 
-   $file = mysqli_query($conexion, $query);
+//    $file = mysqli_query($conexion, $query);
 
-   if ($file) {
-      echo json_encode('ok');
-   } else {
-      echo json_encode('error');
-   }
-}
+//    if ($file) {
+//       echo json_encode('ok');
+//    } else {
+//       echo json_encode('error');
+//    }
+// }

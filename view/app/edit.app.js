@@ -1,64 +1,3 @@
-// function updateAccount() {
-//     var parametros = {
-//         "accion": "upAccount",
-//         "id": document.getElementById('idAccount').value,
-//         "name": document.getElementById('nameAccount').value,
-//         "last_name": document.getElementById('last_nameAccount').value,
-//         "document": document.getElementById('documentAccount').value,
-//         "email": document.getElementById('emailAccount').value,
-//         "phone": document.getElementById('phoneAccount').value,
-//         "role": document.getElementById('roleAccount').value,
-
-//     };
-
-//     if (document.getElementById('nameAccount').value == "") {
-//         Swal.fire({
-//             icon: 'error',
-//             position: 'center',
-//             text: 'Por favor, completa todos los campos.'
-//         })
-//     } else {
-//         $.ajax({
-//             data: parametros,
-//             url: "../view/http/account.controller.php",
-//             type: "post",
-//             beforeSend: function () {
-
-//             },
-//             success: function (data) {
-
-//                 if (JSON.parse(data) == 'ok') {
-//                     Swal.fire({
-//                         icon: 'success',
-//                         title: '',
-//                         position: 'center',
-//                         text: 'Perfil actualizado',
-//                         footer: ''
-//                     }).then(function (isConfirm) {
-//                         if (isConfirm) {
-//                             location.href = 'http/logout.controller.php';
-//                         } else {
-
-//                         }
-//                     });
-//                 } else if (JSON.parse(data) == 'error') {
-//                     Swal.fire({
-//                         position: 'center',
-//                         icon: 'error',
-//                         title: '¡Actualizacion fallida!',
-//                         ShowConfirmbutton: false,
-//                         timer: 1500
-//                     })
-//                 }
-//             },
-//             error: function () {
-//                 console.log("No se ha podido obtener la información")
-//             },
-//         });
-//     }
-
-
-// }
 
 function updatePass() {
     var parametros = {
@@ -74,6 +13,7 @@ function updatePass() {
             title: '',
             position: 'center',
             text: 'las contraseñas no cinciden',
+            confirmButtonText: 'Aceptar',
             footer: ''
         })
     } else {
@@ -92,6 +32,7 @@ function updatePass() {
                         title: '',
                         position: 'center',
                         text: 'Contraseña actualizada',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     }).then(function (isConfirm) {
                         if (isConfirm) {
@@ -105,6 +46,7 @@ function updatePass() {
                         position: 'center',
                         icon: 'error',
                         text: 'Las contraseñas no coinciden',
+                        confirmButtonText: 'Aceptar',
                         ShowConfirmbutton: false,
                         timer: 1500
                     })
@@ -113,6 +55,7 @@ function updatePass() {
                         position: 'center',
                         icon: 'error',
                         text: '¡Actualizacion fallida!',
+                        confirmButtonText: 'Aceptar',
                         ShowConfirmbutton: false,
                         timer: 1500
                     })

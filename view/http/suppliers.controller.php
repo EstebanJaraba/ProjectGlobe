@@ -7,8 +7,9 @@ if ($_POST['accion'] == 'registerSuppliers') {
     $direction = $_POST['direction'];
     $email = $_POST['correo'];
     $phone = $_POST['celular'];
+    $categoria = $_POST['categoria'];
 
-    if ($name == "" || $direction == "" || $email == "" || $phone == "") {
+    if ($name == "" || $direction == "" || $email == "" || $phone == "" || $categoria == "") {
         echo json_encode('fallo');
     }else if (strlen($phone) <= 9 || strlen($phone) > 15 || !is_numeric($phone)) {
         echo json_encode('max2');
@@ -22,7 +23,7 @@ if ($_POST['accion'] == 'registerSuppliers') {
         if ($result2 > 0) {
             echo json_encode('emailError');
         } else {
-            $query = "INSERT INTO suppliers(nameSupplier,phone,direction,email,stateSupplier) VALUE ('$name','$phone','$direction','$email','1')";
+            $query = "INSERT INTO suppliers(nameSupplier,phone,direction,email,categoria,stateSupplier) VALUE ('$name','$phone','$direction','$email','$categoria','1')";
 
             $file =  mysqli_query($conexion, $query);
 
@@ -47,7 +48,7 @@ if (trim($_POST['accion']) == 'select_ListSuppliers') {
     $elementos = [];
     $i = 1;
     while ($datos = mysqli_fetch_array($result)) {
-        array_push($elementos, ['idSupplier' => $datos["idSupplier"], 'nameSupplier' => $datos["nameSupplier"], 'phone' => $datos["phone"],'direction' => $datos["direction"],'email' => $datos["email"], 'stateSupplier' => $datos["stateSupplier"]]);
+        array_push($elementos, ['idSupplier' => $datos["idSupplier"], 'nameSupplier' => $datos["nameSupplier"], 'phone' => $datos["phone"],'direction' => $datos["direction"],'email' => $datos["email"], 'categoria' => $datos["categoria"], 'stateSupplier' => $datos["stateSupplier"]]);
         $i++;
     }
     $respuesta->registros = $elementos;
@@ -62,9 +63,10 @@ if ($_POST['accion'] == 'updateSupplier') {
     $email = $_POST['correo'];
     $phone = $_POST['celular'];
     $direction = $_POST['direction'];
+    $categoria = $_POST['categoria'];
     $state = $_POST['estado'];
 
-    $query = "UPDATE suppliers SET nameSupplier = '$name', phone = '$phone', direction = '$direction', email = '$email',stateSupplier = '$state' WHERE idSupplier = '$id'";
+    $query = "UPDATE suppliers SET nameSupplier = '$name', phone = '$phone', direction = '$direction', email = '$email',categoria = '$categoria',,stateSupplier = '$state' WHERE idSupplier = '$id'";
 
     $file =  mysqli_query($conexion, $query);
 

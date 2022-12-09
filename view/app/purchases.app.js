@@ -62,17 +62,18 @@ function registrarCompra() {
                         icon: "success",
                         tittle: "Hecho",
                         text: "Registro exitoso",
-                        timer: 1500,
+                        confirmButtonText: 'Aceptar',
                     }).then(function (isConfirm) {
                         if (isConfirm) {
                             location.href = 'compra.php';
+                            listar();
+                            ocultar();
+                            limpiar();
                         } else {
                             //if no clicked => do something else
                         }
                     });
-                    listar();
-                    ocultar();
-                    limpiar();
+
                 } else if (JSON.parse(data) == "fac") {
                     Swal.fire({
                         position: "center",
@@ -102,7 +103,6 @@ function registrarCompra() {
 
 }
 
-
 function mostrar() {
     document.getElementById('showRegister').style.display = 'flex';
 }
@@ -126,7 +126,7 @@ let ArregloProductosAgregarCompra = Array();
 let valorTotalProCompra = 0;
 
 function agregarInsumo() {
-    let selectorPruducto = document.getElementById("insumoPurchase");
+    let selectorInsumo = document.getElementById("insumoPurchase");
 
     var insumo = document.getElementById("insumoPurchase").value;
     var cantidad = document.getElementById("cantidadAgregar").value;
@@ -149,7 +149,7 @@ function agregarInsumo() {
     } else {
         var productoAgregado = {
             productoId: document.getElementById("insumoPurchase").value,
-            nombreProducto: selectorPruducto.options[selectorPruducto.selectedIndex].text,
+            nombreProducto: selectorInsumo.options[selectorInsumo.selectedIndex].text,
             cantidad: document.getElementById("cantidadAgregar").value,
             valorUnitario: document.getElementById("v_unitario").value,
             valorTotal: document.getElementById("v_total").value,
@@ -347,16 +347,36 @@ function listar() {
 function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
     if (estado == 1) {
         varEstado =
-            '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>';
+            '<button class="btn btn-success btn-sm col-12" style="cursor: text">PENDIENTE</button>';
     } else if (estado == 0) {
         varEstado =
-            '<button class="btn btn-danger btn-sm col-12" style="cursor: text">ANULADO</button>';
+            '<button class="btn btn-danger btn-sm col-12" style="cursor: text">CANCELADO</button>';
+    } else if (estado == 2) {
+        varEstado =
+            '<button class="btn btn-warning btn-sm col-12" style="cursor: text">EN COBRO</button>';
+    } else if (estado == 3) {
+        varEstado =
+            '<button class="btn btn-secondary btn-sm col-12" style="cursor: text">PAGADO</button>';
     }
-    if (estado == 1) {
-        anular = `<button class="btn btn-outline-danger btn-sm" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-cart-dash"></i></button>`
 
+    if (estado == 1) {
+        cambiar = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado(${IdFactura},${estado})"><i class="bi bi-caret-right"></i></button>`
     } else if (estado == 0) {
-        anular = ``
+        cambiar = ``
+    } else if (estado == 2) {
+        cambiar = `<button class="btn btn-outline-success btn-sm" onclick="actualizarEstado2(${IdFactura},${estado})"><i class="bi bi-caret-right"></i></button>`
+    } else if (estado == 3) {
+        cambiar = ``
+    }
+
+    if (estado == 1) {
+        anulado = `<button class="btn btn-outline-danger btn-sm" onclick="anular(${IdFactura},${estado})"><i class="bi bi-cart-dash"></i></button>`
+    } else if (estado == 2) {
+        anulado = `<button class="btn btn-outline-danger btn-sm" onclick="anular(${IdFactura},${estado})"><i class="bi bi-cart-dash"></i></button>`
+    } else if (estado == 3) {
+        anulado = ` `
+    } else if (estado == 0) {
+        anulado = ` `
     }
 
     let datosProvider =
@@ -379,8 +399,10 @@ function agregarFila(IdFactura, proveedor, description, total, estado, accion) {
        <td>${total}</td>
        <td>${varEstado}</td>
        <td>
-       <button data-toggle="modal" data-target="#detalleCompra" class="btn btn-outline-success btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-eye"></i></button>
-            ${anular} 
+       <button data-toggle="modal" data-target="#detalleCompra" class="btn btn-outline-warning btn-sm" onclick="tomarDatos(${datosProvider})"><i class="bi bi-eye"></i></button>
+            ${cambiar}
+            ${anulado}
+            
        </td>
        </tr>`;
 
@@ -399,10 +421,10 @@ function eliminaFilastabla() {
 
 //Cambiar de ESTADO
 
-function actualizarEstado(IdFactura, estado) {
+function anular(IdFactura, estado) {
     Swal.fire({
         title: '¿Estás seguro?',
-        text: "¿Vas a deshabilitar una compra?",
+        text: "¿Vas a cancelar una compra?",
         icon: 'warning',
         cancelButtonText: 'Cancelar',
         showCancelButton: true,
@@ -440,50 +462,109 @@ function actualizarEstado(IdFactura, estado) {
             });
         }
     })
-    
+
 
 }
 
-function actualizarEstado1(IdFactura, estado) {
-    let parametros = {
-        accion: "actualizarEstadoInactivo",
-        id: IdFactura,
-        estado: estado,
-    };
+function actualizarEstado(IdFactura, estado) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¡Vas a cambiar de estado "PENDIENTE" a "EN COBRO"!',
+        icon: 'warning',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let parametros = {
+                accion: "actualizarEstadoP",
+                id: IdFactura,
+                estado: estado,
+            };
 
-    $.ajax({
-        data: parametros,
-        url: "../view/http/purchases.controller.php",
-        type: "POST",
-        beforeSend: function () {
-            //         //mostrar cargando
-        },
-        success: function (data) {
-            if (JSON.parse(data) == "ok") {
-                Swal.fire({
-                    position: "top",
-                    icon: "success",
-                    text: "Estado editado con exito",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                listar();
-            }
-        },
-        error: function (error) {
-            console.log("No se a podido editar la información " + error);
-        },
-    });
+            $.ajax({
+                data: parametros,
+                url: "../view/http/purchases.controller.php",
+                type: "POST",
+                beforeSend: function () {
+                    //         //mostrar cargando
+                },
+                success: function (data) {
+                    if (JSON.parse(data) == "ok") {
+                        Swal.fire({
+                            position: "top",
+                            icon: "success",
+                            text: "Estado editado con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listar();
+                    }
+                },
+                error: function (error) {
+                    console.log("No se a podido editar la información " + error);
+                },
+            });
+        }
+    })
+
 }
 
+function actualizarEstado2(IdFactura, estado) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¡Vas a cambiar el estado a "PAGADO"!',
+        icon: 'warning',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let parametros = {
+                accion: "actualizarEstadoE",
+                id: IdFactura,
+                estado: estado,
+            };
+
+            $.ajax({
+                data: parametros,
+                url: "../view/http/purchases.controller.php",
+                type: "POST",
+                beforeSend: function () {
+                    //         //mostrar cargando
+                },
+                success: function (data) {
+                    if (JSON.parse(data) == "ok") {
+                        Swal.fire({
+                            position: "top",
+                            icon: "success",
+                            text: "Estado editado con exito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        listar();
+                    }
+                },
+                error: function (error) {
+                    console.log("No se a podido editar la información " + error);
+                },
+            });
+        }
+    })
+
+}
 //Listar Detalles de Compra
 
 function tomarDatos(IdFactura, proveedor, description, total, estado) {
 
     if (estado == 1) {
-        var estadoC = 'Activo'
+        var estadoC = 'PENDIENTE'
     } else if (estado == 0) {
-        var estadoC = 'Anulado';
+        var estadoC = 'CANCELADO';
+    }else if (estado == 2) {
+        var estadoC = 'EN COBRO';
+    }else if (estado == 3) {
+        var estadoC = 'PAGADO';
     }
 
     document.getElementById("id_detalle").value = IdFactura;
@@ -501,7 +582,7 @@ function ListarDetalle() {
     tablaInsumo.destroy();
 
     let parametros = {
-        accion: "seleccionarListaInsumos",
+        accion: "seleccionarDetalle",
         id: document.getElementById("id_detalle").value
     };
 
@@ -517,6 +598,7 @@ function ListarDetalle() {
                 agregarFilaTablaInsumoss(
                     JSON.parse(data).registros[i].insumo,
                     JSON.parse(data).registros[i].cantidad,
+                    JSON.parse(data).registros[i].precio,
                     JSON.parse(data).registros[i].total,
                     ""
                 );
@@ -539,12 +621,14 @@ function ListarDetalle() {
 function agregarFilaTablaInsumoss(
     nombreProducto,
     cantidad,
+    precio,
     valorTotal
 
 ) {
     var htmlTags = `<tr>
       <td>${nombreProducto}</td>
       <td>${cantidad}</td>
+      <td>${precio}</td>
       <td>${valorTotal}</td>
       </tr>`;
 

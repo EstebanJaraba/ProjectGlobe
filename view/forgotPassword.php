@@ -88,13 +88,13 @@ require "http/db/conexion.php";
         $mail->isSMTP();                                    //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';               //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                           //Enable SMTP authentication
-        $mail->Username   = 'fernandogarces925@gmail.com';  //SMTP username
-        $mail->Password   = 'durbpfgpvphzqyvl';             //SMTP password
+        $mail->Username   = 'globes.soft@gmail.com';  //SMTP username
+        $mail->Password   = 'mlgdvoigtdbtbqbk';             //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    //Enable implicit TLS encryption
         $mail->Port       = 465;                            //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('fernandogarces925@gmail.com', 'Globe');
+        $mail->setFrom('globes.soft@gmail.com', 'Globe');
         $mail->addAddress($mailRecipient);     //Add a recipient
 
         //Content
@@ -128,6 +128,7 @@ require "http/db/conexion.php";
             position: 'center',
             icon: 'success',
             confirmButtonText: 'Aceptar',
+            
             text: '¡Correo electrónico enviado!',
           }).then(function(isConfirm) {
             if (isConfirm) {
@@ -148,6 +149,7 @@ require "http/db/conexion.php";
           position: 'center',
           text: '¡Correo electrónico no encontrado!',
           confirmButtonText: 'Aceptar',
+
         })
       </script>
   <?php

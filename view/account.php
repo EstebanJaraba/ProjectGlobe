@@ -111,11 +111,11 @@ $resultado = mysqli_query($conexion, $query);
                                     <input type="hidden" class="form-control" id="idup" value="<?php echo $_SESSION['idUser'] ?>">
                                     <div class="form-group">
                                         <label for="pass">Contraseña nueva</label>
-                                        <input type="text" class="form-control" id="passUpdate" placeholder="*">
+                                        <input type="password" class="form-control" id="passUpdate" placeholder="*">
                                     </div>
                                     <div class="form-group">
                                         <label for="pass">Repetir contraseña nueva</label>
-                                        <input type="text" class="form-control" id="passr" placeholder="*">
+                                        <input type="password" class="form-control" id="passr" placeholder="*">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -128,102 +128,7 @@ $resultado = mysqli_query($conexion, $query);
 
                 </div>
             </section>
-            <!-- <section class="content">
-                <div class="container-fluid">
-                    <div>
-                        <div class="card">
-                            <div id="container-fluid">
-                                <div class="row" id="cancel-row">
-                                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                                        <div class="statbox widget box box-shadow">
-                                            <div class="widget-content widget-content-area">
-                                                <div class="card update collapse" id="update">
-
-                                                    <div class=" m-2">
-                                                        <div class="col-">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <div class="row">
-                                                                        <div class="d-flex col-11">
-                                                                            <h3 class="card-title">Editar perfil</h3>
-                                                                        </div>
-
-                                                                        <div class=" d-flex justify-content-end">
-                                                                            <button class="btn btn-danger" onclick="ocultar()"><i class="bi bi-x-lg"></i></button>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <form id="editar perfil">
-
-                                                                        <div class="card-body">
-                                                                            <input type="hidden" class="form-control" id="idAccount" value="<?php echo $_SESSION['idUser'] ?>">
-                                                                            <input type="hidden" class="form-control" id="roleAccount" value="<?php echo $_SESSION['id_rol'] ?>">
-
-                                                                            <div class="row">
-                                                                                <div class="col-6">
-                                                                                    <div class="form-group">
-                                                                                        <label for="nameAccount">Nombre</label>
-                                                                                        <input type="text" class="form-control" id="nameAccount" placeholder="*">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="col-6">
-                                                                                    <div class="form-group">
-                                                                                        <label for="last_nameAccount">Apellidos</label>
-                                                                                        <input type="text" class="form-control" id="last_nameAccount" placeholder="*">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row">
-                                                                                <div class="col-6">
-                                                                                    <div class="form-group">
-                                                                                        <label for="emailAccount">Email</label>
-                                                                                        <input type="email" class="form-control" id="emailAccount" placeholder="*">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-6">
-                                                                                    <div class="form-group">
-                                                                                        <label for="phoneAccount">Telefono</label>
-                                                                                        <input type="text" class="form-control" id="phoneAccount" placeholder="*">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-
-
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" onclick="updateAccount()" class="btn btn-primary">Guardar</button>
-                                                                        </div>
-
-                                                                    </form>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-end">
-                                                        <button class="btn btn-primary btn-sm" onclick="mostrar()">Editar perfil</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section> -->
+            
         </div>
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

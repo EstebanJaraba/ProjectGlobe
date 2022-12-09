@@ -88,6 +88,7 @@ if (!isset($_SESSION['userName'])) {
                     <th>Teléfono</th>
                     <th>Dirección</th>
                     <th>Correo electrónico</th>
+                    <th>Categoría</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -183,28 +184,41 @@ if (!isset($_SESSION['userName'])) {
         <div class="row">
           <div class="col-6" style="margin-left: 0;">
             <div class="form-group">
-              <label for="">Nombre</label>
-              <input type="text" class="form-control" id="nameSupplier" placeholder="*">
+              <label for="">Nombre</label><label for="">*</label>
+              <input type="text" class="form-control" id="nameSupplier" placeholder="Nombre del proveedor">
             </div>
           </div>
           <div class="col-6" style="margin-left: 0;">
             <div class="form-group">
-              <label for="">Teléfono</label>
-              <input type="text" class="form-control" id="phoneSupplier" placeholder="*">
+              <label for="">Teléfono</label><label for="">*</label>
+              <input type="text" class="form-control" id="phoneSupplier" placeholder="Telefono móvil">
             </div>
           </div>
 
 
         </div>
-        <div class="form-group">
-          <label for="">Dirección</label>
-          <input type="text" class="form-control" id="dire" placeholder="*">
+        <div class="row">
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="">Dirección</label><label for="">*</label>
+              <input type="text" class="form-control" id="dire" placeholder="Dirección del proveedor">
+            </div>
+          </div>
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="">Categoría</label><label for="">*</label>
+              <input type="text" class="form-control" id="catSupplier" placeholder="Campo especificó de especialización">
+            </div>
+          </div>
         </div>
 
+
+
         <div class="form-group">
-          <label for="">Correo electrónico</label>
-          <input type="text" class="form-control" id="emailSupplier" placeholder="*">
+          <label for="">Correo electrónico</label><label for="">*</label>
+          <input type="text" class="form-control" id="emailSupplier" placeholder="Dirreción de correo electrónico">
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <a onclick="registerSupplier()" class="btn btn-primary" data-dismiss="modal">Guardar</a>
@@ -243,15 +257,30 @@ if (!isset($_SESSION['userName'])) {
 
 
         </div>
-        <div class="form-group">
-          <label for="">Direccion</label><label for="">*</label>
-          <input type="text" class="form-control" id="direUpdate" aria-describedby="">
+
+        <div class="row">
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="">Direccion</label><label for="">*</label>
+              <input type="text" class="form-control" id="direUpdate" aria-describedby="">
+            </div>
+          </div>
+          <div class="col-6" style="margin-left: 0;">
+            <div class="form-group">
+              <label for="">Categoría</label><label for="">*</label>
+              <input type="text" class="form-control" id="catUpdate" placeholder="">
+            </div>
+          </div>
         </div>
+
+
 
         <div class="form-group">
           <label for="">Correo electrónico</label><label for="">*</label>
           <input type="text" class="form-control" id="emailUpdate" aria-describedby="">
         </div>
+
+
         <div class="form-group">
           <label for="stateUserUpdate">Estado</label><label for="">*</label>
           <select class="form-control" id="stateUpdate" aria-describedby="">

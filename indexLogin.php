@@ -87,7 +87,8 @@
           Swal.fire({
               icon: 'warning',
               heightAuto: false,
-              text: 'No hay un usuario registrado con ese nombre.'
+              text: 'No hay un usuario registrado con ese nombre.',
+              confirmButtonText: 'Aceptar'
           }).then(function(isConfirm) {
             if (isConfirm) {
               location.href = 'indexLogin.php';
@@ -103,7 +104,8 @@
         Swal.fire({
             icon: 'warning',
             heightAuto: false,
-            text: 'Contraseña Incorrecta.'
+            text: 'Contraseña Incorrecta.',
+            confirmButtonText: 'Aceptar'
         }).then(function(isConfirm) {
           if (isConfirm) {
             location.href = 'indexLogin.php';
@@ -162,18 +164,18 @@
             <div class="row">
               <div class="col-6">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" id="nameUser" placeholder="Nombre">
+                  <input type="text" class="form-control" id="nameUser" placeholder="Nombre *">
                 </div>
               </div>
               <div class="col-6">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" id="last_nameUser" placeholder="Apellidos">
+                  <input type="text" class="form-control" id="last_nameUser" placeholder="Apellidos *">
                 </div>
               </div>
             </div>
 
             <div class="input-group mb-3">
-              <input type="text" class="form-control" id="documentUser" placeholder="Documento">
+              <input type="text" class="form-control" id="documentUser" placeholder="Documento *">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-user"></span>
@@ -182,7 +184,7 @@
             </div>
 
             <div class="input-group mb-3">
-              <input type="email" class="form-control" id="emailUser" placeholder="Correo electrónico">
+              <input type="email" class="form-control" id="emailUser" placeholder="Correo electrónico *">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -191,7 +193,7 @@
             </div>
 
             <div class="input-group mb-3">
-              <input type="text" class="form-control" id="phoneUser" placeholder="Teléfono">
+              <input type="text" class="form-control" id="phoneUser" placeholder="Teléfono *">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-phone"></span>
@@ -200,7 +202,7 @@
             </div>
 
             <div class="input-group mb-3">
-              <input type="password" class="form-control" id="passwordUser" placeholder="Contraseña">
+              <input type="password" class="form-control" id="passwordUser" placeholder="Contraseña *">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>

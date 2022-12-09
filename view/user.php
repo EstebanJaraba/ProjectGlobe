@@ -83,7 +83,7 @@ $resultado = mysqli_query($conexion, $query);
         <div id="container-fluid">
           <div class="card">
             <div class="card-header d-flex justify-content-end">
-              <button data-toggle="modal" data-target="#registerUsers" class="btn btn-primary btn-sm">Nuevo usuario</button>
+              <button data-toggle="modal" data-target="#registerUsers" title="Este bóton es para registrar un nuevo usuario" class="btn btn-primary btn-sm">Nuevo usuario</button>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -170,7 +170,7 @@ $resultado = mysqli_query($conexion, $query);
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <h5 class="modal-title" id="exampleModalLabel">Información del usuario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" title="Este bóton cierra el formulario sin guardar cambios" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -223,8 +223,8 @@ $resultado = mysqli_query($conexion, $query);
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <a onclick="registerUser()" class="btn btn-primary">Guardar</a>
+        <button type="button" class="btn btn-secondary" title="Este bóton cierra el formulario sin guardar cambios" data-dismiss="modal">Cerrar</button>
+        <a onclick="registerUser()" title="Este bóton es para enviar los datos del usuario" class="btn btn-primary">Guardar</a>
       </div>
     </div>
   </div>
@@ -235,7 +235,7 @@ $resultado = mysqli_query($conexion, $query);
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <h5 class="modal-title" id="exampleModalLabel">Actualizar datos</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" title="Este bóton cierra el formulario sin guardar cambios" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -287,8 +287,8 @@ $resultado = mysqli_query($conexion, $query);
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" onclick="updateUsers()" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
+        <button type="button" class="btn btn-secondary" title="Este bóton cierra el formulario sin guardar cambios" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="updateUsers()" title="Este bóton guarda los cambios realizados" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
       </div>
     </div>
   </div>

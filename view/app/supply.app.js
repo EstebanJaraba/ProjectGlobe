@@ -18,7 +18,8 @@ function registerSupply() {
                 Swal.fire({
                     icon: 'error',
                     position: 'center',
-                    text: 'Debes ingresar todos los campos'
+                    text: 'Debes ingresar todos los campos',
+                    confirmButtonText: 'Aceptar',
                 })
                 listarInsumos()
             } else if (JSON.parse(data) == 'min') {
@@ -34,15 +35,16 @@ function registerSupply() {
                     position: 'center',
                     icon: 'warning',
                     text: '¡Los campos deben ser numericos!',
-                    timer: 1500
+                    confirmButtonText: 'Aceptar'
                 })
                 listarInsumos()
             } else if (JSON.parse(data) == 'pa') {
                 Swal.fire({
                     position: 'center',
                     icon: 'warning',
-                    text: 'Este insumo ya existe, ingrese otro',
-                    timer: 1500
+                    confirmButtonText: 'Aceptar',
+                    text: 'Este insumo ya existe, ingrese otro'
+                    
                 })
                 listarInsumos()
             } else if (JSON.parse(data) == 'ok') {
@@ -50,7 +52,7 @@ function registerSupply() {
                     position: 'center',
                     icon: 'success',
                     text: '¡Registro exitoso!',
-                    timer: 1500
+                    confirmButtonText: 'Aceptar'
                 })
                 listarInsumos()
                 Cerrar()

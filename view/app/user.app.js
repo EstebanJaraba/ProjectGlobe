@@ -14,14 +14,16 @@ function registerUser() {
         Swal.fire({
             icon: 'error',
             position: 'center',
-            text: 'Por favor, completa todos los campos.'
+            text: 'Por favor, completa todos los campos.',
+            confirmButtonText: 'Aceptar'
         })
         listarUsuarios()
     } else if (document.getElementById('documentUser').value.length <= 8) {
         Swal.fire({
             icon: 'error',
             position: 'center',
-            text: 'Ingrese un documento válido.'
+            text: 'Ingrese un documento válido.',
+            confirmButtonText: 'Aceptar'
         })
         listarUsuarios()
     } else {
@@ -40,6 +42,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡El correo electrónico ya existe!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     listarUsuarios()
@@ -49,6 +52,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡Correo electrónico inválido!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     listarUsuarios()
@@ -58,6 +62,7 @@ function registerUser() {
                         title: '',
                         position: 'center',
                         text: '¡El número de documento ya existe!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     listarUsuarios()
@@ -68,6 +73,7 @@ function registerUser() {
                         confirmButtonText: 'Aceptar',
                         position: 'center',
                         text: '¡Registro exitoso!',
+                        confirmButtonText: 'Aceptar',
                         footer: ''
                     })
                     listarUsuarios()
@@ -235,6 +241,7 @@ function updateUsers() {
                     position: 'center',
                     confirmButtonText: 'Aceptar',
                     text: '¡Actualización exitosa!',
+                    confirmButtonText: 'Aceptar',
                     footer: ''
                 })
 
@@ -244,6 +251,7 @@ function updateUsers() {
                     position: 'center',
                     icon: 'error',
                     text: '¡Actualización fallida!',
+                    confirmButtonText: 'Aceptar',
                     ShowConfirmbutton: false,
                     timer: 1500
                 })
@@ -260,7 +268,7 @@ function actualizarEstado(idUser, stateUser) {
 
     Swal.fire({
         title: '¿Estás seguro?',
-        text: "¡Vas a inhabilitar un usuario!",
+        text: "¡Vas a eliminar este usuario!",
         icon: 'warning',
         cancelButtonText: 'Cancelar',
         showCancelButton: true,
@@ -285,7 +293,8 @@ function actualizarEstado(idUser, stateUser) {
                         Swal.fire({
                             position: "center",
                             icon: "success",
-                            text: "Estado editado con exito",
+                            text: "Usuario eliminado con exito",
+                            confirmButtonText: 'Aceptar',
                             showConfirmButton: false,
                             timer: 1500,
                         });
@@ -295,6 +304,7 @@ function actualizarEstado(idUser, stateUser) {
                             position: "center",
                             icon: "warning",
                             text: "Actualización de estado fallido",
+                            confirmButtonText: 'Aceptar',
                             showConfirmButton: false,
                             timer: 1500,
                         });
@@ -313,55 +323,55 @@ function actualizarEstado(idUser, stateUser) {
 
 }
 
-function actualizarEstado1(idUser, stateUser) {
-    Swal.fire({
-        title: '¿Estas seguro?',
-        text: "Este usuario se habilitara!",
-        icon: 'warning',
-        cancelButtonText: 'Cancelar',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            let parametros = {
-                accion: "actualizarEstadoInactivo",
-                id: idUser,
-                estado: stateUser,
-            };
+// function actualizarEstado1(idUser, stateUser) {
+//     Swal.fire({
+//         title: '¿Estas seguro?',
+//         text: "Este usuario se habilitara!",
+//         icon: 'warning',
+//         cancelButtonText: 'Cancelar',
+//         showCancelButton: true,
+//         confirmButtonText: 'Aceptar'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             let parametros = {
+//                 accion: "actualizarEstadoInactivo",
+//                 id: idUser,
+//                 estado: stateUser,
+//             };
 
-            $.ajax({
-                data: parametros,
-                url: "../view/http/users.controller.php",
-                type: "POST",
-                beforeSend: function () {
-                    //         //mostrar cargando
-                },
-                success: function (data) {
-                    if (JSON.parse(data) == "ok") {
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            text: "Estado editado con exito",
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                        listarUsuarios();
-                    } else if (JSON.parse(data) == "error") {
-                        Swal.fire({
-                            position: "center",
-                            icon: "warning",
-                            text: "Actualización de estado fallido",
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                        listarUsuarios();
-                    }
-                },
-                error: function (error) {
-                    console.log("No se ha podido editar la información " + error);
-                },
-            });
-        }
-    })
+//             $.ajax({
+//                 data: parametros,
+//                 url: "../view/http/users.controller.php",
+//                 type: "POST",
+//                 beforeSend: function () {
+//                     //         //mostrar cargando
+//                 },
+//                 success: function (data) {
+//                     if (JSON.parse(data) == "ok") {
+//                         Swal.fire({
+//                             position: "center",
+//                             icon: "success",
+//                             text: "Estado editado con exito",
+//                             showConfirmButton: false,
+//                             timer: 1500,
+//                         });
+//                         listarUsuarios();
+//                     } else if (JSON.parse(data) == "error") {
+//                         Swal.fire({
+//                             position: "center",
+//                             icon: "warning",
+//                             text: "Actualización de estado fallido",
+//                             showConfirmButton: false,
+//                             timer: 1500,
+//                         });
+//                         listarUsuarios();
+//                     }
+//                 },
+//                 error: function (error) {
+//                     console.log("No se ha podido editar la información " + error);
+//                 },
+//             });
+//         }
+//     })
 
-}
+// }

@@ -6,6 +6,7 @@ function registerSupplier() {
         "direction": document.getElementById('dire').value,
         "correo": document.getElementById('emailSupplier').value,
         "celular": document.getElementById('phoneSupplier').value,
+        "categoria": document.getElementById('catSupplier').value
 
     };
 
@@ -115,6 +116,7 @@ function listarProveedores() {
                     JSON.parse(data).registros[i].phone,
                     JSON.parse(data).registros[i].direction,
                     JSON.parse(data).registros[i].email,
+                    JSON.parse(data).registros[i].categoria,
                     JSON.parse(data).registros[i].stateSupplier,
                     " "
                 );
@@ -136,7 +138,7 @@ function listarProveedores() {
     });
 }
 
-function agregarFila_Suppliers(idSupplier, name, phone, direction, email, stateSupplier, acciones) {
+function agregarFila_Suppliers(idSupplier, name, phone, direction, email, categoria, stateSupplier, acciones) {
     if (stateSupplier == 1) {
         verEstado = '<button class="btn btn-success btn-sm col-12" style="cursor: text">ACTIVO</button>'
     } else if (stateSupplier == 0) {
@@ -149,7 +151,7 @@ function agregarFila_Suppliers(idSupplier, name, phone, direction, email, stateS
         bot = ``
     }
 
-    let datosSupplier = "'" + idSupplier + "','" + name + "','" + phone + "','" + direction + "','" + email + "','" + stateSupplier + "'";
+    let datosSupplier = "'" + idSupplier + "','" + name + "','" + phone + "','" + direction + "','" + email + "', '" + categoria + "','" + stateSupplier + "'";
 
     var htmlTags = `
          <tr>
@@ -158,6 +160,7 @@ function agregarFila_Suppliers(idSupplier, name, phone, direction, email, stateS
            <td> ${phone}</td>
            <td> ${direction}</td>
            <td> ${email}</td>
+           <td> ${categoria}</td>
            <td> ${verEstado}</td>
            <td>
              <button data-toggle="modal" data-target="#updateSupplier" class="btn btn-outline-success btn-sm" onclick="tomarDatosSupplier(${datosSupplier})"><i class="bi bi-pencil-square"></i></button>
@@ -178,12 +181,13 @@ function eliminarFilasTableSuppliers() {
     }
 }
 
-function tomarDatosSupplier(idSupplier, name, phone, dire, email, stateSupplier) {
+function tomarDatosSupplier(idSupplier, name, phone, dire, email,categoria, stateSupplier) {
     document.getElementById('idSupplierUpdate').value = idSupplier
     document.getElementById('nameUpdate').value = name
     document.getElementById('phoneUpdate').value = phone
     document.getElementById('direUpdate').value = dire
     document.getElementById('emailUpdate').value = email
+    document.getElementById('catUpdate').value = categoria
     document.getElementById('stateUpdate').value = stateSupplier
 }
 
@@ -195,6 +199,7 @@ function updateSupplier() {
         "celular": document.getElementById('phoneUpdate').value,
         "direction": document.getElementById('direUpdate').value,
         "correo": document.getElementById('emailUpdate').value,
+        "categoria": document.getElementById('catUpdate').value,
         "estado": document.getElementById('stateUpdate').value
     };
 
